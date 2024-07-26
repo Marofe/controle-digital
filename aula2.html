@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="images/sel.png"/> </div>
+					<div class="logo2"><img src="images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 2: <br>Teorema da Amostragem</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">10 de agosto de 2024</p>
+				</div>
+
+				</section>
+				<section>
+
+				<div class="slide-title">
+					<h2>Objetivos</h2>
+				</div>
+				<div class="slide-content">
+					<p>Objetivos dessa aula são:
+							<ul>
+							<li class="fragment">Apresentar o teorema da amostragem;</li> 
+						
+				
+						</p>
+						</div>
+
+			</section>
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Sinal contínuo vs Discreto</h2>
+					</div>
+					<div class="slide-content">
+				
+					   </div>
+
+				</section>
+
+
+
+			
+			<section>
+				<div class="slide-title">
+					<h2>New slide</h2>
+				</div>
+				<div class="slide-content">
+					<p>Objetivos dessa aula são:
+						<ul>
+						<li class="fragment">Apresentar a disciplina: estrutura e métodos de avaliação;</li> 
+						<li  class="fragment">Revisar os conceitos de sinais, sistemas e controle;</li> 
+						<li  class="fragment">..;</li>
+						<li  class="fragment">Evidenciar a importância dos sistemas de controle digitais para a engenharia;</li>
+			
+					</p>
+
+				</div>
+
+			</section>
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				width: 1244,
+  				height: 700,
+				center:false,
+				katex: {
+    version: 'latest',
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+   ],
+   ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+   macros: {
+	"\\R": "\\mathbb{R}",
+	"\\trp": "\\intercal",
+	"\\diag": "\\text{diag}",
+	"\\Diag": "\\text{Diag}",
+	"\\tr": "\\text{tr}"
+   }
+ },
+				hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+				controls: false,
+				progress: false,
+				transition: 'none'
+			});
+		//////remove slide number from first page (data-hide-slide-number="true")
+	    Reveal.addEventListener('slidechanged', (event) => {
+  		const isSnOn = (event.currentSlide.dataset.hideSlideNumber !== 'true');
+  		Reveal.configure({ slideNumber: isSnOn });
+		});
+		</script>
+	</body>
+</html>
+

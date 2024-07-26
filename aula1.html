@@ -1,0 +1,557 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="images/sel.png"/> </div>
+					<div class="logo2"><img src="images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 1: <br>Introdução à disciplina de Controle Digital</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">9 de agosto de 2024</p>
+				</div>
+
+				</section>
+				<section>
+
+				<div class="slide-title">
+					<h2>Objetivos</h2>
+				</div>
+				<div class="slide-content">
+					<p>Os objetivos dessa aula são:
+							<ul>
+							<li ><b>Apresentar a disciplina</b>: estrutura e métodos de avaliação;</li> 
+							<li  ><b>Visão Geral</b>  dos conceitos de sistemas de controle;</li> 
+							<li >Apresentar <b>exemplos</b> práticos de sistemas de controle digital;</li>
+							<li  ><b>Comparativo</b> entre controle analógico e digital;</li>
+							<li  >Evidenciar a <b>importância</b> dos sistemas de controle digitais para a engenharia;</li>
+						</p>
+						</div>
+
+			</section>
+
+
+		
+
+
+			
+			<section>
+				<div class="slide-title">
+					<h2>SEL0359 - Controle Digital</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>Encontros:</p>
+						<p><ul><li>quintas-feiras às 14h20-16h00 => aula teórica</li>
+						<li>sextas-feiras às 14h20-16h00 => aula prática (laboratório)</li></ul></p>
+						<p>&nbsp;</p>
+					
+					<p>Contato: marofe@usp.br</p>
+					<p>Sala 3083 (combinar horário)</p>
+					
+				</center>
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Tópicos</h2>
+				</div>
+				<div class="slide-content">
+
+						<ul><li>Representação de sistemas em tempo discreto;
+							<li>Amostragem de sinais;
+							<li>Transformada Z e discretização de sistemas;</li>
+							<li>Análise de estabilidade em tempo discreto;</li>
+							<li>Projeto de controladores PID discreto;</li>
+							<li>Modelos em Espaço de estados à tempo discreto;</li>
+							<li>Projeto de controle via realimentação de estados;</li>
+							<li>Projeto de observadores de estado;</li>
+							<li>Controle LQR e Filtro de Kalman.</li>
+					</ul>
+						
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<p>Serão realizadas:</p>
+				
+						
+						<p><ul>
+							<li>
+							 Duas provas teóricas: $P_1$ e $P_2$; </li>
+							<li>Uma prova
+						prática $P_1^{LAB}$ (Matlab);
+						<li>Listas de exercícios computacionais $L_1,\ldots,L_n$; </li>
+						<li>Ao final do semestre, um trabalho computacional $T$.</li></ul></p>
+					
+						
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+			
+					<p>A média final é dada por:$$MF=0.5P+0.3L+0.2T$$
+						<p>&nbsp;</p>
+						$$P=mean(P_1,P_2,P_1^{LAB})$$
+						$$L=mean(L_1,L_2,\ldots,L_n)$$ </p>
+		
+
+				</div>
+
+			</section>
+
+			
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					Para aprovação, é necessário:	
+<ul>
+<li>Ao menos $70\%$ de frequência, $P\ge 4.0$ e $MF\ge5.0$</li>
+<li>Se $3.0\le P < 4.0$, aluno ficará de recuperação independente da $MF$. </li>
+<li>Se $P<3.0$ mas $MF\ge 3.0$ então aluno poderá fazer recuperação. </li>
+<li>Se $MF<3.0$ aluno é reprovado. </li>
+</ul>
+
+				</div>
+
+			</section>
+
+
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Introdução</h2>
+					</div>
+					<div class="slide-content">
+						<!-- <p class="lightup fragment current-visible" data-fragment-index="1">O que é um sinal?</p>
+						<center class="fragment current-visible" data-fragment-index="2">
+							<p class="lightup"><b>Sinal</b> é tudo que carrega informação.</p>
+						<img src="images/sinal.png" width="600">
+					</center>
+					<p class="lightup fragment current-visible" data-fragment-index="3">O que é um sistema?</p>
+					<center class="fragment current-visible" data-fragment-index="4">
+						<p class="lightup"><b>Sistema</b> é tudo que modifica um sinal.</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+	
+					<p>	<img src="images/sistema.png" width="700"></p>
+				</center> -->
+
+
+				<p class="lightup fragment current-visible" >O que é um sistema de controle?</p>
+					<center class="fragment current-visible" >
+						<p>&nbsp;</p>
+					<p>	<img src="images/malha_controle0.png" width="800"></p>
+					<p>Garantir <b>desempenho</b> e <b>segurança</b>!</p>
+				</center>
+
+			</div>
+
+		</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Exemplos</h2>
+				</div>
+				<div class="slide-content">
+
+
+
+			
+
+			
+			<center class="fragment current-visible" >
+				<p>Naves espaciais e aviões</b></p>
+			<table><Tr><Td><img src="images/rockets.jpg" width="250"></Td><td><img src="images/aviao.png" width="550"></td></Tr></table>
+			<p>Ex: controle de atitude</p>
+		</center>
+
+
+		<center class="fragment current-visible" >
+			<p>Geração de energia</b></p>
+			<table><Tr><Td><img src="images/usina_nuclear.jpg" width="525"></Td><td><img src="images/itaipu.jpg" width="600"></td></Tr></table>
+			<p>Ex: controle de potência gerada</p>
+	</center>
+
+	<center class="fragment current-visible" >
+		<p>Indústria</b></p>
+		<table><Tr><td><img src="images/industria.jpg" width="600"></td><Td><img src="images/industria2.jpg" width="500"></Td></Tr></table>
+		<p>Ex: controle de temperatura, vazão, nível...</p>
+</center>
+
+		<center class="fragment current-visible" >
+			<p>Setor automotivo</b></p>
+			<table><Tr><td><img src="images/controle_tracao2.jpg" width="550"><br><i>Fonte: https://salaodocarro.com.br/como-funciona/controle-de-tracao.html</i></td><Td><img src="images/controle_tracao.jpg" width="300"></Td></Tr></table>
+	</center>
+
+
+	<center class="fragment current-visible" >
+		<p>Medicina e Biologia</b></p>
+		<table><Tr><td><img src="images/controL_diabetes.png" width="800"><br><i>Fonte: IEEE Control Systems Magazine https://doi.org/10.1109/MCS.2017.2766322</i></td><Td><img src="images/control_population.jpg" width="450"><br><i>Fonte: https://www.sare.org/publications/manage-insects-on-your-farm/beneficial-agents-on-the-farm/predators-2/</i></Td></Tr></table>
+</center>
+
+<center class="fragment current-visible" >
+	<p>Tomada de decisão no Mercado financeiro e Economia</b></p>
+	<table><Tr><td><img src="images/stock_market.jpg" width="550"></td><Td><img src="images/economic-policy.jpg" width="500"></Td></Tr></table>
+</center>
+
+			
+		</div>
+
+	</section>
+
+
+	
+	<section>
+
+		<div class="slide-title">
+			<h2>Introdução</h2>
+		</div>
+		<div class="slide-content">
+
+				<center class="fragment current-visible" >
+	
+					<p>	<img src="images/malha_controle.png" width="800"></p>
+				</center>
+				<center class="fragment current-visible" >
+					<p>&nbsp;</p>
+					<p>	<img src="images/malha_controle_atuador_processo.png" width="800"></p>
+					<p>Processo pode ser <b>físico</b> ou <b>não-físico</b>.</p>
+				</center>
+					   </div>
+
+				</section>
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Exemplos</h2>
+				</div>
+				<div class="slide-content">
+
+					<p align="center" class="fragment current-visible">Pêndulo Invertido: <br><a href="https://www.youtube.com/watch?v=4kIrcELC79o">https://www.youtube.com/watch?v=4kIrcELC79o</a>
+						<video width="700" controls>
+							<source src="videos/pendulo_invertido.mp4" type="video/mp4">
+						  Your browser does not support the video tag.
+						  </video> 
+					</p>
+
+					<p align="center" class="fragment current-visible">Pêndulo Invertido: <br><a href="https://www.youtube.com/watch?v=4kIrcELC79o">https://www.youtube.com/watch?v=4kIrcELC79o</a>
+						<img src="images/youtube_pendulo_invertido.png" width="700">
+					</p>
+
+					
+
+
+					<p align="center" class="fragment current-visible">Pêndulo Invertido: <br><a href="https://www.youtube.com/watch?v=4kIrcELC79o">https://www.youtube.com/watch?v=4kIrcELC79o</a>
+						<img src="images/youtube_pendulo_invertido_processo_atuador.png" width="700">
+					</p>
+					<p align="center" class="fragment current-visible">Pêndulo Invertido: <br><a href="https://www.youtube.com/watch?v=4kIrcELC79o">https://www.youtube.com/watch?v=4kIrcELC79o</a>
+						<img src="images/youtube_pendulo_invertido_planta.png" width="700">
+					</p>
+
+
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+					<video width="700" controls>
+							<source src="videos/self_balanced_robot.mp4" type="video/mp4">
+						  Your browser does not support the video tag.
+						  </video> 
+					</p>
+
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="images/youtube_self_balanced_robot.png" width="700">
+					</p>
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="images/youtube_self_balanced_robot_atuador.png" width="700">
+					</p>
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="images/youtube_self_balanced_robot_processo_atuador.png" width="700">
+					</p>
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="images/youtube_self_balanced_robot_planta.png" width="700">
+					</p>
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="images/youtube_self_balanced_robot_pertubacao.png" width="700">
+					</p>
+
+
+<!-- 
+						<p align="center" class="fragment current-visible">Plate balancing: <Br><a href="https://www.youtube.com/watch?v=F8R91bAOHSU">https://www.youtube.com/watch?v=F8R91bAOHSU</a>
+							<img src="images/youtube_plate_balancing.png" width="700">
+						</p>
+						<p align="center" class="fragment current-visible">Plate balancing: <Br><a href="https://www.youtube.com/watch?v=F8R91bAOHSU">https://www.youtube.com/watch?v=F8R91bAOHSU</a>
+							<img src="images/youtube_plate_balancing_atuador.png" width="700">
+						</p>
+						<p align="center" class="fragment current-visible">Plate balancing: <Br><a href="https://www.youtube.com/watch?v=F8R91bAOHSU">https://www.youtube.com/watch?v=F8R91bAOHSU</a>
+							<img src="images/youtube_plate_balancing_processo_processo_atuador.png" width="700">
+						</p>
+						<p align="center" class="fragment current-visible">Plate balancing: <Br><a href="https://www.youtube.com/watch?v=F8R91bAOHSU">https://www.youtube.com/watch?v=F8R91bAOHSU</a>
+							<img src="images/youtube_plate_balancing_planta.png" width="700">
+						</p>
+
+
+
+							<p align="center" class="fragment current-visible">Inverted Pendulo (pencil): <br><a href="https://www.youtube.com/watch?v=HC0IRvnlRG4">https://www.youtube.com/watch?v=HC0IRvnlRG4</a>
+								<img src="images/youtube_pendulo_invertido_lapis.png" width="700">
+							</p>
+							<p align="center" class="fragment current-visible">Inverted Pendulo (pencil): <br><a href="https://www.youtube.com/watch?v=HC0IRvnlRG4">https://www.youtube.com/watch?v=HC0IRvnlRG4</a>
+								<img src="images/youtube_pendulo_invertido_lapis_processo_atuador.png" width="700">
+							</p>
+							<p align="center" class="fragment current-visible">Inverted Pendulo (pencil): <br><a href="https://www.youtube.com/watch?v=HC0IRvnlRG4">https://www.youtube.com/watch?v=HC0IRvnlRG4</a>
+								<img src="images/youtube_pendulo_invertido_lapis_planta.png" width="700">
+							</p> -->
+							
+							
+				
+
+
+
+						</section>
+
+		
+				
+			
+			<section>
+				<div class="slide-title">
+					<h2>Requisítos</h2>
+				</div>
+				<div class="slide-content">
+					<p>Um sistema de controle deve:
+						<ul>
+						<li class="fragment">Ser estável;</li> 
+						<li class="fragment">Ser eficiênte (tempo de súbida, acomodação, sobresinal, etc):</li> 
+						<li class="fragment">Rejeitar pertubações;</li>
+						<li class="fragment">Ter Robustez (ex: margens de ganho e fase);</li>			
+					</p>
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Requisítos</h2>
+				</div>
+				<div class="slide-content">
+					<p>Um sistema de controle deve:
+						<ul>
+						<li class="fragment">Garantir estabilidade;</li> 
+						<li  class="fragment">Eficiência do funcionamento;</li> 
+						<li  class="fragment">Robustez: rejeição à pertubações;</li>
+						
+			
+					</p>
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Ciclo de projeto</h2>
+				</div>
+				<div class="slide-content">
+				
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Modelagem</h2>
+				</div>
+				<div class="slide-content">
+				<p>EDO</p>
+				<p>Sistemas de 1° e 2° ordem</p>
+				<p></p>
+				</div>
+
+			</section>
+
+			<section>
+				<div class="slide-title">
+					<h2>Critérios de desempenho</h2>
+				</div>
+				<div class="slide-content">
+				<p>EDO</p>
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Implementação</h2>
+				</div>
+				<div class="slide-content">
+				<p>Analógico vs Digital</p>
+				<p class="">classificação dos sinais: continuo, discreto, quantizado</p>
+				<p class="">ferramenta matemática: Transformada Z</p>
+				<p class="">escolha do tempo de amostragem</p>
+				<p class="">escolha do método de discretização</p>
+				<p class="">derivada discreta</p>
+                <p class="">equação diferença: seq. Fibonacci</p>
+				<p class="">análise de estabilidade do sistema discreto</p>
+    			<p class="">volta para o contínuo através de interpolação do sinal discreteto: segurador de primeira ordem</p>   
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Teste</h2>
+				</div>
+				<div class="slide-content">
+				
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Exemplos de controladores</h2>
+				</div>
+				<div class="slide-content">
+				<p>On-off</p>
+				<p>avanço/atraso de fase</p>
+				<p>P,PI,PD,PID</p>
+				<p>LQR</p>
+				<p>etc</p>
+				</div>
+
+			</section>
+
+
+
+
+					
+			
+			<section>
+				<div class="slide-title">
+					<h2>New slide</h2>
+				</div>
+				<div class="slide-content">
+					<p>Objetivos dessa aula são:
+						<ul>
+						<li class="fragment">Apresentar a disciplina: estrutura e métodos de avaliação;</li> 
+						<li  class="fragment">Revisar os conceitos de sinais, sistemas e controle;</li> 
+						<li  class="fragment">..;</li>
+						<li  class="fragment">Evidenciar a importância dos sistemas de controle digitais para a engenharia;</li>
+			
+					</p>
+
+				</div>
+
+			</section>
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				width: 1244,
+  				height: 700,
+				center:false,
+				katex: {
+    version: 'latest',
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true}
+   ],
+   ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+   macros: {
+	"\\R": "\\mathbb{R}",
+	"\\trp": "\\intercal",
+	"\\diag": "\\text{diag}",
+	"\\Diag": "\\text{Diag}",
+	"\\tr": "\\text{tr}"
+   }
+ },
+				hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+				controls: false,
+				progress: false,
+				transition: 'none'
+			});
+		//////remove slide number from first page (data-hide-slide-number="true")
+	    Reveal.addEventListener('slidechanged', (event) => {
+  		const isSnOn = (event.currentSlide.dataset.hideSlideNumber !== 'true');
+  		Reveal.configure({ slideNumber: isSnOn });
+		});
+		</script>
+	</body>
+</html>
+
