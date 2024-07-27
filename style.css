@@ -15,7 +15,7 @@
     padding-bottom: 0.3em;
 }
 .slides h2, .slides h4,.slides h3{
-    text-transform: capitalize;
+    text-transform: unset;
 }
 .lightup {
     background-color: var(--yellow);

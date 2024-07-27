@@ -325,39 +325,6 @@
 					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
 						<img src="images/youtube_self_balanced_robot_pertubacao.png" width="700">
 					</p>
-
-
-<!-- 
-						<p align="center" class="fragment current-visible">Plate balancing: <Br><a href="https://www.youtube.com/watch?v=F8R91bAOHSU">https://www.youtube.com/watch?v=F8R91bAOHSU</a>
-							<img src="images/youtube_plate_balancing.png" width="700">
-						</p>
-						<p align="center" class="fragment current-visible">Plate balancing: <Br><a href="https://www.youtube.com/watch?v=F8R91bAOHSU">https://www.youtube.com/watch?v=F8R91bAOHSU</a>
-							<img src="images/youtube_plate_balancing_atuador.png" width="700">
-						</p>
-						<p align="center" class="fragment current-visible">Plate balancing: <Br><a href="https://www.youtube.com/watch?v=F8R91bAOHSU">https://www.youtube.com/watch?v=F8R91bAOHSU</a>
-							<img src="images/youtube_plate_balancing_processo_processo_atuador.png" width="700">
-						</p>
-						<p align="center" class="fragment current-visible">Plate balancing: <Br><a href="https://www.youtube.com/watch?v=F8R91bAOHSU">https://www.youtube.com/watch?v=F8R91bAOHSU</a>
-							<img src="images/youtube_plate_balancing_planta.png" width="700">
-						</p>
-
-
-
-							<p align="center" class="fragment current-visible">Inverted Pendulo (pencil): <br><a href="https://www.youtube.com/watch?v=HC0IRvnlRG4">https://www.youtube.com/watch?v=HC0IRvnlRG4</a>
-								<img src="images/youtube_pendulo_invertido_lapis.png" width="700">
-							</p>
-							<p align="center" class="fragment current-visible">Inverted Pendulo (pencil): <br><a href="https://www.youtube.com/watch?v=HC0IRvnlRG4">https://www.youtube.com/watch?v=HC0IRvnlRG4</a>
-								<img src="images/youtube_pendulo_invertido_lapis_processo_atuador.png" width="700">
-							</p>
-							<p align="center" class="fragment current-visible">Inverted Pendulo (pencil): <br><a href="https://www.youtube.com/watch?v=HC0IRvnlRG4">https://www.youtube.com/watch?v=HC0IRvnlRG4</a>
-								<img src="images/youtube_pendulo_invertido_lapis_planta.png" width="700">
-							</p> -->
-							
-							
-				
-
-
-
 						</section>
 
 		
@@ -373,7 +340,7 @@
 						<li class="fragment">Ser estável;</li> 
 						<li class="fragment">Ser eficiênte (tempo de súbida, acomodação, sobresinal, etc):</li> 
 						<li class="fragment">Rejeitar pertubações;</li>
-						<li class="fragment">Ter Robustez (ex: margens de ganho e fase);</li>			
+						<li class="fragment">Ter robustez (ex: margens de ganho e fase);</li>			
 					</p>
 
 				</div>
@@ -381,31 +348,15 @@
 			</section>
 
 
+		
 			<section>
 				<div class="slide-title">
-					<h2>Requisítos</h2>
+					<h2>Ciclo do Projeto de Controle</h2>
 				</div>
 				<div class="slide-content">
-					<p>Um sistema de controle deve:
-						<ul>
-						<li class="fragment">Garantir estabilidade;</li> 
-						<li  class="fragment">Eficiência do funcionamento;</li> 
-						<li  class="fragment">Robustez: rejeição à pertubações;</li>
-						
-			
-					</p>
-
-				</div>
-
-			</section>
-
-
-			<section>
-				<div class="slide-title">
-					<h2>Ciclo de projeto</h2>
-				</div>
-				<div class="slide-content">
-				
+					<center>
+				<img src="images/design_process.png" width="450"/>
+			</center>
 				</div>
 
 			</section>
@@ -416,19 +367,73 @@
 					<h2>Modelagem</h2>
 				</div>
 				<div class="slide-content">
-				<p>EDO</p>
-				<p>Sistemas de 1° e 2° ordem</p>
-				<p></p>
+				<p>Obter Equações Diferênciais através da <b>física/comportamento</b> do processo:</p>
+				<p>$$a_n\frac{d^n y}{dt^n}+a_{n-1}\frac{d^{n-1} y}{dt^{n-1}}+\cdots+a_{1}\frac{dy}{dt}+a_0y=u(t)$$</p>
+				<p>
+					<ul>
+						<li><b>Abordagens em frequência:</b> Função de Transferência</li>
+						<li><b>Abordagens domínio do tempo:</b> Espaço de estados</li>
+					</ul>
+				
 				</div>
 
 			</section>
 
 			<section>
 				<div class="slide-title">
-					<h2>Critérios de desempenho</h2>
+					<h2>Critérios de Desempenho</h2>
 				</div>
 				<div class="slide-content">
-				<p>EDO</p>
+				<center class="fragment current-visible">
+					<p>&nbsp;</p>
+					<img src="images/desempenho_saida1.png" width="800" alt="">
+				</center>
+
+				<center  class="fragment current-visible">
+					<p>Tempo de súbida $(t_r)$</p>
+					<img src="images/desempenho_saida2.png" width="800" alt="">
+				</center>
+
+				<center  class="fragment current-visible">
+					<p>Sobresinal $(M_p)$</p>
+					<img src="images/desempenho_saida3.png" width="800" alt="">
+				</center>
+
+				<center  class="fragment current-visible">
+					<p>Tempo de acomodação $(t_s)$</p>
+					<img src="images/desempenho_saida4.png" width="800" alt="">
+				</center>
+
+				<center  class="fragment current-visible">
+					<p>Erro $(\epsilon)$</p>
+					<img src="images/desempenho_saida5.png" width="800" alt="">
+				</center>
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Controlador</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<p>O controlador resultante do projeto é um <b>objeto matemático</b>.</p>
+				<ul><li>Abordagem em frequência:
+					$$C(s)=\frac{N(s)}{D(s)}$$
+				</li>
+			<li>Abordagem no domínio do tempo:
+				$$u(t)=C\{x(t)\}$$
+			</li>
+		</ul>
+	</center>
+				
+			
+				
+				
+				
+    		
 				</div>
 
 			</section>
@@ -439,15 +444,26 @@
 					<h2>Implementação</h2>
 				</div>
 				<div class="slide-content">
-				<p>Analógico vs Digital</p>
-				<p class="">classificação dos sinais: continuo, discreto, quantizado</p>
-				<p class="">ferramenta matemática: Transformada Z</p>
-				<p class="">escolha do tempo de amostragem</p>
-				<p class="">escolha do método de discretização</p>
-				<p class="">derivada discreta</p>
-                <p class="">equação diferença: seq. Fibonacci</p>
-				<p class="">análise de estabilidade do sistema discreto</p>
-    			<p class="">volta para o contínuo através de interpolação do sinal discreteto: segurador de primeira ordem</p>   
+				<p align="center">Analógico vs Digital</p>
+				<table width="100%">
+<tr><td width="50%"><img src="images/capacitor_indutor.jpg" width="580" ></td><td style="border-left:1px solid #ccc"><img src="images/microcontroller.png" width="490"></td></tr>
+<tr><td>Resistores, capacitores, indutores e OpAmp. </td><td style="border-left:1px solid #ccc">Computador digital ($\mu C$)</td></tr>
+				</table>    		
+				</div>
+
+			</section>
+
+			<section>
+				<div class="slide-title">
+					<h2>Implementação</h2>
+				</div>
+				<div class="slide-content">
+				<p align="center">Analógico vs Digital</p>
+				<table width="100%">
+<tr><td width="50%"><img src="images/capacitor_indutor2.jpg" width="580" ></td><td style="border-left:1px solid #ccc"><img src="images/microcontroller.png" width="490"></td></tr>
+<tr><td>Resistores, capacitores, indutores e OpAmp. </td><td style="border-left:1px solid #ccc">Computador digital ($\mu C$)</td></tr>
+				</table>
+    		
 				</div>
 
 			</section>
@@ -455,10 +471,199 @@
 
 			<section>
 				<div class="slide-title">
+					<h2>Controle Digital</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					<img src="images/microcontroller.png" width="700">
+					<p>Computador digital ($\mu C$)</p>
+				</center>
+				</div>
+
+			</section>
+
+			<section>
+				<div class="slide-title">
+					<h2>Controle Digital</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<h3>Vantagens:</h3>
+						<table><tr><td width="40%" valign="top"><img src="images/microcontroller.png"></td><td valign="top">
+						
+							<ul><li>
+							<b>Flexibilidade</b> para alteração;
+						</li>
+					<li><b>Custo</b> menor;</li>
+					<li>Maior <b>confiabilidade</b>;</li>
+					<li><b>Controladores mais modernos</b> (ex: ótimo, adaptativo, robusto, etc);</li>
+					<li><b>Coletar dados</b> do sistema, incluir telas e botões etc;</li>
+
+					</ul></td></tr></table>
+				
+				</center>
+				</div>
+
+			</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Controle Digital</h2>
+				</div>
+				<div class="slide-content">
+
+					<center class="fragment current-visible" >
+	
+						<p>	<img src="images/malha_controle.png" width="900"></p>
+					</center>
+		
+						<center class="fragment current-visible" >
+							<p>Interface analógica/digital</p>
+							<p>	<img src="images/malha_controle_digital.png" width="900"></p>
+						</center>
+						<center class="fragment current-visible" >
+							<p>Interface analógica/digital</p>
+							<p>	<img src="images/malha_controle_digital2.png" width="900"></p>
+							
+						</center>
+
+						<center class="fragment current-visible" >
+							<p>Interface analógica/digital</p>
+							<p>	<img src="images/malha_controle_digital3.png" width="900"></p>
+							
+						</center>
+
+						<center class="fragment current-visible" >
+							<p>Interface analógica/digital</p>
+							<p>	<img src="images/malha_controle_digital4.png" width="900"></p>
+							
+						</center>
+							   </div>
+		
+						</section>
+
+
+						<section>
+							<div class="slide-title">
+								<h2>Sinal digital</h2>
+							</div>
+							<div class="slide-content">
+								<center class="fragment current-visible">
+								<img src="images/sinal_continuo.png" width="800" alt="">
+							</center>
+
+							<center class="fragment current-visible">
+								<img src="images/sinal_amostrado.png" width="800" alt="">
+							</center>
+
+							<center class="fragment current-visible">
+								<img src="images/sinal_discreto.png" width="800" alt="">
+							</center>
+
+							<center class="fragment current-visible">
+								<img src="images/sinal_digital.png" width="800" alt="">
+							</center>
+
+							<center class="fragment current-visible">
+								<img src="images/sinal_digital2.png" width="800" alt="">
+							</center>
+							</div>
+			
+						</section>
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Escolha do tempo de amostragem</h2>
+				</div>
+				<div class="slide-content">
+					<center class="fragment current-visible">
+						<img src="images/sinal_amostrado.png" width="800" alt="">
+					</center>
+					<center class="fragment current-visible">
+						<img src="images/sinal_amostrado2.png" width="800" alt="">
+					</center>
+
+					<center class="fragment current-visible">
+						<img src="images/sinal_amostrado3.png" width="800" alt="">
+					</center>
+				</div>
+
+			</section>
+
+			
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Sequência de números</h2>
+				</div>
+				<div class="slide-content">
+					<center class="fragment current-visible">
+						<img src="images/sequencia_sinal.png" width="700" alt="">
+					</center>
+					<center class="fragment">
+						<p>&nbsp;</p>
+						<h3>Transformada Z</h3>
+						$$X(z)=\sum_{k=-\infty}^\infty x[k]z^{-k}$$
+					</center>
+					
+				</div>
+
+			</section>
+
+			<section>
+				<div class="slide-title">
+					<h2>Representação de sistemas</h2>
+				</div>
+				<div class="slide-content">
+							<center class="fragment current-visible">
+						<p>&nbsp;</p>
+						<h3>Funções de transferência:</h3>
+						$$\frac{Y(z)}{U(z)}=G(z)$$
+					</center>
+					<center class="fragment current-visible">
+						<p>&nbsp;</p>
+						<h3>Equações à diferenças:</h3>
+						$$a_ny[k-n]+\cdots+a_1y[k-1]+a_0y[k]=u[k]$$
+					</center>
+					
+				</div>
+
+			</section>
+
+			<section>
+				<div class="slide-title">
+					<h2>Análise de estabilidade</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<img src="images/estabilidade_discreta.png" alt="">
+					</center>
+				</div>
+
+			</section>
+
+			
+
+			<section>
+				<div class="slide-title">
 					<h2>Teste</h2>
 				</div>
 				<div class="slide-content">
-				
+					<center>
+					<ul>
+						<li>Simulações computacionais;
+							<p align="center"><img src="images/matlab_logo.png" width="300"><img src="images/python-logo.png" width="280"><img src="images/julia-logo.png" width="230"></p>
+						</li>
+						<li>Direto na planta (de forma segura);
+							<p align="center"><img src="images/hardware-on-the-loop.jpg" width="350"></p>
+						</li>
+					</ul>
+				</center>
 				</div>
 
 			</section>
@@ -469,37 +674,93 @@
 					<h2>Exemplos de controladores</h2>
 				</div>
 				<div class="slide-content">
-				<p>On-off</p>
-				<p>avanço/atraso de fase</p>
-				<p>P,PI,PD,PID</p>
-				<p>LQR</p>
-				<p>etc</p>
+					<center class="fragment current-visible">
+						<p align="center">&nbsp;</p><img src="images/malha_controle_digital.png" width="800"></center>
+				<center class="fragment current-visible">
+					<p align="center">On-off</p><img src="images/malha_controle_on_off.png" width="800">
+				<p>Utilizado em geladeiras, ar-condicionados, caixas de água etc</p>
+				</center>
+				<center class="fragment current-visible">
+					<p align="center">On-off</p><img src="images/resposta_on_off.png" width="800">
+				
+				</center>
+
+				<center class="fragment current-visible">
+					<p align="center">PID</p><img src="images/malha_controle_PID.png" width="800">
+				
+				</center>
+				<center class="fragment current-visible">
+					<p align="center">PID (tempo contínuo)</p><img src="images/pid_continuo.png" width="650"><br>$C(s)=K_p+K_i\frac{1}{s}+K_ds$
+				
+				</center>
+				<center class="fragment current-visible">
+					<p align="center">PID (tempo discreto)</p><img src="images/pid_discreto.png" width="650"><br>$C(z)=K_p+K_i\frac{1}{1-z^{-1}}+K_d(1-z^{-1})$
+				
+				</center>
 				</div>
 
 			</section>
 
 
-
-
-					
-			
 			<section>
 				<div class="slide-title">
-					<h2>New slide</h2>
+					<h2>Exemplos de controladores</h2>
 				</div>
 				<div class="slide-content">
-					<p>Objetivos dessa aula são:
-						<ul>
-						<li class="fragment">Apresentar a disciplina: estrutura e métodos de avaliação;</li> 
-						<li  class="fragment">Revisar os conceitos de sinais, sistemas e controle;</li> 
-						<li  class="fragment">..;</li>
-						<li  class="fragment">Evidenciar a importância dos sistemas de controle digitais para a engenharia;</li>
-			
-					</p>
-
+				<p align="center">LQR (Linear Quadratic Regulator)</p>
+				<p>Dado um sistema modelado em espaço de estados:</p>
+				$$x_{k+1}=Ax_k+Bu_k$$
+				Busca-se a lei de controle que minimiza o custo
+				$$J=\sum_{k=0}^T x_k^TQx_k+u_k^TRu_k$$
 				</div>
 
 			</section>
+
+			<section>
+				<div class="slide-title">
+					<h2>Exemplos de controladores</h2>
+				</div>
+				<div class="slide-content">
+				<p align="center">Realimentação de estados</p>
+				<center>
+				<img src="images/state_feedback.png" width="600">
+			</center>
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Próxima aula teórica</h2>
+				</div>
+				<div class="slide-content">
+					<center class="fragment">
+						<p>Teorema da amostragem</p>
+						<img src="images/sinal_amostrado.png" width="700" alt="">
+					</center>
+				</div>
+
+			</section>
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h1>Fim!</h1>
+				</center>
+				</div>
+
+			</section>
+
+
+
+
+				
 
 
 
@@ -542,8 +803,9 @@
 				hash: true,
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
-				controls: false,
+				controls: true,
 				progress: false,
+				controlsLayout: 'edges',
 				transition: 'none'
 			});
 		//////remove slide number from first page (data-hide-slide-number="true")
