@@ -24,7 +24,8 @@
    }
  },
 				hash: true,
-				// Learn about plugins: https://revealjs.com/plugins/
+
+
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
 				controls: true,
 				controlsLayout: 'edges',

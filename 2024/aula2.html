@@ -96,45 +96,7 @@
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
 		<script src="plugin/math/math.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				pdfMaxPagesPerSlide: 1,
-				width: 1244,
-  				height: 700,
-				center:false,
-				katex: {
-    version: 'latest',
-    delimiters: [
-      {left: '$$', right: '$$', display: true},
-      {left: '$', right: '$', display: false},
-      {left: '\\(', right: '\\)', display: false},
-      {left: '\\[', right: '\\]', display: true}
-   ],
-   ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-   macros: {
-	"\\R": "\\mathbb{R}",
-	"\\trp": "\\intercal",
-	"\\diag": "\\text{diag}",
-	"\\Diag": "\\text{Diag}",
-	"\\tr": "\\text{tr}"
-   }
- },
-				hash: true,
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
-				controls: false,
-				progress: false,
-				transition: 'none'
-			});
-		//////remove slide number from first page (data-hide-slide-number="true")
-	    Reveal.addEventListener('slidechanged', (event) => {
-  		const isSnOn = (event.currentSlide.dataset.hideSlideNumber !== 'true');
-  		Reveal.configure({ slideNumber: isSnOn });
-		});
-		</script>
+		<script src="../init.js"></script>
 	</body>
 </html>
 
