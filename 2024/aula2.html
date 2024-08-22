@@ -6,13 +6,13 @@
 
 		<title>SEL0359 - Controle Digital</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
 
 		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
 	</head>
 	<body>
 		
@@ -20,8 +20,8 @@
 			<div class="slides">
 				
 				<section data-hide-slide-number="true" data-transition="slide">
-					<div class="logo"><img src="images/sel.png"/> </div>
-					<div class="logo2"><img src="images/usp.png"/> </div>
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/usp.png"/> </div>
 					<div class="title">
 					<h2>Aula 2: <br>Teorema da Amostragem</h2>
 					</div>
@@ -30,58 +30,1339 @@
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">10 de agosto de 2024</p>
+					<p style="text-align: center;font-size: 0.8em;">22 de agosto de 2024</p>
 				</div>
 
 				</section>
-				<section>
+				
+
+
+
+			<section>
 
 				<div class="slide-title">
-					<h2>Objetivos</h2>
+					<h2>Malha de controle digital
+					</h2>
 				</div>
 				<div class="slide-content">
-					<p>Objetivos dessa aula são:
-							<ul>
-							<li class="fragment">Apresentar o teorema da amostragem;</li> 
-						
-				
-						</p>
-						</div>
+					<center>
+					<p>&nbsp;</p>
+					<img src="../images/malha_controle_digital.png" width="900" alt="">
+		
+				</center>
+				   </div>
 
 			</section>
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Objetivos</h2>
+			</div>
+			<div class="slide-content">
+				<p>Os objetivos dessa aula são entender:
+						<ul>
+						<li>Representação matemática de <b>sinais amostrados</b>;</li>
+						<li>Análise do <b>efeito</b> da amostragem no espectro;</li>
+						<li>Apresentar o <b>teorema da amostragem</b>;</li> 
+						<li>Exemplos;</li>
+					</p>
+					</div>
+
+		</section>
 
 
 			<section>
 
 					<div class="slide-title">
-						<h2>Sinal contínuo vs Discreto</h2>
+						<h2>Sinal contínuo no tempo
+						</h2>
 					</div>
 					<div class="slide-content">
-				
+						<center>
+							$$
+							g(t):\mathbb{R}\to\mathbb{R}
+							$$
+						<img src="../images/sinal_continuo.png" width="600" alt="">
+			
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							g_a[k]=g(kT), \quad k\in\mathbb{Z}
+							$$
+						<img src="../images/sinal_discreto.png" width="600" alt="">
+					</center>
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							g_a[k]=g(kT), \quad k\in\mathbb{Z}
+							$$
+							<p>&nbsp;</p>
+						<p>Qual o valor de $g_a[t]$ quando $t\in(k,k+1)$?</p>
+					</center>
+					   </div>
+
+				</section>
+
+
+			
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja um sinal descrito por
+							$
+							 g:\mathbb{R}\to\mathbb{R}
+							$ 
+							<p>&nbsp;</p>
+						<img src="../images/chave_amostragem.png" width="700" alt="">
+						<p>Chave ideal!</p>
+						
+					</center>
+					<p class="fragment" align="center">	Qual a condição para recuperar o sinal $g(t)$ através de $g_a[k]$?</p>
 					   </div>
 
 				</section>
 
 
 
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+										
+						<img src="../images/modular_amostragem.png" width="550" alt="">
+						
+						$$
+						p(t)=\sum_{k=-\infty}^\infty \delta(t-kT)
+
+											$$
+					</center>
+					   </div>
+
+				</section>
+
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Impulso Unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+										
+						<img src="../images/impulso_unitario.png" width="550" alt="">
+						
+						$$
+						
+    \delta(t)=\begin{cases}0,\quad \forall t\neq 0,\\
+    \infty, \quad t=0.\end{cases}, \quad \int_{-\infty}^\infty \delta(t)dt = 1.
+
+
+											$$
+					</center>
+					   </div>
+
+				</section>
+				
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+										
+						<img src="../images/modular_amostragem.png" width="550" alt="">
+						
+					</center>
+					<center class="lightup">
+						$
+						g_a^*(t)=g(t)\underbrace{\sum_{k=-\infty}^\infty \delta(t-kT)}_{p(t)}
+											$
+					</center>
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+										
+						<img src="../images/modular_amostragem.png" width="550" alt="">
+						
+					</center>
+					<center class="lightup">
+						$$
+						g_a^*(t)=\sum_{k=-\infty}^\infty g(kT)\delta(t-kT)
+											$$
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							g_a^*(t)=\sum_{k=-\infty}^\infty g(kT)\delta(t-kT)
+							$$
+						<img src="../images/sinal_amostrado.png" width="600" alt="">
+					</center>
+					   </div>
+
+				</section>
+
+
 			
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal com banda-limitada</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja um sinal descrito por
+							$
+							 g:\mathbb{R}\to\mathbb{R}
+							$ e cuja transformada de Fourier é
+							$$
+							G(\omega)=\mathcal{F}\{g(t)\}
+							$$
+						<img src="../images/espectro_limitado.png" width="700" alt="">
+					
+					</center>
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Trem de Impulsos</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							p(t)=\sum_{k-\infty}^\infty \delta(t-kT)
+							$$
+										
+						<img src="../images/trem_impulsos.png" width="750" alt="">
+					
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Série de Fourier: Trem de Impulsos</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							p(t)=\sum_{k-\infty}^\infty c_ke^{jk\omega_0 t},\quad\omega_0=\frac{2\pi}{T}
+							$$
+										
+						<img src="../images/trem_impulsos.png" width="750" alt="">
+					
+					</center>
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Série de Fourier: Trem de Impulsos</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							p(t)=\sum_{k-\infty}^\infty \frac{1}{T}e^{jk\omega_0 t},\quad\omega_0=\frac{2\pi}{T}
+							$$
+										
+						<img src="../images/trem_impulsos.png" width="750" alt="">
+					
+					</center>
+					   </div>
+
+				</section>
+
+
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							g_a(t)=g(t)p(t)=\sum_{k-\infty}^\infty \frac{1}{T}g(t)e^{jk\omega_0 t}
+							$$
+										
+					
+					
+					</center>
+					<center class="fragment">
+						$$
+						\Rightarrow G_a(\omega)=\mathcal{F}\{g_a(t)\}=\sum_{k-\infty}^\infty \frac{1}{T}\mathcal{F}\{g(t)e^{jk\omega_0 t}\}
+						$$
+					</center>
+					<center class="fragment lightup">
+						$\mathcal{F}\{x(t)e^{j\omega_0t}\}=X(\omega-\omega_0)$
+					</center>
+					   </div>
+
+				</section>
+
+
+					
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+						<center class="lightup">
+						$$
+						G_a(\omega)=\sum_{k-\infty}^\infty \frac{1}{T}G(\omega-k\omega_0)
+						$$
+					</center>
+					<center>
+				
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado.png">
+					$$
+						\omega_0=\frac{2\pi}{T}
+					$$
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de Reconstrução</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado_filtro.png">
+					<b>Filtro Ideal</b>
+					$$
+						H(\omega)=\begin{cases} 
+						T,\text{ se } |\omega|\le B\\
+						0,\text{ caso contrário.}
+						\end{cases}
+					$$
+				</center>
+		
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de Reconstrução</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado_filtro_recuperado.png">
+					$$
+						G_a(\omega)H(\omega)=G(\omega)
+					$$
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado3.png">
+					$$
+						\omega_0=\frac{2\pi}{T}
+					$$
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado2.png">
+					$$
+						\omega_0=\frac{2\pi}{T},\quad \downarrow T
+					$$
+					<p><b>Diminuir o tempo de amostragem</b></p>
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado4.png">
+					$$
+						\omega_0=\frac{2\pi}{T},\quad \uparrow T
+					$$
+					<p><b>Aumentar o tempo de amostragem</b></p>
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado5.png">
+					<p><b>Aliasing!</b></p>
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado5_filtro.png">
+					<b>Filtro Ideal</b>
+					$$
+						H(\omega)=\begin{cases} 
+						T,\text{ se } |\omega|\le B\\
+						0,\text{ caso contrário.}
+						\end{cases}
+					$$
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema de Nyquist-Shannom</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado_freqmin.png">
+					<p class="lightup">
+				$
+						\omega_0 \ge 2\omega_M [rads]
+				$
+			</p>
+				</center>
+		
+					   </div>
+
+				</section>
+
+		
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema de Nyquist-Shannom</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado_freqmin.png">
+					<p class="lightup">
+				$
+						f_s \ge 2f_M [Hz]
+				$
+			</p>
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema de Nyquist-Shannom</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+					<img src="../images/AD_DA_reconstrucao.png" width="800">
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Representação de Fourier</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/joseph_fourier.webp">
+					<p>Os sinais podem ser representados através de somas infinitas de senos e cossenos!</p>
+					$$
+						g(t)=\frac{1}{2\pi}\int_{-\infty}^\infty G(\omega)e^{j\omega t}d\omega
+					$$
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Representação de Fourier</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/joseph_fourier.webp">
+					<p>Os sinais podem ser representados através de somas infinitas de senos e cossenos!</p>
+					$$
+						g(t)=\frac{1}{2\pi}\int_{-\infty}^\infty G(\omega)[\cos(\omega t)+j\sin(\omega t)]d\omega
+					$$
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Cossenoide</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						$$
+						y(t)=\cos(2\pi t),\quad f_M=1Hz
+					$$
+					<img src="../images/cossenoide.png" width="850">
+					
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Amostragem ($f_s=2Hz$)</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					
+					<img src="../images/cossenoide_amostragem_2fm.png" width="900">
+					
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Amostragem ($f_s=2Hz$)</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					
+					<img src="../images/cossenoide_amostras_2fm.png" width="900">
+					
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Amostragem ($f_s=2Hz$)</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					
+					Dado o conjunto $\{y(kT),k\in\mathbb{Z}\}$, existe <b>uma única solução</b> $(\omega,\phi)$ para o sistema de equações 
+
+					$$
+						\cos(\omega T+\phi)=y(T)\\
+						\cos(\omega 2T+\phi)=y(2T)\\
+						\cos(\omega 3T+\phi)=y(3T)\\
+						\vdots\\
+						\cos(\omega kT+\phi)=y(kT)
+
+					$$
+					
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Amostragem ($f_s=1.5Hz$)</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					
+					<img src="../images/cossenoide_amostragem_1-5fm.png" width="900">
+					
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Amostragem ($f_s=1.5Hz$)</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					
+					<img src="../images/cossenoide_amostragem_1-5fm_rec.png" width="900">
+					
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Aliasing</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					
+					<img src="../images/cossenoide_amostragem_1-5fm_rec2.png" width="900">
+					
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Aliasing</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					
+					
+				<video width="800" controls>
+					<source src="../videos/aliasing_helicopter.mp4" type="video/mp4">
+				  Your browser does not support the video tag.
+				  </video> 
+					
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinais limitado em banda</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_limitado.png" width="700">
+					
+				<p class="lightup">Sinais na prática não são limitados em banda!</p>
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal típico em controle</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						$$
+						y(t)=e^{-at}\cos(\omega_n t)u(t)
+						$$
+
+
+					<img src="../images/sinal_exp_cos.png" width="650">
+					
+				
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Fourier</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						$$
+						Y(\omega)=\frac{a+j\omega}{(a+j\omega)^2+\omega_n^2}
+						$$
+
+						<img src="../images/espectro_sinal_exp_cos.png" width="600">
+					
+				
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Limitação de banda</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						$$
+						\omega_M=30[rads] \Rightarrow \omega_0>60[rads]
+						$$
+
+						<img src="../images/espectro_sinal_exp_cos2.png" width="600">
+					
+				
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Boa prática</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						<p class="lightup">
+						$$
+						\omega_0>10\omega_M
+						$$					
+					</p>
+					Para sistemas de controle digital, é uma boa prática adotar sempre frequência de amostragem 10x maior que a frequência máxima contida na saída do sistema.
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Filtro PB Ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						
+						$$
+						H(\omega)=\begin{cases}
+						T,\text{ se } |\omega|\le B,\\
+						0,\text{ caso contrário.}
+						\end{cases}
+
+						$$				
+						
+						<img src="../images/filtro_passa_baixa.png" width="900">
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Filtro PB Ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						
+						$$
+						h(t)=\text{sinc}\Bigl(\frac{\pi t}{T}\Bigr)
+
+						$$				
+						
+						<img src="../images/sinc.png" width="700">
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Reconstrução ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						
+						$$
+						y(t)=y_a(t)\ast h(t)\\
+						=\int_{-\infty}^\infty \sum_{k=-\infty}^\infty y(kT)\delta(\tau-kT)\text{sinc}(\frac{\pi (t-\tau)}{T})d\tau\\
+						
+
+						$$				
+						
+						<p class="fragment lightup">
+							Portanto,
+$$y(t)=\sum_{k=-\infty}^\infty y(kT)\text{sinc}(\frac{\pi (t-kT)}{T})$$
+
+						</p>
+					
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Reconstrução Ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+							
+						
+						<img src="../images/cossenoide_amostras_2fm.png" width="800">
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Reconstrução Ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+							
+						
+						<img src="../images/rec_cossenoide1.png" width="800">
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Reconstrução Ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+							
+						
+						<img src="../images/rec_cossenoide2.png" width="800">
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Reconstrução Ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+							
+						
+						<img src="../images/rec_cossenoide3.png" width="800">
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Reconstrução Ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+							
+						
+						<img src="../images/rec_cossenoide4.png" width="800">
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Reconstrução Ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+							
+						
+						<img src="../images/rec_cossenoide5.png" width="800">
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Reconstrução Ideal</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+							
+						
+						<img src="../images/rec_cossenoide6.png" width="800">
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Na prática: ZOH</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						<img src="../images/rec_cossenoide_ZOH.png" width="800">
+						
+						
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold </h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						
+						<img src="../images/AD_DA_reconstrucao.png" width="800">
+						
+						
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold </h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						
+						<img src="../images/AD_DA_reconstrucao_zoh.png" width="800">
+						
+						
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold </h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						<img src="../images/zoh.png" width="800">
+						
+						$$
+zoh(t)=u(t)-u(t-T)
+						$$
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold </h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						<img src="../images/zoh.png" width="800">
+						
+						$$
+ZOH(s)=\frac{1}{s}-\frac{1}{s}e^{-sT}
+						$$
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold </h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						<img src="../images/zoh.png" width="800">
+						
+						$$
+ZOH(s)=\frac{1-e^{-sT}}{s}
+						$$
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold (Fourier) </h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+					
+						$$
+ZOH(\omega)=\frac{1-e^{-j\omega T}}{j\omega }\\
+=e^{-j\frac{\omega T}{2}}\Bigl(\frac{e^{j\omega T/2}-e^{-j\omega T/2}}{j\omega}\Bigr)\frac{2T}{2T}\\
+=T\text{sinc}(\frac{\omega T}{2})e^{-j\omega T/2}
+						$$
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold (Fourier) </h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+					
+						$$
+ZOH(\omega)=\frac{1-e^{-j\omega T}}{j\omega }\\
+=e^{-j\frac{\omega T}{2}}\Bigl(\frac{e^{j\omega T/2}-e^{-j\omega T/2}}{j\omega}\Bigr)\frac{2T}{2T}\\
+=T\text{sinc}(\frac{\omega T}{2})e^{-j\omega T/2}
+						$$
+			
+					
+				</center>
+
+				<p class="lightup">ZOH introduz um atraso no sinal de $T/2$!</p>
+		
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold </h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						<img src="../images/rec_cossenoide_ZOH2.png" width="950">
+						
+	
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+
+
+
+
+
+
+
+
 			<section>
 				<div class="slide-title">
-					<h2>New slide</h2>
+					<h2>Próxima aula teórica</h2>
 				</div>
 				<div class="slide-content">
-					<p>Objetivos dessa aula são:
-						<ul>
-						<li class="fragment">Apresentar a disciplina: estrutura e métodos de avaliação;</li> 
-						<li  class="fragment">Revisar os conceitos de sinais, sistemas e controle;</li> 
-						<li  class="fragment">..;</li>
-						<li  class="fragment">Evidenciar a importância dos sistemas de controle digitais para a engenharia;</li>
-			
-					</p>
-
+					<center>
+						<p>Transformada Z</p>
+						<img src="../images/sequencia_sinal.png" width="650" alt="">
+					</center>
 				</div>
 
 			</section>
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h2>Até a próxima aula!</h2>
+				</center>
+				</div>
+
+			</section>
+
+			
+
 
 
 
@@ -91,11 +1372,11 @@
 
 		
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script src="plugin/math/math.js"></script>
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
 		<script src="../init.js"></script>
 	</body>
 </html>
