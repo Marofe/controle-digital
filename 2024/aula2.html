@@ -306,7 +306,7 @@
 					<div class="slide-content">
 						<center>
 							$$
-							p(t)=\sum_{k-\infty}^\infty c_ke^{jk\omega_0 t},\quad\omega_0=\frac{2\pi}{T}
+							p(t)=\sum_{k-\infty}^\infty c_ke^{jk\omega_s t},\quad\omega_s=\frac{2\pi}{T}
 							$$
 										
 						<img src="../images/trem_impulsos.png" width="750" alt="">
@@ -324,7 +324,7 @@
 					<div class="slide-content">
 						<center>
 							$$
-							p(t)=\sum_{k-\infty}^\infty \frac{1}{T}e^{jk\omega_0 t},\quad\omega_0=\frac{2\pi}{T}
+							p(t)=\sum_{k-\infty}^\infty \frac{1}{T}e^{jk\omega_s t},\quad\omega_s=\frac{2\pi}{T}
 							$$
 										
 						<img src="../images/trem_impulsos.png" width="750" alt="">
@@ -345,7 +345,7 @@
 					<div class="slide-content">
 						<center>
 							$$
-							g_a(t)=g(t)p(t)=\sum_{k-\infty}^\infty \frac{1}{T}g(t)e^{jk\omega_0 t}
+							g_a(t)=g(t)p(t)=\sum_{k-\infty}^\infty \frac{1}{T}g(t)e^{jk\omega_s t}
 							$$
 										
 					
@@ -353,11 +353,11 @@
 					</center>
 					<center class="fragment">
 						$$
-						\Rightarrow G_a(\omega)=\mathcal{F}\{g_a(t)\}=\sum_{k-\infty}^\infty \frac{1}{T}\mathcal{F}\{g(t)e^{jk\omega_0 t}\}
+						\Rightarrow G_a(\omega)=\mathcal{F}\{g_a(t)\}=\sum_{k-\infty}^\infty \frac{1}{T}\mathcal{F}\{g(t)e^{jk\omega_s t}\}
 						$$
 					</center>
 					<center class="fragment lightup">
-						$\mathcal{F}\{x(t)e^{j\omega_0t}\}=X(\omega-\omega_0)$
+						$\mathcal{F}\{x(t)e^{j\omega_st}\}=X(\omega-\omega_s)$
 					</center>
 					   </div>
 
@@ -373,7 +373,7 @@
 					<div class="slide-content">
 						<center class="lightup">
 						$$
-						G_a(\omega)=\sum_{k-\infty}^\infty \frac{1}{T}G(\omega-k\omega_0)
+						G_a(\omega)=\sum_{k-\infty}^\infty \frac{1}{T}G(\omega-k\omega_s)
 						$$
 					</center>
 					<center>
@@ -395,7 +395,7 @@
 					<center>
 					<img src="../images/espectro_sinal_amostrado.png">
 					$$
-						\omega_0=\frac{2\pi}{T}
+						\omega_s=\frac{2\pi}{T}
 					$$
 				</center>
 		
@@ -451,9 +451,9 @@
 					</div>
 					<div class="slide-content">
 					<center>
-					<img src="../images/espectro_sinal_amostrado3.png">
+					<img src="../images/sinal_amostrado_distancia.png">
 					$$
-						\omega_0=\frac{2\pi}{T}
+						\omega_s=\frac{2\pi}{T}
 					$$
 				</center>
 		
@@ -474,15 +474,34 @@
 					<center>
 					<img src="../images/espectro_sinal_amostrado2.png">
 					$$
-						\omega_0=\frac{2\pi}{T},\quad \downarrow T
+						\omega_s=\frac{2\pi}{T},\quad \downarrow T
 					$$
-					<p><b>Diminuir o tempo de amostragem</b></p>
+					<p><b>Diminuir o tempo de amostragem aumenta a distância</b></p>
 				</center>
 		
 					   </div>
 
 				</section>
 
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					<img src="../images/espectro_sinal_amostrado3.png">
+					$$
+						\omega_s=\frac{2\pi}{T},\quad \uparrow T
+					$$
+					<p><b>Aumentar o tempo de amostragem diminui a distância</b></p>
+				</center>
+		
+					   </div>
+
+				</section>
 
 
 				<section>
@@ -493,25 +512,6 @@
 					<div class="slide-content">
 					<center>
 					<img src="../images/espectro_sinal_amostrado4.png">
-					$$
-						\omega_0=\frac{2\pi}{T},\quad \uparrow T
-					$$
-					<p><b>Aumentar o tempo de amostragem</b></p>
-				</center>
-		
-					   </div>
-
-				</section>
-
-
-				<section>
-
-					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
-					</div>
-					<div class="slide-content">
-					<center>
-					<img src="../images/espectro_sinal_amostrado5.png">
 					<p><b>Aliasing!</b></p>
 				</center>
 		
@@ -527,7 +527,7 @@
 					</div>
 					<div class="slide-content">
 					<center>
-					<img src="../images/espectro_sinal_amostrado5_filtro.png">
+					<img src="../images/espectro_sinal_amostrado4_filtro.png">
 					<b>Filtro Ideal</b>
 					$$
 						H(\omega)=\begin{cases} 
@@ -549,10 +549,10 @@
 					</div>
 					<div class="slide-content">
 					<center>
-					<img src="../images/espectro_sinal_amostrado_freqmin.png">
+					<img src="../images/teorema_nyquist.png">
 					<p class="lightup">
 				$
-						\omega_0 \ge 2\omega_M [rads]
+						\omega_s \ge 2\omega_M [rads]
 				$
 			</p>
 				</center>
@@ -571,7 +571,7 @@
 					</div>
 					<div class="slide-content">
 					<center>
-					<img src="../images/espectro_sinal_amostrado_freqmin.png">
+					<img src="../images/teorema_nyquist.png">
 					<p class="lightup">
 				$
 						f_s \ge 2f_M [Hz]
@@ -871,7 +871,7 @@
 					<div class="slide-content">
 					<center>
 						$$
-						\omega_M=30[rads] \Rightarrow \omega_0>60[rads]
+						\omega_M=30[rads] \Rightarrow \omega_s>60[rads]
 						$$
 
 						<img src="../images/espectro_sinal_exp_cos2.png" width="600">
@@ -895,7 +895,7 @@
 						
 						<p class="lightup">
 						$$
-						\omega_0>10\omega_M
+						\omega_s>10\omega_M
 						$$					
 					</p>
 					Para sistemas de controle digital, é uma boa prática adotar sempre frequência de amostragem 10x maior que a frequência máxima contida na saída do sistema.
@@ -969,14 +969,14 @@
 						
 						$$
 						y(t)=y_a(t)\ast h(t)\\
-						=\int_{-\infty}^\infty \sum_{k=-\infty}^\infty y(kT)\delta(\tau-kT)\text{sinc}(\frac{\pi (t-\tau)}{T})d\tau\\
+						=\int_{-\infty}^\infty \sum_{k=-\infty}^\infty y(kT)\delta(\tau-kT)\text{sinc}\Bigl(\frac{\pi (t-\tau)}{T}\Bigr)d\tau\\
 						
 
 						$$				
 						
 						<p class="fragment lightup">
 							Portanto,
-$$y(t)=\sum_{k=-\infty}^\infty y(kT)\text{sinc}(\frac{\pi (t-kT)}{T})$$
+$$y(t)=\sum_{k=-\infty}^\infty y(kT)\text{sinc}\Bigl(\frac{\pi (t-kT)}{T}\Bigr)$$
 
 						</p>
 					
@@ -1148,31 +1148,11 @@ $$y(t)=\sum_{k=-\infty}^\infty y(kT)\text{sinc}(\frac{\pi (t-kT)}{T})$$
 				</section>
 
 
+	
 				<section>
 
 					<div class="slide-title">
-						<h2>Zero Order Hold </h2>
-					</div>
-					<div class="slide-content">
-					<center>
-						<p>&nbsp;</p>
-						
-						<img src="../images/AD_DA_reconstrucao.png" width="800">
-						
-						
-			
-					
-				</center>
-		
-					   </div>
-
-				</section>
-
-
-				<section>
-
-					<div class="slide-title">
-						<h2>Zero Order Hold </h2>
+						<h2>Zero Order Hold (ZOH) </h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -1194,7 +1174,7 @@ $$y(t)=\sum_{k=-\infty}^\infty y(kT)\text{sinc}(\frac{\pi (t-kT)}{T})$$
 				<section>
 
 					<div class="slide-title">
-						<h2>Zero Order Hold </h2>
+						<h2>Zero Order Hold (ZOH) </h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -1217,7 +1197,7 @@ zoh(t)=u(t)-u(t-T)
 				<section>
 
 					<div class="slide-title">
-						<h2>Zero Order Hold </h2>
+						<h2>Zero Order Hold (ZOH)</h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -1239,7 +1219,7 @@ ZOH(s)=\frac{1}{s}-\frac{1}{s}e^{-sT}
 				<section>
 
 					<div class="slide-title">
-						<h2>Zero Order Hold </h2>
+						<h2>Zero Order Hold (ZOH)</h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -1269,8 +1249,8 @@ ZOH(s)=\frac{1-e^{-sT}}{s}
 					
 						$$
 ZOH(\omega)=\frac{1-e^{-j\omega T}}{j\omega }\\
-=e^{-j\frac{\omega T}{2}}\Bigl(\frac{e^{j\omega T/2}-e^{-j\omega T/2}}{j\omega}\Bigr)\frac{2T}{2T}\\
-=T\text{sinc}(\frac{\omega T}{2})e^{-j\omega T/2}
+=e^{-j\frac{\omega T}{2}}\Bigl(\frac{e^{j\frac{\omega T}{2}}-e^{-j\frac{\omega T}{2}}}{j\omega}\Bigr)\frac{2T}{2T}\\
+=T\text{sinc}\Bigl(\frac{\omega T}{2}\Bigr)e^{-j\frac{\omega T}{2}}
 						$$
 			
 					
@@ -1292,8 +1272,8 @@ ZOH(\omega)=\frac{1-e^{-j\omega T}}{j\omega }\\
 					
 						$$
 ZOH(\omega)=\frac{1-e^{-j\omega T}}{j\omega }\\
-=e^{-j\frac{\omega T}{2}}\Bigl(\frac{e^{j\omega T/2}-e^{-j\omega T/2}}{j\omega}\Bigr)\frac{2T}{2T}\\
-=T\text{sinc}(\frac{\omega T}{2})e^{-j\omega T/2}
+=e^{-j\frac{\omega T}{2}}\Bigl(\frac{e^{j\frac{\omega T}{2}}-e^{-j\frac{\omega T}{2}}}{j\omega}\Bigr)\frac{2T}{2T}\\
+=T\text{sinc}\Bigl(\frac{\omega T}{2}\Bigr)e^{-j\frac{\omega T}{2}}
 						$$
 			
 					
@@ -1310,7 +1290,7 @@ ZOH(\omega)=\frac{1-e^{-j\omega T}}{j\omega }\\
 				<section>
 
 					<div class="slide-title">
-						<h2>Zero Order Hold </h2>
+						<h2>Zero Order Hold (ZOH)</h2>
 					</div>
 					<div class="slide-content">
 					<center>
