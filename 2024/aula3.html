@@ -1,0 +1,1678 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 3: <br>Transformada Z</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">29 de agosto de 2024</p>
+				</div>
+
+				</section>
+				
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sequencia_sinal.png" width="650" alt="">
+						</center>
+					</div>
+	
+				</section>
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Objetivos</h2>
+			</div>
+			<div class="slide-content">
+				<p>Os objetivos dessa aula são entender:
+						<ul>
+						<li>Definição da <b>Transformada Z</b>;</li>
+						<li>Propriedades;</li>
+						<li>Exemplos;</li> 
+						<li>Aplicações;</li>
+					</p>
+					</div>
+
+		</section>
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Sinal contínuo: Transformada de Laplace
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							x(t):\mathbb{R}\to\mathbb{R}
+							$$
+						<img src="../images/sinal_continuo.png" width="600" alt="">
+			
+					</center>
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal contínuo: Transformada de Laplace
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							X(s)=\mathcal{L}\{x(t)\}=\int_{-\infty}^\infty x(t)e^{-st}dt
+							$$
+						<img src="../images/sinal_continuo.png" width="600" alt="">
+			
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace: exemplo
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/degrau_unitario.png" width="700" alt="">
+						$$
+							U(s)=\frac{1}{s}
+						$$
+			
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal em tempo discreto</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							x[k]=x(kT), \quad k\in\mathbb{Z}
+							$$
+						<img src="../images/sequencia_sinal.png" width="600" alt="">
+					</center>
+					   </div>
+
+				</section>
+
+
+
+					
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							x_a^*(t)=\sum_{k=-\infty}^\infty x(kT)\delta(t-kT)
+							$$
+						<img src="../images/modular_amostragem2.png" width="550" alt="">
+					</center>
+					   </div>
+
+				</section>
+
+
+					
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace do sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\mathcal{L}\{x_a^*(t)\}=\int_{-\infty}^\infty \Bigl(\sum_{k=-\infty}^\infty x(kT)\delta(t-kT)\Bigr)e^{-st}dt
+							$$
+				
+					</center>
+					<center class="fragment">
+						$$
+						= \sum_{k=-\infty}^\infty x(kT)\int_{-\infty}^\infty\delta(t-kT)e^{-st}dt
+						$$
+					</center>
+					<center class="fragment">
+						$$
+						= \sum_{k=-\infty}^\infty x(kT)e^{-skT}
+						$$
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace do sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\mathcal{L}\{x_a^*(t)\}= \sum_{k=-\infty}^\infty x[k](e^{sT})^{-k}
+							$$
+							Defina 
+							<p class="lightup">
+							$$
+							z=e^{sT}
+							$$
+						</p>
+
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Dado uma função $x:\mathbb{Z}\to\mathbb{C}$, a transformada Z de $x[k]$ é definida como o mapeamento $X:\mathcal{D}\to\mathbb{C}$ dado por
+							<p class="lightup">
+							$$
+							\mathcal{Z}\{x[k]\}= \sum_{k=-\infty}^\infty x[k]z^{-k}=X(z)
+							$$
+						</p>
+							em que $\mathcal{D}\subseteq \mathbb{C}$ é o domínio
+							da transformada Z de $x[k]$:
+							$$
+							\mathcal{D}=\{z\in\mathbb{C} : X(z) \text{ existe}\}
+							$$
+						
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Série Geométrica</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							Considere $z \in \mathbb{C}$. Se $|z|<1$, então
+							<p class="lightup">
+							$$
+							\sum_{k=0}^\infty z^k = \frac{1}{1-z}
+							$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Região de Convergência (ROC)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+							$z \in \mathbb{C}$ tal que $|z|<1$
+							<p>
+							<img src="../images/ROC_ztrans.png" width="550"><br>Plano-Z
+						</p>
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Considere a sequência gerada pela função
+							$$
+								f[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\in\mathbb{Z}
+							$$
+						</p>
+
+					</center>
+
+					<center class="fragment">
+						$$\Rightarrow F(z)=\sum_{k=-\infty}^\infty \Bigl(\frac{1}{2}\Bigr)^k z^{-k}$$
+
+					</center>
+					<center class="fragment">
+						$$=\sum_{k=-\infty}^{-1} \Bigl(\frac{1}{2}\Bigr)^k z^{-k}+\sum_{k=0}^{\infty} \Bigl(\frac{1}{2}\Bigr)^k z^{-k}
+						$$
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Considere a sequência gerada pela função
+							$$
+								f[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\in\mathbb{Z}
+							$$
+						</p>
+
+					</center>
+
+					<center>
+						$$\Rightarrow F(z)=\sum_{k=-\infty}^\infty \Bigl(\frac{1}{2}\Bigr)^k z^{-k}$$
+
+					</center>
+					<center>
+						$$=\sum_{k=0}^{\infty} (2z)^k-1+\sum_{k=0}^{\infty} \Bigl(\frac{1}{2z}\Bigr)^k
+						$$
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo ($k\ge0$)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Considere a sequência gerada pela função
+							$$
+								f[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\in\mathbb{N}
+							$$
+						</p>
+
+					</center>
+
+					<center class="fragment">
+						$$\Rightarrow F(z)=\sum_{k=0}^\infty \Bigl(\frac{1}{2}\Bigr)^k z^{-k}$$
+
+					</center>
+					<center class="fragment">
+						$$=\sum_{k=0}^{\infty} \Bigl(\frac{1}{2z}\Bigr)^k=\frac{1}{1-\frac{1}{2z}}=\frac{z}{z-\frac{1}{2}}
+						$$
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo  ($k\ge0$)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Portanto,
+							<p class="lightup">
+							$$
+								\mathcal{Z}\Bigl\{\Bigl(\frac{1}{2}\Bigr)^k\Bigr\}=\frac{z}{z-\frac{1}{2}},\quad k\in\mathbb{N}
+							$$
+						</p>
+						em que
+						$$
+						\mathcal{D}=\{z\in\mathbb{C}: |z|>\frac{1}{2}\}
+						$$
+
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo  ($k\ge0$)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						
+				
+						<img src="../images/ROC_ztrans0.png" width="550"><br>Plano-Z
+
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z (Unilateral)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Dado uma função $x:\mathbb{N}\to\mathbb{C}$, a transformada Z de $x[k]$ é definida como o mapeamento $X:\mathcal{D}\to\mathbb{C}$ dado por
+							<p class="lightup">
+							$$
+							\mathcal{Z}\{x[k]\}= \sum_{k=0}^\infty x[k]z^{-k}=X(z)
+							$$
+						</p>
+							em que $\mathcal{D}\subseteq \mathbb{C}$ é o domínio
+							da transformada Z de $x[k]$:
+							$$
+							\mathcal{D}=\{z\in\mathbb{C} : X(z) \text{ existe}\}
+							$$
+						
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					<div class="slide-content">
+						
+						<center>
+												$$
+							u[k]=\begin{cases} 
+							1,\text{ se } k\ge 0,\\
+							0, \text{ se k<0}.
+							\end{cases}
+							$$
+
+						
+							<img src="../images/degrau_unitario_discreto.png" width="700">
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+
+							$$
+							u[k]=\begin{cases} 
+							1,\text{ se } k\ge 0,\\
+							0, \text{ se k<0}.
+							\end{cases}
+							$$
+
+							A transformada Z é dada por 
+							<p class="lightup">
+							$$
+								\mathcal{Z}\{u[k]\}=\frac{z}{z-1},\quad |z|>1
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/ROC_ztrans1.png" width="550"><br>Plano-Z
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							
+							$$
+								f[k]=\begin{cases} 
+								0, \text{ se } k\in(-\infty,-1)\\
+								a^k, \text{ se } k\in\mathbb{N}
+								\end{cases}
+							$$
+						
+						em que $a\in\mathbb{C}$.
+
+					</center>
+
+					<center class="fragment">
+						$$
+						x(t)=e^{\alpha t} \\\Rightarrow x(kT)=e^{\alpha kT}=(e^{\alpha T})^k
+$$
+					</center>
+
+					   </div>
+
+				</section>
+
+				
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/exponencial_discreta.png" width="900">
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+			
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							
+							$$
+								f[k]=a^ku[k]
+							$$
+						
+						em que $a\in\mathbb{C}$, então
+						<p class="lightup fragment">
+						$$
+						F(z)=\frac{z}{z-a},\quad \mathcal{D}=\{z\in\mathbb{C}: |z|>|a|\}
+						$$
+					</p>
+
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/ROC_ztrans_a.png" width="550"><br>Plano-Z
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial: exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							<p class="lightup">
+						$
+						x(t)=e^{-2t}u(t)
+						$
+					</p>
+
+					</center>
+
+					<center class="fragment">
+						$$
+					\Rightarrow	x(kT)=e^{-2kT}u(kT)=(e^{-2T})^ku(kT)
+$$
+					</center>
+
+					
+					<center class="fragment">
+						Portanto,
+						<p class="lightup">
+						$$
+					\mathcal{Z}\{x(kT)\}=\frac{z}{z-e^{-2T}},\quad |z| > e^{-2T}
+$$</p>
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Impulso unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+
+							$$
+							\delta[k]=\begin{cases} 
+							1,\text{ se } k=0,\\
+							0, \text{ se } k\neq 0.
+							\end{cases}
+							$$
+
+							A transformada Z é dada por 
+							<p class="lightup">
+							$$
+								\mathcal{Z}\{\delta[k]\}=1,\quad \mathcal{D}=\mathbb{C}
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Cosseno</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							<p class="lightup">
+							$$
+								f[k]=\cos(\omega Tk)u[k],\quad \omega \in \mathbb{R}
+							$$
+						</p>
+						
+									
+
+					</center>
+
+					<center class="fragment">
+						Lembre que 
+						$$
+							\cos(\theta)=\frac{e^{j\theta}+e^{-j\theta}}{2}
+						$$
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Cosseno</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							A transformada Z é, então, dada por 
+							
+							$$
+								F(z)=\sum_{k=0}^\infty\Bigl(\frac{e^{j\omega Tk}+e^{-j\omega Tk}}{2}\Bigr)z^{-k}
+							$$
+						
+					</center>
+					<center class="fragment">
+						$$
+						= \sum_{k=0}^\infty\frac{1}{2}\Bigl(\frac{e^{j\omega T}}{z}\Bigr)^k+\sum_{k=0}^\infty\frac{1}{2}\Bigl(\frac{1}{ze^{j\omega T}}\Bigr)^k
+						$$
+					</center>
+					<center class="fragment">
+						$$
+						= \frac{1}{2}\frac{z}{z-e^{j\omega T}}+\frac{1}{2}\frac{z}{z-e^{-j\omega T}}
+						$$
+					</center>
+
+					   </div>
+
+				</section>
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Cosseno</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+
+							A transformada Z é, então, dada por 
+							<p class="lightup">
+							$$
+								\mathcal{Z}\{\cos(\omega Tk)u[k]\}=\frac{z(z-\cos(\omega T))}{z^2-2\cos(\omega T)z+1},\quad |z|>1
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Propriedades da Transformada Z</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<ul>
+
+							<li>Linearidade:
+
+								$$
+								\mathcal{Z}\{\alpha x[k]+\beta y[k]\}=\alpha X(z)+\beta Y(z)
+								$$
+							</li>
+
+							<li>
+								Atraso no tempo
+								$$
+								\mathcal{Z}\{x[k-l]\}=z^{-l}X(z)
+								$$
+							</li>
+
+							<li>
+								Avanço no tempo
+								$$
+								\mathcal{Z}\{x[k+l]\}=z^{l}X(z)
+								$$
+							</li>
+						</ul>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Propriedades da Transformada Z</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<ul>
+
+							<li>Amortecimento:
+
+								$$
+								\mathcal{Z}\{a^{k}x[k]\}=X(az),\quad |a|<1
+								$$
+							</li>
+
+							<li>
+								Diferenciação:
+								$$
+								\mathcal{Z}\{kx[k]\}=-z\frac{dX}{dz}
+								$$
+							</li>
+
+							<li>Convolução:
+
+								$$
+								\mathcal{Z}\{x[k]\ast y[k]\}=X(z)Y(z)
+							$$
+							</li>
+
+				
+						</ul>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Soma de sequências</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Dado a definição de Transformada Z de $x[k]$ na forma:
+
+							$$
+							X(z)= \sum_{k=0}^\infty x[k]z^{-k}
+							$$
+
+							Então, para $z=1$, tem-se
+							<p class="lightup">
+							$$
+								X(1)=\sum_{k=0}^\infty x[k]
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema do Valor Inicial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Seja $x[k]$ uma função com Transformada Z dada por $X(z)$. Se $\lim_{z\to\infty}X(z)$ existe, então 
+						<p class="lightup">
+						$$
+							x[0]=\lim_{z\to\infty} X(z)
+						$$
+					</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema do Valor Final</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Seja $x[k]$ uma função com Transformada Z dada por $X(z)$. Se $\lim_{k\to\infty}x[k]$ existe, então 
+						<p class="lightup">
+						$$
+							\lim_{k\to\infty} x[k]= \lim_{z\to 1} (z-1)X(z)
+						$$
+					</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+			
+
+
+				
+			
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Considere a equação à diferenças dada na forma
+						<p class="lightup">
+						$$
+							\sum_{i=0}^n \alpha_i y[k-i] = \sum_{i=0}^m \beta_i x[k-i]
+						$$
+						</p>
+						Exemplo:
+						$$
+						3y[k-2]+2y[k-1]+y[k]=x[k]-2x[k-1]
+						$$
+					
+				
+				
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+					
+					<p>A Transformada Z permite obter uma representação na forma de uma função racional da Eq. à Diferenças!</p>
+					<p class="lightup">
+					$$
+					\frac{Y(z)}{X(z)}=\frac{\beta_mz^{-m}+\cdots+\beta_1z^{-1}+\beta_0}{\alpha_nz^{-n}+\cdots+\alpha_1z^{-1}+\alpha_0}
+					$$
+				</p>
+					</center>
+
+					<p align="center" class="fragment">Usualmente, considera-se $\alpha_0=1$ (normalização)</p>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Implementação de Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					<p>&nbsp;</p>
+					
+					<p class="lightup">
+						$$
+						y[k] = -\sum_{i=1}^n \alpha_i y[k-i] + \sum_{i=0}^m \beta_i x[k-i]
+					$$
+				</p>
+					</center>
+
+					<p align="center">Implmentação em tempo real exige que a amostra presente seja uma relação das amostras do passado e ou presente! (nunca do futuro) 
+						
+			
+					</p>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+				<!-- <section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+					
+				
+					<p class="lightup">
+					$$
+					\frac{Y(z)}{X(z)}=\frac{\beta_mz^{-m}+\cdots+\beta_1z^{-1}+\beta_0}{\alpha_nz^{-n}+\cdots+\alpha_1z^{-1}+\alpha_0}\frac{z^n}{z^n}
+					$$
+				</p>
+					</center>
+
+				
+				
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças: causalidade</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+					
+					
+					<p class="lightup">
+					$$
+					\frac{Y(z)}{X(z)}=\frac{\beta_mz^{-a}+\cdots+\beta_1z^{n-1}+\beta_0z^n}{\alpha_n+\cdots+\alpha_1z^{n-1}+\alpha_0z^n}
+					$$
+				</p>
+				Suponha $n < m $, e definia $a=m-n$.
+					</center>
+
+				
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças: causalidade</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+					
+					
+					<p class="lightup">
+					$$
+					\frac{Y(z)}{X(z)}=\frac{\beta_mz^{-a}+\cdots+\beta_1z^{n-1}+\beta_0z^n}{\alpha_n+\cdots+\alpha_1z^{n-1}+\alpha_0z^n}\frac{z^a}{z^a}
+					$$
+				</p>
+				Suponha $n < m $, e definia $a=m-n$.
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças: causalidade</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+					
+					
+					<p class="lightup">
+					$$
+					\frac{Y(z)}{X(z)}=\frac{\beta_m+\cdots+\beta_1z^{n-1+a}+\beta_0z^{n+a}}{\alpha_nz^a+\cdots+\alpha_1z^{n-1+a}+\alpha_0z^{n+a}}
+					$$
+				</p>
+				Suponha $n < m $, e definia $a=m-n$.
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças: causalidade</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+					
+					
+					<p class="lightup">
+					$$
+					\frac{Y(z)}{X(z)}=\frac{\beta_m+\cdots+\beta_1z^{m-1}+\beta_0z^{m}}{\alpha_nz^a+\cdots+\alpha_1z^{m-1}+\alpha_0z^{m}}
+					$$
+				</p>
+				Suponha $n < m $, e definia $a=m-n$.
+					</center>
+
+					   </div>
+
+				</section> -->
+
+
+		
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z Inversa</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Seja $X(z)$ a transformada Z de $x[k]$ com $k\in\mathbb{N}$. Então, a Transformada Z Inversa é definida como
+						<p class="lightup">
+						$$
+							\mathcal{Z}^{-1}\{X(z)\}=x[k]
+						$$
+					</p>
+						
+					</center>
+
+					<center class="fragment">
+						$$
+						x[k]=\frac{1}{2\pi j}\oint_\Gamma \Bigl(\frac{X(z)}{z}\Bigr)z^k dz,\quad k\in\mathbb{N}
+					$$
+
+					</center>
+		
+					<center class="fragment">
+						<b>Tabelas de Transformada Z!</b>
+					</center>
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z Inversa: exemplos</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p class="lightup">
+								$$
+									\mathcal{Z}^{-1}\Bigl\{1\Bigr\}=\delta[k]
+								$$
+							</p>
+						<p class="lightup">
+						$$
+							\mathcal{Z}^{-1}\Bigl\{\frac{z}{z-a}\Bigr\}=a^ku[k]
+						$$
+					</p>
+						
+					</center>
+
+	
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z Inversa: fatoração</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							
+							$$
+    X(z)=\frac{Az}{z-1}+\frac{Bz}{(z-1)^2}+\frac{Cz}{z-a}+\frac{Dz}{a_2z^2+a_1z+a_0}
+$$
+
+que resulta em
+<p class="lightup">
+$$
+    x[k]=(A+Bk+Ca^k+D\beta^k\sin(\omega kT))u[k]
+$$
+</p>
+						
+					</center>
+
+
+
+
+	
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Expansão em Frações Parciais</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							
+							$$
+    X(z)=\frac{N(z)}{D(z)}=\frac{\beta_mz^{-m}+\cdots+\beta_1z^{-1}+\beta_0}{\alpha_nz^{-n}+\cdots+\alpha_1z^{-1}+1}
+$$
+
+						
+					</center>
+
+
+
+
+	
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Expansão em Frações Parciais</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							
+							$$
+    X(z)=\frac{N(z)}{D(z)}=\frac{\beta_mz^{n-m}+\cdots+\beta_1z^{n-1}+\beta_0z^n}{\alpha_n+\cdots+\alpha_1z^{n-1}+z^n}
+$$
+
+						
+					</center>
+
+
+
+
+	
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Expansão em Frações Parciais</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							
+							$$
+    X(z)=\frac{N(z)}{D(z)}=\frac{\beta_mz^{n-m}+\cdots+\beta_1z^{n-1}+\beta_0z^n}{(z-p_1)(z-p_2)\cdots (z-p_n)}
+$$
+
+						
+					</center>
+
+					<center class="fragment">
+						$$
+						\Rightarrow \frac{X(z)}{z}=\frac{A_1}{z-p_1}+\frac{A_2}{z-p_2}+\cdots + \frac{A_n}{z-p_n}
+						$$
+					</center>
+
+
+					<center class="fragment">
+						$$
+						\Rightarrow X(z)=\frac{A_1z}{z-p_1}+\frac{A_2z}{z-p_2}+\cdots + \frac{A_nz}{z-p_n}
+						$$
+					</center>
+
+
+
+
+	
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Expansão em Frações Parciais</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Pólos simples:
+							<p class="lightup">
+							$$
+    A_i=\Bigl[(z-p_i)\frac{X(z)}{z}\Bigr]\Bigr|_{z=p_i}
+$$
+</p>
+						
+					</center>
+
+
+					
+
+					
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Expansão em Frações Parciais</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							
+							$$
+    X(z)=\frac{N(z)}{D(z)}=\frac{\beta_mz^{n-m}+\cdots+\beta_1z^{n-1}+\beta_0z^n}{(z-p_1)^k(z-p_2)\cdots (z-p_n)}
+$$
+
+						
+					</center>
+
+					<center class="fragment">
+						$$
+						\Rightarrow \frac{X(z)}{z}=\frac{A_{1k}}{(z-p_1)^k}+\frac{A_{1(k-1)}}{(z-p_1)^{k-1}}+\cdots+\frac{A_{11}}{z-p_1}+\\ +\frac{A_2}{z-p_2}+\cdots + \frac{A_n}{z-p_n}
+						$$
+					</center>
+
+
+				
+	
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Expansão em Frações Parciais</h2>
+					</div>
+					<div class="slide-content">
+					
+
+					<center >
+						Pólos com multiplicidade:
+						<p class="lightup">
+						$$
+A_{ji}=\frac{1}{(i-1)!}\Bigl[\frac{d^{i-1}}{dz^{i-1}}\Bigl((z-p_i)^k\frac{X(z)}{z}\Bigr)\Bigr]\Bigr|_{z=p_j}
+$$
+</p>
+
+					
+				</center>
+
+					
+					   </div>
+
+				</section>
+
+
+				
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z Inversa: exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							
+							$$
+							X(z)=\frac{4 z}{(z-3)(z-1)^2}
+							$$
+
+						
+					</center>
+
+					<center class="fragment">
+						$$
+\Rightarrow \frac{X(z)}{z}=\frac{A_1}{(z-3)}+\frac{A_{21}}{(z-1)}+\frac{A_{22}}{(z-1)^2}
+						$$
+					</center>
+
+				
+
+
+	
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z Inversa: divisão longa</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							
+							$$
+							X(z)=\frac{b_0z^n+b_1z^{n-1}+\cdots+b_{n-1}z+b_n}{z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n}
+							$$
+
+						
+					</center>
+
+				
+					<center class="fragment">
+							
+						$$
+						=c_0z^0+c_1z^{-1}+c_2z^{-2}+\cdots 
+						$$
+
+					
+				</center>
+
+
+				<center class="fragment">
+					Exemplo		
+					$$
+					X(z)=\frac{z}{z-1}=\frac{1}{1-z^{-1}}
+					$$
+
+				
+			</center>
+
+	
+					   </div>
+
+				</section>
+
+
+
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Solução de Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Considere a equação à diferenças dada na forma
+<p class="lightup">
+						$$
+							\sum_{i=0}^n \alpha_i y[k-i] = \sum_{i=0}^m \beta_i x[k-i]
+						$$
+					</p>
+					<p>A Transformada Z Inversa permite obter a solução $y[k]$ para um dado sinal $x[k]$!</p>
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sequência de Fibonacci</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+
+						$$
+							y[0]=0\\
+							y[1]=1\\
+							y[k]=y[k-1]+y[k-2]
+						$$
+					</p>
+					Qual o valor da Sequência de Fibonacci para qualquer $k\in\mathbb{N}$ sem  ter que fazer iterações de $1:k$?
+					
+					</center>
+
+					<center class="fragment lightup">
+						$y[k]=\frac{1}{\sqrt{5}}\Bigl[\Bigl(\frac{1+\sqrt{5}}{2}\Bigr)^k-\Bigl(\frac{1-\sqrt{5}}{2}\Bigr)^k\Bigr]$
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+			
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p class="lightup">$$z=e^{sT}</s>$$</p>
+							
+						</center>
+
+						<center class="fragment">
+							$$
+							s=\sigma+j\omega
+							$$
+						</center>
+
+						<center class="fragment">
+							$$
+							z=e^{(\sigma+j\omega)T}=e^{\sigma T}e^{j\omega T}
+							$$
+						</center>
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=0}=e^{j\omega T}
+							$
+							<img src="../images/map0.png" width="900">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=-0.5}=e^{-0.5 T}e^{j\omega T}
+							$
+							<img src="../images/map1.png" width="900">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=0.1}=e^{0.1 T}e^{j\omega T}
+							$
+							<img src="../images/map2.png" width="900">
+						</center>
+						
+
+					</div>
+	
+				</section>
+			
+			
+
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Próxima aula teórica</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>Modelagem e identificação de sistemas</p>
+						<img src="../images/malha_controle_atuador_processo.png" width="750" alt="">
+					</center>
+				</div>
+
+			</section>
+
+
+
+			
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h2>Até a próxima aula!</h2>
+				</center>
+				</div>
+
+			</section>
+
+			
+
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
+
