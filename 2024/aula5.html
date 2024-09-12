@@ -1,0 +1,333 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 5: <br>Análise de Estabilidade</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">19 de setembro de 2024</p>
+				</div>
+
+				</section>
+				
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Ciclo do Projeto de Controle</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					<img src="../images/design_process.png" width="450"/>
+				</center>
+					</div>
+	
+				</section>
+
+				
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Objetivos</h2>
+			</div>
+			<div class="slide-content">
+				<p>Os objetivos dessa aula são entender:
+						<ul>
+						<li>Modelagem de sistemas dinâmicos em tempo discreto;</li>
+						<li>Métodos de Discretização;</li>
+						
+						<li>Exemplos;</li>
+					</p>
+					</div>
+
+		</section>
+
+
+		
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p class="lightup">$$z=e^{sT}</s>$$</p>
+							
+						</center>
+
+						<center class="fragment">
+							$$
+							s=\sigma+j\omega
+							$$
+						</center>
+
+						<center class="fragment">
+							$$
+							z=e^{(\sigma+j\omega)T}=e^{\sigma T}e^{j\omega T}
+							$$
+						</center>
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=0}=e^{j\omega T}
+							$
+							<img src="../images/map0.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=-0.5}=e^{-0.5 T}e^{j\omega T}
+							$
+							<img src="../images/map1.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=-1}=e^{-T}e^{j\omega T}
+							$
+							<img src="../images/map3.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=-2}=e^{-2 T}e^{j\omega T}
+							$
+							<img src="../images/map4.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=0.1}=e^{0.1 T}e^{j\omega T}
+							$
+							<img src="../images/map2.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=0.5}=e^{0.5 T}e^{j\omega T}
+							$
+							<img src="../images/map5.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=1}=e^{T}e^{j\omega T}
+							$
+							<img src="../images/map6.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\omega=1}=e^{\sigma T}e^{jT}
+							$
+							<img src="../images/maps_w0.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\omega=-1}=e^{\sigma T}e^{-jT}
+							$
+							<img src="../images/maps_w1.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+			
+			
+			
+			
+
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Próxima aula teórica</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>Modelagem e identificação de sistemas</p>
+						<img src="../images/malha_controle_atuador_processo.png" width="750" alt="">
+					</center>
+				</div>
+
+			</section>
+
+
+
+			
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h2>Até a próxima aula!</h2>
+				</center>
+				</div>
+
+			</section>
+
+			
+
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
+

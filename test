@@ -1,0 +1,196 @@
+	<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p class="lightup">$$z=e^{sT}</s>$$</p>
+							
+						</center>
+
+						<center class="fragment">
+							$$
+							s=\sigma+j\omega
+							$$
+						</center>
+
+						<center class="fragment">
+							$$
+							z=e^{(\sigma+j\omega)T}=e^{\sigma T}e^{j\omega T}
+							$$
+						</center>
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=0}=e^{j\omega T}
+							$
+							<img src="../images/map0.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=-0.5}=e^{-0.5 T}e^{j\omega T}
+							$
+							<img src="../images/map1.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=-1}=e^{-T}e^{j\omega T}
+							$
+							<img src="../images/map3.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=-2}=e^{-2 T}e^{j\omega T}
+							$
+							<img src="../images/map4.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=0.1}=e^{0.1 T}e^{j\omega T}
+							$
+							<img src="../images/map2.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=0.5}=e^{0.5 T}e^{j\omega T}
+							$
+							<img src="../images/map5.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\sigma=1}=e^{T}e^{j\omega T}
+							$
+							<img src="../images/map6.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\omega=1}=e^{\sigma T}e^{jT}
+							$
+							<img src="../images/maps_w0.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							z=e^{(\sigma+j\omega)T}\Bigr|_{\omega=-1}=e^{\sigma T}e^{-jT}
+							$
+							<img src="../images/maps_w1.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
