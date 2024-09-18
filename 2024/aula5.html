@@ -60,9 +60,10 @@
 			<div class="slide-content">
 				<p>Os objetivos dessa aula são entender:
 						<ul>
-						<li>Modelagem de sistemas dinâmicos em tempo discreto;</li>
-						<li>Métodos de Discretização;</li>
-						
+						<li>Noções de estabilidade em tempo discreto;</li>
+						<li>Mapeamento plano-s no plano-z;</li>
+						<li>Equivalência estabilidade em tempo contínuo;</li>					
+						<li>Critérios de performance;</li>
 						<li>Exemplos;</li>
 					</p>
 					</div>
@@ -272,6 +273,895 @@
 
 
 
+				
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+				<img src="../images/plano_s_plano_z.png" alt="">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+				<img src="../images/plano_s_plano_z_faixa_princ.png" alt="">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+				<img src="../images/plano_s_plano_z_SPE.png" alt="">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+				<img src="../images/plano_s_plano_z_SPD.png" alt="">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+				<img src="../images/plano_s_plano_z_jw.png" alt="">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+				<img src="../images/map_plano_s_plano_z.png" alt="">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Sistema de 2° Ordem</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							<p class="lightup">
+							$$
+							G(s)=\frac{\omega_n^2}{s^2+2\xi\omega_n +\omega_n^2}
+							$$
+						</p>
+							Subamortecido: 
+$$
+0\le \xi < 1
+$$
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Sistema de 2° Ordem</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+				
+							Subamortecido $\omega_n=1$: <br>
+<img src="../images/subamortecido_step.png" width="800">
+						</center>
+						
+
+					</div>
+	
+				</section>
+				
+
+				<section>
+					<div class="slide-title">
+						<h2>Sistema de 2° Ordem</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+				
+							Subamortecido $\xi=0.2$: <br>
+<img src="../images/subamortecido_step_wn.png" width="800">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Sistema de 2° Ordem</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							<p class="lightup">
+							$$
+							p_{1,2}=-\xi\omega_n\pm j\omega_n\sqrt{1-\xi^2}
+							$$
+						</p>
+
+						</center>
+						<center>
+							Mapeamento $z=e^{sT}$
+							<p class="lightup">
+							$$
+							p_{1,2}=e^{-\xi\omega_n}e^{\pm j\omega_n\sqrt{1-\xi^2}}
+							$$
+						</p>
+
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\xi=0.3
+							$<br>
+							<img src="../images/2nd_pole_xi3.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\xi=0.4
+							$<br>
+							<img src="../images/2nd_pole_xi4.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\xi=0.5
+							$<br>
+							<img src="../images/2nd_pole_xi5.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\xi=0.6
+							$<br>
+							<img src="../images/2nd_pole_xi6.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\xi=0.7
+							$<br>
+							<img src="../images/2nd_pole_xi7.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\xi=0.8
+							$<br>
+							<img src="../images/2nd_pole_xi8.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\xi=0.9
+							$<br>
+							<img src="../images/2nd_pole_xi9.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=0.3
+							$<br>
+							<img src="../images/2nd_pole_wn1.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=0.5
+							$<br>
+							<img src="../images/2nd_pole_wn2.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=0.7
+							$<br>
+							<img src="../images/2nd_pole_wn3.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+							
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=0.9
+							$<br>
+							<img src="../images/2nd_pole_wn4.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+									
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=1.1
+							$<br>
+							<img src="../images/2nd_pole_wn5.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+									
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=1.3
+							$<br>
+							<img src="../images/2nd_pole_wn6.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+									
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=1.5
+							$<br>
+							<img src="../images/2nd_pole_wn7.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+									
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=1.7
+							$<br>
+							<img src="../images/2nd_pole_wn8.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+									
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=1.9
+							$<br>
+							<img src="../images/2nd_pole_wn9.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=2.1
+							$<br>
+							<img src="../images/2nd_pole_wn10.png" width="1100">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\xi=0.2
+							$<br>
+							<img src="../images/zgrid0.png" width="800">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\xi=0.2
+							$<br>
+							<img src="../images/zgrid02.png" width="800">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Mapeamento $s$ em $z$</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							$
+							\omega_n=2.1 rad/s
+							$<br>
+							<img src="../images/zgrid_wn.png" width="800">
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Estabilidade em Malha Fechada</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							<p>Como avaliar a estabilidade assintótica?</p>
+						<img src="../images/malha_controle_estabilidade_s.png" alt="">
+						</center>
+						<center class="fragment current-visible">
+							$$
+							G_f(s)=\frac{G(s)}{1+G(s)}
+							$$
+						</center>
+
+						<center class="fragment current-visible">
+							$$
+							P(s)=1+G(s) \Rightarrow \text{raízes}(P(s))\in \text{SPE}
+							$$
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+
+				
+				<section>
+					<div class="slide-title">
+						<h2>Estabilidade em Malha Fechada</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+						<img src="../images/estabilidade_s.png" width="600">
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Estabilidade em Malha Fechada</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							<p>Como avaliar a estabilidade assintótica?</p>
+						<img src="../images/malha_controle_estabilidade_z.png" alt="">
+						</center>
+						<center class="fragment current-visible">
+							$$
+							G_f(z)=\frac{G(z)}{1+G(z)}
+							$$
+						</center>
+
+						<center class="fragment current-visible">
+							$$
+							Q(z)=1+G(z) \Rightarrow \text{raízes}(Q(z))\in \text{círculo unitário}
+							$$
+						</center>
+						
+
+					</div>
+	
+				</section>
+
+
+					
+				<section>
+					<div class="slide-title">
+						<h2>Estabilidade em Malha Fechada</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+						<img src="../images/estabilidade_z.png" width="600">
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Estabilidade em Malha Fechada</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center>
+							<img src="../images/malha_controle_estabilidade_z_K.png" width="800">
+							$$
+							\text{raízes}(Q(z))\in \text{círculo unitário}
+							$$
+							Como avaliar a estabilidade sem calcular as raízes de $Q(z)$?
+						
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+				
+				<section>
+					<div class="slide-title">
+						<h2>Critério de Jury</h2>
+					</div>
+					<div class="slide-content">
+				Correspondente em tempo discreto do critério <b>Routh-Hurwitz</b>.
+						<center>
+						$$
+							Q(z)=a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n
+						$$
+						<img src="../images/tabela_jury.png" width="800">
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Critério de Jury</h2>
+					</div>
+					<div class="slide-content">
+				Correspondente em tempo discreto do critério <b>Routh-Hurwitz</b>.
+						<center>
+						$$
+							Q(z)=a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n
+						$$
+						<img src="../images/tabela_jury2.png" width="800">
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Critério de Jury</h2>
+					</div>
+					<div class="slide-content">
+				Correspondente em tempo discreto do critério <b>Routh-Hurwitz</b>.
+						<center>
+						$$
+							Q(z)=a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n
+						$$
+						<img src="../images/tabela_jury3.png" width="800">
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Critério de Jury</h2>
+					</div>
+					<div class="slide-content">
+				Correspondente em tempo discreto do critério <b>Routh-Hurwitz</b>.
+						<center>
+						$$
+							b_k=\Bigl|\begin{matrix}a_n & a_{n-1-k}\\ a_0 &  a_{k+1}\end{matrix}\Bigr|,\quad k=0,\ldots,n-1\\
+							c_k=\Bigl|\begin{matrix}b_{n-1} & b_{n-2-k}\\ b_0 &  b_{k+1}\end{matrix}\Bigr|,\quad k=0,\ldots,n-2\\
+							\vdots \\
+							q_k=\Bigl|\begin{matrix}p_3 & p_{2-k}\\ p_0 &  p_{k+1}\end{matrix}\Bigr|,\quad k=0,1,2
+						$$
+					
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Critério de Jury</h2>
+					</div>
+					<div class="slide-content">
+				O sistema em tempo discreto é estável se
+						<center>
+						$$
+							\begin{align}
+							|a_n|&< a_0 \\
+							Q(1)&>0\\ 
+							(-1)^nQ(-1)&>0\\ 
+							
+							\end{align}
+						$$
+			
+						Suficiente para sistemas até 2° ordem!
+					
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Critério de Jury</h2>
+					</div>
+					<div class="slide-content">
+
+										<center>
+					Para $n>2$, além das condições anteriores, também é necessário
+						$$
+							\begin{align*}
+							|b_{n-1}|&> |b_0| \\
+							|c_{n-2}|&> |c_0|\\ 
+							\vdots \\
+							|q_2| &> |q_0|
+							\end{align*}
+						$$
+					
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Critério de Jury: exemplo</h2>
+					</div>
+					<div class="slide-content">
+
+										<center>
+											<p>&nbsp;</p>
+											Considere a equação característica de um sistema em malha-fechada em tempo discreto dada por
+						$$
+							Q(z)=z^4-1.2z^3+0.07z^2+0.3z-0.08=0
+						$$
+					Esse sistema é estável?
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Critério de Jury: exemplo</h2>
+					</div>
+					<div class="slide-content">
+
+										<center>
+											<p>&nbsp;</p>
+											Considere o sistema cuja função de transferência é dada por
+						$$
+							G(z)=\frac{K(0.3679z+0.2642)}{(z-0.3679)(z-1)}
+						$$
+					Esse sistema em malha-fechada (realimentação unitária) é estável para quais valores de $K$?
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+
+
 			
 			
 			
@@ -286,7 +1176,7 @@
 				</div>
 				<div class="slide-content">
 					<center>
-						<p>Modelagem e identificação de sistemas</p>
+						<p>Projeto de controladores</p>
 						<img src="../images/malha_controle_atuador_processo.png" width="750" alt="">
 					</center>
 				</div>
