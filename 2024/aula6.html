@@ -1,0 +1,1057 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/usp.png"/> </div>
+					<div class="title">
+					<h2>Aula 6: <br>Projeto de Controladores na Frequência - parte 1</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">03 de outubro de 2024</p>
+				</div>
+
+				</section>
+				
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Ciclo do Projeto de Controle</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					<img src="../images/design_process.png" width="450"/>
+				</center>
+					</div>
+	
+				</section>
+
+				
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Objetivos</h2>
+			</div>
+			<div class="slide-content">
+				<p>Os objetivos dessa aula são entender:
+						<ul>
+						<li>Critérios de desempenho;</li>
+						<li>Projeto por Emulação;</li>				
+						<li>Exemplos;</li>
+					</p>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Como especificar o desempenho?</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+					<p>Características transitórias:</p>
+					<ul>
+					<li>Tempo de subida ($t_r$);</li>
+					<li>Tempo de pico ($t_p$);</li>
+					<li>Sobressinal ($M_p$);</li>
+					<li>Tempo de acomodação ($t_s$);</li>
+					</ul>
+		
+				</center>
+			</div>
+
+		</section>
+
+		<section>
+			<div class="slide-title">
+				<h2>Como especificar o desempenho?</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+					<p>Características em regime permanente:</p>
+					<ul>
+					<li>Erro de posição (degrau)</li>
+					<li>Erro de velocidade (rampa);</li>
+					<li>Erro de aceleração (parábola);</li>
+					</ul>
+				
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Como especificar o desempenho?</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+					<p>Características de robustez:</p>
+					<ul>
+					<li>Margem de ganho</li>
+					<li>Margem de fase;</li>
+					<li>Variação de parâmetros do sistema;</li>
+					</ul>
+					
+				</center>
+			</div>
+
+		</section>
+
+
+		
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo: Controle de laser p/ os olhos</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/laser_surgery.jpg" width="900">
+				
+				</center>
+			</div>
+
+		</section>
+
+
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo: Controle de laser p/ os olhos</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/eye_tracking.png" width="900">
+				<br>Fonte: <a href="https://aes.amegroups.org/article/view/5776/html">https://aes.amegroups.org/article/view/5776/html</a>
+				</center>
+			</div>
+
+		</section>
+
+
+
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo: Caldeira</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/boiler_control.jpg" width="900">
+				
+				</center>
+			</div>
+
+		</section>
+
+
+		
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo: Drones</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+				<img src="../images/drone_control_system.png" width="900">
+				
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Pólos dominantes de 2° ordem</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+				$
+					s_{1,2}=-\xi\omega_n\pm j\omega_n \sqrt{1-\xi^2}
+				$
+			</p>
+				<img src="../images/polos_dominantes.png" alt="">
+				</center>
+			</div>
+
+		</section>
+
+				
+		<section>
+			<div class="slide-title">
+				<h2>Pólos dominantes de 2° ordem</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/polos_dominantes_xi_wn.png" width="900">
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Pólos dominantes de 2° ordem</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Resposta ao degrau unitário:
+					<p class="lightup">
+				$$
+				y(t)=1-\frac{e^{-\sigma_d t}}{\sqrt{1-\xi^2}} \sin \left(\omega_d t+\tan ^{-1}\left( \frac{\sqrt{1-\xi^2}}{\xi}\right)\right)
+				$$
+			</p>
+				em que $t\ge 0$ e
+				$$
+\omega_d=\omega_n\sqrt{1-\xi^2}\\
+\sigma_d=\xi\omega_n
+				$$
+				</center>
+			</div>
+
+		</section>
+
+
+					
+	
+
+	
+
+
+<!-- 
+		<section>
+			<div class="slide-title">
+				<h2>Atraso</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_td.png" width="1050">
+				</center>
+			</div>
+
+		</section> -->
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tempo de subida</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_tr.png" width="700">
+				<p class="lightup">
+				$
+				t_r=\frac{1}{\omega_d}\arctan\left(\frac{\omega_d}{-\sigma_d}\right)=\frac{\pi-\beta}{\omega_d}, \quad \beta=\cos(\xi)
+				$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tempo de pico</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_tp.png" width="700">
+				<p class="lightup">
+					$
+					t_p=\frac{\pi}{\omega_d}
+					$
+				</p>
+				</center>
+			</div>
+
+		</section>
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Sobressinal</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_Mp.png" width="700">
+				<p class="lightup">
+				$M_p=e^{-\pi\frac{\xi}{\sqrt{1-\xi^2}}}$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Sobressinal</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						$$\xi=\frac{\ln(M_p)}{\sqrt{\pi^2+\ln(M_p)^2}}$$
+					</p>
+			Boa prática de projeto:
+				<br>
+				<p class="">
+			$$
+					0.4\le \xi \le 0.8
+			$$
+		</p>
+			<ul>
+				<li>$\xi< 0.4$: sobressinal elevado;</li>
+				<li>$\xi>0.8$: resposta demasiadamente lenta;</li>
+			</ul>
+				</center>
+			</div>
+
+		</section>
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Tempo de acomodação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_ts.png" width="700">
+				<p class="lightup">
+				$t_s=\frac{3}{\xi\omega_n}$ (tolerância de 5%)
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tempo de acomodação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_ts.png" width="700">
+				<p class="lightup">
+				$t_s=\frac{4}{\xi\omega_n}$ (tolerância de 2%)
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Características em regime permanente:</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+				<ul>
+					<li>Erro de posição (degrau)</li>
+					<li>Erro de velocidade (rampa);</li>
+					<li>Erro de aceleração (parábola);</li>
+					</ul>
+					<p class="lightup">Depende dos pólos da função de excitação!</p>
+				</center>
+			</div>
+
+		</section>
+
+
+
+			
+
+
+
+
+				
+	
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tipo do sistema</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$G(s)=\frac{K\left(T_a s+1\right)\left(T_b s+1\right) \ldots\left(T_m s+1\right)}{s^N\left(T_1 s+1\right)\left(T_2 s+1\right) \ldots\left(T_p s+1\right)}$$
+				</p>
+				<p>&nbsp;</p>
+					O sistema é considerado tipo 0 se $N=0$, tipo 1 se $N=1$, etc.
+					<p class="lightup">O número de pólos na origem define o tipo do sistema!</p>
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tipo 0</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$G(s)=\frac{2s+1}{s^2+s+1}$
+				</p>
+			<img src="../images/tipo0_degrau.png" width="650">
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tipo 1</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$G(s)=\frac{2s+1}{s(s^2+s+1)}$
+				</p>
+			<img src="../images/tipo1_degrau.png" width="650">
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tipo 1</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$G(s)=\frac{2s+1}{s(s^2+s+1)}$
+				</p>
+			<img src="../images/tipo1_rampa.png" width="650">
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tipo 2</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$G(s)=\frac{2s+1}{s^2(s^2+s+5)}$
+				</p>
+			<img src="../images/tipo2_rampa.png" width="650">
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tipo 2</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$G(s)=\frac{2s+1}{s^2(s^2+s+5)}$
+				</p>
+			<img src="../images/tipo2_degrau.png" width="650">
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tipo 2</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$G(s)=\frac{2s+1}{s^2(s^2+s+5)}$
+				</p>
+			<img src="../images/tipo2_parabola.png" width="650">
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Tipo do sistema em tempo discreto </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$G(z)=\frac{1}{(z-1)^N}\frac{N(z)}{D(z)}
+					$$
+				</p>
+					O sistema é considerado tipo 0 se $N=0$, tipo 1 se $N=1$, etc.
+				</center>
+				<center>
+					<p>&nbsp;</p>
+					<ul><li>Tipo 1: erro nulo para entrada em degrau</li>
+					<li>Tipo 2: erro nulo para entrada em degrau e rampa;</li>
+					<li>Tipo 3: erro nulo para entrada em degrau, rampa e parábola;</li>
+					</ul>
+				</center>
+
+			</div>
+
+		</section>
+
+
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Erro em regime estacionário</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					e[k]=y[k]-r[k]
+					$$
+				</p>
+				Pelo teorema do valor final, tem-se
+				$$
+				\lim_{k\to\infty} e[k]=\lim_{z\to 1}(z-1)E(z)
+				$$
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Erro de posição</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					e_{ss}=\frac{1}{1+K_p}
+					$$
+					com 
+					$$
+						K_p=\lim_{z\to 1}G(z)
+					$$
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Erro de velocidade</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					e_{ss}=\frac{1}{K_v}
+					$$
+					com 
+					$$
+						K_v=\lim_{z\to 1}\frac{(1-z^{-1})G(z)}{T}
+					$$
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Erro de aceleração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+					$$
+					e_{ss}=\frac{1}{K_a}
+					$$
+					com 
+					$$
+						K_a=\lim_{z\to 1}\frac{(1-z^{-1})^2G(z)}{T^2}
+					$$
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Resumo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="">
+					$$
+					\begin{array}{|c|c|c|c|}
+\hline \text { Sistema } & \text { Degrau } & \text { Rampa } & \text { Parábola } \\
+\hline \text { Tipo 0 } & \frac{1}{1+K_p} & \infty & \infty \\
+\hline \text { Tipo 1 } & 0 & \frac{1}{K_V} & \infty \\
+\hline \text { Tipo 2 } & 0 & 0 & \frac{1}{K_a} \\
+\hline
+\end{array}
+					$$
+					em que as constantes estáticas são dadas por<br>
+					$
+						K_p=\lim_{z\to 1} G(z)\\ 
+						K_v=\lim_{z\to 1} \frac{1-z^{-1}}{T}G(z)\\
+						K_a=\lim_{z\to 1} \frac{(1-z^{-1})^2}{T^2}G(z)\\
+					$
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Projeto de controladores na frequência</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<img src="../images/malha_controle_digital_zoh.png" width="950">
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Projeto via Emulação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<img src="../images/projeto_c2d.png" width="850">
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Projeto via Emulação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<ul>
+						<li>Despreza-se o efeito do ZOH;</li>
+						<li>Projeto usando LGR, Bode, alocação de pólos, etc, no domínio S;</li>
+						<li>Discretização do controlador usando Tustin, Euler-Backward, etc;</li>
+						<li>Requer frequência de amostragem elevada (>30x banda passante do sistema);</li>
+						<li>Desempenho em tempo discreto pode ser ruim para taxas de amostragens pequenas;</li>
+					</ul>
+			
+				</center>
+
+			</div>
+
+		</section>
+		
+
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Projeto direto em Z</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<p>
+					<img src="../images/projeto_path_d2d.png" width="450">
+				</p>
+				</center>
+
+			</div>
+
+		</section>
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Projeto direto em Z</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<ul>
+						<li>Pode-se considerar os efeitos da amostragem e ZOH;</li>
+						<li>Requer métodos de discretização para a planta, ex: Tustin, Euler-Backward, etc;</li>
+						<li>Método Lugar das Raízes, Bode, alocação de pólos, etc no domínio Z;</li>
+						<li>Pode-se trabalhar com taxas de amostragem menores;</li>
+					</ul>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Projeto direto em Z</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<img src="../images/malha_controle_digital_discretizacao.png" width="950">
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+			
+		<section>
+			<div class="slide-title">
+				<h2>Projeto direto em Z</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<img src="../images/malha_controle_digital_em_z.png" width="950">
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Critérios de desempenho</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<img src="../images/polos_dominantes_xi_wn.png" width="750">
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Pólos dominantes de 2° ordem</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+				$$
+					z_{1,2}=e^{s_{1,2}T}=e^{-T\xi\omega_n}e^{\pm jT\omega_n\sqrt{1-\xi^2}}
+				$$
+			</p>
+
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Pólos dominantes de 2° ordem</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+				$$
+					z_{1,2}=e^{s_{1,2}T}=r\cos(\theta)\pm jr\sin(\theta)
+				$$
+			</p>
+				com 
+				$$
+\begin{cases} 
+r=e^{-T\xi \omega_n} \\
+\theta=T\omega_n\sqrt{1-\xi^2}
+\end{cases}
+				$$
+				
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="">
+				$$M_p \le 10\%\\ 
+				t_s\le 5s ~(\pm 2\%)\\
+				T=0.1s
+				$$
+			</p>
+				
+			Então,
+			$$
+			M_p=e^{-\pi\frac{\xi}{\sqrt{1-\xi^2}}}=0.1\Rightarrow \xi = ? \\
+			t_s=\frac{4}{\xi\omega_n}=5 \Rightarrow \omega_n=?
+			$$
+				
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Estrutura de Controlador</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+				$$C(z)=K\frac{z-a}{z-b}
+				$$
+			</p>
+				<p>&nbsp;</p>
+			<ul>
+				<li><b>Compensador por avanço de fase:</b> melhora transitório;</li>
+				<li><b>Compensador por atraso de fase:</b> melhor regime permanente;</li>
+			</ul>
+		
+				
+				</center>
+			</div>
+
+		</section>
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Malha Fechada</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+				$$G_f(z)=\frac{C(z)G(z)}{1+C(z)G(z)}
+				$$
+			</p>
+
+			<b>Sintonia do compensador:</b>
+			<ul><li>
+				Lugar Geométrico das Raízes;
+			</li>
+		<li>Resposta em frequência (Diagrama de Bode);</li>
+		<li>Algoritmos de otimização (Algoritmos genéticos, particle swarms, etc)</li>
+		</ul>
+	
+				
+				</center>
+			</div>
+
+		</section>
+
+
+				
+		<section>
+			<div class="slide-title">
+				<h2>Lugar Geométrico das Raízes</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+
+					Condição de ângulo:
+		$$
+					|C(z)G(z)| = 1
+		$$
+					
+		Condição de ângulo:
+		$$
+					\text{angle}(C(z)G(z)) = 180° (2k+1)
+		$$
+				
+				</center>
+			</div>
+
+		</section>
+
+
+		
+
+
+							
+		<!-- <section>
+			<div class="slide-title">
+				<h2>Pólos dominantes de 2° ordem</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Dado
+					<p class="lightup">
+				$
+					z_{1,2}=re^{\pm j\theta}
+				$
+			</p>
+				Tem-se
+				$$
+				\xi = \frac{\ln(r)}{\sqrt{\ln(r)^2+\theta^2}},\quad \omega_n = \frac{\sqrt{\ln(r)^2+\theta^2}}{T}
+				$$
+				
+				</center>
+			</div>
+
+		</section> -->
+
+
+	
+		
+
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Próxima aula teórica</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>Projeto de controladores - parte 2</p>
+						<img src="../images/malha_controle_atuador_processo.png" width="750" alt="">
+					</center>
+				</div>
+
+			</section>
+
+
+
+			
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h2>Até a próxima aula!</h2>
+				</center>
+				</div>
+
+			</section>
+
+			
+
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
+
