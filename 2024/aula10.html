@@ -37,25 +37,25 @@
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">17 de outubro de 2024</p>
+					<p style="text-align: center;font-size: 0.8em;">7 de novembro de 2024</p>
 				</div>
 
 				</section>
 				
 
 
-
 				<section>
 					<div class="slide-title">
-						<h2>Ciclo do Projeto de Controle</h2>
+						<h2>Ciclo do Projeto de Controle LQR</h2>
 					</div>
 					<div class="slide-content">
 						<center>
-					<img src="../images/design_process.png" width="450"/>
+					<img src="../images/design_process_lqr.png" width="700"/>
 				</center>
 					</div>
 	
 				</section>
+		
 
 				
 
@@ -67,551 +67,108 @@
 			<div class="slide-content">
 				<p>Os objetivos dessa aula são entender:
 						<ul>
-						<li>Modelos em espaço de estados;</li>
-						<li>Discretização em espaço de estados;</li>
-						<li>Análise de estabilidade em espaço de estados;</li>
+						<li>Problema de controle ótimo;</li>
+						<li>Custo Quadrático;</li>
+						<li>Programação dinâmica: equação de Bellman;</li>
+						<li>Equação de Riccati;</li>
+						<li>Custo ótimo;</li>
 					</p>
 					</div>
 
 		</section>
 
 
-		<section>
 
+		<section>
+			
 			<div class="slide-title">
-				<h2>Sistema Dinâmico em tempo contínuo
-				</h2>
+				<h2>Controle Ótimo</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo2.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo3.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo4.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo</h2>
 			</div>
 			<div class="slide-content">
 				<center>
 					<p class="lightup">
-						EDO
-					$$
-					\sum_{i=0}^n\alpha_i\frac{d^i y}{dt^i}=\sum_{i=0}^m\beta_i\frac{d^i u}{dt^i}
+						Problema de programação (otimização) matemática:
+				$$
+					\min_{u_0,u_1,\ldots,u_{N-1}} \quad J\\
+					\text{tal que} \\
+					 x_{k+1}=f(x_k,u_k)\\
+					 x_k\in\mathcal{X}\\
+					 u_k\in\mathcal{U}
 				$$
 			</p>
-				<img src="../images/planta.png" width="600" alt="">
-	
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Abordagens
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					<p>&nbsp;</p>
-					<img src="../images/edo_approach.png" width="1000" alt="">
-	
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					$$
-					A_{n\times m}=\begin{bmatrix}
-					a_{11} & a_{12} & \cdots & a_{1m}\\
-					a_{21} & a_{22} & \cdots & a_{2m}\\
-					\vdots & \vdots & \ddots & \vdots\\
-					a_{n1} & a_{n2} & \cdots & a_{nm}\\
-					\end{bmatrix}
-					$$
-				De forma compacta
-				$$
-					A_{n\times m}=[a_{ij}], i=1,\ldots,n,\quad j=1,\ldots,m
-				$$
-$i\to$ linhas e $j\to$ colunas
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					$$
-					A_{n\times m}=\begin{bmatrix}
-					| & | & \cdots & |\\
-					c_{1} & c_{2} & \cdots & c_{m}\\
-					| & | & \cdots & |\\
-					\end{bmatrix}
-					$$
-				ou
-				$$
-					A_{n\times m}=\begin{bmatrix}
-					- & l_1^\trp & -\\
-					- & l_2^\trp & -\\
-					& \vdots \\
-					- & l_n^\trp & -\\
-					\end{bmatrix}
-					$$
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com matriz
-					$$
-					[A_{n\times m}B_{m\times p}]_{ij}=\sum_{k=1}^m a_{ik} b_{kj}
-					$$
-			<p class="lightup">
-					i-ésima linha produto escalar com a j-ésima coluna
-					$$
-					[A_{n\times m}B_{m\times p}]_{ij}=\langle l_i^A, c_j^B\rangle 
-					$$
-			</p>
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com matriz
-					<p>&nbsp;</p>
-					$$
-					(AB)_{n\times p}=\begin{bmatrix} 
-					- & (l_1^A)^\trp & - \\
-					- & (l_2^A)^\trp & - \\
-					&\vdots \\
-					- & (l_n^A)^\trp & - \\
-					\end{bmatrix}\begin{bmatrix} 
-					| & |  & \cdots & |\\
-					c_1^B &  c_2^B & \cdots & c_p^B \\
-					| & |  & \cdots & |
-					\end{bmatrix}
-					$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com matriz
-					<p>&nbsp;</p>
-					$$
-					(AB)_{n\times p}=\begin{bmatrix} 
-					\langle l_1^A, c_1^B\rangle & \langle l_1^A, c_2^B\rangle & \cdots & \langle l_1^A, c_p^B\rangle\\
-					\langle l_2^A, c_1^B\rangle & \langle l_2^A, c_2^B\rangle & \cdots & \langle l_2^A, c_p^B\rangle\\
-					\vdots & \vdots & \ddots & \vdots \\
-					\langle l_n^A, c_1^B\rangle & \langle l_n^A c_2^B\rangle & \cdots & \langle l_n^A, c_p^B\rangle\\
-					\end{bmatrix}
-					$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com matriz
-					<p>&nbsp;</p>
-					$$
-					(AB)_{n\times p}=\begin{bmatrix} 
-					| & |  & \cdots & |\\
-					c_1^A &  c_2^A & \cdots & c_m^A \\
-					| & |  & \cdots & |
-					\end{bmatrix}
-					\begin{bmatrix} 
-					- & (l_1^B)^\trp & - \\
-					- & (l_2^B)^\trp & - \\
-					&\vdots \\
-					- & (l_m^B)^\trp & - \\
-					\end{bmatrix}
-					$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com matriz
-					<p>&nbsp;</p>
-					$$
-					(AB)_{n\times p}=c_1^A(l_1^B)^\trp +c_2^A(l_2^B)^\trp+\cdots+c_m^A(l_m^B)^\trp
-					$$
-			Portanto,
-			$$
-					(AB)_{n\times p}=\sum_{k=1}^m \begin{bmatrix}
-					|\\
-					c_k^A \\
-					|
-					\end{bmatrix}_{n\times 1}\cdot \begin{bmatrix}
-					- & (l_k^B)^\trp & - 
-					\end{bmatrix}_{1\times p}
-					$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com vetor
-					$$
-					A\in\mathbb{R}^{n\times n},\quad x\in\mathbb{R}^n
-					$$
-			Portanto,
-			$$
-					Ax = \begin{bmatrix} 
-					| & |  & \cdots & |\\
-					c_1^A &  c_2^A & \cdots & c_n^A \\
-					| & |  & \cdots & |
-					\end{bmatrix}\begin{bmatrix}
-					x_1\\
-					x_2\\
-					\vdots \\
-					x_n
-					\end{bmatrix}=\sum_{j=1}^n \begin{bmatrix} 
-					|\\
-					c_j^A \\
-					| 
-					\end{bmatrix}x_j
-					$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com vetor
-					$$
-					A\in\mathbb{R}^{n\times n},\quad x\in\mathbb{R}^n
-					$$
-			Portanto,
-			$$
-					Ax =\begin{bmatrix} 
-					- & (l_1^A)^\trp & - \\
-					- & (l_2^A)^\trp & - \\
-					&\vdots \\
-					- & (l_n^A)^\trp & - \\
-					\end{bmatrix}\begin{bmatrix}
-					x_1\\
-					x_2\\
-					\vdots \\
-					x_n
-					\end{bmatrix}=\begin{bmatrix} 
-					\langle l_1^A, x\rangle\\
-					\langle l_2^A, x\rangle\\
-					\vdots \\
-					\langle l_n^A, x\rangle\\
-					\end{bmatrix}
-					$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Não-comutatividade:
-					$$
-				AB \neq BA
-					$$
-		Transposto:
-		$$
-					(AB)^\trp = B^\trp A^\trp 
-		$$
-		Inversa: 
-		$$
-					(AB)^{-1}=B^{-1}A^{-1}
-		$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-		Autovalores e Autovetores:
-		$$
-					Av=\lambda v
-		$$
-		Operador Autovalores:
-		$$
-					\lambda\{A\}=\{\lambda_1,\lambda_2,\ldots,\lambda_n\}
-		$$
-		Matriz (semi)-definida positiva: 
-		$$
-					A\ge 0 \Rightarrow \lambda \{A\} \ge 0
-		$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-			Decomposição espectral: 
-		$$
-					A=V\Lambda V^{-1}
-		$$
-em que
-		$$
-\begin{aligned} 
-V=\begin{bmatrix}
-| & | & \cdots & |\\
-v_1 & v_2 & \cdots & v_n\\
-| & | & \cdots & |
-\end{bmatrix},\quad \Lambda = \begin{bmatrix}
-\lambda_1 \\
-& \lambda_2 \\
-& & \ddots \\
-& & & \lambda_n
-\end{bmatrix}
-\end{aligned}
-		$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-			Decomposição espectral: 
-		$$
-					A=V\Lambda V^{-1}
-		$$
-em que
-		$$
-\begin{aligned} 
-A^{-1} = V\begin{bmatrix}
-\frac{1}{\lambda_1} \\
-& \frac{1}{\lambda_2} \\
-& & \ddots \\
-& & & \frac{1}{\lambda_n}
-\end{bmatrix}V^{-1}
-\end{aligned}
-		$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-			Decomposição espectral: 
-		$$
-					A=V\Lambda V^{-1}
-		$$
-em que
-		$$
-\begin{aligned} 
-A^n = V\begin{bmatrix}
-\lambda_1^n \\
-& \lambda_2^n \\
-& & \ddots \\
-& & & \lambda_n^n
-\end{bmatrix}V^{-1}
-\end{aligned}
-		$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-			Decomposição espectral: 
-		$$
-					A=V\Lambda V^{-1}
-		$$
-em que
-		$$
-\begin{aligned} 
-e^A = V\begin{bmatrix}
-e^{\lambda_1} \\
-& e^{\lambda_2} \\
-& & \ddots \\
-& & & e^{\lambda_n}
-\end{bmatrix}V^{-1}
-\end{aligned}
-		$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-			Exponencial Matricial: 
-		$$
-					e^A=I+A+\frac{1}{2!}A^2+\frac{1}{3!}A^3+\cdots
-		$$
-
-similar ao caso escalar:
-$$
-e^a=1+a+\frac{1}{2!}a^2+\frac{1}{3!}a^3+\cdots
-$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-
-		
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					<p class="">
-						EDO
-					$$
-					\alpha_n\frac{d^n y}{dt^n}+\alpha_{n-1}\frac{d^{n-1}y}{dt^{n-1}}+\cdots+\alpha_0y=u
-				$$
-				Introduz-se <b>variáveis de estado</b>:
-				<p class="lightup">
-				$$
-						x_1=y,\quad 
-						x_2=\frac{dy}{dt},\quad
-						\cdots,\quad
-						x_n=\frac{d^{n-1}y}{dt^{n-1}}
-				$$
-			</p>
-			
-	
-			</center>
+				</center>
 					</div>
 
 		</section>
@@ -620,934 +177,523 @@ $$
 		<section>
 			
 			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados</h2>
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
 			</div>
 			<div class="slide-content">
 				<center>
-					$$
-					\begin{bmatrix} 
-					\dot x_1\\
-					\dot x_2\\
-					\vdots\\
-					\dot x_n
-					\end{bmatrix}=\begin{bmatrix} 
-					0 & 1 & \ldots & 0\\
-					0 & 0 & \ldots & 0\\
-					\vdots & \vdots & \ddots & \vdots \\
-					-\frac{\alpha_0}{\alpha_n} & -\frac{\alpha_1}{\alpha_n} & \cdots & -\frac{\alpha_{n-1}}{\alpha_n}
-					\end{bmatrix}\begin{bmatrix} 
-					x_1\\
-					x_2\\
-					\vdots\\
-					x_n
-					\end{bmatrix}+\begin{bmatrix} 
-					0\\
-					0\\
-					\vdots\\
-					\frac{1}{\alpha_n}
-					\end{bmatrix}u
-					$$
-				
-				<p class="lightup">
-				$$
-					\dot{x}(t)=Ax(t)+Bu(t)
-				$$
-			</p>
-			
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados</h2>
-			</div>
-			<div class="slide-content">
-				<center>
+					Custo quadrático:
 					<p class="lightup">
-						EDO:
-						$$
-						\alpha_n\frac{d^n y}{dt^n}+\alpha_{n-1}\frac{d^{n-1}y}{dt^{n-1}}+\cdots+\alpha_0y=u
-						$$
-					</p>
-				
-				<p class="lightup">
-					Espaço de Estados
-				$$
-					\dot{x}(t)=Ax(t)+Bu(t)
-				$$
-			</p>
 			
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					Espaço de Estados
-				$$
-					\dot{x}(t)=Ax(t)+Bu(t)
-				$$
-			</p>
-			$$
-			x\in\mathbb{R}^n \to \text{vetor de estados}\\
-			u\in\mathbb{R}^m \to \text{vetor de entrada}\\
-			A\in\mathbb{R}^{n\times n}\to \text{matriz de dinâmica}\\
-			B\in\mathbb{R}^{n\times m}\to \text{matriz de entrada}\\
-			$$
-			
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					Saída:
-				$$
-					y(t)=Hx(t)+Du(t)
-				$$
-			</p>
-			$$
-			y\in\mathbb{R}^p \to \text{vetor de saída}\\
-			H\in\mathbb{R}^{p\times n}\to \text{matriz de saída}\\
-			D\in\mathbb{R}^{p\times m}\to \text{matriz de transmissão direta}\\
-			$$
-			
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados (Linear)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					
-				$$
-				\dot{x}(t)=Ax(t)+Bu(t)\\
-					y(t)=Hx(t)+Du(t)
-				$$
-			</p>
-			<img src="../images/MIMO.png" width="600">
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados (Linear)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									<p>&nbsp;</p>
-	
-			<img src="../images/modelo_ss.png" width="1100">
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados (Não-Linear)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					
-				$$
-				\dot{x}(t)=f(x(t),u(t))\\
-					y(t)=h(x(t),u(t))
-				$$
-			</p>
-			<img src="../images/MIMO_nonlinear.png" width="600">
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Pêndulo Invertido móvel</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-			
-			<img src="../images/pendulo_invertido.png" width="350">
-			<p class="">
-		$$
-					(M+m)\ddot{x}-ml\ddot{\theta}\cos(\theta)+ml\dot{\theta}^2\sin(\theta)=F\\
-					l\ddot{\theta}-\ddot{x}\cos(\theta)-g\sin(\theta)=0
-		$$
-	</p>
-	
-			</center>
-					</div>
-
-		</section>
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-			<img src="../images/linearizacao.png" alt="">
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="">
-					
-				$$
-				\delta \dot{x}(t)=A(x_0,u_0)\delta x(t)+B(x_0,u_0)\delta u(t)\\
-					\delta y(t)=H(x_0,u_0)\delta x(t)+D(x_0,u_0)\delta u(t)
-				$$
-			</p>
-		em que 
-		$$
-		\begin{aligned}
-		A(x_0,u_0)=\frac{\partial f}{\partial x}\Bigr|_{x=x_0,u=u_0},\quad
-		B(x_0,u_0)=\frac{\partial f}{\partial u}\Bigr|_{x=x_0,u=u_0}\\
-		H(x_0,u_0)=\frac{\partial h}{\partial x}\Bigr|_{x=x_0,u=u_0},\quad
-		D(x_0,u_0)=\frac{\partial h}{\partial u}\Bigr|_{x=x_0,u=u_0}
-\end{aligned}
-		$$
-		
-	
-			</center>
-					</div>
-
-		</section>
-		
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="">
-					
-				$$
-				\delta \dot{x}(t)=A(x_0,u_0)\delta x(t)+B(x_0,u_0)\delta u(t)\\
-					\delta y(t)=H(x_0,u_0)\delta x(t)+D(x_0,u_0)\delta u(t)
-				$$
-			</p>
-		em que 
-		$$
-		\begin{aligned}
-			\delta x(t)&=x(t)-x_0 \\
-			\delta \dot{x}&=\dot{x}(t)-f(x_0,u_0)\\
-			\delta u(t)&=u(t)-u_0\\ 
-			\delta y(t)&=y(t)-h(x_0,u_0)\\
-\end{aligned}
-		$$
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									Ponto de equilíbrio na origem
-									$$
-									0=f(0,0),\quad 0=h(0,0)
-									$$
-				<p class="">
-					
-				$$
-				\dot{x}(t)=A(x_0,u_0)x(t)+B(x_0,u_0)u(t)\\
-				y(t)=H(x_0,u_0)x(t)+D(x_0,u_0)u(t)
-				$$
-				em que $x_0=0$ e $u_0=0$.
-			</p>
-	
-			</center>
-					</div>
-
-		</section>
-
-	
-
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização do Modelo em Espaço de Estados</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					
-				$$
-				\dot{x}(t)=Ax(t)+Bu(t)\\
-				$$
-			</p>
-
-Equivalente em tempo discreto:
-										
-			<p class="lightup">
-					
-				$$
-				x_{k+1}=A_dx_k+B_du_k\\
-				$$
-			</p>
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização via Integração</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					
-				$$
-				x(t)=e^{A (t-t_0)}x(t_0)+\int_{t_0}^t e^{A(t-\tau)}Bu(\tau)d\tau,\quad t\in[t_0,T]
-				$$
-			</p>
-Considere
-										
-			<p class="">
-					
-				$$
-				x(kT_s)=x_k,\quad t \in [kT_s,(k+1)T_s]
-				$$
-			</p>
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-
-		
-			<section>
-			
-			<div class="slide-title">
-				<h2>Discretização via Integração</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					
-				$$
-				x_{k+1}=e^{A T_s}x_k+\int_{0}^{T_s} e^{A((k+1)T_s-\tau)}Bu(\tau)d\tau
-				$$
-			</p>
-
-			Suponha que 
-
-			$$
-			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
-			$$
-
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização via Integração</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					
-				$$
-				x_{k+1}=e^{A T_s}x_k+\Bigl(\int_{0}^{T_s} e^{A\eta}d\eta B\Bigr)u_k
-				$$
-			</p>
-
-			Suponha que 
-			$$
-			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
-			$$
-
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização via Integração</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					
-				$$
-				x_{k+1}=\underbrace{e^{A T_s}}_{A_d}x_k+\underbrace{\Bigl(\int_{0}^{T_s} e^{A\eta }d\eta B\Bigr)}_{B_d}u_k
-				$$
-			</p>
-
-			Suponha que 
-			$$
-			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
-			$$
-
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização via Integração</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="lightup">
-					
-				$$
-				x_{k+1}=A_dx_k+B_du_k
-				$$
-			</p>
-			em que 
-			$$
-			\begin{aligned}
-			A_d&=e^{AT_s}\\
-			B_d&=\int_0^{T_s} e^{A\eta}d\eta B
-			\end{aligned}
-			$$
-
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização via Integração</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-			Se $A$ for não-singular (existe $A^{-1}$), então
-						$$
-			\begin{aligned}
-		B_d&=\int_0^{T_s} e^{A\eta}d\eta B\\&=A^{-1}(e^{AT_s}-I)B\\&=(e^{AT_s}-I)A^{-1}B
-			\end{aligned}
-			$$
-
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização via Integração</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-			Se $A$ for singular (não existe $A^{-1}$), então
-						$$
-			\begin{aligned}
-		B_d&=\int_0^{T_s} e^{A\eta}d\eta B\\&= \int_0^{T_s} (I+A\eta+\frac{1}{2!}A^2\eta^2+\frac{1}{3!}A^3\eta^3+\cdots)d\eta B
-			\end{aligned}
-			$$
-
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização da Saída</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-			<p class="lightup">
-
-				$$
-				y(kT_s)=Hx(kT_s)+Du(kT_s)
-				$$
-			</p>
-		Portanto, o equivalente em tempo discreto é
-
-		<p class="lightup">
-
-			$$
-			y_k=Hx_k+Du_k
-			$$
-		</p>
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em espaço de estados em tempo discreto</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-			<p class="lightup">
-
-				$$
-				\begin{aligned} 
-				x_{k+1}&=A_dx_k+B_du_k\\ 
-				y_k&=Hx_k+Du_k
-				\end{aligned}
-				$$
-			</p>
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Modelo em espaço de estados em tempo discreto</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-			<img src="../images/modelo_ss_discreto.png" width="1000">
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Solução da equação de estados em tempo discreto</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-			<p class="lightup">
-
-				$$
-				\begin{aligned} 
-				x_k=A_d^kx_0+\sum_{j=0}^{k-1}A_d^{k-j-1}B_d u_j, \quad k=1,2,3,\ldots
-				\end{aligned}
-				$$
-			</p>
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Solução da equação de estados em tempo discreto</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-			<p class="lightup">
-				Saída:
-
-				$$
-				\begin{aligned} 
-				y_k=HA_d^kx_0+H\sum_{j=0}^{k-1}A_d^{k-j-1}B_d u_j+Du_k, \\k=1,2,3,\ldots
-				\end{aligned}
-				$$
-			</p>
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Estabilidade</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Considere um sistema em espaço de estados na forma
-					$$
-					x_{k+1}=A_dx_k
-					$$
-									
-			<p class="lightup">
-			O sistema representado em espaço de estados é estável em tempo discreto se 
-				$$
-				\begin{aligned} 
-				|\lambda\{A_d\}| < 1
-				\end{aligned}
-				$$
-			</p>
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Estabilidade</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-													
-			<p class="lightup">
 							$
-				\begin{aligned} 
-				|\lambda\{A_d\}| < 1
-				\end{aligned}
-				$
-			</p>
-
-			<img src="../images/estabilidade_discreta.png" width="850">
+J_{0\to N}=x_N^T P_N x_N + \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k, \\Q=Q^T\ge 0,\quad R=R^\trp >0
+						$
+					</p>
+					Dinâmica Linear:
+					<p class="lightup2">
 		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Estabilidade no sentido de Lyapunov</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-			Função de energia:
-
-			<br>
-			Se existir uma função $V:\mathbb{R}^n\to \mathbb{R}$ tal que 
-			$$
-					V(x_k)>0,\quad \forall x_k\in\mathbb{R}^n \\
-					V(x_k)=0 \Leftrightarrow x_k=0
-			$$
-			e 
-$$
-V(x_{k+1})-V(x_{k}) \le 0
-$$
-então o sistema é estável.
-			</center>
-					</div>
-
-		</section>
-
-
-		
-		<section>
-			
-			<div class="slide-title">
-				<h2>Estabilidade no sentido de Lyapunov</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-			Função de energia:
-
-			<br>
-			Se existir uma função $V:\mathbb{R}^n\to \mathbb{R}$ tal que 
-			$$
-					V(x_k)>0,\quad \forall x_k\in\mathbb{R}^n \\
-					V(x_k)=0 \Leftrightarrow x_k=0
-			$$
-			e 
-$$
-V(x_{k+1})-V(x_{k}) < 0
-$$
-então o sistema é <b>assintoticamente</b> estável.
-			</center>
-					</div>
-
-		</section>
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Estabilidade no sentido de Lyapunov</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					<p>&nbsp;</p>
-			Função de energia:
-
-			<br>
-			Para <b>sistemas lineares</b>, a função de energia
-			<p class="lightup">
-			$$
-					V(x_k)=x_k^\trp P x_k,\quad P\ge 0
-			$$
-		</p>
-			é necessária e suficiente para certificar a estabilidade!
-			</center>
-					</div>
-
-		</section>
-
-
-		
-		<section>
-			
-			<div class="slide-title">
-				<h2>Estabilidade no sentido de Lyapunov</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					<p>&nbsp;</p>
-			Função de energia:
-
-			<br>
-			Para <b>sistemas lineares</b>, a função de energia
-			<p class="lightup">
+					
 				$$
-						V(x_k)=x_k^\trp P x_k,\quad P> 0
+					 x_{k+1}=Ax_k+Bu_k\\
+					 x_k\in\mathbb{R}^n\\
+					 u_k\in\mathbb{R}^m
 				$$
 			</p>
-			é necessária e suficiente para certificar a <b>estabilidade assintótica</b>!
-			</center>
+				</center>
 					</div>
 
 		</section>
 
 
-			
+
 		<section>
 			
 			<div class="slide-title">
-				<h2>Estabilidade no sentido de Lyapunov</h2>
+				<h2>Controle Ótimo: LQR</h2>
 			</div>
 			<div class="slide-content">
 				<center>
-			Função de energia:
-
-			<br>
-			$$
-						V(x_{k+1})-V(x_k)=x_{k+1}^\trp Px_{k+1}-x_k^\trp Px_k < 0
-			$$
-			Uma vez que,
-			$$
-					x_{k+1}=A_dx_k
-			$$
-			então
-					$$
-					A_d^\trp PA_d -P < 0
-					$$
+					<p class="lightup">
+						Problema de programação (otimização) matemática:
+				$$
+					\min_{u_0,u_1,\ldots,u_{N-1}} \quad \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N \\
+					\text{tal que} \\
+					 x_{k+1}=Ax_k+Bu_k\\
+					 x_k\in\mathbb{R}^n\\
+					 u_k\in\mathbb{R}^m
+				$$
 			</p>
-		
-			</center>
+				</center>
 					</div>
 
 		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	<img src="../images/controle_otimo_bellman.png" width="700">
+				</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	<img src="../images/controle_otimo_bellman2.png" width="700">
+				</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	<img src="../images/controle_otimo_bellman3.png" width="730">
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+	Seja $\{x_0^*,x_1^*,\ldots,x_N^*\}$ e $\{u_0^*,u_1^*,\ldots,u_{N-1}^*\}$ a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{0\to N}$.
+		<p class="lightup">
+			Então, para qualquer $k\in (0,N)$, tem-se:
+	$\{x_k^*,x_{k+1}^*,\ldots,x_N^*\}$ e $\{u_k^*,u_{k+1}^*,\ldots,u_{N-1}^*\}$ são a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{k\to N}$			
+</p>
+				</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+	Seja $V_k(x_k)=J_{k\to N}^*$, então 
+	<p class="lightup">
+	$$
+					V_k(x_k)=\min_{u_k} [\underbrace{x_k^\trp Q x_k + u_k^\trp R u_k}_{\text{custo por estágio}} + \underbrace{V_{k+1}(x_{k+1})}_{\text{custo  ``to-go"}}]
+	$$
+</p>
+<p>Base da programação dinâmica! (Reinforcement Learning, etc)</p>
+					</div>
+
+		</section>
+
 
 
 				
 		<section>
 			
 			<div class="slide-title">
-				<h2>Estabilidade no sentido de Lyapunov</h2>
+				<h2>Equação de Bellman</h2>
 			</div>
 			<div class="slide-content">
+				
 				<center>
-					<p>&nbsp;</p>
-			Um sistema em espaço de estados em tempo discreto é <b>assintoticamente estável</b> se e somente se
-			existir uma matriz $P\in\mathbb{R}^{n\times n}$ tal que
-			<p class="lightup">
-			$$
-						P>0 \\
-						A_d^\trp PA_d -P < 0
-			$$
-			
-		</p>
-		Linear Matrix Inequality (LMI)
-			</p>
-		
-			</center>
+<img src="../images/custo_estagio.png" width="700">
+
+	</center>
+
 					</div>
 
 		</section>
+
 
 
 		<section>
 			
 			<div class="slide-title">
-				<h2>Estabilidade no sentido de Lyapunov</h2>
+				<h2>Equação de Bellman</h2>
 			</div>
 			<div class="slide-content">
+				
 				<center>
-					<p>&nbsp;</p>
-			Um sistema em espaço de estados em tempo discreto é <b>assintoticamente estável</b> se e somente se
-			existir uma matriz $P\in\mathbb{R}^{n\times n}$ tal que
-			<p class="lightup">
-			$$
-						P>0 \\
-						A_d^\trp PA_d -P = -Q, \quad Q>0
-			$$
-			
-		</p>
-
-			Sistema linear de equações!
-		
-			</center>
+<img src="../images/custo_to_go.png" width="700">
+	</center>
 					</div>
 
 		</section>
 
 
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					V_k(x_k)=\min_{u_k} [x_k^\trp Q x_k + u_k^\trp R u_k + V_{k+1}(x_{k+1})]
+	$$
+</p>
+<p>Hipótese:</p>
+$$
+	V_{k+1}(x_{k+1})=x_{k+1}^\trp P_{k+1}x_{k+1}, \quad P_{k+1}=P_{k+1}^\trp >0
+$$
+					</div>
+
+		</section>
+
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					V_k(x_k)=\min_{u_k} [x_k^\trp Q x_k + u_k^\trp R u_k + x_{k+1}^\trp P_{k+1}x_{k+1}]
+	$$
+</p>
+<p>LQR: Custo quadrático+dinâmica linear gera um problema <b>convexo</b>! (possui apenas um mínimo)</p>
+$$
+	\frac{\partial V_k(x_k)}{\partial u_k}=0
+$$
+					</div>
+
+		</section>
+
+
+		<!-- <section>
+			
+			<div class="slide-title">
+				<h2>Solução da Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>Resolve-se a eq. de Bellman de trás para frente!</p>
+	<p class="lightup2">
+	$$
+					V_{N-1}(x_{N-1})=\min_{u_{N-1}} [x_{N-1}^\trp Q x_{N-1} + u_{N-1}^\trp R u_{N-1} + x_{N}^\trp P_{N}x_{N}]
+	$$
+</p>
+<p>LQR: Custo quadrático+dinâmica linear gera um problema <b>convexo</b>! (possui apenas um mínimo)</p>
+$$
+	\frac{\partial V_{N-1}(x_{N-1})}{\partial u_{N-1}}=0
+$$
+					</div>
+
+		</section> -->
+
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y
+$$
+</center>
+					</div>
+
+		</section>
+	
+
 		
 	
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução de Controle Ótimo (LQR):</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					u^*_k=-\underbrace{(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A}_{K}x_k
+	$$
+</p>
+<ul>
+	<li>Realimentação de estados!</li>
+	<li>Ganho depende de $P_{k+1}$.</li>
+</ul>
+
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					V_k(x_k)=x_k^\trp Q x_k + (u_k^*)^\trp R u_k^* + x_{k+1}^\trp P_{k+1}x_{k+1}\\
+					x_{k+1}=Ax_k+Bu^*_k
+	$$
+</p>
+
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="">
+	$$
+					x_k^\trp P_k x_k \\=x_k^\trp(Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A )x_k 
+	$$
+</p>
+Então,
+<p class="lightup2">
+	Equação de Riccati p/ Tempo Discreto:
+	$$
+					P_k =Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A  
+	$$
+</p>
+
+					</div>
+
+		</section>
+		
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da Equação de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Para $k=N-1$,
+<p class="">
+	$$
+					P_{N-1} =Q +A^\trp P_{N}A-A^\trp P_{N}B(R+B^\trp P_{N}B)^{-1}B^\trp P_{N}A  
+	$$
+</p>
+Para $k=N-2$,
+<p class="">
+	$$
+					P_{N-2} =Q +A^\trp P_{N-1}A-A^\trp P_{N-1}B(R+B^\trp P_{N-1}B)^{-1}B^\trp P_{N-1}A  
+	$$
+</p>
+Para $k=N-3,\ldots, 1, 0$,
+<p class="">
+	$$
+	P_k =Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A  
+	$$
+</p>
+
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo quadrático (Horizonte Infinito):
+					<p class="lightup">
+			
+							$$
+J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N,
+						$$
+					</p>
+					com 
+					$$
+					Q=Q^T\ge 0,\quad R=R^\trp >0
+					$$
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução Estacionária da Eq. de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Se $(A,B)$ for controlável então existe:
+<p class="lightup">
+	$$
+	P_\infty =Q +A^\trp P_\infty A-A^\trp P_\infty B(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A  
+	$$
+</p>
+<p class="lightup">
+	Lei de Controle Ótimo:
+	$$
+					u^*_k=-\underbrace{(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A}_{K}x_k
+	$$
+</p>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução Estacionária da Eq. de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Se $(A,B)$ for controlável então existe:
+<p class="lightup">
+	$$
+	P_\infty =Q +A^\trp P_\infty A-A^\trp P_\infty B(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A  
+	$$
+</p>
+
+<p></p>
+
+	<ul>
+		<li>Controle LQR garante estabilidade!</li>
+	</ul>
+	$$
+	u_k=-Kx_k
+	$$
+				</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo quadrático (Horizonte Infinito):
+					<p class="lightup">
+			Estabilidade implica em
+							$$
+J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N < \infty 
+						$$
+					</p>
+					com 
+					$$
+					Q=Q^T\ge 0,\quad R=R^\trp >0
+					$$
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Matrizes de desempenho $Q$ e $R$ </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				Critério de Bryson:
+					<p class="">
+			
+						$$
+						Q=\begin{bmatrix}q_{11}\\
+						& q_{22} \\
+						& & \ddots \\
+						& & & q_{nn}\end{bmatrix},\quad R=\begin{bmatrix}r_{11}\\
+						& r_{22} \\
+						& & \ddots \\
+						& & & r_{mm}\end{bmatrix}
+						$$
+					</p>
+					com 
+					$$
+					q_{ii}=\frac{1}{(x_i^\text{max})^2},\quad r_{ii}=\frac{1}{(u_i^\text{max})^2}
+					$$
+				</center>
+					</div>
+
+		</section>
+
+
+			
+		
+
 	
 
 
@@ -1557,8 +703,8 @@ então o sistema é <b>assintoticamente</b> estável.
 				</div>
 				<div class="slide-content">
 					<center>
-						<p>Projeto em Espaço de estados - parte 2</p>
-						<img src="../images/state_observer.png" width="600" alt="">
+						<p>Filtro de Kalman</p>
+						<img src="../images/state_observer.png" alt="">
 					</center>
 				</div>
 
