@@ -693,7 +693,49 @@ J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_
 
 			
 		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo ótimo:
+					<p class="lightup">
+	
+							$$
+V_0(x_0) = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N = x_0^\trp P_\infty x_0
+						$$
+					</p>
+					com 
+					$$
+					Q=Q^T\ge 0,\quad R=R^\trp >0
+					$$
+				</center>
+					</div>
 
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo ótimo:
+					<p class="">
+	
+							$
+J_\infty = x_0^\trp P_\infty x_0
+						$
+					</p>
+					<img src="../images/LQR_cost.gif" alt="">
+				</center>
+					</div>
+
+		</section>
 	
 
 
@@ -704,7 +746,7 @@ J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_
 				<div class="slide-content">
 					<center>
 						<p>Filtro de Kalman</p>
-						<img src="../images/state_observer.png" alt="">
+						<img src="../images/state_observer.png" width="500">
 					</center>
 				</div>
 
