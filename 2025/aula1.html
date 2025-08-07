@@ -1,0 +1,1450 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 1: <br>Introdução à disciplina de Controle Digital<br>SEL0359</h2>
+					</div>
+					<p>2° semestre/2025</p>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div>					
+					<p style="text-align: center;font-size: 0.8em;">7 de agosto de 2025</p>
+				</div>
+
+				</section>
+
+
+				<section>
+				<div class="slide-title">
+					<h2>Objetivos</h2>
+				</div>
+				<div class="slide-content">
+					<p>Os objetivos dessa aula são:
+							<ul>
+							<li><b>Apresentar a disciplina</b>: estrutura e métodos de avaliação;</li> 
+							<li><b>Visão Geral</b>  dos conceitos de sistemas de controle digitais;</li> 
+							<li>Apresentar <b>exemplos</b> práticos de sistemas de controle digital;</li>
+							<li><b>Comparativo</b> entre controle analógico e digital;</li>
+							<li>Evidenciar a <b>importância</b> dos sistemas de controle digitais para a engenharia;</li>
+						
+						</p>
+						</div>
+
+			</section>
+
+
+		
+
+
+			
+			<section>
+				<div class="slide-title">
+					<h2>SEL0359 - Controle Digital</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<h3>Encontros:</h3>
+						<p><ul><li>quintas-feiras às 14h20-16h00 => aula teórica & Matlab (G1-STI)</li>
+						<li>sextas-feiras às 14h20-16h00 => aula prática (Lab. de Ensino do SEL - sala 3148)</li></ul></p>
+						<p>&nbsp;</p>
+					
+					<p>Contato: marofe@usp.br</p>
+			
+					
+				</center>
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>SEL0359 - Aulas Práticas </h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<h3>Encontros Quinzenais: <br>Lab. de Ensino do SEL - sala 3148</h3>
+					<ul>
+					<li>Divisão de 16 grupos;</li>
+					<li>Em cada semana, 8 grupos participam da atividade de laboratório;</li>
+					<li>Os demais grupos usam o tempo para fazer lista de exercícios e/ou relatório;</li>
+					</ul>
+					<p>Divisão dos grupos: <a href="https://docs.google.com/document/d/1s2jVlRV01CS3VQPLauDrW24pCOGp9Q4Y/edit" target="_blank">link</a><br>
+					<b>Colocar o nome até hoje às 23h59!</b>
+					</p>
+				</center>
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Tópicos</h2>
+				</div>
+				<div class="slide-content">
+
+						<ul>
+							<li>Amostragem de sinais;
+							<li>Modelagem e identificação de sistemas;
+							<li>Discretização de sistemas contínuos;</li>
+							<li>Análise de estabilidade em tempo discreto;</li>
+							<li>Projeto de controladores Avanço/Atraso;</li>
+							<li>Projeto de controladores PID;</li>
+							<li>Modelos em Espaço de estados em tempo discreto;</li>
+							<li>Projeto de controle via realimentação de estados;</li>
+							<li>Projeto de observadores de estado;</li>
+							<li>Controle LQR e Filtro de Kalman.</li>
+					</ul>
+						
+
+				</div>
+
+			</section>
+
+
+			<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Material da disciplina</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+
+					<a href="https://edisciplinas.usp.br/course/view.php?id=132285" target="_blank">
+						<div style="background-color: rgb(55, 147, 201);border-radius: 50%;"><img src="../images/edisciplina.png" width="400"></div>
+						https://edisciplinas.usp.br/course/view.php?id=132285</a>
+						<p>&nbsp;</p>	
+						<ul>
+							<li>Slides;</li>
+							<li>Notas de aula;</li>
+							<li>Listas de exercícios;</li>
+							<li>Vídeos relacionados aos tópicos;</li>
+							<li>Códigos, exemplos ilustrativos, etc...</li>
+						</ul>
+					
+										
+				</center>
+
+				</div>
+
+			</section>
+
+			<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Material da disciplina</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					
+						<h3>Referências</h3>
+						<p>&nbsp;</p>	
+						<ul>
+							<li><b>[1] Bruno A. Angélico and Gabriel P. Das Neves. Controle Digital Aplicado. Editora Blucher,
+							2023 (Tem na Biblioteca EESC)</b>.</li>
+							<li>[2] E. M. HEMERLY. Controle por Computador de Sistemas Dinâmicos. Editora Blucher,
+							2nd edition, 2000.</li>
+							<li>[3] Katsuhiko Ogata. Discrete-Time Control Systems. Prentice Hall, 2nd edition, 1995.</li>
+						</ul>
+
+				</center>
+
+				</div>
+
+			</section>
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<p>Serão realizadas:</p>
+				
+						
+						<p><ul>
+							<li>
+							 Duas provas: $P_1$ (Matlab) e $P_2$ (Teórica); </li>
+						 <li>Listas de exercícios computacionais $L_1,\ldots,L_n$; </li>
+						 	<li>Atividades práticas de laboratório
+						prática $R_1,R_2$ e $R_3$ (relatórios+apresentação);
+						<li>Ao final do semestre, um trabalho prático $T$ (relatório+apresentação).</li></ul></p>
+					
+						
+
+				</div>
+
+			</section>
+
+
+			
+			<section>
+				<div class="slide-title">
+					<h2>Atividades Práticas</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<p>Serão realizadas três experimentos práticos:</p>
+				
+						
+						<p><ul>
+							<li> ($R_1$) Amostragem e Reconstrução de Sinais (Teorema da Amostragem);</li>
+						 <li> ($R_2$) Sistema de controle de temperatura; </li>
+						 	<li>($R_3$) Sistema de controle de posição de motor DC (servomotor);</li>
+						</ul></p>
+
+						<p>Ao final do semestre, um trabalho prático $T$: <br>
+							construção, modelagem e controle digital de um sistema real.<br>
+							
+		
+						</p>
+					
+						
+
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+			
+					<p>A média final é dada por:
+						<p class="lightup">$MF=0.5P+0.1L+0.2R+0.2T$</p>
+						
+						$$P=mean(P_1,P_2)$$
+						$$L=mean(L_1,L_2,\ldots,L_n)$$ 
+						$$R=mean(R_1,R_2,R_3)$$
+						$$T\to \text{trabalho prático}$$
+					</p>
+		
+
+				</div>
+
+			</section>
+
+			
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Avaliação</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					Para aprovação, é necessário:	
+<ul>
+<li>Ao menos $70\%$ de frequência, $P\ge 4.0$ e $MF\ge5.0$;</li>
+<li>Se $3.0\le P < 4.0$, aluno ficará de recuperação independente da $MF$; </li>
+<li>Se $P<3.0$ mas $MF\ge 3.0$ então aluno poderá fazer recuperação; </li>
+<li>Se $MF<3.0$  ou  menos $70\%$ de frequência o aluno é reprovado.</li>
+</ul>
+
+				</div>
+
+			</section>
+
+
+
+			<section  data-transition="slide">
+				<div class="slide-title">
+					<h2>Dúvidas?</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					<img src="../images/duvida.jpg" width="800">
+					
+					
+					
+				</center>
+
+				</div>
+
+			</section>
+
+
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Introdução</h2>
+					</div>
+					<div class="slide-content">
+
+				<p class="lightup  current-visible" >O que é um sistema de controle?</p>
+					<center class="fragment current-visible" >
+						<p>&nbsp;</p>
+					<p>	<img src="../images/malha_controle0.png" width="700"></p>
+					<p>Garantir <b>desempenho</b> e <b>segurança</b>!</p>
+				</center>
+
+			</div>
+
+		</section>
+
+			
+			<section>
+				<div class="slide-title">
+					<h2>Requisítos</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+					<p>Um sistema de controle deve:
+						<ul>
+						<li>Ser <b>estável</b>;</li> 
+						<li>Ser <b>eficiênte</b> (tempo de súbida, acomodação, sobresinal, etc):</li> 
+						<li>Rejeitar <b>pertubações</b> no processo;</li>
+						<li>Ter <b>robustez</b> (ex: margens de ganho e fase, etc);</li>			
+					</p>
+				</center>
+
+
+				</div>
+
+			</section>
+
+				<section>
+
+				<div class="slide-title">
+					<h2>Exemplos</h2>
+				</div>
+				<div class="slide-content">
+
+
+
+			
+
+			
+			<center class="fragment current-visible" >
+				<p>Aviação</b></p>
+			<table><Tr><td><img src="../images/aviao.png" width="550"></td></Tr></table>
+			<p>Ex: controle de atitude, fly-by-wire</p>
+		</center>
+
+
+		<center class="fragment current-visible" >
+			<p>Rocket Landing System</p>
+			<video width="700" controls>
+				<source src="../videos/rocket_landing.mp4" type="video/mp4">
+			  Your browser does not support the video tag.
+			  </video> 
+		
+	</center>
+
+
+		<center class="fragment current-visible" >
+			<p>Geração de energia</b></p>
+			<table><Tr><Td><img src="../images/usina_nuclear.jpg" width="525"></Td><td><img src="../images/nuclear_reactor.jpg" width="550"></td></Tr></table>
+			<p>Ex: controle de potência gerada</p>
+	</center>
+
+	<center class="fragment current-visible" >
+		<p>Indústria</b></p>
+		<table><Tr><td><img src="../images/industria.jpg" width="600"></td><Td><img src="../images/industria2.jpg" width="500"></Td></Tr></table>
+		<p>Ex: controle de temperatura, vazão, nível...</p>
+</center>
+
+		<center class="fragment current-visible" >
+			<p>Setor automotivo</b></p>
+			<table><Tr><td><img src="../images/controle_tracao2.jpg" width="500"><br><i>Fonte: https://salaodocarro.com.br/como-funciona/controle-de-tracao.html</i></td><Td><img src="../images/controle_tracao.jpg" width="300"></Td></Tr></table>
+	</center>
+
+
+	<center class="fragment current-visible" >
+		<p>Medicina (Ex: Controle de Diabetes)</p>
+		<!-- <p style="font-size: 2rem;">Fonte: IEEE Control Systems Magazine https://doi.org/10.1109/MCS.2017.2766322</p> -->
+		<p><img src="../images/controL_diabetes.png" width="800" style="margin: 0;padding: 0;"></p>
+</center>
+
+			
+		</div>
+
+	</section>
+
+
+	<section>
+
+		<div class="slide-title">
+			<h2>Sistemas de controle</h2>
+		</div>
+		<div class="slide-content">
+
+				<center class="fragment current-visible" >
+	
+					<p>	<img src="../images/malha_controle.png" width="800"></p>
+				</center>
+				<center class="fragment current-visible" >
+					<p>&nbsp;</p>
+					<p>	<img src="../images/malha_controle_atuador_processo.png" width="800"></p>
+			
+				</center>
+					   </div>
+
+				</section>
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Exemplos</h2>
+				</div>
+				<div class="slide-content">
+
+				
+
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+					<video width="700" controls>
+							<source src="../videos/self_balanced_robot.mp4" type="video/mp4">
+						  Your browser does not support the video tag.
+						  </video> 
+					</p>
+
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="../images/youtube_self_balanced_robot.png" width="700">
+					</p>
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="../images/youtube_self_balanced_robot_atuador.png" width="700">
+					</p>
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="../images/youtube_self_balanced_robot_processo_atuador.png" width="700">
+					</p>
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="../images/youtube_self_balanced_robot_planta.png" width="700">
+					</p>
+					<p align="center" class="fragment current-visible">Self-balanced robot:<Br><a href="https://www.youtube.com/watch?v=38KVxZnBDZc">https://www.youtube.com/watch?v=38KVxZnBDZc</a>
+						<img src="../images/youtube_self_balanced_robot_pertubacao.png" width="700">
+					</p>
+						</section>
+
+
+
+
+
+		
+			<section>
+				<div class="slide-title">
+					<h2>Ciclo do Projeto de Controle</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/design_process.png" width="450"/>
+			</center>
+				</div>
+
+			</section>
+
+
+			
+		
+			<section>
+				<div class="slide-title">
+					<h2>Ciclo do Projeto de Controle</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/design_process2.png" width="510"/>
+			</center>
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Modelagem</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<center>
+						
+			<img src="../images/planta.png" alt="">
+				<p>Como obter um <b>modelo matemático</b> que descreva a <b>planta</b>?</p>
+				<p class="fragment lightup">Técnicas de identificação de sistemas!</p>
+
+				</center>
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Modelagem</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<center>
+				<p>Após obter o <b>modelo matemático</b> que descreva a <b>planta</b>, o que fazer?</p>
+		<p>&nbsp;</p>
+			<p class="fragment lightup">Projeto do controlador!</p>					
+		
+				</center>
+				</div>
+
+			</section>
+
+
+					<section>
+				<div class="slide-title">
+					<h2>Modelagem</h2>
+				</div>
+				<div class="slide-content">
+					<p>&nbsp;</p>
+					<center>
+				<p>Após obter o <b>modelo matemático</b> que descreva a <b>planta</b>, o que fazer?</p>
+		<p>&nbsp;</p>
+		<p class="">
+			<p class="lightup">Projeto do controlador!</p>
+			<p>&nbsp;</p>
+					<ul>
+						<li><b>Abordagens em frequência:</b> Função de Transferência</li>
+						<li><b>Abordagens domínio do tempo:</b> Espaço de estados</li>
+					</ul>
+		</p>
+				</center>
+				</div>
+
+			</section>
+
+
+
+		
+			<section>
+				<div class="slide-title">
+					<h2>Critérios de Desempenho</h2>
+				</div>
+				<div class="slide-content">
+				
+
+				<center  class="fragment current-visible">
+					<p>Tempo de súbida $(t_r)$</p>
+					<img src="../images/desempenho_saida2.png" width="800" alt="">
+				</center>
+
+				<center  class="fragment current-visible">
+					<p>Sobresinal $(M_p)$</p>
+					<img src="../images/desempenho_saida3.png" width="800" alt="">
+				</center>
+
+				<center  class="fragment current-visible">
+					<p>Tempo de acomodação $(t_s)$</p>
+					<img src="../images/desempenho_saida4.png" width="800" alt="">
+				</center>
+
+				<center  class="fragment current-visible">
+					<p>Erro $(\epsilon)$</p>
+					<img src="../images/desempenho_saida5.png" width="800" alt="">
+				</center>
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Controlador</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<p>O controlador resultante do projeto é um <b>objeto matemático</b>.</p>
+				<ul><li>Abordagem em frequência:
+					<p class="lightup2">
+					$$C(s)=\frac{U(s)}{E(s)}$$
+					</p>
+				</li>
+			<li>Abordagem no domínio do tempo:
+				<p class="lightup2">
+				$$u(t)=C\{x(t),r(t)\}$$
+				</p>
+			</li>
+		</ul>
+	</center>    		
+				</div>
+
+			</section>
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Implementação</h2>
+				</div>
+				<div class="slide-content">
+				<p align="center">Analógico vs Digital</p>
+				<table width="100%">
+<tr><td width="50%"><img src="../images/capacitor_indutor.jpg" width="580" ></td><td style="border-left:1px solid #ccc"><img src="../images/microcontroller.png" width="490"></td></tr>
+<tr><td>Resistores, capacitores, indutores e OpAmp. </td><td style="border-left:1px solid #ccc">Computador digital ($\mu C$)</td></tr>
+				</table>    		
+				</div>
+
+			</section>
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Pólos</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/ampOp_polos.png" width="500">
+				$$
+				\frac{V_o}{V_i}=-\frac{R_1}{R_2}\frac{\frac{1}{R_1C_1}}{s+\frac{1}{R_1C_1}}
+				$$
+	</center>    		
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Zeros</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/ampOp_zeros.png" width="550">
+				
+				$$
+				\frac{V_o}{V_i}=-R_1C_2(s+\frac{1}{R_2C_2})
+				$$
+			
+	</center>    		
+				</div>
+
+			</section>
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Implementação</h2>
+				</div>
+				<div class="slide-content">
+				<p align="center">Analógico vs Digital</p>
+				<table width="100%">
+<tr><td width="50%"><img src="../images/capacitor_indutor2.jpg" width="580" ></td><td style="border-left:1px solid #ccc"><img src="../images/microcontroller.png" width="490"></td></tr>
+<tr><td>Resistores, capacitores, indutores e OpAmp. </td><td style="border-left:1px solid #ccc">Computador digital ($\mu C$)</td></tr>
+				</table>
+    		
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Controle Digital</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					<img src="../images/microcontroller.png" width="700">
+					<p>Computador digital ($\mu C$)</p>
+				</center>
+				</div>
+
+			</section>
+
+			<section>
+				<div class="slide-title">
+					<h2>Controle Digital</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<h3>Vantagens:</h3>
+						<table><tr><td width="40%" valign="top"><img src="../images/microcontroller.png"></td><td valign="top">
+						
+							<ul><li>
+							<b>Flexibilidade</b> para alteração;
+						</li>
+					<li><b>Custo</b> menor;</li>
+					<li>Maior <b>confiabilidade</b>;</li>
+					<li><b>Controladores mais modernos</b> (ex: ótimo, adaptativo, robusto, etc);</li>
+					<li><b>Coletar dados</b> do sistema, incluir telas e botões etc;</li>
+
+					</ul></td></tr></table>
+				
+				</center>
+				</div>
+
+			</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Controle Digital</h2>
+				</div>
+				<div class="slide-content">
+
+					<center class="fragment current-visible" >
+	
+						<p>	<img src="../images/malha_controle.png" width="900"></p>
+					</center>
+		
+						<center class="fragment current-visible" >
+							<p>Interface analógica/digital</p>
+							<p>	<img src="../images/malha_controle_digital.png" width="900"></p>
+						</center>
+						<center class="fragment current-visible" >
+							<p>Interface analógica/digital</p>
+							<p>	<img src="../images/malha_controle_digital2.png" width="900"></p>
+							
+						</center>
+
+						<center class="fragment current-visible" >
+							<p>Interface analógica/digital</p>
+							<p>	<img src="../images/malha_controle_digital3.png" width="900"></p>
+							
+						</center>
+
+						<center class="fragment current-visible" >
+							<p>Interface analógica/digital</p>
+							<p>	<img src="../images/malha_controle_digital4.png" width="900"></p>
+							
+						</center>
+							   </div>
+		
+						</section>
+
+
+						<section>
+							<div class="slide-title">
+								<h2>Sinal digital</h2>
+							</div>
+							<div class="slide-content">
+								<center class="fragment current-visible">
+									<p>&nbsp;</p>
+								<img src="../images/sinal_continuo.png" width="800" alt="">
+
+							</center>
+
+							<center class="fragment current-visible">
+								<p>Amostragem</p>
+								<img src="../images/sinal_amostrado.png" width="800" alt="">
+								
+							</center>
+
+							<center class="fragment current-visible">
+									<p>&nbsp;</p>
+								<img src="../images/sinal_discreto.png" width="800" alt="">
+							</center>
+
+							<center class="fragment current-visible">
+									<p>&nbsp;</p>
+								<img src="../images/sinal_digital.png" width="800" alt="">
+							</center>
+
+							<center class="fragment current-visible">
+								<p>Quantização</p>
+								<img src="../images/sinal_digital2.png" width="800" alt="">
+							</center>
+							</div>
+			
+						</section>
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Escolha do tempo de amostragem</h2>
+				</div>
+				<div class="slide-content">
+					<center class="fragment current-visible">
+						<p>&nbsp;</p>
+						<img src="../images/sinal_amostrado.png" width="800" alt="">
+						
+					</center>
+								<center class="fragment current-visible">
+						<p>Taxa de amostragem pequena</p>
+						<img src="../images/sinal_amostrado3.png" width="800" alt="">
+					</center>
+
+					<center class="fragment current-visible">
+						<p>Taxa de amostragem grande</p>
+						<img src="../images/sinal_amostrado2.png" width="800" alt="">
+					</center>
+
+		
+				</div>
+
+			</section>
+
+			
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Sequência de números</h2>
+				</div>
+				<div class="slide-content">
+					<center class="fragment current-visible">
+						<p>&nbsp;</p>
+						<img src="../images/sequencia_sinal.png" width="700" alt="">
+					</center>
+					<center class="fragment">
+						<p>&nbsp;</p>
+						<h3>Transformada Z</h3>
+						<p class="lightup">$$X(z)=\sum_{k=-\infty}^\infty x[k]z^{-k}$$
+						
+							</p>
+								*Material complementar
+					</center>
+					
+				</div>
+
+			</section>
+
+			<section>
+				<div class="slide-title">
+					<h2>Representação de sistemas</h2>
+				</div>
+				<div class="slide-content">
+						<center class="current-visible">
+						<p>&nbsp;</p>
+		
+						<h3>Equações à diferenças:</h3>
+						<p class="lightup">
+						$$\sum_{n=0}^N a_ny[k-n]=\sum_{m=1}^M b_m u[k-m]$$
+						</p>
+					</center>
+					
+				
+					
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Sequência de Fibonacci</h2>
+				</div>
+				<div class="slide-content">
+			
+					<center class="fragment current-visible">
+						<p>&nbsp;</p>
+					<p class="lightup">
+						$$y[k]=y[k-1]+y[k-2]$$
+						</p>
+						com $$
+\begin{cases} y[0]=0\\ y[1]=1 \end{cases}
+						$$
+
+
+					</center>
+
+					<center class=" fragment current-visible">
+						$$
+0,1,1,2,3,5,8,13,21,\ldots
+						$$
+				
+					
+<video controls="true" src="../videos/Fibonacci_Sequence_Video_Generation.mp4" width="800">
+						</video>
+
+					</center>
+					
+				</div>
+
+			</section>
+
+
+				<section>
+				<div class="slide-title">
+					<h2>Representação de sistemas</h2>
+				</div>
+				<div class="slide-content">
+									<center class="">
+				
+						<h3>Funções de transferência (domínio $z$):</h3>
+						Usando $\mathcal{Z}\{y[k-1]\}=z^{-1}Y(z)$ e $\mathcal{Z}\{u[k-1]\}=z^{-1}U(z)$, temos:
+						<p class="lightup">
+						$$\frac{Y(z)}{U(z)}=G(z)$$
+						</p>
+						em que 
+						$$ z=e^{sT}$$
+					</center>
+				
+					
+				</div>
+
+			</section>
+
+
+
+<!-- 
+			<section>
+
+					<div class="slide-title">
+						<h2>Conversão Digital para Analógico</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						 <p>Zero Order Hold (ZOH)</p>
+						<img src="../images/rec_cossenoide_ZOH2.png" width="950">
+						
+	
+					
+				</center>
+		
+					   </div>
+
+				</section> -->
+
+
+
+
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Análise de estabilidade</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<img src="../images/estabilidade_discreta.png" alt="">
+					</center>
+				</div>
+
+			</section>
+
+			
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Exemplos de controladores</h2>
+				</div>
+				<div class="slide-content">
+					<center class="fragment current-visible">
+						<p align="center">&nbsp;</p><img src="../images/malha_controle_digital.png" width="800"></center>
+				<center class="fragment current-visible">
+					<p align="center">On-off</p><img src="../images/malha_controle_on_off.png" width="800">
+				<p>Utilizado em geladeiras, ar-condicionados, caixas de água etc</p>
+				</center>
+				<center class="fragment current-visible">
+					<p align="center">On-off</p><img src="../images/resposta_on_off.png" width="800">
+				
+				</center>
+
+				<center class="fragment current-visible">
+					<p align="center">PID</p><img src="../images/malha_controle_PID.png" width="800">
+				
+				</center>
+				<center class="fragment current-visible">
+					<p align="center">PID (tempo contínuo)</p><img src="../images/pid_continuo.png" width="650"><br>$C(s)=K_p+K_i\frac{1}{s}+K_ds$
+				
+				</center>
+				<center class="fragment current-visible">
+					<p align="center">PID (tempo discreto)</p><img src="../images/pid_discreto.png" width="650"><br>$C(z)=K_p+K_i\frac{1}{1-z^{-1}}+K_d(1-z^{-1})$
+				
+				</center>
+					<center class="fragment current-visible">
+					<p align="center">Integral Discreta vs Contínuo</p><img src="../images/integral_discreta_vs_continua.jpg" width="450">
+				
+				</center>
+
+					<center class="fragment current-visible">
+					<p align="center">PID (tempo discreto)</p><img src="../images/pid_discreto.png" width="650"><br>$C(z)=K_p+K_i\frac{1}{1-z^{-1}}+K_d(1-z^{-1})$
+				
+				</center>
+				</div>
+
+			</section>
+
+
+				<section>
+				<div class="slide-title">
+					<h2>Exemplos de controladores</h2>
+				</div>
+				<div class="slide-content">
+				<p align="center">Realimentação de estados</p>
+				<center>
+				<img src="../images/state_feedback.png" width="600">
+				<p>Controle ótimo: LQR</p>
+			</center>
+				</div>
+
+			</section>
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Observador de estados</h2>
+				</div>
+				<div class="slide-content">
+			
+				<center>
+	
+				<img src="../images/state_observer.png" width="600">
+				<p>Observador ótimo: Filtro de Kalman</p>
+			</center>
+				</div>
+
+			</section>
+
+
+					<section>
+				<div class="slide-title">
+					<h2></h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+				<h2>PARTE II</h2>				
+				</center>
+				</div>
+
+			</section>
+
+
+
+			
+			<section>
+				<div class="slide-title">
+					<h2>Ciclo do Projeto de Controle</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/design_process.png" width="450"/>
+			</center>
+				</div>
+
+			</section>
+
+
+			
+
+			<section>
+				<div class="slide-title">
+					<h2>Testes</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+					<ul>
+						<li>Simulações computacionais;
+							<p align="center"><img src="../images/matlab_logo.png" width="300"><img src="../images/python-logo.png" width="280"><img src="../images/julia-logo.png" width="230"></p>
+						</li>
+					
+					</ul>
+				</center>
+				</div>
+
+			</section>
+
+
+			
+
+
+				<section>
+
+				<div class="slide-title">
+					<h2>Curso de Matlab</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/matlab_onramp.png" width="750"><br>
+				<a href="https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted">https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted</a>
+			</center>
+						</div>
+
+			</section>
+
+			
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>O que é o Matlab?</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/matlab_logo.png" alt="">
+				<p class="lightup">MATLAB = MATrix LABoratory</p>
+				<p>Em Matlab tudo é
+					tratado como matriz!</p>
+					$a\in \mathbb{R}^{1\times 1}, \vec x \in \mathbb{R}^{n\times 1}$, etc
+			</center>
+				</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>O que é o Matlab?</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/matlab_logo.png" alt="">
+				<p class="lightup">MATLAB = MATrix LABoratory</p>
+				<p>Em Matlab tudo é
+					tratado como matriz!</p>
+					$a\in \mathbb{R}^{1\times 1}, \vec x \in \mathbb{R}^{n\times 1}$, etc
+			</center>
+				</div>
+
+			</section>
+
+
+
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>O que é o Matlab?</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/matlab_logo.png" alt="">
+				<p>Projetado especificamente para engenheiros e cientistas</p>
+
+				<p class="lightup">Modelagem, Simulação e Prototipação</p>
+				<ul><li>Sistemas de controle</li>
+				<li>Processamento de sinais</li>
+				</ul>
+				
+			</center>
+				</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>O que é o Matlab?</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/matlab_logo.png" alt="">
+				
+				<p class="lightup">Permite programar problemas cuja formulação é baseada em matrizes e vetores de forma rápida (uma fração de tempo que levaria para escrever um programa em C)</p>
+				
+			</center>
+				</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>O que é o Matlab?</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/matlab_logo.png" alt="">
+				<p>Tem diversos toolboxes para aplicações específicas, incluindo:</p>
+				<ul>
+					<li>Controle;</li>
+					<li>Processamento de sinais;</li>
+					<li>Redes Neurais;</li>
+					<li>Lógica Fuzzy;</li>
+					<li>Identificação de sistemas;</li>
+					<li>Robótica, etc.</li>
+				</ul>
+				
+			</center>
+				</div>
+
+			</section>
+
+
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>O que é o Matlab?</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/matlab_logo.png" alt="">
+				<p><b>Desvantagens</b></p>
+				<ul>
+					<li>Mais lento que linguagens tradicionais: C, C++, Java, etc</li>
+					<li>Proprietário (pago);</li>
+					<li>Obs: USP possui licença campus disponível!</li>
+				</ul>
+
+				
+			</center>
+				</div>
+
+			</section>
+
+
+					
+			<section>
+
+				<div class="slide-title">
+					<h2>Sinais em tempo contínuo: plot(t,y)</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/seno_continuo.png" width="700">
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Sinais em tempo discreto: stem(t,y)</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/seno_stem.png" width="700">
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Sinais convertidos via ZOH: stairs(t,y)</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/seno_stairs.png" width="700">
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Operações Matriciais</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/operacoes_basicas.png" width="850">
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Operações Ponto a Ponto</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+				<img src="../images/operacao_ponto_a_ponto.png" width="850">
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+
+			
+			<section>
+
+				<div class="slide-title">
+					<h2>Estruturas condicionais</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+				<img src="../images/if_else.png" width="700">
+				<img src="../images/switch.png" width="700">
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Estruturas de repetição</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+				<img src="../images/for_loop.png" width="700">
+				<img src="../images/while_loop.png" width="700">
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Estruturas de repetição</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+				<img src="../images/evita_loop.png" width="800">
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Atividade: Introdução ao Matlab</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+				<h3>Live script:</h3>
+				<p>&nbsp;</p>
+				<p class="lightup">Baixe o arquivo <b>"aula1_intro_matlab.mlx"</b> disponível no e-disciplina.</p>		
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+
+			<section>
+
+				<div class="slide-title">
+					<h2>Lista de Exercícios</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+				<h3>Lista 1</h3>
+					<p>&nbsp;</p>
+				<p>Entregar até 22/08/2025 via e-disciplina.</p>		
+			</center>
+					
+				</ul>
+			
+				</div>
+
+			</section>
+
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Próxima aula teórica</h2>
+				</div>
+				<div class="slide-content">
+					<center class="">
+						<p>Teorema da amostragem</p>
+						<img src="../images/sinal_amostrado.png" width="650" alt="">
+					</center>
+				</div>
+
+			</section>
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h2>Até a próxima aula!</h2>
+				</center>
+				</div>
+
+			</section>
+
+
+
+
+				
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
+
