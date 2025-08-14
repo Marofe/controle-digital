@@ -120,7 +120,7 @@
 							g_a[k]=g(kT), \quad k\in\mathbb{Z}
 							$$
 							<p>&nbsp;</p>
-						<p>Qual o valor de $g_a[t]$ quando $t\in(k,k+1)$?</p>
+						<p class="lightup">Qual o valor de $g_a[t]$ quando $t\in(k,k+1)$?</p>
 					</center>
 					   </div>
 
@@ -133,7 +133,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 						<center>
@@ -141,39 +141,17 @@
 							$
 							 g:\mathbb{R}\to\mathbb{R}
 							$ 
-							<p>&nbsp;</p>
+						
 						<img src="../images/chave_amostragem.png" width="700" alt="">
-						<p>Chave ideal!</p>
+						<p>Chave ideal! <br>(fecha e abre instantaneamente)</p>
 						
 					</center>
-					<p class="fragment" align="center">	Qual a condição para recuperar o sinal $g(t)$ através de $g_a[k]$?</p>
+					<p class="fragment lightup" align="center">	Qual a condição para recuperar o sinal $g(t)$ através de $g_a[k]$?</p>
 					   </div>
 
 				</section>
 
 
-
-				<section>
-
-					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
-					</div>
-					<div class="slide-content">
-						<center>
-										
-						<img src="../images/modular_amostragem.png" width="550" alt="">
-						
-						$$
-						p(t)=\sum_{k=-\infty}^\infty \delta(t-kT)
-
-											$$
-					</center>
-					   </div>
-
-				</section>
-
-
-				
 				<section>
 
 					<div class="slide-title">
@@ -195,12 +173,59 @@
 					   </div>
 
 				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Trem de Impulsos</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							p(t)=\sum_{k-\infty}^\infty \delta(t-kT)
+							$$
+										
+						<img src="../images/trem_impulsos.png" width="750" alt="">
+					
+					</center>
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Processo de amostragem Ideal</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+										
+						<img src="../images/modular_amostragem.png" width="550" alt="">
+						
+						<p class="lightup2">
+							Trem de Impulsos:
+						$$
+						p(t)=\sum_{k=-\infty}^\infty \delta(t-kT)
+
+											$$
+											</p>
+					</center>
+					   </div>
+
+				</section>
+
+
+				
+				
 				
 
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 						<center>
@@ -220,7 +245,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 						<center>
@@ -241,7 +266,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 						<center>
@@ -269,11 +294,14 @@
 							$
 							 g:\mathbb{R}\to\mathbb{R}
 							$ e cuja transformada de Fourier é
-							$$
+							$
 							G(\omega)=\mathcal{F}\{g(t)\}
-							$$
-						<img src="../images/espectro_limitado.png" width="700" alt="">
-					
+							$<br>
+						<img src="../images/espectro_limitado.png" width="600" alt="">
+					<p class="lightup2">$$
+						\mathcal{F}\{g_a^*(t)\}=?
+						$$
+					</p>
 					</center>
 					   </div>
 
@@ -281,23 +309,7 @@
 
 
 
-				<section>
-
-					<div class="slide-title">
-						<h2>Trem de Impulsos</h2>
-					</div>
-					<div class="slide-content">
-						<center>
-							$$
-							p(t)=\sum_{k-\infty}^\infty \delta(t-kT)
-							$$
-										
-						<img src="../images/trem_impulsos.png" width="750" alt="">
-					
-					</center>
-					   </div>
-
-				</section>
+			
 
 
 				<section>
@@ -307,9 +319,11 @@
 					</div>
 					<div class="slide-content">
 						<center>
+							<p class="lightup2">
 							$$
-							p(t)=\sum_{k-\infty}^\infty c_ke^{jk\omega_s t},\quad\omega_s=\frac{2\pi}{T}
+							p(t)=\sum_{k=-\infty}^\infty c_ke^{jk\omega_s t},\quad\omega_s=\frac{2\pi}{T}
 							$$
+							</p>
 										
 						<img src="../images/trem_impulsos.png" width="750" alt="">
 					
@@ -325,10 +339,11 @@
 					</div>
 					<div class="slide-content">
 						<center>
+							<p class="lightup2">
 							$$
-							p(t)=\sum_{k-\infty}^\infty \frac{1}{T}e^{jk\omega_s t},\quad\omega_s=\frac{2\pi}{T}
-							$$
-										
+							p(t)=\sum_{k=-\infty}^\infty \frac{1}{T}e^{jk\omega_s t},\quad\omega_s=\frac{2\pi}{T}
+							$$		
+							</p>
 						<img src="../images/trem_impulsos.png" width="750" alt="">
 					
 					</center>
@@ -342,12 +357,12 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 						<center>
 							$$
-							g_a(t)=g(t)p(t)=\sum_{k-\infty}^\infty \frac{1}{T}g(t)e^{jk\omega_s t}
+							g_a^*(t)=g(t)p(t)=g(t)\sum_{k=-\infty}^\infty \frac{1}{T}e^{jk\omega_s t}
 							$$
 										
 					
@@ -355,11 +370,11 @@
 					</center>
 					<center class="fragment">
 						$$
-						\Rightarrow G_a(\omega)=\mathcal{F}\{g_a(t)\}=\sum_{k-\infty}^\infty \frac{1}{T}\mathcal{F}\{g(t)e^{jk\omega_s t}\}
+						\Rightarrow G_a(\omega)=\mathcal{F}\{g_a^*(t)\}=\sum_{k=-\infty}^\infty \frac{1}{T}\mathcal{F}\{g(t)e^{jk\omega_s t}\}
 						$$
 					</center>
 					<center class="fragment lightup">
-						$\mathcal{F}\{x(t)e^{j\omega_st}\}=X(\omega-\omega_s)$
+						$$\mathcal{F}\{x(t)e^{j\omega_st}\}=X(\omega-\omega_s)$$
 					</center>
 					   </div>
 
@@ -370,12 +385,12 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 						<center class="lightup">
 						$$
-						G_a(\omega)=\sum_{k-\infty}^\infty \frac{1}{T}G(\omega-k\omega_s)
+						G_a(\omega)=\sum_{k=-\infty}^\infty \frac{1}{T}G(\omega-k\omega_s)
 						$$
 					</center>
 					<center>
@@ -391,7 +406,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -409,7 +424,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de Reconstrução</h2>
+						<h2>Processo de Reconstrução Ideal</h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -430,14 +445,33 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de Reconstrução</h2>
+						<h2>Processo de Reconstrução Ideal</h2>
 					</div>
 					<div class="slide-content">
 					<center>
 					<img src="../images/espectro_sinal_amostrado_filtro_recuperado.png">
+					<p class="lightup">
 					$$
 						G_a(\omega)H(\omega)=G(\omega)
 					$$
+					</p>
+				</center>
+		
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema de Nyquist-Shannom</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<img src="../images/AD_DA_reconstrucao_ideal.png" width="800">
+					
 				</center>
 		
 					   </div>
@@ -449,7 +483,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -470,7 +504,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -490,7 +524,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -509,7 +543,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -522,10 +556,15 @@
 				</section>
 
 
+				
+
+				
+
+
 				<section>
 
 					<div class="slide-title">
-						<h2>Processo de amostragem</h2>
+						<h2>Processo de amostragem Ideal</h2>
 					</div>
 					<div class="slide-content">
 					<center>
@@ -537,6 +576,28 @@
 						0,\text{ caso contrário.}
 						\end{cases}
 					$$
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+						<section>
+
+					<div class="slide-title">
+						<h2>Aliasing</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+					
+					
+				<video width="800" controls>
+					<source src="../videos/aliasing_helicopter.mp4" type="video/mp4">
+				  Your browser does not support the video tag.
+				  </video> 
+					
+					
 				</center>
 		
 					   </div>
@@ -593,14 +654,20 @@
 					</div>
 					<div class="slide-content">
 					<center>
-						<p>&nbsp;</p>
-					<img src="../images/AD_DA_reconstrucao.png" width="800">
-					
+					<img src="../images/teorema_nyquist.png">
+					<p class="lightup">
+				$
+						T \le \frac{1}{2}T_M [s]
+				$
+			</p>
 				</center>
 		
 					   </div>
 
 				</section>
+
+
+				
 
 
 				<section>
@@ -697,32 +764,7 @@
 				</section>
 
 
-				<section>
-
-					<div class="slide-title">
-						<h2>Amostragem ($f_s=2Hz$)</h2>
-					</div>
-					<div class="slide-content">
-					<center>
-					
-					Dado o conjunto $\{y(kT),k\in\mathbb{Z}\}$, existe <b>uma única solução</b> $(\omega,\phi)$ para o sistema de equações 
-
-					$$
-						\cos(\omega T+\phi)=y(T)\\
-						\cos(\omega 2T+\phi)=y(2T)\\
-						\cos(\omega 3T+\phi)=y(3T)\\
-						\vdots\\
-						\cos(\omega kT+\phi)=y(kT)
-
-					$$
-					
-					
-				</center>
-		
-					   </div>
-
-				</section>
-
+				
 
 				<section>
 
@@ -780,26 +822,7 @@
 
 				</section>
 
-				<section>
-
-					<div class="slide-title">
-						<h2>Aliasing</h2>
-					</div>
-					<div class="slide-content">
-					<center>
-					
-					
-				<video width="800" controls>
-					<source src="../videos/aliasing_helicopter.mp4" type="video/mp4">
-				  Your browser does not support the video tag.
-				  </video> 
-					
-					
-				</center>
 		
-					   </div>
-
-				</section>
 
 
 
@@ -970,7 +993,7 @@
 						
 						
 						$$
-						y(t)=y_a(t)\ast h(t)\\
+						y(t)=y_a^*(t)\ast h(t)\\
 						=\int_{-\infty}^\infty \sum_{k=-\infty}^\infty y(kT)\delta(\tau-kT)\text{sinc}\Bigl(\frac{\pi (t-\tau)}{T}\Bigr)d\tau\\
 						
 
@@ -1130,17 +1153,22 @@ $$y(t)=\sum_{k=-\infty}^\infty y(kT)\text{sinc}\Bigl(\frac{\pi (t-kT)}{T}\Bigr)$
 				</section>
 
 
+				
 				<section>
 
 					<div class="slide-title">
-						<h2>Na prática: ZOH</h2>
+						<h2>Filtro PB Ideal</h2>
 					</div>
 					<div class="slide-content">
 					<center>
 						
-						<img src="../images/rec_cossenoide_ZOH.png" width="800">
 						
+						$$
+						h(t)=\text{sinc}\Bigl(\frac{\pi t}{T}\Bigr)
+
+						$$				
 						
+						<img src="../images/sinc.png" width="700">
 			
 					
 				</center>
@@ -1150,6 +1178,78 @@ $$y(t)=\sum_{k=-\infty}^\infty y(kT)\text{sinc}\Bigl(\frac{\pi (t-kT)}{T}\Bigr)$
 				</section>
 
 
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold (ZOH) </h2>
+					</div>
+					<div class="slide-content">
+					<center>
+
+							$$
+zoh(t)=u(t)-u(t-T)
+						$$
+						
+						<img src="../images/zoh.png" width="800">
+						
+					
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold (ZOH)</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+
+								
+						$$
+ZOH(s)=\frac{1}{s}-\frac{1}{s}e^{-sT}
+						$$
+						
+						<img src="../images/zoh.png" width="800">
+				
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Zero Order Hold (ZOH)</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+
+									
+						$$
+ZOH(s)=\frac{1-e^{-sT}}{s}
+						$$
+						
+						<img src="../images/zoh.png" width="800">
+			
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+				
 	
 				<section>
 
@@ -1161,74 +1261,7 @@ $$y(t)=\sum_{k=-\infty}^\infty y(kT)\text{sinc}\Bigl(\frac{\pi (t-kT)}{T}\Bigr)$
 						<p>&nbsp;</p>
 						
 						<img src="../images/AD_DA_reconstrucao_zoh.png" width="800">
-						
-						
-			
-					
-				</center>
-		
-					   </div>
-
-				</section>
-
-
-
-				<section>
-
-					<div class="slide-title">
-						<h2>Zero Order Hold (ZOH) </h2>
-					</div>
-					<div class="slide-content">
-					<center>
-						
-						<img src="../images/zoh.png" width="800">
-						
-						$$
-zoh(t)=u(t)-u(t-T)
-						$$
-			
-					
-				</center>
-		
-					   </div>
-
-				</section>
-
-
-				
-				<section>
-
-					<div class="slide-title">
-						<h2>Zero Order Hold (ZOH)</h2>
-					</div>
-					<div class="slide-content">
-					<center>
-						
-						<img src="../images/zoh.png" width="800">
-						
-						$$
-ZOH(s)=\frac{1}{s}-\frac{1}{s}e^{-sT}
-						$$
-			
-					
-				</center>
-		
-					   </div>
-
-				</section>
-
-
-				<section>
-
-					<div class="slide-title">
-						<h2>Zero Order Hold (ZOH)</h2>
-					</div>
-					<div class="slide-content">
-					<center>
-						
-						<img src="../images/zoh.png" width="800">
-						
-						$$
+											$$
 ZOH(s)=\frac{1-e^{-sT}}{s}
 						$$
 			
@@ -1239,6 +1272,8 @@ ZOH(s)=\frac{1-e^{-sT}}{s}
 
 				</section>
 
+
+			
 
 				<section>
 
@@ -1289,6 +1324,17 @@ ZOH(\omega)=\frac{1-e^{-j\omega T}}{j\omega }\\
 
 
 
+
+
+
+				
+
+
+				
+				
+
+
+
 				<section>
 
 					<div class="slide-title">
@@ -1322,8 +1368,11 @@ ZOH(\omega)=\frac{1-e^{-j\omega T}}{j\omega }\\
 				</div>
 				<div class="slide-content">
 					<center>
-						<p>Transformada Z</p>
-						<img src="../images/sequencia_sinal.png" width="650" alt="">
+						<p>&nbsp;</p>
+						<p>Modelagem e Identificação de Sistemas</p>
+						
+						<p>&nbsp;</p>
+						<img src="../images/sistema.png" width="650" alt="">
 					</center>
 				</div>
 
