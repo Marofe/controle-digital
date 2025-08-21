@@ -1,0 +1,1905 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 3: <br>Modelagem e Identificação de Sistemas</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">21 de agosto de 2025</p>
+				</div>
+
+				</section>
+				
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Transformada Z: material complementar</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<img src="../images/sequencia_sinal.png" width="650" alt="">
+						</center>
+					</div>
+	
+				</section>
+
+
+					<section>
+
+				<div class="slide-title">
+					<h2>Malha de controle digital
+					</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+					<p>&nbsp;</p>
+					<img src="../images/malha_controle_digital.png" width="900" alt="">
+		
+				</center>
+				   </div>
+
+			</section>
+
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Ciclo do Projeto de Controle</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					<img src="../images/design_process.png" width="450"/>
+				</center>
+					</div>
+	
+				</section>
+
+				
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Objetivos</h2>
+			</div>
+			<div class="slide-content">
+				<p>Os objetivos dessa aula são entender:
+						<ul>
+						<li>Modelagem de sistemas dinâmicos;</li>
+						<li>Métodos de Discretização;</li>
+						<li>Conversão de EDO em Eq. à Diferenças</li>
+						<li>Identificação paramétrica;</li>
+						<li>Exemplos;</li>
+					</p>
+					</div>
+
+		</section>
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Sistema Dinâmico em tempo contínuo
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p class="lightup">
+								EDO
+							$$
+							\sum_{i=0}^n\alpha_i\frac{d^i y}{dt^i}=\sum_{i=0}^m\beta_i\frac{d^i u}{dt^i}
+						$$
+					</p>
+						<img src="../images/planta.png" width="600" alt="">
+			
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Abordagens
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<img src="../images/edo_approach.png" width="1000" alt="">
+			
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Abordagem no domínio da Frequência
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Tomando a Transformada de Laplace em ambos os lados:
+							$$
+							\mathcal{L}\Bigl\{\sum_{i=0}^n\alpha_i\frac{d^i y}{dt^i}\Bigr\}=\mathcal{L}\Bigl\{\sum_{i=0}^m\beta_i\frac{d^i u}{dt^i}\Bigr\}
+							$$
+			
+					</center>
+
+					<center class=" lightup">
+						Função de Transferência (FT):
+						$$
+						\Rightarrow \frac{Y(s)}{U(s)}=\frac{\sum_{i=0}^m \beta_i s^i}{\sum_{i=0}^n \alpha_i s^i}=G(s)
+						$$
+		
+				</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sistema 2° Ordem
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\alpha_2\frac{d^2y}{dt^2}+\alpha_1 \frac{dy}{dt}+\alpha_0 y(t) =\beta_0 u(t)
+							$$
+			
+					</center>
+
+					<center class=" lightup">
+						Função de Transferência (FT):
+						$$
+						\Rightarrow \frac{Y(s)}{U(s)}=\frac{\beta_0}{\alpha_2s^2+\alpha_1s+\alpha_0}=G(s)
+						$$
+		
+				</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Discretização
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Como representar uma FT em tempo discreto?
+							<p class="lightup">
+							$$
+							G_d(z)=?
+							$$
+							</p>
+							
+					</center>
+
+
+					<center class="">
+						<ul>
+							<li>Impulso-invariante (Z-exata);</li>
+							<li>Degrau-invariante (ZOH)</li>
+							<li>Mapeamento casado de pólos e zeros;</li>
+							<li>Equivalência por integração numérica;</li>
+
+						</ul>
+					
+				</center>
+
+				
+					   </div>
+
+				</section>
+
+
+			
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z exata
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+
+						<p class="lightup">Impulso-invariante:</p>
+					
+						<img src="../images/impulse_invariance.png" width="550">
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z exata
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+
+						<p class="lightup">Impulso-invariante:</p>
+						$$
+							g(t)=\mathcal{L}^{-1}\{G(s)\}\Rightarrow G_d(z)=\mathcal{Z}\{g(kT)\}
+						$$
+						
+
+						<img src="../images/resposta_impulso.png" width="750">
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z exata
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+
+						<p class="lightup">Impulso-invariante:</p>
+						$$
+							\mathcal{Z}^{-1}\{G_d(z)\}=\mathcal{L}^{-1}\{G(s)\}\Bigr|_{t=kT}
+						$$
+						
+
+						<img src="../images/resposta_impulso.png" width="700">
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+			
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z exata
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<b>Notação:</b>
+					$$
+							\mathcal{Z}\{G(s)\}=\mathcal{Z}\{\underbrace{\mathcal{L}^{-1}\{G(s)\}|_{t=kT}}_{g(kT)}\}
+					$$
+
+						
+
+					</center>
+
+					<center class=" lightup">
+						$$
+							\mathcal{Z}\Bigl\{\frac{1}{s+a}\Bigr\}=\frac{z}{z-e^{-aT}}
+						$$
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z exata
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<h3 class="lightup">Usar <a href="../pdf/tabela_tranformada_Z_controle_digital.pdf" target="_blank">Tabelas de Transformada Z</a>!</h3>	
+
+						Exemplos:
+						$$
+							G(s)=\frac{1}{s} \Rightarrow G_d(z)=\frac{z}{z-1}
+						$$
+						
+
+					</center>
+
+					<center class="">
+						$$
+							G(s)=\frac{1}{s+a} \Rightarrow G_d(z)=\frac{z}{z-e^{-aT}}
+						$$
+						<p>etc...</p>
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z exata
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Exemplo:
+						$$
+							G(s)=\frac{s+3}{s^2+3s+2}
+						$$
+						
+					Qual a FT discretizada com $T=0.1s$?
+						
+					</center>
+					<center class="lightup">
+						$$
+						G_d(z)=\mathcal{Z}\{G(s)\}=?
+						$$
+				
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Degrau-Invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+
+						<p class="lightup">Degrau-Invariante:</p>
+					
+						<img src="../images/step_invariance.png" width="550">
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau-Invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center class="lightup">
+					$
+							\mathcal{Z}^{-1}\Bigl\{G_d(z)\frac{1}{1-z^{-1}}\Bigr\}=\mathcal{L}^{-1}\Bigl\{G(s)\frac{1}{s}\Bigr\}|_{t=kT}
+					$
+					</center>
+					<center>
+					<img src="../images/resposta_degrau.png" width="800">
+				</center>
+					   </div>
+
+				</section>
+
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau-Invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center class="lightup">
+					$
+							\mathcal{Z}\{\mathcal{Z}^{-1}\Bigl\{G_d(z)\frac{1}{1-z^{-1}}\Bigr\}\}=\mathcal{Z}\{\mathcal{L}^{-1}\Bigl\{G(s)\frac{1}{s}\Bigr\}|_{t=kT}\}
+					$
+					</center>
+					<center>
+					<img src="../images/resposta_degrau.png" width="800">
+				</center>
+					   </div>
+
+				</section>
+
+
+			
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau-Invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center >
+					$$
+							G_d(z)\frac{1}{1-z^{-1}}=\mathcal{Z}\Bigl\{G(s)\frac{1}{s}\Bigr\}
+					$$
+					</center>
+					<center class="fragment" >
+						$$
+								\Rightarrow G_d(z)=(1-z^{-1})\mathcal{Z}\Bigl\{G(s)\frac{1}{s}\Bigr\}
+						$$
+						</center>
+
+						<center class="fragment" >
+							Mas $z=e^{sT}$, então
+							$$
+									G_d(z)=\mathcal{Z}\Bigl\{\frac{1-e^{-sT}}{s}G(s)\Bigr\}
+							$$
+							</center>
+
+							<center class="fragment lightup2" >
+								Segurador de Ordem Zero (ZOH)!
+								</center>
+					
+					   </div>
+
+				</section>
+
+
+
+			
+	
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau-Invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center >
+				<img src="../images/degrau_invariance.png" width="700">
+				<p class="lightup">
+				$
+							ZOH(s)=\frac{1-e^{-sT}}{s}
+				$
+			</p>
+					</center>
+
+					
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Reconstrução via ZOH</h2>
+					</div>
+					<div class="slide-content">
+					<center>
+						
+						<img src="../images/rec_cossenoide_ZOH2.png" width="1000">
+						
+						
+			
+					
+				</center>
+		
+					   </div>
+
+				</section>
+
+
+				
+			<section>
+
+					<div class="slide-title">
+						<h2>Degrau-Invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Exemplo:
+						$$
+							G(s)=\frac{s+3}{s^2+3s+2}
+						$$
+						
+					Qual a FT discretizada com $T=0.1s$?
+						
+					</center>
+					<center class="lightup">
+						$$
+						G_d(z)=\mathcal{Z}\{\frac{1-e^{-sT}}{s}G(s)\}=?
+						$$
+				
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Mapeamento casado de pólos e zeros
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					Seja 
+					$$
+					G(s)=\frac{\prod_{i=1}^m (s-b_i)}{\prod_{i=1}^n (s-p_i)},\quad n\ge m
+					$$
+
+					</center>
+
+					<center>
+						Aplica-se o mapeamento $z=e^{sT}$ nos pólos e zeros, resultando em
+						<p class="lightup">
+						$$
+							G_d(z)=K\frac{\prod_{i=1}^m (z-e^{b_iT})}{\prod_{i=1}^n (z-e^{p_iT})} 
+						$$
+						</p>
+						
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Mapeamento casado de pólos e zeros
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						<p>&nbsp;</p>
+				
+						O ganho $K$ é escolhido de forma a preservar o ganho do sistema contínuo em uma frequência de interesse, por exemplo:
+<p class="lightup">
+						$$
+						G(s)|_{s=0}=G_d(z)|_{z=1}
+						$$
+
+					</p>						
+						
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Mapeamento casado de pólos e zeros
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Exemplo:
+						$$
+							G(s)=\frac{s+3}{s^3+3s+2}
+						$$
+						
+						Qual a FT discretizada com $T=0.1s$?
+						
+					</center>
+					<center class="lightup">
+						$$
+						G_d(z)=?
+						$$
+				
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Equivalência por integração numérica
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Considere um integrador na forma:
+						<p class="lightup">
+						$$
+							y(t)=\int_{-\infty}^t u(\tau)d\tau
+						$$
+					</p>
+						Como aproximar essa integral?
+					
+						
+					</center>
+
+					<center class="">
+		
+						<ul>
+							<li>Método Euler-Forward;</li>
+							<li>Método Euler-Backward;</li>
+							<li>Método Tustin.</li>
+
+						</ul>
+					</center>
+	
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Forward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							y[k+1]=y[k]+u[k]T
+						$$
+						<img src="../images/integracao_numerica_forwad.png" width="500">
+						
+					
+						
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Forward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							zY(z)=Y(z)+U(z)T
+						$$
+												
+					</center>
+
+					<center class="">
+						
+						$$
+						\Rightarrow	Y(z)=\frac{T}{z-1}U(z)
+						$$
+												
+					</center>
+
+					<center class="">
+						Mas
+						$$
+						Y(s)=\frac{1}{s}U(s)
+						$$
+												
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Forward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+		
+
+					<center class="lightup">
+						
+						$$
+						\Rightarrow	s=\frac{z-1}{T}=\frac{1-z^{-1}}{Tz^{-1}}
+						$$
+												
+					</center>
+
+					<center >
+						Portanto,
+						
+						$$
+						G_d(z)=G(s)|_{s=\frac{z-1}{T}}
+						$$
+												
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Forward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Exemplo:
+						$$
+							G(s)=\frac{s+3}{s^2+3s+2}
+						$$
+						
+					Qual a FT discretizada com $T=0.1s$?
+						
+					</center>
+					<center class="lightup">
+						$$
+					G_d(z)=G(s)|_{s=\frac{z-1}{T}}=?
+						$$
+				
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+	
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Backward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							y[k+1]=y[k]+u[k+1]T
+						$$
+						
+						<img src="../images/integracao_numerica_backward.png" width="500">
+						
+						
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Backward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							zY(z)=Y(z)+zU(z)T
+						$$
+					
+						
+						
+					</center>
+
+
+					<center class="">
+					
+						$$
+							\Rightarrow Y(z)=\frac{zT}{z-1}U(z)
+						$$
+					
+						
+						
+					</center>
+
+					<center class="">
+						Mas
+						$$
+						Y(s)=\frac{1}{s}U(s)
+						$$
+												
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Backward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						
+						<p class="lightup">
+						$$
+							s=\frac{z-1}{zT}
+						$$
+					</p>
+					
+						
+						
+					</center>
+
+
+					<center>
+						Portanto,
+						$$
+							G_d(z)=G(s)|_{s=\frac{z-1}{zT}}
+						$$
+					
+						
+						
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Método Euler-Backward
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Exemplo:
+						$$
+							G(s)=\frac{s+3}{s^2+3s+2}
+						$$
+						
+					Qual a FT discretizada com $T=0.1s$?
+						
+					</center>
+					<center class="lightup">
+						$$
+					G_d(z)=G(s)|_{s=\frac{z-1}{zT}}=?
+						$$
+				
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Tustin (Bilinear)
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							y[k+1]=y[k]+(u[k]+u[k+1])T/2
+						$$
+						
+						<img src="../images/integracao_numerica_tustin.png" width="500">
+						
+					</center>
+
+	
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Tustin (Bilinear)
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Integração numérica através de uma soma recursiva:
+						$$
+							zY(z)=Y(z)+(U(z)+zU(z))T/2
+						$$
+						
+						
+						
+					</center>
+
+					<center class="">
+						
+						$$
+							\Rightarrow Y(z)=\frac{T}{2}\frac{z+1}{z-1}U(z)
+						$$
+						
+						
+						
+					</center>
+
+					<center class="">
+						Mas
+						$$
+						Y(s)=\frac{1}{s}U(s)
+						$$
+												
+					</center>
+
+
+	
+				
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Método Tustin (Bilinear)
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center class="lightup">
+					
+						$$
+							s=\frac{2}{T}\frac{z-1}{z+1}
+						$$
+						
+						
+						
+					</center>
+
+					<center>
+						Portanto, 
+						$$
+							G_d(z)=G(s)|_{s=\frac{2}{T}\frac{z-1}{z+1}}
+						$$
+						
+						
+						
+					</center>
+
+
+
+	
+				
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Método Tustin (Bilinear)
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Exemplo:
+						$$
+							G(s)=\frac{s+3}{s^2+3s+2}
+						$$
+						
+					Qual a FT discretizada com $T=0.1s$?
+						
+					</center>
+					<center class="lightup">
+						$$
+				G_d(z)=G(s)|_{s=\frac{2}{T}\frac{z-1}{z+1}}=?
+						$$
+				
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+
+				
+		
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Equivalência por integração numérica
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center>
+						<table>
+							<tr><td align="center"><b>Euler-Forward:</b>
+								$$
+									s=\frac{z-1}{T}
+								$$</td><td align="center"><b>Euler-Backward:</b>
+									$$
+										s=\frac{z-1}{Tz}
+									$$</td><td align="center"><b>Tustin (Bilinear):</b>
+										$$
+											s=\frac{2}{T}\frac{z-1}{z+1}
+										$$</td></tr>
+										<tr>
+											<td><img src="../images/integracao_numerica_forwad.png" width="400"></td>
+											<td><img src="../images/integracao_numerica_backward.png" width="400"></td>
+											<td><img src="../images/integracao_numerica_tustin.png" width="400"></td>
+										</tr>
+						</table>
+						
+
+						
+
+						
+						
+					
+						
+				
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Degrau-Invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+					<center>
+						
+					<img src="../images/2nd_sys_zoh.png" width="800">
+					</center>
+					
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Tustin (Bilinear)
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+					<center>
+						
+					<img src="../images/2nd_sys_tustin.png" width="800">
+					</center>
+					
+					   </div>
+
+				</section>
+
+
+
+
+			
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de Sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						<p>&nbsp;</p>
+					<img src="../images/sistema.png" alt="">
+						
+					</center>
+					<center>
+					$$
+						G(s)=\frac{Y(s)}{U(s)}
+					$$
+						
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+		
+					<center>
+	
+	Como obter os parâmetros associados ao <b>sistema real</b>?
+	<img src="../images/circuito_RLC.png" width="600" >
+	<p class="lightup">
+	$$
+						LC\frac{d^2v_o}{dt^2}+RC\frac{dv_o}{dt}+v_o(t)=v_i(t)
+	$$
+	</p>
+	</center>
+					   </div>
+
+				</section>
+
+
+						<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+		
+					<center>
+	
+	Como obter os parâmetros associados ao <b>sistema real</b>?
+	<img src="../images/circuito_RLC.png" width="600" >
+	<p class="lightup2">
+	$$
+						\underbrace{LC}_{\alpha_2}\frac{d^2v_o}{dt^2}+\underbrace{RC}_{\alpha_1}\frac{dv_o}{dt}+\underbrace{1}_{\alpha_0}v_o(t)=\underbrace{1}_{\beta_0}v_i(t)
+	$$
+	</p>
+	</center>
+					   </div>
+
+				</section>
+
+
+							<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+		
+					<center>
+	
+	Como obter os parâmetros associados ao <b>sistema real</b>?
+	<img src="../images/circuito_RLC.png" width="600" >
+	<p class="lightup2">
+	$$
+						\frac{V_o(s)}{V_i(s)}=\frac{\frac{1}{LC}}{s^2+\frac{R}{L}s+\frac{1}{LC}}=G(s)
+	$$
+	</p>
+	</center>
+					   </div>
+
+				</section>
+
+
+								<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+		
+					<center>
+	
+	Como obter os parâmetros associados ao <b>sistema real</b>?
+	<img src="../images/circuito_RLC.png" width="600" >
+	<p class="lightup2">
+	$$
+					G_d(z)=G(s)|_{s=\frac{z-1}{zT}},\quad T=0.1s
+	$$
+	</p>
+	</center>
+					   </div>
+
+				</section>
+
+			
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sistema 2° Ordem
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+					<center class="lightup">
+						
+						$$
+						\Rightarrow \frac{V_d^o(z)}{V_d^i(z)}=\frac{d_0}{c_2z^{-2}-c_1z^{-1}+1}=G_d(z)
+						$$
+					</center>
+					<center>
+		em que
+		$$
+		d_0=T^2,\quad
+						c_2=\frac{LC}{LC+RCT+T^2},\\
+						c_1=\frac{RCT+2LC}{LC+RCT+T^2}\\
+						
+		$$
+	</center>
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sistema 2° Ordem
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+					<center class="lightup">
+						
+				$$y[k]=-c_2y[k-2]+c_1y[k-1]+d_0u[k]$$
+					</center>
+					<center>
+		em que $y[k]=v_o[k]$ e $u[k]=v_i[k]$ com
+		$$
+		d_0=T^2,\quad
+						c_2=\frac{LC}{LC+RCT+T^2},\\
+						c_1=\frac{RCT+2LC}{LC+RCT+T^2}\\
+						
+		$$
+	</center>
+					   </div>
+
+				</section>
+			
+
+				
+			
+
+					
+			
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+	<center class="lightup">
+		$$y[k]=\underbrace{\begin{bmatrix}y[k-2] & y[k-1] & u[k]\end{bmatrix}}_{h_k^T}\underbrace{\begin{bmatrix}-c_2\\c_1\\d_0\end{bmatrix}}_{\theta}$$
+	</center>
+	<center>
+		<p>$\rightarrow h_k $ é o <b>vetor de regressor</b> associado à $y_k$ </p>
+		<p>$\rightarrow \theta$ é o <b>vetor de parâmetros</b> do modelo.</p>
+	</center>
+	
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+	<center class="">
+		$$
+		\begin{bmatrix}
+		y[1]\\
+		y[2]\\
+		\vdots\\
+		y[N]
+		\end{bmatrix}
+		=\begin{bmatrix}-h_1^T-\\
+		-h_2^T-\\
+		\vdots\\
+		-h_N^T- \end{bmatrix} \theta$$
+	</center>
+	<center class="lightup2">
+		$$
+		y=H\theta+\varepsilon
+		$$
+		em que $H\in\mathbb{R}^{N\times n}$, $\theta\in\mathbb{R}^n$ e $\varepsilon$ indica o <b>ruido de medição</b>!
+	</center>
+	
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+	<center>
+		Dado a medição:
+		$$
+		 y=H\theta+\varepsilon
+		$$
+		Encontrar a <b>melhor estimativa</b> do parâmetro $\theta$, por exemplo:
+		<P class="lightup">
+		<b>Erro Médio Quadrático (EMQ):</b>
+
+		$$
+		\hat{\theta}=\arg \min_\theta \|y-\underbrace{H\theta}_{\hat{y}}\|^2_2
+		$$
+	</P>
+	</center>
+	
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+	<center>
+		Dado a medição:
+		$$
+		 y=H\theta+\varepsilon
+		$$
+		Encontrar a <b>melhor estimativa</b> do parâmetro $\theta$, por exemplo:
+		<P class="lightup">
+		<b>Erro Médio Quadrático (EMQ):</b>
+
+		$$
+		\hat{\theta}=(H^T H)^{-1}H^Ty, \quad \text{rank}(H)=n
+		$$
+	</P>
+	</center>
+	
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+					<center>
+	
+						$$
+						u=\begin{bmatrix}
+						u[1]\\
+						u[2]\\
+						\vdots\\
+						u[N]
+						\end{bmatrix},\quad y=\begin{bmatrix}
+						y[1]\\
+						y[2]\\
+						\vdots\\
+						y[N]
+						\end{bmatrix}
+						$$
+
+	</center>
+
+
+	<center class=" lightup2">
+		$$\hat{\theta}=(H^\trp H)^{-1}H^\trp y=\begin{bmatrix}-\hat{c}_2\\\hat{c}_1\\\hat{d}_0\end{bmatrix}$$
+	</center>
+	
+					   </div>
+
+				</section>
+
+				<!-- <section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sistema 2° Ordem
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\alpha_2\frac{d^2y}{dt^2}+\alpha_1 \frac{dy}{dt}+\alpha_0 y(t) =\beta_0 u(t)
+							$$
+			
+					</center>
+
+					<center class="lightup">
+						Função de Transferência (FT):
+						$$
+						\Rightarrow \frac{Y(s)}{U(s)}=\frac{\beta_0}{\alpha_2s^2+\alpha_1s+\alpha_0}=G(s)
+						$$
+		
+				</center>
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sistema 2° Ordem
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\alpha_2\frac{d^2y}{dt^2}+\alpha_1 \frac{dy}{dt}+\alpha_0 y(t) =\beta_0 u(t)
+							$$
+			
+					</center>
+
+					<center class="lightup">
+						Função de Transferência (FT) (Euler-Backward) :
+						$$
+						\Rightarrow \frac{Y_d(z)}{U_d(z)}=\frac{\beta_0}{\alpha_2(\frac{z-1}{zT})^2+\alpha_1(\frac{z-1}{zT})+\alpha_0}=G_d(z)
+						$$
+		
+				</center>
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sistema 2° Ordem
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+					<center class="lightup">
+						
+						$$
+						\Rightarrow \frac{Y_d(z)}{U_d(z)}=\frac{d_0}{c_2z^{-2}-c_1z^{-1}+1}=G_d(z)
+						$$
+					</center>
+					<center>
+		em que
+		$$
+		d_0=\beta_0T^2,\quad
+						c_2=\frac{\alpha_2}{\alpha_2+\alpha_1 T+\alpha_0 T^2},\\
+						c_1=\frac{\alpha_1T+2\alpha_2}{\alpha_2+\alpha_1 T+\alpha_0 T^2}\\
+						
+		$$
+	</center>
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sistema 2° Ordem
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+					<center class="lightup">
+						
+						$$
+						(c_2z^{-2}-c_1z^{-1}+1)Y_d(z)=d_0U_d(z)
+						$$
+					</center>
+					<center class="">
+		Então, a <b>equação à diferenças</b> associada a esse sistema é
+		<p class="lightup">
+		$$
+					c_2y[k-2]-c_1y[k-1]+y[k]=d_0u[k]
+		$$
+	</p>
+	</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sistema 2° Ordem
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+					<center class="lightup">
+						
+						$$
+						(c_2z^{-2}-c_1z^{-1}+1)Y_d(z)=d_0U_d(z)
+						$$
+					</center>
+					<center class="">
+		Então, a <b>equação à diferenças</b> associada a esse sistema é
+		<p class="lightup">
+		$$
+					y[k]=-c_2y[k-2]+c_1y[k-1]+d_0u[k]
+		$$
+	</p>
+	</center>
+					   </div>
+
+				</section>
+
+
+
+			
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Modelagem do sistema
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+		
+					<center>
+	<p>&nbsp;</p>
+		<p class="lightup">
+		$$
+					y[k]=-c_2y[k-2]+c_1y[k-1]+d_0u[k]
+		$$
+	</p>
+	Como obter os parâmetros associados ao <b>sistema real</b>?
+	</center>
+					   </div>
+
+				</section> -->
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+		
+					<center>
+	
+	Como obter os parâmetros associados ao <b>sistema real</b>?
+	<p>&nbsp;</p>
+	<img src="../images/sistema.png" width="600" >
+
+	</center>
+	<center class="lightup ">
+		Entrada=exitação do sistema
+	</center>
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+		
+					<center>
+	
+	Como obter os parâmetros associados ao <b>sistema real</b>?
+	<p>&nbsp;</p>
+	<img src="../images/sistema.png" width="600" >
+
+	</center>
+	<center class="lightup ">
+	<ul><li>Degrau (regime estacionário);</li>
+		<li>Senoide (ressonância);</li>
+		<li>PRBS (persistentemente excitante).</li>
+	</ul>
+	</center>
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+
+		
+					<center>
+	
+	Como obter os parâmetros associados ao <b>sistema real</b>?
+	<p>&nbsp;</p>
+	<img src="../images/sistema.png" width="600" >
+
+	</center>
+	<center class="lightup ">
+		Entrada=PRBS (Pseudo-Random-Binary-Sequence)
+	</center>
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center class="lightup">
+							Entrada=PRBS (Pseudo-Random-Binary-Sequence)
+						</center>
+		
+					<center>
+	
+
+	<img src="../images/PRBS.png" width="1200" >
+
+	</center>
+	
+					   </div>
+
+				</section>
+
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center class="lightup">
+							Entrada=PRBS (Pseudo-Random-Binary-Sequence)
+						</center>
+		
+					<center>
+	
+
+	<img src="../images/espectro_prbs.png" width="1200" >
+
+	</center>
+	
+					   </div>
+
+				</section>
+
+
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Exemplo de Identificação de sistemas
+						</h2>
+					</div>
+					<div class="slide-content">
+				
+						<center class="">
+							<img src="../images/circuito_RLC.png" width="600" >
+						</center>
+		 com 
+		 $$
+						R_1=100\Omega;\\
+						L_1=390mH;\\
+						C_1=10\mu F.
+		 $$
+					<center>
+	
+
+
+	</center>
+	
+					   </div>
+
+				</section>
+
+		
+
+
+			
+
+
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Próxima aula teórica</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>Análise de Estabilidade em tempo discreto</p>
+						<img src="../images/map_plano_s_plano_z.png" width="800" alt="">
+					</center>
+				</div>
+
+			</section>
+
+
+
+			
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h2>Até a próxima aula!</h2>
+				</center>
+				</div>
+
+			</section>
+
+			
+
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
+
