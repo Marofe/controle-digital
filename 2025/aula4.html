@@ -232,7 +232,315 @@
 
 				</section>
 
+					<section>
 
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							<p class="lightup">
+							$$
+							\sum_{k=0}^\infty \Bigl(\frac{1}{2}\Bigr)^k ?
+							$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							$$
+							x[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\ge 0
+							$$						
+							Qual a Transformada Z de $x[k]$?
+							<p class="lightup">
+								$$\mathcal{Z}\{x[k]\}=?$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				
+					<section>
+
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							$$
+							x[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\ge 0
+							$$						
+							Qual a Transformada Z de $x[k]$?
+							<p class="lightup">
+								$$\mathcal{Z}\{x[k]\}=\sum_{k=0}^\infty x[k]z^{-k}$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+						<section>
+
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							$$
+							x[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\ge 0
+							$$						
+							Qual a Transformada Z de $x[k]$?
+							<p class="lightup">
+								$$\mathcal{Z}\{x[k]\}=\sum_{k=0}^\infty \Bigl(\frac{1}{2}\Bigr)^kz^{-k}$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+						<section>
+
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							$$
+							x[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\ge 0
+							$$						
+							Qual a Transformada Z de $x[k]$?
+							<p class="lightup">
+								$$\mathcal{Z}\{x[k]\}=\sum_{k=0}^\infty \Bigl(\frac{1}{2z}\Bigr)^k$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+						<section>
+
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							$$
+							x[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\ge 0
+							$$						
+							Qual a Transformada Z de $x[k]$?
+							<p class="lightup">
+								$$\mathcal{Z}\{x[k]\}=\sum_{k=0}^\infty  \Bigl(\frac{1}{2z}\Bigr)^k=\frac{1}{1-\frac{1}{2z}}$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+							<section>
+
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							$$
+							x[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\ge 0
+							$$						
+							Qual a Transformada Z de $x[k]$?
+							<p class="lightup">
+								$$\mathcal{Z}\{x[k]\}=\sum_{k=0}^\infty  \Bigl(\frac{1}{2z}\Bigr)^k=\frac{z}{z-\frac{1}{2}}$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+								<section>
+
+					<div class="slide-title">
+						<h2>Exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							$$
+							x[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\ge 0
+							$$						
+							Qual a Transformada Z de $x[k]$?
+							<p class="lightup">
+								$$\mathcal{Z}\{x[k]\}=\sum_{k=0}^\infty  \Bigl(\frac{1}{2z}\Bigr)^k=\frac{z}{z-\frac{1}{2}},\quad |z|>\frac{1}{2}$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+										<section>
+
+					<div class="slide-title">
+						<h2>Propriedade da Transformada Z</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+						<center>
+Seja $X(z)=\mathcal{Z}\{x[k]\}$. Então, para um inteiro $m$, vale que
+							<p class="lightup">
+								$$\mathcal{Z}\{x[k-m]\}= z^{-m}X(z)$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+											<section>
+
+					<div class="slide-title">
+						<h2>Equações à diferença</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+						<center>
+							<p>
+							<img src="../images/sistema.png" alt="">
+							</p>
+<p>
+Seja $$
+							y[k]=a_1y[k-1]+a_2y[k-2]+u[k]+b_1u[k-1]
+$$
+</p>
+											</center>
+		
+
+					   </div>
+
+				</section>
+
+
+											<section>
+
+					<div class="slide-title">
+						<h2>Equações à diferença</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+						<center>
+							<p>
+							<img src="../images/sistema.png" alt="">
+							</p>
+<p>
+Seja $$
+							Y(z)=a_1z^{-1}Y(z)+a_2z^{-2}Y(z)+U(z)+b_1z^{-1}U(z)
+$$
+</p>
+											</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Equações à diferença</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+						<center>
+							<p>
+							<img src="../images/sistema.png" alt="">
+							</p>
+<p>
+Seja $$
+							(1-a_1z^{-1}-a_2z^{-2})Y(z)=(1+b_1z^{-1})U(z)
+$$
+</p>
+											</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				
+											<section>
+
+					<div class="slide-title">
+						<h2>Equações à diferença</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+						<center>
+							<p>
+							<img src="../images/sistema.png" alt="">
+							</p>
+<p>
+Seja $$
+							\frac{Y(z)}{U(z)}=\frac{1+b_1z^{-1}}{1-a_1z^{-1}-a_2z^{-2}}=G(z)
+$$
+</p>
+											</center>
+		
+
+					   </div>
+
+				</section>
+
+
+			
 
 				
 
@@ -1479,6 +1787,28 @@ $$
 				</section>
 
 
+				<section>
+					<div class="slide-title">
+						<h2>Estabilidade em malha-fechada</h2>
+					</div>
+					<div class="slide-content">
+
+										<center>
+											<p>&nbsp;</p>
+											Considere a equação característica de um sistema em malha-fechada em tempo discreto dada por
+						$$
+							Q(z)=z^4-1.2z^3+0.07z^2+0.3z-0.08=0
+						$$
+					Esse sistema é estável?
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
 				
 				<section>
 					<div class="slide-title">
@@ -1644,6 +1974,29 @@ $$
 
 				<section>
 					<div class="slide-title">
+						<h2>Critério de Jury: exemplo</h2>
+					</div>
+					<div class="slide-content">
+
+										<center>
+											<p>&nbsp;</p>
+											Considere o sistema cuja função de transferência é dada por
+						$$
+							G(z)=\frac{K(0.3679z+0.2642)}{(z-0.3679)(z-1)}
+						$$
+					Esse sistema em malha-fechada (realimentação unitária) é estável para quais valores de $K$?
+						</center>
+			
+						
+
+					</div>
+	
+				</section>
+
+
+
+				<section>
+					<div class="slide-title">
 						<h2>Mapeamento Bilinear no plano-w</h2>
 					</div>
 					<div class="slide-content">
@@ -1717,49 +2070,10 @@ Aplique a transformação <b>bilinear</b> na variável $z$ na forma
 
 
 
-				<section>
-					<div class="slide-title">
-						<h2>Critério de Jury: exemplo</h2>
-					</div>
-					<div class="slide-content">
-
-										<center>
-											<p>&nbsp;</p>
-											Considere a equação característica de um sistema em malha-fechada em tempo discreto dada por
-						$$
-							Q(z)=z^4-1.2z^3+0.07z^2+0.3z-0.08=0
-						$$
-					Esse sistema é estável?
-						</center>
-			
-						
-
-					</div>
-	
-				</section>
+				
 
 
-				<section>
-					<div class="slide-title">
-						<h2>Critério de Jury: exemplo</h2>
-					</div>
-					<div class="slide-content">
-
-										<center>
-											<p>&nbsp;</p>
-											Considere o sistema cuja função de transferência é dada por
-						$$
-							G(z)=\frac{K(0.3679z+0.2642)}{(z-0.3679)(z-1)}
-						$$
-					Esse sistema em malha-fechada (realimentação unitária) é estável para quais valores de $K$?
-						</center>
-			
-						
-
-					</div>
-	
-				</section>
-
+				
 
 				
 
