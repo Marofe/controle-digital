@@ -1086,7 +1086,9 @@
 				<p><b>Vantagens:</b></p>
 					<ul>
 						<li>Pode-se considerar os efeitos da amostragem e ZOH;</li>
+							<li>Preserva o desempenhos do contínuo;</li>
 						<li>Pode-se trabalhar com taxas de amostragem menores;</li>
+
 					</ul>
 			
 				</center>
@@ -1427,7 +1429,7 @@ $$
 				$$
 <p class="lightup">
 				$$
-					u[k]-bu[k-1]=Ke[k]-ae[k-1]
+					u[k]-bu[k-1]=K(e[k]-ae[k-1])
 				$$
 
 </p>				
@@ -1453,7 +1455,7 @@ $$
 				$$
 <p class="lightup">
 				$$
-					u[k]=bu[k-1]+Ke[k]-ae[k-1]
+					u[k]=bu[k-1]+K(e[k]-ae[k-1])
 				$$
 
 </p>				
@@ -1475,7 +1477,7 @@ $$
 				<center>
 					<p class="lightup">
 					$$
-						u[k]=bu[k-1]+Ke[k]-ae[k-1]
+						u[k]=bu[k-1]+K(e[k]-ae[k-1])
 					$$
 				</p>
 				<p>Escrever software em uma linguagem como C, C++, etc para colocar em um microcontrolador!</p>
@@ -1499,7 +1501,7 @@ $$
 							r=1; //set-point
 							y=analogRead(input_pin); //le saida do sistema 
 							erro=r-y; //obtem sinal de erro 
-							u=b*u_anterior+K*erro-a*erro_anterior; //sinal de controle
+							u=b*u_anterior+K*(erro-a*erro_anterior); //sinal de controle
 							erro_anterior=erro; 	//atualiza erro p/ proxima iteracao
 							u_anterior=u; 	//atualiza u p/ proxima iteracao
 							analogWrite(output_pin,u); //atualiza saida

@@ -28,7 +28,7 @@
 				
 				<section data-hide-slide-number="true" data-transition="slide">
 					<div class="logo"><img src="../images/sel.png"/> </div>
-					<div class="logo2"><img src="../images/usp.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
 					<div class="title">
 					<h2>Aula 7: <br>Projeto de Controladores na Frequência - parte 2</h2>
 					</div>
@@ -37,7 +37,7 @@
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">10 de outubro de 2024</p>
+					<p style="text-align: center;font-size: 0.8em;">16 de setembro de 2025</p>
 				</div>
 
 				</section>
@@ -69,6 +69,7 @@
 						<ul>
 						<li>Avanço/Atraso fase;</li>
 						<li>Projeto PID;</li>
+						<li>Métodos de otimização;</li>
 						<li>Exemplos;</li>
 					</p>
 					</div>
@@ -190,7 +191,7 @@
 				<center>
 					<p class="lightup">
 				$$
-					z_{1,2}=e^{s_{1,2}T}=r\cos(\theta)\pm jr\sin(\theta)
+					z_{1,2}=e^{s_{1,2}T}=re^{\pm j\theta}
 				$$
 			</p>
 				com 
@@ -234,7 +235,6 @@ r=e^{-T\xi \omega_n} \\
 
 		</section>
 
-
 		<section>
 			<div class="slide-title">
 				<h2>Estrutura de Controlador</h2>
@@ -262,6 +262,58 @@ r=e^{-T\xi \omega_n} \\
 		</section>
 
 
+			<section>
+			<div class="slide-title">
+				<h2>Avanço de Fase</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			
+			<img src="../images/avanco_fase_bode.png" width="800">
+		
+				
+				</center>
+			</div>
+
+		</section>
+
+
+		
+			<section>
+			<div class="slide-title">
+				<h2>Atraso de Fase</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			
+			<img src="../images/atraso_fase_bode.png" width="800">
+		
+				
+				</center>
+			</div>
+
+		</section>
+
+		<section>
+			<div class="slide-title">
+				<h2>Avanço e Atraso de Fase</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			
+			<img src="../images/avanco_atraso_fase_bode.png" width="800">
+		
+				
+				</center>
+			</div>
+
+		</section>
+
+
+
+		
+
+
 		<section>
 			<div class="slide-title">
 				<h2>Estrutura de Controlador</h2>
@@ -269,7 +321,7 @@ r=e^{-T\xi \omega_n} \\
 			<div class="slide-content">
 				<center>
 					<p class="lightup">
-						PID:
+						PID (Padrão):
 				$$C(z)=K_p\Bigl(1+\frac{T_s}{2T_I}\frac{z+1}{z-1}+\frac{T_D}{T_s}\frac{z-1}{z}\Bigr)
 				$$
 			</p>
@@ -282,6 +334,22 @@ T_D \to \text{Tempo derivativo}
 \end{cases}
 			$$
 				
+		
+				
+				</center>
+			</div>
+
+		</section>
+
+
+			<section>
+			<div class="slide-title">
+				<h2>PID</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			
+			<img src="../images/PID_bode.png" width="800">
 		
 				
 				</center>
@@ -331,7 +399,9 @@ T_D \to \text{Tempo derivativo}
 			</p>
 
 			<b>Sintonia do compensador:</b>
-			<ul><li>
+			<ul>
+				<li>Forma analítica;</li>
+				<li>
 				Lugar Geométrico das Raízes;
 			</li>
 		<li>Resposta em frequência (Diagrama de Bode);</li>
@@ -345,8 +415,7 @@ T_D \to \text{Tempo derivativo}
 		</section>
 
 
-				
-		<section>
+			<section>
 			<div class="slide-title">
 				<h2>Lugar Geométrico das Raízes</h2>
 			</div>
@@ -354,43 +423,178 @@ T_D \to \text{Tempo derivativo}
 				<center>
 					<p>&nbsp;</p>
 
+Equação característica:
+					<p class="lightup">
+		$$
+				Q(z)=1+C(z)G(z)
+		$$
+		</p>
+					
+		Raízes (pólos de malha fechada): 
+		$$
+			z\in\mathbb{C}:	1+C(z)G(z)=0
+		$$
+		
+				
+				</center>
+			</div>
+
+		</section>
+
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Lugar Geométrico das Raízes</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+
+Equação característica:
+					<p class="lightup">
+		$$
+				Q(z)=1+C(z)G(z)
+		$$
+		</p>
+					
+	Raízes (pólos de malha fechada): 
+		$$
+			z\in\mathbb{C}:	C(z)G(z)=-1
+		$$
+		
+				
+				</center>
+			</div>
+
+		</section>
+
+		
+
+
+				
+		<section>
+			<div class="slide-title">
+				<h2>Lugar Geométrico das Raízes</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					
+					<b>Condições para que um ponto $z\in\mathbb{C}$ pertença ao LGR:</b>
+					<p class="lightup">
 					Condição de Módulo:
+					
 		$$
 					|C(z)G(z)| = 1
 		$$
+		</p>
 					
+			<p class="lightup">
 		Condição de fase:
 		$$
 					\angle C(z)G(z) = 180° (2k+1)
 		$$
+		</p>
 				
 				</center>
 			</div>
 
 		</section>
 
+
+			<section>
+			<div class="slide-title">
+				<h2>Lugar Geométrico das Raízes</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					
+					Note que
+					$$
+					C(z)G(z)=\frac{N(z)}{D(z)}=\frac{|N(z)|e^{j\angle N(z)}}{|D(z)|e^{j\angle D(z)}}
+					$$
+				</center>
+			</div>
+
+		</section>
+
+
+		
+			<section>
+			<div class="slide-title">
+				<h2>Lugar Geométrico das Raízes</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					
+					Note que
+					$$
+					C(z)G(z)=\frac{N(z)}{D(z)}=\frac{|N(z)|e^{j\angle N(z)}}{|D(z)|e^{j\angle D(z)}}
+					$$
+					Logo,
+					$$
+					\angle C(z)G(z)=\angle N(z)-\angle D(z)
+					$$
+				</center>
+			</div>
+
+		</section>
+
+			<section>
+			<div class="slide-title">
+				<h2>Lugar Geométrico das Raízes</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					
+					Note que
+					$$
+					C(z)G(z)=\frac{N(z)}{D(z)}=\frac{|N(z)|e^{j\angle N(z)}}{|D(z)|e^{j\angle D(z)}}
+					$$
+					Logo,
+					$$
+					\angle C(z)G(z)=\angle N(z)-\angle D(z)
+					$$
+					como
+					$N(z)=(z-n_1)(z-n_2)\ldots(z-n_m)$ <Br>
+						$D(z)=(z-p_1)(z-p_2)\ldots(z-p_n)$
+				</center>
+			</div>
+
+		</section>
+
+
+				
 		<section>
 			<div class="slide-title">
 				<h2>Lugar Geométrico das Raízes</h2>
 			</div>
 			<div class="slide-content">
 				<center>
-					<p>&nbsp;</p>
-
+					
+					<b>Condições para que um ponto $z\in\mathbb{C}$ pertença ao LGR:</b>
+					<p class="lightup">
 					Condição de Módulo:
+					
 		$$
 					|C(z)G(z)| = 1
 		$$
+		</p>
 					
+			<p class="lightup">
 		Condição de fase:
 		$$
 					\sum \angle \text{zeros}-\sum\angle \text{pólos} = 180° (2k+1)
 		$$
+		</p>
 				
 				</center>
 			</div>
 
 		</section>
+
+	
+		
 
 		<section>
 			<div class="slide-title">
@@ -496,30 +700,7 @@ T_D \to \text{Tempo derivativo}
 		</section>
 
 
-		<section>
-			<div class="slide-title">
-				<h2>Exemplo:</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-
-					<p><b>4° passo:</b> escolha da estrutura do controlador</p>
-					$$
-					C(z)=?
-					$$
-
-					<ul>
-						<li>Avanço de fase</li>
-						<li>Atraso de fase</li>
-						<li>Avanço e Atraso de fase</li>
-						<li>PID</li>
-						<li>etc...</li>
-					</ul>
-				</center>
-			</div>
-
-		</section>
-
+		
 
 		<section>
 			<div class="slide-title">
@@ -536,9 +717,55 @@ T_D \to \text{Tempo derivativo}
 					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
 					<ul>
 						<li>Satisfazer a condição de fase do LGR;</li>
-						<li>Se $G_d(z)$ tiver pólos <b>estáveis</b>, então pode-se escolher os zeros do controlador de forma a cancelar esses pólos <b>estáveis</b>.</li>
+						<li>Se $G_d(z)$ tiver pólos <b>assintóticamente estáveis</b>, então pode-se escolher os zeros do controlador de forma a cancelar esses pólos <b>assintóticamente estáveis</b>.</li>
 						
 					</ul>
+				</center>
+			</div>
+
+		</section>
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+Cancelamento do pólo assintoticamente estável de $G_d(z)$:
+					$a=0.9048$ 
+					$$
+					C(z)=K\frac{z-0.9048}{z-b}
+					$$
+
+					Dessa forma,
+					$$
+					C(z)G_d(z) = \underbrace{K\frac{(z-0.9048)}{(z-b)}}_{C(z)}	\underbrace{\frac{0.004837(z+0.9672)}{(z-1)(z-0.9048)}}_{G_d(z)}
+					$$
+				
+				</center>
+			</div>
+
+		</section>
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+Cancelamento do pólo assintoticamente estável de $G_d(z)$:
+					$a=0.9048$ 
+					$$
+					C(z)=K\frac{z-0.9048}{z-b}
+					$$
+
+					Dessa forma,
+					$$
+					C(z)G_d(z) = \frac{K}{(z-b)}\frac{0.004837(z+0.9672)}{(z-1)}
+					$$
+				
 				</center>
 			</div>
 
@@ -560,9 +787,58 @@ T_D \to \text{Tempo derivativo}
 
 					Condição de fase:
 					$$
-					\angle C(z)G_d(z) = \angle \Bigl(\frac{K}{z-b}\frac{0.004837(z+0.9672)}{z-1}\Bigr)=180°
+					\angle C(z_1)G_d(z_1) = \angle \Bigl(\frac{K}{(z_1-b)}\frac{0.004837(z_1+0.9672)}{(z_1-1)}\Bigr)=180°
 					$$
 				
+				</center>
+			</div>
+
+		</section>
+
+
+				
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+
+					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					$$
+					C(z)=K\frac{z-0.9048}{z-b}
+					$$
+
+					Condição de fase:
+					$$
+					\angle(z_1+0.9672)-\angle (z_1-1)-\angle(z_1-b)=180°
+					$$
+				
+				</center>
+			</div>
+
+		</section>
+
+			<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+
+					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					$$
+					C(z)=K\frac{z-0.9048}{z-b}
+					$$
+
+					Condição de fase:
+					$$
+					\theta-\phi-\alpha=180°
+					$$
+					com 
+					$$
+					\theta=\angle (z_1+0.9672),	\phi=\angle (z_1-1),\alpha=\angle (z_1-b)
+				$$
 				</center>
 			</div>
 
@@ -586,6 +862,24 @@ T_D \to \text{Tempo derivativo}
 
 		</section>
 
+
+			<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="../images/projeto_cond_fase.png" width="900">
+					<p class="lightup">
+				$
+					\alpha=\theta-\phi-180°
+				$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
 		<section>
 			<div class="slide-title">
 				<h2>Exemplo:</h2>
@@ -601,7 +895,7 @@ T_D \to \text{Tempo derivativo}
 				$$
 				\theta=\angle(-0.3072+j0.246)\approx 8.6°\\
 				\phi = \angle(-0.3398+j0.246)\approx 144°\\
-				\alpha=\angle((0.660-b)+j0.246)=\arctan\Bigl(\frac{0.246}{0.660-b}\Bigr)
+				\alpha=\theta-\phi-180°\approx -315.4°
 			$$
 				</center>
 			</div>
@@ -609,30 +903,107 @@ T_D \to \text{Tempo derivativo}
 		</section>
 
 
-
-
-
-		
 		<section>
 			<div class="slide-title">
 				<h2>Exemplo:</h2>
 			</div>
 			<div class="slide-content">
 				<center>
-				$$
-					8.6°-144°-\arctan\Bigl(\frac{0.246}{0.660-b}\Bigr)=180°
-				$$
-		Logo,
-	$$
-		\arctan\Bigl(\frac{0.246}{0.660-b}\Bigr)=-315,4°\\
-		\Rightarrow b=0.660-\frac{0.246}{\tan(-315.4°)}\\
-		\Rightarrow b=0.41
-
-		$$
+			$$
+			\alpha=\angle (z_1-b)=\arctan\Bigl(\frac{imag(z_1-b)}{real(z_1-b)}\Bigr)
+			$$
 				</center>
 			</div>
 
 		</section>
+
+			<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			$$
+			\alpha=\angle (z_1-b)=\arctan\Bigl(\frac{imag(z_1-b)}{real(z_1-b)}\Bigr)
+			$$
+			Então,
+			$$
+					\tan(\alpha)=\frac{imag(z_1-b)}{real(z_1-b)}
+			$$
+			com $b\in\mathbb{R}$
+				</center>
+			</div>
+
+		</section>
+
+
+				<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			$$
+			\alpha=\angle (z_1-b)=\arctan\Bigl(\frac{imag(z_1-b)}{real(z_1-b)}\Bigr)
+			$$
+			Então,
+			$$
+					\tan(\alpha)=\frac{imag(z_1)}{real(z_1)-b}
+			$$
+			com $b\in\mathbb{R}$
+				</center>
+			</div>
+
+		</section>
+
+
+		
+				<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			$$
+			\alpha=\angle (z_1-b)=\arctan\Bigl(\frac{real(z_1-b)}{imag(z_1-b)}\Bigr)
+			$$
+			Portanto,
+			<p class="lightup">
+			$$
+					b=real(z_1)-\frac{imag(z_1)}{\tan(\alpha)}
+			$$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+				<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			$$
+			\alpha=\angle (z_1-b)=\arctan\Bigl(\frac{real(z_1-b)}{imag(z_1-b)}\Bigr)
+			$$
+			Portanto,
+			<p class="lightup">
+			$$
+					b=0.41
+			$$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+
+
+
+	
 
 
 		<section>
@@ -652,7 +1023,79 @@ T_D \to \text{Tempo derivativo}
 					$$
 \Bigl|\frac{K}{z_1-0.41}\frac{0.004837(z_1+0.9672)}{z_1-1}\Bigr|=1
 					$$
-					Resolvendo, tem-se $K=18.5038$.
+				
+				</center>
+			</div>
+
+		</section>
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+
+					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					$$
+					C(z)=K\frac{z-0.9048}{z-0.41}
+					$$
+
+					
+					<p><b>6° passo:</b> escolha do ganho do controlador</p>
+					$$
+\frac{K\Bigl| 0.004837(z_1+0.9672)\Bigr |}{\Bigl|(z_1-0.41)(z_1-1)\Bigr|}=1
+					$$
+					
+				</center>
+			</div>
+
+		</section>
+
+
+					<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+
+					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					$$
+					C(z)=K\frac{z-0.9048}{z-0.41}
+					$$
+
+					
+					<p><b>6° passo:</b> escolha do ganho do controlador</p>
+					$$
+K=\frac{\Bigl|(z_1-0.41)(z_1-1)\Bigr|}{\Bigl| 0.004837(z_1+0.9672)\Bigr |}
+					$$
+					
+				</center>
+			</div>
+
+		</section>
+
+
+						<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+
+					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					$$
+					C(z)=K\frac{z-0.9048}{z-0.41}
+					$$
+
+					
+					<p><b>6° passo:</b> escolha do ganho do controlador</p>
+					$$
+K=18.5076
+					$$
+					
 				</center>
 			</div>
 
@@ -670,7 +1113,34 @@ T_D \to \text{Tempo derivativo}
 					<p><b>Controlador projetado:</b></p>
 					<p class="lightup">
 					$$
-					C(z)=18.5038\frac{z-0.9048}{z-0.41}
+					C(z)=18.5076\frac{z-0.9048}{z-0.41}
+					$$
+				</p>
+				<p>
+				<b>Próximas etapas:</b>
+			</p>
+				<ul>
+					<li>Implementação</li>
+					<li>Testes</li>
+				</ul>
+
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+
+					<p><b>Controlador projetado:</b></p>
+					<p class="lightup">
+					$$
+					\frac{U(z)}{E(z)}=18.5076\frac{1-0.9048z^{-1}}{1-0.41z^{-1}}
 					$$
 				</p>
 				<p>
@@ -695,7 +1165,7 @@ T_D \to \text{Tempo derivativo}
 				<center>
 					<p class="lightup">
 					$$
-					u[k]=0.41u[k-1]+18.5038e[k]-16.7422e[k-1]
+					u[k]=0.41u[k-1]+18.5076(e[k]-0.9048e[k-1])
 					$$
 				</p>
 				<p>Escrever software em uma linguagem como C, C++, etc para colocar em um microcontrolador!</p>
@@ -716,11 +1186,11 @@ T_D \to \text{Tempo derivativo}
 			<div class="slide-content">
 				<p align="center">Arduino:</p>
 				<pre><code class="language-arduino">
-					void loop() {
+					void sampling() {
 						r=1; //set-point
 						y=analogRead(input_pin); //le saida do sistema 
 						erro=r-y; //obtem sinal de erro 
-						u=0.41*u_anterior+18.5038*erro-16.7422*erro_anterior; //sinal de controle
+						u=0.41*u_anterior+18.5076*(erro-0.9048*erro_anterior); //controle
 						erro_anterior=erro; 	//atualiza erro p/ proxima iteracao
 						u_anterior=u; 	//atualiza u p/ proxima iteracao
 						analogWrite(output_pin,u); //atualiza saida
@@ -730,28 +1200,9 @@ T_D \to \text{Tempo derivativo}
 
 		</section>
 
-
 		<section>
 			<div class="slide-title">
-				<h2>Exemplo:</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-
-					<p><b>Testes:</b></p>
-					
-				<p><img src="../images/hardware-on-the-loop.jpg" width="800"></p>
-				
-
-				</center>
-			</div>
-
-		</section>
-
-
-		<section>
-			<div class="slide-title">
-				<h2>Controle PID:</h2>
+				<h2>Controle PID (Padrão):</h2>
 			</div>
 			<div class="slide-content">
 				<center>
@@ -770,13 +1221,13 @@ T_D \to \text{Tempo derivativo}
 
 		<section>
 			<div class="slide-title">
-				<h2>Controle PID:</h2>
+				<h2>Controle PID (Paralelo):</h2>
 			</div>
 			<div class="slide-content">
 				<center>
 					<p class="lightup">
 						$$
-						U(s)=K_P\Bigl(E(s)+\frac{1}{T_I}\frac{E(s)}{s}+T_DsE(s)\Bigr)
+						u(t)=K_pe(t)+K_i\int_0^t e(\tau)d\tau+K_d\frac{de(t)}{dt}
 						$$
 						</p>
 					<img src="../images/pid_continuo.png" width="650">
@@ -795,7 +1246,26 @@ T_D \to \text{Tempo derivativo}
 				<center>
 					<p class="lightup">
 						$$
-						C(s)=\frac{U(s)}{E(s)}=K_P\Bigl(1+\frac{1}{T_Is}+T_Ds\Bigr)
+						U(s)=K_pE(s)+K_i\frac{E(s)}{s}+K_dsE(s)
+						$$
+						</p>
+					<img src="../images/pid_continuo.png" width="650">
+	
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Controle PID:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						$$
+						C(s)=\frac{U(s)}{E(s)}=K_p+\frac{K_i}{s}+K_ds
 						$$
 						</p>
 					<img src="../images/pid_continuo.png" width="650">
@@ -814,7 +1284,26 @@ T_D \to \text{Tempo derivativo}
 				<center>
 					<p class="lightup">
 						$$
-						C(z)=\frac{U(z)}{E(z)}=K_P\Bigl(1+\frac{1}{T_I}\frac{zT_s}{z-1}+T_D\frac{z-1}{zT_s}\Bigr)
+						C(z)=\frac{U(z)}{E(z)}=K_p+K_i\frac{zT_s}{z-1}+K_d\frac{z-1}{zT_s}
+						$$
+						</p>
+					<img src="../images/pid_discreto.png" width="650">
+	
+				</center>
+			</div>
+
+		</section>
+
+
+				<section>
+			<div class="slide-title">
+				<h2>Controle PID (Euler-Backward):</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						$$
+						C(z)=\frac{U(z)}{E(z)}=K_p+K_i\frac{T_s}{1-z^{-1}}+K_d\frac{1-z^{-1}}{T_s}
 						$$
 						</p>
 					<img src="../images/pid_discreto.png" width="650">
@@ -840,8 +1329,8 @@ T_D \to \text{Tempo derivativo}
 					$$
 					\begin{aligned}
 u_P[k]&=K_pe[k]\\
-u_I[k]&=u_I[k-1]+\frac{K_PT_s}{T_I}e[k]\\
-u_D[k]&=\frac{K_PT_D}{T_s}(e[k]-e[k-1])
+u_I[k]&=u_I[k-1]+K_iT_se[k]\\
+u_D[k]&=\frac{K_d}{T_s}(e[k]-e[k-1])
 \end{aligned}
 					$$
 	
@@ -858,14 +1347,14 @@ u_D[k]&=\frac{K_PT_D}{T_s}(e[k]-e[k-1])
 			<div class="slide-content">
 				<p align="center">Arduino:</p>
 				<pre><code class="language-arduino">
-					void loop() {
+					void sampling() {
 						r=1; //set-point
 						y=analogRead(input_pin); //le saida do sistema 
 						erro=r-y; //obtem sinal de erro 
-						u_P=K_p*erro;  // termo proporcional
-						u_I=u_I+Kp*Ts/Ti*erro; // termo integrativo
-						u_D=Kp*Td/Ts*(erro-erro_anterior);  //termo derivativo
-						u=u_P+u_I+u_D; //sinal de controle
+						up=Kp*erro;  // termo proporcional
+						ui=ui+Ki*Ts*erro; // termo integrativo
+						ud=Kd/Ts*(erro-erro_anterior);  //termo derivativo
+						u=up+ui+ud; //sinal de controle
 						erro_anterior=erro; 	//atualiza erro p/ proxima iteracao
 						analogWrite(output_pin,u); //atualiza saida
 					  }
@@ -884,7 +1373,7 @@ u_D[k]&=\frac{K_PT_D}{T_s}(e[k]-e[k-1])
 				<center>
 					<p class="lightup">
 						$$
-						C(z)=\frac{U(z)}{E(z)}=K_P\Bigl(1+\frac{T_s}{2T_I}\frac{z+1}{z-1}+T_D\frac{z-1}{zT_s}\Bigr)
+						C(z)=\frac{U(z)}{E(z)}=K_p+\frac{K_iT_s}{2}\frac{z+1}{z-1}+K_d\frac{z-1}{zT_s}
 						$$
 						</p>
 					<img src="../images/pid_discreto.png" width="650">
@@ -909,8 +1398,8 @@ u_D[k]&=\frac{K_PT_D}{T_s}(e[k]-e[k-1])
 						$$
 					\begin{aligned}
 u_P[k]&=K_pe[k]\\
-u_I[k]&=u_I[k-1]+\frac{K_PT_s}{T_I}\Bigl(\frac{e[k]+e[k-1]}{2}\Bigr)\\
-u_D[k]&=\frac{K_PT_D}{T_s}(e[k]-e[k-1])
+u_I[k]&=u_I[k-1]+K_iT_s\Bigl(\frac{e[k]+e[k-1]}{2}\Bigr)\\
+u_D[k]&=\frac{K_p}{T_s}(e[k]-e[k-1])
 				\end{aligned}
 	$$
 				</center>
@@ -926,18 +1415,37 @@ u_D[k]&=\frac{K_PT_D}{T_s}(e[k]-e[k-1])
 			<div class="slide-content">
 				<p align="center">Arduino:</p>
 				<pre><code class="language-arduino">
-					void loop() {
+						void sampling() {
 						r=1; //set-point
 						y=analogRead(input_pin); //le saida do sistema 
 						erro=r-y; //obtem sinal de erro 
-						u_P=K_p*erro;  // termo proporcional
-						u_I=u_I+Kp*Ts/Ti*(erro+erro_anterior)/2; // termo integrativo
-						u_D=Kp*Td/Ts*(erro-erro_anterior);  //termo derivativo
-						u=u_P+u_I+u_D; //sinal de controle
+						up=Kp*erro;  // termo proporcional
+						ui=ui+Ki*Ts*(erro+erro_anterior)/2; // termo integrativo
+						ud=Kd/Ts*(erro-erro_anterior);  //termo derivativo
+						u=up+ui+ud; //sinal de controle
 						erro_anterior=erro; 	//atualiza erro p/ proxima iteracao
 						analogWrite(output_pin,u); //atualiza saida
 					  }
 					  </code></pre>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Controle PID: derivador amplifica ruido</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						$$
+						C(s)=\frac{U(s)}{E(s)}=K_p+\frac{K_i}{s}+K_ds
+						$$
+						</p>
+					<img src="../images/pid_continuo.png" width="650">
+	
+				</center>
 			</div>
 
 		</section>
@@ -951,10 +1459,10 @@ u_D[k]&=\frac{K_PT_D}{T_s}(e[k]-e[k-1])
 				<center>
 					<p class="lightup">
 						$$
-						C(s)=\frac{U(s)}{E(s)}=K_P\Bigl(1+\frac{1}{T_Is}+T_Ds\Bigr)
+						C(s)=\frac{U(s)}{E(s)}=K_p+\frac{K_i}{s}+K_ds H(s)
 						$$
 						</p>
-					<img src="../images/pid_continuo.png" width="650">
+					<img src="../images/pid_continuo_filtro_derivativo.png" width="650">
 	
 				</center>
 			</div>
@@ -971,62 +1479,16 @@ u_D[k]&=\frac{K_PT_D}{T_s}(e[k]-e[k-1])
 				<center>
 					<p class="lightup">
 						$$
-						C(s)=\frac{U(s)}{E(s)}=K_P\Bigl(1+\frac{1}{T_Is}+\frac{T_Ds}{\frac{T_D}{N}s+1}\Bigr)
+						C(s)=\frac{U(s)}{E(s)}=K_p+\frac{K_i}{s}+\frac{K_ds}{\frac{K_d}{N}s+1}
 						$$
 						</p>
-					<img src="../images/pid_continuo.png" width="650">
+					<img src="../images/pid_continuo_filtro_derivativo.png" width="650">
 	
 				</center>
 			</div>
 
 		</section>
 
-
-
-		
-		<section>
-			<div class="slide-title">
-				<h2>Controle PID c/ anti-windup:</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-				$$
-				u_\text{min} \le u[k] \le u_\text{max}
-				$$
-				<img src="../images/u_saturacao.png" width="800">
-				</center>
-			</div>
-
-		</section>
-
-
-		<section>
-			<div class="slide-title">
-				<h2>Controle PID c/ anti-windup:</h2>
-			</div>
-			<div class="slide-content">
-				<p align="center">Arduino:</p>
-				<pre><code class="language-arduino">
-					void loop() {
-						r=1; //set-point
-						y=analogRead(input_pin); //le saida do sistema 
-						erro=r-y; //obtem sinal de erro 
-						if (u_anterior >u_max || u_anterior < u_min) {
-							erro_I=0;
-						}else {
-							erro_I=erro;
-						}
-						u_P=K_p*erro;  // termo proporcional
-						u_I=u_I+Kp*Ts/Ti*erro_I; // termo integrativo c/ anti-windup
-						u_D=Kp*Td/Ts*(erro-erro_anterior);  //termo derivativo
-						u=u_P+u_I+u_D; //sinal de controle
-						erro_anterior=erro; 	//atualiza erro p/ proxima iteracao
-						analogWrite(output_pin,u); //atualiza saida
-					  }
-					  </code></pre>
-			</div>
-
-		</section>
 
 
 		<section>
@@ -1147,6 +1609,80 @@ u_D[k]&=\frac{K_PT_D}{T_s}(e[k]-e[k-1])
 			</div>
 
 		</section>
+
+
+		
+			<section>
+			<div class="slide-title">
+				<h2>Saturação do atuador:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				$$
+				u_\text{min} \le u[k] \le u_\text{max}
+				$$
+				<img src="../images/u_saturacao.png" width="800">
+				</center>
+			</div>
+
+		</section>
+
+
+		
+		
+		<section>
+			<div class="slide-title">
+				<h2>Controle PID c/ anti-windup:</h2>
+			</div>
+			<div class="slide-content">
+				<p align="center">Arduino:</p>
+				<pre><code class="language-arduino">
+					void sampling() {
+						r=1; //set-point
+						y=analogRead(input_pin); //le saida do sistema 
+						erro=r-y; //obtem sinal de erro 
+						if (ui >u_max) {
+							ui=u_max;
+						}else if (ui < u_mim ){
+							ui=ui_min;
+						}
+						up=K*erro;  // termo proporcional
+						ui=ui+Ki*Ts*erro; // termo integrativo c/ anti-windup
+						ud=Kd/Ts*(erro-erro_anterior);  //termo derivativo
+						u=up+ui+ud; //sinal de controle
+						erro_anterior=erro; 	//atualiza erro p/ proxima iteracao
+						analogWrite(output_pin,u); //atualiza saida
+					  }
+					  </code></pre>
+			</div>
+
+		</section>
+
+			<section>
+			<div class="slide-title">
+				<h2>Controle PID s/ anti-windup:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<img src="../images/temperatura_sem_antiwindup.png" width="800">	
+				</center>
+			</div>
+
+		</section>
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Controle PID c/ anti-windup:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<img src="../images/temperatura_com_antiwindup.png" width="800">	
+			</center>
+			</div>
+
+		</section>
+
 
 
 
