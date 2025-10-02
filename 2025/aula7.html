@@ -1,0 +1,2251 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+		
+		<!-- and it's easy to individually load additional languages -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/arduino.min.js"></script>
+		
+		<script>hljs.highlightAll();</script>
+		
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 7: <br>Espaço de Estados - parte 1</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">02 de outubro de 2025</p>
+				</div>
+
+				</section>
+				
+
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Ciclo do Projeto de Controle</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					<img src="../images/design_process.png" width="450"/>
+				</center>
+					</div>
+	
+				</section>
+
+				
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Objetivos</h2>
+			</div>
+			<div class="slide-content">
+				<p>Os objetivos dessa aula são entender:
+						<ul>
+						<li>Modelos em espaço de estados;</li>
+						<li>Discretização em espaço de estados;</li>
+						<li>Análise de estabilidade em espaço de estados;</li>
+					</p>
+					</div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Sistema Dinâmico em tempo contínuo
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						EDO
+					$$
+					\sum_{i=0}^n\alpha_i\frac{d^i y}{dt^i}=\sum_{i=0}^m\beta_i\frac{d^i u}{dt^i}
+				$$
+			</p>
+				<img src="../images/planta.png" width="600" alt="">
+	
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Abordagens
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+					<img src="../images/edo_approach.png" width="1000" alt="">
+	
+			</center>
+			   </div>
+
+		</section>
+
+
+		<!-- <section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					$$
+					A_{n\times m}=\begin{bmatrix}
+					a_{11} & a_{12} & \cdots & a_{1m}\\
+					a_{21} & a_{22} & \cdots & a_{2m}\\
+					\vdots & \vdots & \ddots & \vdots\\
+					a_{n1} & a_{n2} & \cdots & a_{nm}\\
+					\end{bmatrix}
+					$$
+				De forma compacta
+				$$
+					A_{n\times m}=[a_{ij}], i=1,\ldots,n,\quad j=1,\ldots,m
+				$$
+$i\to$ linhas e $j\to$ colunas
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					$$
+					A_{n\times m}=\begin{bmatrix}
+					| & | & \cdots & |\\
+					c_{1} & c_{2} & \cdots & c_{m}\\
+					| & | & \cdots & |\\
+					\end{bmatrix}
+					$$
+				ou
+				$$
+					A_{n\times m}=\begin{bmatrix}
+					- & l_1^\trp & -\\
+					- & l_2^\trp & -\\
+					& \vdots \\
+					- & l_n^\trp & -\\
+					\end{bmatrix}
+					$$
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Produto matriz com matriz
+					$$
+					[A_{n\times m}B_{m\times p}]_{ij}=\sum_{k=1}^m a_{ik} b_{kj}
+					$$
+			<p class="lightup">
+					i-ésima linha produto escalar com a j-ésima coluna
+					$$
+					[A_{n\times m}B_{m\times p}]_{ij}=\langle l_i^A, c_j^B\rangle 
+					$$
+			</p>
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Produto matriz com matriz
+					<p>&nbsp;</p>
+					$$
+					(AB)_{n\times p}=\begin{bmatrix} 
+					- & (l_1^A)^\trp & - \\
+					- & (l_2^A)^\trp & - \\
+					&\vdots \\
+					- & (l_n^A)^\trp & - \\
+					\end{bmatrix}\begin{bmatrix} 
+					| & |  & \cdots & |\\
+					c_1^B &  c_2^B & \cdots & c_p^B \\
+					| & |  & \cdots & |
+					\end{bmatrix}
+					$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Produto matriz com matriz
+					<p>&nbsp;</p>
+					$$
+					(AB)_{n\times p}=\begin{bmatrix} 
+					\langle l_1^A, c_1^B\rangle & \langle l_1^A, c_2^B\rangle & \cdots & \langle l_1^A, c_p^B\rangle\\
+					\langle l_2^A, c_1^B\rangle & \langle l_2^A, c_2^B\rangle & \cdots & \langle l_2^A, c_p^B\rangle\\
+					\vdots & \vdots & \ddots & \vdots \\
+					\langle l_n^A, c_1^B\rangle & \langle l_n^A c_2^B\rangle & \cdots & \langle l_n^A, c_p^B\rangle\\
+					\end{bmatrix}
+					$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Produto matriz com matriz
+					<p>&nbsp;</p>
+					$$
+					(AB)_{n\times p}=\begin{bmatrix} 
+					| & |  & \cdots & |\\
+					c_1^A &  c_2^A & \cdots & c_m^A \\
+					| & |  & \cdots & |
+					\end{bmatrix}
+					\begin{bmatrix} 
+					- & (l_1^B)^\trp & - \\
+					- & (l_2^B)^\trp & - \\
+					&\vdots \\
+					- & (l_m^B)^\trp & - \\
+					\end{bmatrix}
+					$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Produto matriz com matriz
+					<p>&nbsp;</p>
+					$$
+					(AB)_{n\times p}=c_1^A(l_1^B)^\trp +c_2^A(l_2^B)^\trp+\cdots+c_m^A(l_m^B)^\trp
+					$$
+			Portanto,
+			$$
+					(AB)_{n\times p}=\sum_{k=1}^m \begin{bmatrix}
+					|\\
+					c_k^A \\
+					|
+					\end{bmatrix}_{n\times 1}\cdot \begin{bmatrix}
+					- & (l_k^B)^\trp & - 
+					\end{bmatrix}_{1\times p}
+					$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Produto matriz com vetor
+					$$
+					A\in\mathbb{R}^{n\times n},\quad x\in\mathbb{R}^n
+					$$
+			Portanto,
+			$$
+					Ax = \begin{bmatrix} 
+					| & |  & \cdots & |\\
+					c_1^A &  c_2^A & \cdots & c_n^A \\
+					| & |  & \cdots & |
+					\end{bmatrix}\begin{bmatrix}
+					x_1\\
+					x_2\\
+					\vdots \\
+					x_n
+					\end{bmatrix}=\sum_{j=1}^n \begin{bmatrix} 
+					|\\
+					c_j^A \\
+					| 
+					\end{bmatrix}x_j
+					$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Produto matriz com vetor
+					$$
+					A\in\mathbb{R}^{n\times n},\quad x\in\mathbb{R}^n
+					$$
+			Portanto,
+			$$
+					Ax =\begin{bmatrix} 
+					- & (l_1^A)^\trp & - \\
+					- & (l_2^A)^\trp & - \\
+					&\vdots \\
+					- & (l_n^A)^\trp & - \\
+					\end{bmatrix}\begin{bmatrix}
+					x_1\\
+					x_2\\
+					\vdots \\
+					x_n
+					\end{bmatrix}=\begin{bmatrix} 
+					\langle l_1^A, x\rangle\\
+					\langle l_2^A, x\rangle\\
+					\vdots \\
+					\langle l_n^A, x\rangle\\
+					\end{bmatrix}
+					$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Não-comutatividade:
+					$$
+				AB \neq BA
+					$$
+		Transposto:
+		$$
+					(AB)^\trp = B^\trp A^\trp 
+		$$
+		Inversa: 
+		$$
+					(AB)^{-1}=B^{-1}A^{-1}
+		$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+		Autovalores e Autovetores:
+		$$
+					Av=\lambda v
+		$$
+		Operador Autovalores:
+		$$
+					\lambda\{A\}=\{\lambda_1,\lambda_2,\ldots,\lambda_n\}
+		$$
+		Matriz (semi)-definida positiva: 
+		$$
+					A\ge 0 \Rightarrow \lambda \{A\} \ge 0
+		$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Decomposição espectral: 
+		$$
+					A=V\Lambda V^{-1}
+		$$
+em que
+		$$
+\begin{aligned} 
+V=\begin{bmatrix}
+| & | & \cdots & |\\
+v_1 & v_2 & \cdots & v_n\\
+| & | & \cdots & |
+\end{bmatrix},\quad \Lambda = \begin{bmatrix}
+\lambda_1 \\
+& \lambda_2 \\
+& & \ddots \\
+& & & \lambda_n
+\end{bmatrix}
+\end{aligned}
+		$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Decomposição espectral: 
+		$$
+					A=V\Lambda V^{-1}
+		$$
+em que
+		$$
+\begin{aligned} 
+A^{-1} = V\begin{bmatrix}
+\frac{1}{\lambda_1} \\
+& \frac{1}{\lambda_2} \\
+& & \ddots \\
+& & & \frac{1}{\lambda_n}
+\end{bmatrix}V^{-1}
+\end{aligned}
+		$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Decomposição espectral: 
+		$$
+					A=V\Lambda V^{-1}
+		$$
+em que
+		$$
+\begin{aligned} 
+A^n = V\begin{bmatrix}
+\lambda_1^n \\
+& \lambda_2^n \\
+& & \ddots \\
+& & & \lambda_n^n
+\end{bmatrix}V^{-1}
+\end{aligned}
+		$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Decomposição espectral: 
+		$$
+					A=V\Lambda V^{-1}
+		$$
+em que
+		$$
+\begin{aligned} 
+e^A = V\begin{bmatrix}
+e^{\lambda_1} \\
+& e^{\lambda_2} \\
+& & \ddots \\
+& & & e^{\lambda_n}
+\end{bmatrix}V^{-1}
+\end{aligned}
+		$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Exponencial Matricial: 
+		$$
+					e^A=I+A+\frac{1}{2!}A^2+\frac{1}{3!}A^3+\cdots
+		$$
+
+similar ao caso escalar:
+$$
+e^a=1+a+\frac{1}{2!}a^2+\frac{1}{3!}a^3+\cdots
+$$
+			
+			</center>
+			   </div>
+
+		</section>
+ -->
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="">
+						EDO
+					$$
+					\alpha_n\frac{d^n y}{dt^n}+\alpha_{n-1}\frac{d^{n-1}y}{dt^{n-1}}+\cdots+\alpha_0y=u
+				$$
+				Introduz-se <b>variáveis de estado</b>:
+				<p class="lightup">
+				$$
+						x_1=y,\quad 
+						x_2=\frac{dy}{dt},\quad
+						\cdots,\quad
+						x_n=\frac{d^{n-1}y}{dt^{n-1}}
+				$$
+			</p>
+			
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					$$
+					\begin{bmatrix} 
+					\dot x_1\\
+					\dot x_2\\
+					\vdots\\
+					\dot x_n
+					\end{bmatrix}=\begin{bmatrix} 
+					0 & 1 & \ldots & 0\\
+					0 & 0 & \ldots & 0\\
+					\vdots & \vdots & \ddots & \vdots \\
+					-\frac{\alpha_0}{\alpha_n} & -\frac{\alpha_1}{\alpha_n} & \cdots & -\frac{\alpha_{n-1}}{\alpha_n}
+					\end{bmatrix}\begin{bmatrix} 
+					x_1\\
+					x_2\\
+					\vdots\\
+					x_n
+					\end{bmatrix}+\begin{bmatrix} 
+					0\\
+					0\\
+					\vdots\\
+					\frac{1}{\alpha_n}
+					\end{bmatrix}u
+					$$
+				
+				<p class="lightup">
+				$$
+					\dot{x}(t)=Ax(t)+Bu(t)
+				$$
+			</p>
+			
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					Espaço de Estados
+				$$
+					\dot{x}(t)=Ax(t)+Bu(t)
+				$$
+			</p>
+			$$
+			x\in\mathbb{R}^n \to \text{vetor de estados}\\
+			u\in\mathbb{R}^m \to \text{vetor de entrada}\\
+			A\in\mathbb{R}^{n\times n}\to \text{matriz de dinâmica}\\
+			B\in\mathbb{R}^{n\times m}\to \text{matriz de entrada}\\
+			$$
+			
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					Saída:
+				$$
+					y(t)=Hx(t)+Du(t)
+				$$
+			</p>
+			$$
+			y\in\mathbb{R}^p \to \text{vetor de saída}\\
+			H\in\mathbb{R}^{p\times n}\to \text{matriz de saída}\\
+			D\in\mathbb{R}^{p\times m}\to \text{matriz de transmissão direta}\\
+			$$
+			
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		
+
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados (Linear)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				\dot{x}(t)=Ax(t)+Bu(t)\\
+					y(t)=Hx(t)+Du(t)
+				$$
+			</p>
+			<img src="../images/MIMO.png" width="600">
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados (Linear)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									<p>&nbsp;</p>
+	
+			<img src="../images/modelo_ss.png" width="1100">
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+		<p class="lightup">
+			$$
+			\ddot{y}+2\xi\omega_n\dot{y}+\omega_n^2 y = \omega_n^2 u
+			$$
+		</p>
+	
+		$$
+		x_1=y;\quad x_2=\dot{y}=\dot{x}_1; \quad\dot{x}_2=\ddot{y}.
+		$$
+			</center>
+					</div>
+
+		</section>
+
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+		<p class="lightup">
+			$$
+			\ddot{y}+2\xi\omega_n\dot{y}+\omega_n^2 y = \omega_n^2 u
+			$$
+		</p>
+	
+		$$
+		x_1=y;\quad x_2=\dot{y}=\dot{x}_1; \quad\dot{x}_2=\ddot{y}.
+		$$
+		Logo,
+		$$
+		\begin{bmatrix}
+		\dot{x}_1\\ 
+		\dot{x}_2
+		\end{bmatrix}=\begin{bmatrix}
+		0 & 1\\ 
+		-\omega_n^2 & -2\xi\omega_n
+		\end{bmatrix}\begin{bmatrix}
+		x_1\\ 
+		x_2
+		\end{bmatrix}+\begin{bmatrix}
+		0\\			
+		\omega_n^2
+		\end{bmatrix}u
+		$$
+			</center>
+					</div>
+
+		</section>
+		
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados (Não-Linear)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				\dot{x}(t)=f(x(t),u(t))\\
+					y(t)=h(x(t),u(t))
+				$$
+			</p>
+			<img src="../images/MIMO_nonlinear.png" width="600">
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Pêndulo Invertido móvel</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			
+			<img src="../images/pendulo_invertido.png" width="350">
+			<p class="">
+		$$
+					(M+m)\ddot{x}-ml\ddot{\theta}\cos(\theta)+ml\dot{\theta}^2\sin(\theta)=F\\
+					l\ddot{\theta}-\ddot{x}\cos(\theta)-g\sin(\theta)=0
+		$$
+	</p>
+	
+			</center>
+					</div>
+
+		</section>
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<img src="../images/linearizacao.png" alt="">
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		
+
+
+		<!-- <section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="">
+					
+				$$
+				\delta \dot{x}(t)=A(x_0,u_0)\delta x(t)+B(x_0,u_0)\delta u(t)\\
+					\delta y(t)=H(x_0,u_0)\delta x(t)+D(x_0,u_0)\delta u(t)
+				$$
+			</p>
+		em que 
+		$$
+		\begin{aligned}
+		A(x_0,u_0)=\frac{\partial f}{\partial x}\Bigr|_{x=x_0,u=u_0},\quad
+		B(x_0,u_0)=\frac{\partial f}{\partial u}\Bigr|_{x=x_0,u=u_0}\\
+		H(x_0,u_0)=\frac{\partial h}{\partial x}\Bigr|_{x=x_0,u=u_0},\quad
+		D(x_0,u_0)=\frac{\partial h}{\partial u}\Bigr|_{x=x_0,u=u_0}
+\end{aligned}
+		$$
+		
+	
+			</center>
+					</div>
+
+		</section>
+		
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="">
+					
+				$$
+				\delta \dot{x}(t)=A(x_0,u_0)\delta x(t)+B(x_0,u_0)\delta u(t)\\
+					\delta y(t)=H(x_0,u_0)\delta x(t)+D(x_0,u_0)\delta u(t)
+				$$
+			</p>
+		em que 
+		$$
+		\begin{aligned}
+			\delta x(t)&=x(t)-x_0 \\
+			\delta \dot{x}&=\dot{x}(t)-f(x_0,u_0)\\
+			\delta u(t)&=u(t)-u_0\\ 
+			\delta y(t)&=y(t)-h(x_0,u_0)\\
+\end{aligned}
+		$$
+		
+	
+			</center>
+					</div>
+
+		</section> -->
+
+
+		<!-- <section>
+			
+			<div class="slide-title">
+				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									Ponto de equilíbrio na origem
+									$$
+									0=f(0,0),\quad 0=h(0,0)
+									$$
+				<p class="">
+					
+				$$
+				\dot{x}(t)=A(x_0,u_0)x(t)+B(x_0,u_0)u(t)\\
+				y(t)=H(x_0,u_0)x(t)+D(x_0,u_0)u(t)
+				$$
+				em que $x_0=0$ e $u_0=0$.
+			</p>
+	
+			</center>
+					</div>
+
+		</section> -->
+
+	
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização do Modelo em Espaço de Estados</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				\dot{x}(t)=Ax(t)+Bu(t)\\
+				$$
+			</p>
+
+Equivalente em tempo discreto:
+										
+			<p class="lightup">
+					
+				$$
+				x_{k+1}=A_dx_k+B_du_k\\
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				\dot{x}=ax,\quad x\in\mathbb{R}
+				$$
+			</p>
+
+Solução:										
+			<p class="lightup">
+					
+				$$
+		 x(t)=e^{a(t-t_0)}x(t_0),\quad t\in[t_0,T]
+				$$
+			</p>
+		em que $e^x=1+x+\frac{1}{2}x^2+\cdots$
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+		
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				\dot{x}=ax+bu,\quad x,u\in\mathbb{R}
+				$$
+			</p>
+
+Solução:										
+			<p class="lightup">
+					
+				$$
+		 x(t)=e^{a(t-t_0)}x(t_0)+\int_0^t e^{a(t-\tau)}b u(\tau)d\tau,\quad t\in[t_0,T]
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				\dot{x}=Ax+Bu,\quad x\in\mathbb{R}^n,u\in\mathbb{R}^m
+				$$
+			</p>
+
+Solução:										
+			<p class="lightup">
+					
+				$$
+		 x(t)=e^{A(t-t_0)}x(t_0)+\int_0^t e^{A(t-\tau)}B u(\tau)d\tau,\quad t\in[t_0,T]
+				$$
+			</p>
+		
+		em que $e^X=I+X+\frac{1}{2}X^2+\cdots$
+	
+			</center>
+					</div>
+
+		</section>
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				x(t)=e^{A (t-t_0)}x(t_0)+\int_{t_0}^t e^{A(t-\tau)}Bu(\tau)d\tau,\quad t\in[t_0,T]
+				$$
+			</p>
+Considere
+										
+			<p class="">
+					
+				$$
+				x(kT_s)=x_k,\quad t \in [kT_s,(k+1)T_s]
+				$$
+				ou seja,
+				$
+				t_0=kT_s,\quad T=(k+1)T_s
+				$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+		
+			<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				x_{k+1}=e^{A T_s}x_k+\int_{kT_s}^{(k+1)T_s} e^{A((k+1)T_s-\tau)}Bu(\tau)d\tau
+				$$
+			</p>
+
+			Suponha que 
+
+			$$
+			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
+			$$
+
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				x_{k+1}=e^{A T_s}x_k+\int_{kT_s}^{(k+1)T_s} e^{A((k+1)T_s-\tau)}d\tau Bu_k
+				$$
+			</p>
+
+			Suponha que 
+
+			$$
+			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
+			$$
+
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				x_{k+1}=e^{A T_s}x_k+\Bigl(\int_{0}^{T_s} e^{A\eta}d\eta B\Bigr)u_k
+				$$
+			</p>
+
+			Suponha que 
+			$$
+			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
+			$$
+
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				x_{k+1}=\underbrace{e^{A T_s}}_{A_d}x_k+\underbrace{\Bigl(\int_{0}^{T_s} e^{A\eta }d\eta B\Bigr)}_{B_d}u_k
+				$$
+			</p>
+
+			Suponha que 
+			$$
+			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
+			$$
+
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+				<p class="lightup">
+					
+				$$
+				x_{k+1}=A_dx_k+B_du_k
+				$$
+			</p>
+			em que 
+			$$
+			\begin{aligned}
+			A_d&=e^{AT_s}\\
+			B_d&=\int_0^{T_s} e^{A\eta}d\eta B
+			\end{aligned}
+			$$
+
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>
+						&nbsp;
+					</p>
+				<p class="lightup">
+					
+				$$
+			\int_0^t e^{a\eta}d\eta = \frac{1}{a}(e^{at}-1)
+				$$
+				com $a\in\mathbb{R}, a\neq 0$
+			</p>
+
+		
+	
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>
+						&nbsp;
+					</p>
+				<p class="lightup">
+					
+				$$
+			\int_0^t e^{A\eta}d\eta = A^{-1}(e^{At}-I)=(e^{At}-I)A^{-1}
+				$$
+				com $A\in\mathbb{R}^{n\times n}$ e $A$ não-singular.
+			</p>
+
+		
+	
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<p>&nbsp;</p>
+			Se $A$ for não-singular (existe $A^{-1}$), então
+						$$
+			\begin{aligned}
+		B_d&=\int_0^{T_s} e^{A\eta}d\eta B\\&=A^{-1}(e^{AT_s}-I)B\\&=(e^{AT_s}-I)A^{-1}B
+			\end{aligned}
+			$$
+
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+								<p>&nbsp;</p>	
+			Se $A$ for singular (não existe $A^{-1}$), então
+						$$
+			\begin{aligned}
+		B_d&=\int_0^{T_s} e^{A\eta}d\eta B\\&= \int_0^{T_s} (I+A\eta+\frac{1}{2!}A^2\eta^2+\frac{1}{3!}A^3\eta^3+\cdots)d\eta B
+			\end{aligned}
+			$$
+
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+								<p>&nbsp;</p>	
+			Se $A$ for singular (não existe $A^{-1}$), então
+						$$
+			\begin{aligned}
+		B_d&=\int_0^{T_s} e^{A\eta}d\eta B\\&= \int_0^{T_s} (I+A\eta+\frac{1}{2!}A^2\eta^2+\frac{1}{3!}A^3\eta^3+\cdots)d\eta B\\
+		=&\Bigl(IT_s+A \frac{T_s^2}{2}+\frac{1}{2!}A^2 \frac{T_s^3}{3}+\frac{1}{3!}A^3 \frac{T_s^4}{4}+\cdots\Bigr)B
+			\end{aligned}
+			$$
+
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Discretização da Saída</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="lightup">
+
+				$$
+				y(t)=Hx(t)+Du(t)
+				$$
+			</p>
+		Portanto, o equivalente em tempo discreto basta tomar
+
+		<p class="lightup">
+
+			$$
+			t=kT_s
+			$$
+		</p>
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização da Saída</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="lightup">
+
+				$$
+				y(kT_s)=Hx(kT_s)+Du(kT_s)
+				$$
+			</p>
+		ou seja, o equivalente em tempo discreto é
+
+		<p class="lightup">
+
+			$$
+			y_k=Hx_k+Du_k
+			$$
+		</p>
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em espaço de estados em tempo discreto</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="lightup">
+
+				$$
+				\begin{aligned} 
+				x_{k+1}&=A_dx_k+B_du_k\\ 
+				y_k&=Hx_k+Du_k
+				\end{aligned}
+				$$
+			</p>
+		
+		em que 
+		$$
+			A_d=e^{AT_s},\quad B_d=\int_0^{T_s} e^{A\eta}d\eta B
+		$$
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em espaço de estados em tempo discreto</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<img src="../images/modelo_ss_discreto.png" width="1000">
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no matlab</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			$$
+					\dot{x}=\begin{bmatrix}
+					-1 & 1 \\
+					0 & -2
+					 \end{bmatrix}x+\begin{bmatrix} 1 \\ 3 \end{bmatrix}u
+			$$
+		<p>&nbsp;</p>
+			<p class="lightup">
+				Equivalente em tempo discreto com $T_s=0.1s$:
+				$$x_{k+1}=A_dx_k+B_du_k$$
+			</p>
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da equação de estados</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="">
+				k=1;
+				$$
+				\begin{aligned} 
+				x_1=A_dx_0+B_d u_0
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da equação de estados</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="">
+				k=2;
+				$$
+				\begin{aligned} 
+				x_1&=A_dx_0+B_d u_0\\
+				x_2&=A_dx_1+B_d u_1=A_d^2x_0+A_dB_du_0+B_du_1
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Solução da equação de estados</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="">
+				k=3;
+				$$
+				\begin{aligned} 
+				x_1&=A_dx_0+B_d u_0\\
+				x_2&=A_dx_1+B_d u_1=A_d^2x_0+A_dB_du_0+B_du_1\\
+				x_3&=A_dx_2+B_d u_2=A_d^3x_0+A_d^2B_du_0+A_dB_du_1+B_du_2
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		
+				<section>
+			
+			<div class="slide-title">
+				<h2>Solução da equação de estados </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="">
+				k=N;
+				$$
+				\begin{aligned} 
+				x_1&=A_dx_0+B_d u_0\\
+				x_2&=A_dx_1+B_d u_1=A_d^2x_0+A_dB_du_0+B_du_1\\
+				x_3&=A_dx_2+B_d u_2=A_d^3x_0+A_d^2B_du_0+A_dB_du_1+B_du_2\\
+				\vdots\\
+				x_N&=A_dx_{N-1}+B_d u_{N-1}=A_d^Nx_0+\sum_{j=0}^{N-1}A_d^{N-j-1}B_d u_j
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da equação de estados em tempo discreto</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="lightup">
+
+				$$
+				\begin{aligned} 
+				x_k=A_d^kx_0+\sum_{j=0}^{k-1}A_d^{k-j-1}B_d u_j, \quad k=1,2,3,\ldots
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+	
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da equação de saída</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="">
+				Saída:
+
+				$$
+				\begin{aligned} 
+				y_k&=Hx_k+Du_k
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da equação de saída</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="">
+				Saída:
+
+				$$
+				\begin{aligned} 
+				y_k&=Hx_k+Du_k\\
+				&=H\Bigl(A_d^kx_0+\sum_{j=0}^{k-1}A_d^{k-j-1}B_d u_j\Bigr)+Du_k
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da equação de saída</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="">
+				Saída:
+
+				$$
+				\begin{aligned} 
+				y_k&=Hx_k+Du_k\\
+				&=H\Bigl(A_d^kx_0+\sum_{j=0}^{k-1}A_d^{k-j-1}B_d u_j\Bigr)+Du_k\\
+				&=HA_d^kx_0+H\sum_{j=0}^{k-1}A_d^{k-j-1}B_d u_j+Du_k
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da equação de estados em tempo discreto</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="lightup">
+				Saída:
+
+				$$
+				\begin{aligned} 
+				y_k=HA_d^kx_0+H\sum_{j=0}^{k-1}A_d^{k-j-1}B_d u_j+Du_k, \\k=1,2,3,\ldots
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no matlab</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			$$
+					\dot{x}=\begin{bmatrix}
+					-1 & 1 \\
+					0 & -2
+					 \end{bmatrix}x+\begin{bmatrix} 1 \\ 3 \end{bmatrix}u
+			$$
+	
+			<p class="lightup">
+				Equivalente em tempo discreto com $T_s=0.1s$:
+				$$x_{k+1}=A_dx_k+B_du_k$$
+			</p>
+	Simular para $x_0=[10;10]$ e $u_k=0, T=10$
+			</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Considere um sistema em espaço de estados na forma
+					$$
+					x_{k+1}=A_dx_k
+					$$
+									
+			<p class="lightup">
+			O sistema representado em espaço de estados é estável em tempo discreto se 
+				$$
+				\begin{aligned} 
+				|\lambda\{A_d\}| < 1
+				\end{aligned}
+				$$
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+													
+			<p class="lightup">
+							$
+				\begin{aligned} 
+				|\lambda\{A_d\}| < 1
+				\end{aligned}
+				$
+			</p>
+
+			<img src="../images/estabilidade_discreta.png" width="850">
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Função de energia:
+
+			<br>
+			Se existir uma função $V:\mathbb{R}^n\to \mathbb{R}$ tal que 
+			$$
+					V(x_k)>0,\quad \forall x_k\in\mathbb{R}^n \\
+					V(x_k)=0 \Leftrightarrow x_k=0
+			$$
+			e 
+$$
+V(x_{k+1})-V(x_{k}) \le 0
+$$
+então o sistema é estável.
+			</center>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Função de energia:
+
+			<br>
+			Se existir uma função $V:\mathbb{R}^n\to \mathbb{R}$ tal que 
+			$$
+					V(x_k)>0,\quad \forall x_k\in\mathbb{R}^n \\
+					V(x_k)=0 \Leftrightarrow x_k=0
+			$$
+			e 
+$$
+V(x_{k+1})-V(x_{k}) < 0
+$$
+então o sistema é <b>assintoticamente</b> estável.
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+			Função de energia:
+
+			<br>
+			Para <b>sistemas lineares</b>, a função de energia
+			<p class="lightup">
+			$$
+					V(x_k)=x_k^\trp P x_k,\quad P=P^\trp \succeq 0
+			$$
+		</p>
+			é necessária e suficiente para certificar a estabilidade!
+			</center>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+			Função de energia:
+
+			<br>
+			Para <b>sistemas lineares</b>, a função de energia
+			<p class="lightup">
+				$$
+						V(x_k)=x_k^\trp P x_k,\quad P=P^\trp \succ 0
+				$$
+			</p>
+			é necessária e suficiente para certificar a <b>estabilidade assintótica</b>!
+			</center>
+					</div>
+
+		</section>
+
+
+			
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Função de energia:
+
+			<br>
+			$$
+						V(x_{k+1})-V(x_k)=x_{k+1}^\trp Px_{k+1}-x_k^\trp Px_k < 0
+			$$
+			Uma vez que,
+			$$
+					x_{k+1}=A_dx_k
+			$$
+			então
+					$$
+				(A_dx_k)^\trp P(A_dx_k)-x_k^\trp Px_k < 0
+					$$
+			</p>
+		
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Função de energia:
+
+			<br>
+			$$
+						V(x_{k+1})-V(x_k)=x_{k+1}^\trp Px_{k+1}-x_k^\trp Px_k < 0
+			$$
+			Uma vez que,
+			$$
+					x_{k+1}=A_dx_k
+			$$
+			então
+					$$
+				x_k^\trp A_d^\trp P A_dx_k-x_k^\trp Px_k < 0
+					$$
+			</p>
+		
+			</center>
+					</div>
+
+		</section>
+
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Função de energia:
+
+			<br>
+			$$
+						V(x_{k+1})-V(x_k)=x_{k+1}^\trp Px_{k+1}-x_k^\trp Px_k < 0
+			$$
+			Uma vez que,
+			$$
+					x_{k+1}=A_dx_k
+			$$
+			então
+					$$
+				x_k^\trp(A_d^\trp P A_d-P)x_k < 0
+					$$
+			</p>
+		
+			</center>
+					</div>
+
+		</section>
+
+
+			
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Função de energia:
+
+			<br>
+			$$
+						V(x_{k+1})-V(x_k)=x_{k+1}^\trp Px_{k+1}-x_k^\trp Px_k < 0
+			$$
+			Uma vez que,
+			$$
+					x_{k+1}=A_dx_k
+			$$
+			então
+					$$
+					A_d^\trp PA_d -P \prec 0
+					$$
+			</p>
+		
+			</center>
+					</div>
+
+		</section>
+
+
+				
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+			Um sistema em espaço de estados em tempo discreto é <b>assintoticamente estável</b> se e somente se
+			existir uma matriz $P=P^\trp \in\mathbb{R}^{n\times n}$ tal que
+			<p class="lightup">
+			$$
+						P\succ 0 \\
+						A_d^\trp PA_d -P \prec  0
+			$$
+			
+		</p>
+		Desigualdade Matricial Linear (LMI)
+			</p>
+		
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+			Um sistema em espaço de estados em tempo discreto é <b>assintoticamente estável</b> se e somente se
+			existir uma matriz $P=P^\trp\in\mathbb{R}^{n\times n}$ tal que
+			<p class="lightup">
+			$$
+						P\succ 0 \\
+						A_d^\trp PA_d -P = -Q, \quad Q\succ 0
+			$$
+			
+		</p>
+
+			Sistema linear de equações!
+		
+			</center>
+					</div>
+
+		</section>
+
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no matlab</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+
+		Seja o sistema em espaço de estados
+		<p class="lightup">
+		$$
+				x_{k+1}=\begin{bmatrix}
+				1 & -2 \\
+				2 & 1
+				 \end{bmatrix}x_k+\begin{bmatrix} 1 \\ 2 \end{bmatrix}u_k
+		$$</p>
+		Análise a estabilidade desse sistema:
+		<p>
+			<ul>
+				<li>via autovalores de $A_d$ (eig);</li>
+				<li>via Lyapunov com $Q=I$ (dlyap).</li>
+			</ul>
+			</p>
+			</center>
+					</div>
+
+		</section>
+
+
+		
+	
+	
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Próxima aula teórica</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>Projeto de controladores em Espaço de estados</p>
+						<img src="../images/state_feedback.png" width="600" alt="">
+					</center>
+				</div>
+
+			</section>
+
+
+
+			
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h2>Até a próxima aula!</h2>
+				</center>
+				</div>
+
+			</section>
+
+			
+
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
+
