@@ -1,0 +1,1029 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SEL0359 - Controle Digital</title>
+
+		<link rel="stylesheet" href="../dist/reset.css">
+		<link rel="stylesheet" href="../dist/reveal.css">
+		<link rel="stylesheet" href="../dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+		
+		<!-- and it's easy to individually load additional languages -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/arduino.min.js"></script>
+		
+		<script>hljs.highlightAll();</script>
+		
+		<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-hide-slide-number="true" data-transition="slide">
+					<div class="logo"><img src="../images/sel.png"/> </div>
+					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
+					<div class="title">
+					<h2>Aula 9: <br>Controle LQR</h2>
+					</div>
+					<div class="author">
+					<h3>Prof. Marcos Rogério Fernandes</h3>
+				</div>
+					<div class="advisor">
+					
+					<p style="text-align: center;font-size: 0.8em;">16 de outubro de 2025</p>
+				</div>
+
+				</section>
+				
+
+
+				<section>
+					<div class="slide-title">
+						<h2>Ciclo do Projeto de Controle LQR</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					<img src="../images/design_process_lqr.png" width="700"/>
+				</center>
+					</div>
+	
+				</section>
+		
+
+				
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Objetivos</h2>
+			</div>
+			<div class="slide-content">
+				<p>Os objetivos dessa aula são entender:
+						<ul>
+						<li>Problema de controle ótimo;</li>
+						<li>Custo Quadrático;</li>
+						<li>Programação dinâmica: equação de Bellman;</li>
+						<li>Equação de Riccati;</li>
+						<li>Custo ótimo;</li>
+					</p>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo2.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo3.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo4.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						Problema de programação (otimização) matemática:
+				$$
+					\min_{u_0,u_1,\ldots,u_{N-1}} \quad J\\
+					\text{tal que} \\
+					 x_{k+1}=f(x_k,u_k)\\
+					 x_k\in\mathcal{X}\\
+					 u_k\in\mathcal{U}
+				$$
+			</p>
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo quadrático:
+					<p class="lightup">
+			
+							$
+J_{0\to N}=x_N^T P_N x_N + \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k, \\Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+						$
+					</p>
+					Dinâmica Linear:
+					<p class="lightup2">
+		
+					
+				$$
+					 x_{k+1}=Ax_k+Bu_k\\
+					 x_k\in\mathbb{R}^n\\
+					 u_k\in\mathbb{R}^m
+				$$
+			</p>
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo: LQR</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						Problema de programação (otimização) matemática:
+				$$
+					\min_{u_0,u_1,\ldots,u_{N-1}} \quad \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N \\
+					\text{tal que} \\
+					 x_{k+1}=Ax_k+Bu_k\\
+					 x_k\in\mathbb{R}^n\\
+					 u_k\in\mathbb{R}^m
+				$$
+			</p>
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	<img src="../images/controle_otimo_bellman.png" width="700">
+				</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	<img src="../images/controle_otimo_bellman2.png" width="700">
+				</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	<img src="../images/controle_otimo_bellman3.png" width="730">
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+	Seja $\{x_0^*,x_1^*,\ldots,x_N^*\}$ e $\{u_0^*,u_1^*,\ldots,u_{N-1}^*\}$ a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{0\to N}$.
+		<p class="lightup">
+			Então, para qualquer $k\in (0,N)$, tem-se:
+	$\{x_k^*,x_{k+1}^*,\ldots,x_N^*\}$ e $\{u_k^*,u_{k+1}^*,\ldots,u_{N-1}^*\}$ são a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{k\to N}$			
+</p>
+				</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+	Seja $V_k(x_k)=J_{k\to N}^*$, então 
+	<p class="lightup">
+	$$
+					V_k(x_k)=\min_{u_k} [\underbrace{x_k^\trp Q x_k + u_k^\trp R u_k}_{\text{custo por estágio}} + \underbrace{V_{k+1}(x_{k+1})}_{\text{custo  ``to-go"}}]
+	$$
+</p>
+<p>Base da programação dinâmica! (Reinforcement Learning, etc)</p>
+					</div>
+
+		</section>
+
+
+
+				
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+<img src="../images/custo_estagio.png" width="700">
+
+	</center>
+
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+<img src="../images/custo_to_go.png" width="700">
+	</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					V_k(x_k)=\min_{u_k} [x_k^\trp Q x_k + u_k^\trp R u_k + V_{k+1}(x_{k+1})]
+	$$
+</p>
+<p>Hipótese:</p>
+$$
+	V_{k+1}(x_{k+1})=x_{k+1}^\trp P_{k+1}x_{k+1}, \quad P_{k+1}=P_{k+1}^\trp \succ 0
+$$
+					</div>
+
+		</section>
+
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					V_k(x_k)=\min_{u_k} [\underbrace{x_k^\trp Q x_k + u_k^\trp R u_k + x_{k+1}^\trp P_{k+1}x_{k+1}}_{g(x_k,u_k)}]
+	$$
+</p>
+<p>LQR: Custo quadrático+dinâmica linear gera um problema <b>convexo</b>! (possui apenas um mínimo)</p>
+$$
+	\frac{\partial g(x_k,u_k)}{\partial u_k}=0
+$$
+					</div>
+
+		</section>
+
+
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+</center>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+\frac{\partial g(x_k,u_k)}{\partial u_k}=\frac{\partial}{\partial u_k}(x_k^\trp Q x_k + u_k^\trp R u_k + x_{k+1}^\trp P_{k+1}x_{k+1})=0
+$$
+
+</center>
+					</div>
+
+		</section>
+	
+
+
+				
+		<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+\frac{\partial}{\partial u_k}(x_k^\trp Q x_k + u_k^\trp R u_k + (Ax_k+Bu_k)^\trp P_{k+1}(Ax_k+Bu_k))=0
+$$
+
+</center>
+					</div>
+
+		</section>
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+2R u_k+ \frac{\partial}{\partial u_k}((Ax_k+Bu_k)^\trp P_{k+1}(Ax_k+Bu_k))=0
+$$
+
+</center>
+					</div>
+
+		</section>
+
+
+		
+				<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+2R u_k+ \frac{\partial}{\partial u_k}(\underbrace{(Ax_k+Bu_k)^\trp P_{k+1}(Ax_k+Bu_k)}_{\star})=0
+$$
+
+note que 
+$$
+\star=x_k^\trp A^\trp P_{k+1}Ax_k+2u_k^\trp B^\trp P_{k+1}Ax_k+u_k^\trp B^\trp P_{k+1}Bu_k
+$$
+
+</center>
+					</div>
+
+		</section>
+
+
+				
+				<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+2R u_k+ 2B^\trp P_{k+1}Ax_k+2B^\trp P_{k+1}Bu_k=0
+$$
+
+
+</center>
+					</div>
+
+		</section>
+
+
+						<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+(R+B^\trp P_{k+1}B)u_k+ B^\trp P_{k+1}Ax_k=0
+$$
+
+
+</center>
+					</div>
+
+		</section>
+
+
+
+	
+	
+	
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução de Controle Ótimo (LQR):</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					u^*_k=-\underbrace{(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A}_{K}x_k
+	$$
+</p>
+<ul>
+	<li>Realimentação de estados!</li>
+	<li>Ganho depende de $P_{k+1}$.</li>
+</ul>
+
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					V_k(x_k)=x_k^\trp Q x_k + (u_k^*)^\trp R u_k^* + x_{k+1}^\trp P_{k+1}x_{k+1}\\
+					x_{k+1}=Ax_k+Bu^*_k
+	$$
+</p>
+Com 
+$$
+u^*_k=-\underbrace{(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A}_{K}x_k,\quad V_k(x_k)=x_k^\trp P_k x_k
+$$
+
+					</div>
+
+		</section>
+
+
+
+		
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação Recursiva de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="">
+	$$
+					x_k^\trp P_k x_k \\=x_k^\trp(Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A )x_k 
+	$$
+</p>
+Então,
+<p class="lightup2">
+	Equação de Riccati p/ Tempo Discreto:
+	$$
+					P_k =Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A  
+	$$
+</p>
+
+					</div>
+
+		</section>
+		
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da Equação de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Para $k=N-1$,
+<p class="">
+	$$
+					P_{N-1} =Q +A^\trp P_{N}A-A^\trp P_{N}B(R+B^\trp P_{N}B)^{-1}B^\trp P_{N}A  
+	$$
+</p>
+Para $k=N-2$,
+<p class="">
+	$$
+					P_{N-2} =Q +A^\trp P_{N-1}A-A^\trp P_{N-1}B(R+B^\trp P_{N-1}B)^{-1}B^\trp P_{N-1}A  
+	$$
+</p>
+Para $k=N-3,\ldots, 1, 0$,
+<p class="">
+	$$
+	P_k =Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A  
+	$$
+</p>
+
+					</div>
+
+		</section>
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Considere o sistema 
+					<p class="lightup">
+					$$
+					x_{k+1}=\begin{bmatrix}3 & 0 \\ 5 & 4\end{bmatrix}x_k+\begin{bmatrix}1 \\ 2\end{bmatrix}u_k
+					$$
+					</p>
+					Obtenha o controle ótimo LQR de horizonte finito com $N=20$ e 
+					$$
+					Q=\begin{bmatrix}2 & 0 \\ 0 & 3\end{bmatrix},\quad R=1,\quad P_N=0.1I
+					$$
+				</center>
+
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo quadrático (Horizonte Infinito):
+					<p class="lightup">
+			
+							$$
+J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N,
+						$$
+					</p>
+					com 
+					$$
+					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+					$$
+				</center>
+					</div>
+
+		</section>
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo quadrático (Horizonte Infinito):
+					<p class="lightup">
+			
+							$$
+J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k,
+						$$
+					</p>
+					com 
+					$$
+					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+					$$
+				</center>
+					</div>
+
+		</section>
+
+
+		
+				<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo quadrático (Horizonte Infinito):
+					<p class="lightup">
+			
+							$$
+J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k+u_k^\trp F x_k,
+						$$
+					</p>
+					com 
+					$$
+					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0, \quad F=0
+					$$
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução Estacionária da Eq. de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Se $(A,B)$ for controlável então existe:
+<p class="lightup">
+	$$
+	P_\infty =Q +A^\trp P_\infty A-A^\trp P_\infty B(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A  
+	$$
+</p>
+<p class="lightup">
+	Lei de Controle Ótimo:
+	$$
+					u^*_k=-\underbrace{(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A}_{K}x_k
+	$$
+</p>
+					</div>
+
+		</section>
+
+
+			<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Considere o sistema 
+					<p class="lightup">
+					$$
+					x_{k+1}=\begin{bmatrix}3 & 0 \\ 5 & 4\end{bmatrix}x_k+\begin{bmatrix}1 \\ 2\end{bmatrix}u_k
+					$$
+					</p>
+					Obtenha o controle ótimo LQR de horizonte <b>infinito</b> e
+					$$
+					Q=\begin{bmatrix}2 & 0 \\ 0 & 3\end{bmatrix},\quad R=1
+					$$
+				</center>
+
+					</div>
+
+		</section>
+
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução Estacionária da Eq. de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Se $(A,B)$ for controlável então existe:
+<p class="lightup">
+	$$
+	P_\infty =Q +A^\trp P_\infty A-A^\trp P_\infty B(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A  
+	$$
+</p>
+
+<p></p>
+
+	<ul>
+		<li>Controle LQR garante estabilidade!</li>
+	</ul>
+	$$
+	u_k=-Kx_k
+	$$
+				</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo quadrático (Horizonte Infinito):
+					<p class="lightup">
+			Estabilidade implica em
+							$$
+J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N < \infty 
+						$$
+					</p>
+					com 
+					$$
+					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+					$$
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Matrizes de desempenho $Q$ e $R$ </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				Critério de Bryson:
+					<p class="">
+			
+						$$
+						Q=\begin{bmatrix}q_{11}\\
+						& q_{22} \\
+						& & \ddots \\
+						& & & q_{nn}\end{bmatrix},\quad R=\begin{bmatrix}r_{11}\\
+						& r_{22} \\
+						& & \ddots \\
+						& & & r_{mm}\end{bmatrix}
+						$$
+					</p>
+					com 
+					$$
+					q_{ii}=\frac{1}{(x_i^\text{max})^2},\quad r_{ii}=\frac{1}{(u_i^\text{max})^2}
+					$$
+				</center>
+					</div>
+
+		</section>
+
+
+			
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo ótimo:
+					<p class="lightup">
+	
+							$$
+V_0(x_0) = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N = x_0^\trp P_\infty x_0
+						$$
+					</p>
+					com 
+					$$
+					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+					$$
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo ótimo:
+					<p class="">
+	
+							$
+J_\infty = x_0^\trp P_\infty x_0
+						$
+					</p>
+					<img src="../images/LQR_cost.gif" alt="">
+				</center>
+					</div>
+
+		</section>
+	
+
+
+			<section>
+				<div class="slide-title">
+					<h2>Próxima aula teórica</h2>
+				</div>
+				<div class="slide-content">
+					<center>
+						<p>Filtro de Kalman</p>
+						<img src="../images/2d_gaussian.gif" width="500">
+					</center>
+				</div>
+
+			</section>
+
+
+
+			
+
+
+			<section>
+		
+				<div class="slide-content">
+					<center>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					<h2>Até a próxima aula!</h2>
+				</center>
+				</div>
+
+			</section>
+
+			
+
+
+
+
+				<!------------------------>
+			</div>
+		</div>
+
+		
+
+		<script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/math/math.js"></script>
+		<script src="../init.js"></script>
+	</body>
+</html>
+
