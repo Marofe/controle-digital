@@ -30,7 +30,7 @@
 					<div class="logo"><img src="../images/sel.png"/> </div>
 					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
 					<div class="title">
-					<h2>Aula 11: <br>Controle LQG</h2>
+					<h2>Aula 11: <br>Controle Estocástico LQG</h2>
 					</div>
 					<div class="author">
 					<h3>Prof. Marcos Rogério Fernandes</h3>
@@ -55,23 +55,70 @@
 			<div class="slide-content">
 				<p>Os objetivos dessa aula são entender:
 						<ul>
-						<li>O que é o Filtro de Kalman;</li>
-						<li>Implementação recursiva;</li>
-						<li>Implementação com horizonte infinito;</li>
-						<li>Aplicações do Filtro de Kalman;</li>
+						<li>Sistemas com ruído;</li>
+						<li>Controle Ótimo Estocástico;</li>
+						<li>Solução via Programação Dinâmica;</li>
+						<li>Controle Ótimo com Filtro de Kalman;</li>
+						<li>Exemplos</li>
 					</div>
 
 		</section>	
 
+
 		<section>
 			
 			<div class="slide-title">
-				<h2>Filtro de Kalman + LQR = LQG <br>(Linear Quadratic Guassian Regulator)</h2>
+				<h2>Modelo em espaço de estados em tempo discreto</h2>
 			</div>
 			<div class="slide-content">
 				<center>
-								
-			<img src="../images/state_observer_kf.png" width="550">
+									
+			<p class="lightup">
+
+				$$
+				\begin{aligned} 
+				x_{k+1}&=Ax_k+Bu_k\\ 
+				y_k&=Hx_k+Du_k
+				\end{aligned}
+				$$
+			</p>
+			<p>
+				$A$ e $B$ matrizes equivalentes em tempo discreto.
+			</p>
+		
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+	
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Modelo em espaço de estados em tempo discreto</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+			<p class="lightup">
+Modelo estocástico
+				$$
+				\begin{aligned} 
+				x_{k+1}&=Ax_k+Bu_k+w_k\\ 
+				y_k&=Hx_k+Du_k+\epsilon_k
+				\end{aligned}
+				$$
+			</p>
+			<ul>
+				<li>$w_k \to $ ruído de processo</li>
+				<li>$\epsilon_k \to $ ruído de medição</li>
+			</ul>
+		
 		
 	
 			</center>
@@ -84,13 +131,14 @@
 		<section>
 			
 			<div class="slide-title">
-				<h2>Exemplo: Pêndulo Invertido</h2>
+				<h2>Modelo em espaço de estados em tempo discreto estocástico</h2>
 			</div>
 			<div class="slide-content">
 				<center>
-								
-			<img src="../images/pendulo_invertido.png" width="350">
-		<p>Apenas medições ruidosas da posição $x$!</p>
+									
+		<img src="../images/modelo_ss_discreto_estocastico.png" width="1000">
+		
+		
 	
 			</center>
 					</div>
@@ -100,6 +148,702 @@
 
 
 
+		<section>
+			
+			<div class="slide-title">
+				<h2>Distribuição Gaussiana</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+										
+			<img src="../images/2d_gaussian.gif" alt="">
+
+			</center>
+					</div>
+
+		</section>
+
+
+		
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo Estocástico</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo Estocástico</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo2.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo Estocástico</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo3.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo Estocástico</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo4.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo Estocástico</h2>
+			</div>
+			<div class="slide-content">
+				<p class="lightup2">
+					Objetivo:
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+				</p>
+				<center>
+					<img src="../images/controle_otimo_estocastico.png" width="500">
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo Estocástico</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						Problema de programação (otimização) matemática:
+				$$
+					\min_{u_0,u_1,\ldots,u_{N-1}} \quad J\\
+					\text{tal que} \\
+					 x_{k+1}=f(x_k,u_k)+w_k\\
+					 x_k\in\mathcal{X}\\
+					 u_k\in\mathcal{U}\\ 
+					 w_k\sim p(w_k)
+				$$
+			</p>
+				</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo quadrático:
+					<p class="lightup">
+			
+							$
+J_{0\to N}=\mathbb{E}\left[\sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N\right], \\Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+						$
+					</p>
+					Dinâmica Linear:
+					<p class="lightup2">
+
+					$$
+					 x_{k+1}=Ax_k+Bu_k+w_k\\
+					 x_k\in\mathbb{R}^n,\quad u_k\in\mathbb{R}^m\\
+					 w_k\sim \mathcal{N}(0,Q)
+				$$
+			</p>
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Ótimo Estocástico Linear</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						Problema de programação (otimização) matemática:
+				$$
+					\min_{u_0,u_1,\ldots,u_{N-1}} \quad \mathbb{E}\left[\sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N\right] \\
+					\text{tal que} \\
+					 x_{k+1}=Ax_k+Bu_k+w_k\\
+					 x_k\in\mathbb{R}^n,\quad 
+					 u_k\in\mathbb{R}^m\\ 
+					 w_k\sim \mathcal{N}(0,Q)
+				$$
+			</p>
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	<img src="../images/controle_otimo_bellman-estocastico.png" width="700">
+				</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	<img src="../images/controle_otimo_bellman2-estocastico.png" width="700">
+				</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+	<img src="../images/controle_otimo_bellman3-estocastico.png" width="700">
+				</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Princípio de Otimalidade de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+	Seja $\{x_0^*,x_1^*,\ldots,x_N^*\}$ e $\{u_0^*,u_1^*,\ldots,u_{N-1}^*\}$ a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{0\to N}$.
+		<p class="lightup">
+			Então, para qualquer $k\in (0,N)$, tem-se:
+	$\{x_k^*,x_{k+1}^*,\ldots,x_N^*\}$ e $\{u_k^*,u_{k+1}^*,\ldots,u_{N-1}^*\}$ são a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{k\to N}$			
+</p>
+				</center>
+					</div>
+
+		</section>
+
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+	Seja $V_k(x_k)=J_{k\to N}^*$, então 
+	<p class="lightup">
+	$$
+					V_k(x_k)=\min_{u_k} \mathbb{E}[\underbrace{x_k^\trp Q x_k + u_k^\trp R u_k}_{\text{custo por estágio}} + \underbrace{V_{k+1}(x_{k+1})}_{\text{custo  ``to-go"}}]
+	$$
+</p>
+<p>Base da programação dinâmica estocástica! </p>
+					</div>
+
+		</section>
+
+
+
+				
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+<img src="../images/custo_por_estagio_estocastico.png" width="700">
+
+	</center>
+
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+				
+				<center>
+<img src="../images/custo_to_go_estocastico.png" width="700">
+	</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					V_k(x_k)=\min_{u_k} \mathbb{E}[x_k^\trp Q x_k + u_k^\trp R u_k + V_{k+1}(x_{k+1})]
+	$$
+</p>
+<p>Hipótese:</p>
+$$
+	V_{k+1}(x_{k+1})=x_{k+1}^\trp P_{k+1}x_{k+1}+c_{k+1}, \quad P_{k+1}=P_{k+1}^\trp \succ 0
+$$
+					</div>
+
+		</section>
+
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					V_k(x_k)=\min_{u_k} \underbrace{\mathbb{E}[x_k^\trp Q x_k + u_k^\trp R u_k + x_{k+1}^\trp P_{k+1}x_{k+1}+c_{k+1}]}_{g(x_k,u_k)}
+	$$
+</p>
+<p>LQR: Custo quadrático+dinâmica linear+ruído Gaussiano gera um problema <b>convexo</b>! (possui apenas um mínimo)</p>
+$$
+	\frac{\partial g(x_k,u_k)}{\partial u_k}=0
+$$
+					</div>
+
+		</section>
+
+
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+</center>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+\mathbb{E}[x_k^\trp Q x_k + u_k^\trp R u_k + x_{k+1}^\trp P_{k+1}x_{k+1}+c_{k+1}]
+$$
+
+</center>
+					</div>
+
+		</section>
+	
+
+
+				
+		<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+\mathbb{E}[x_k^\trp Q x_k + u_k^\trp R u_k + (Ax_k+Bu_k+w_k)^\trp P_{k+1}(\bullet)+c_{k+1}]
+$$
+
+</center>
+					</div>
+
+		</section>
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+
+$$
+\mathbb{E}[x_k^\trp Q x_k + u_k^\trp R u_k] + \underbrace{\mathbb{E}[(Ax_k+Bu_k+w_k)^\trp P_{k+1}(\bullet)+c_{k+1}]}_{\star}
+$$
+note que 
+$$
+\star=x_k^\trp A^\trp P_{k+1}Ax_k+2u_k^\trp B^\trp P_{k+1}Ax_k+u_k^\trp B^\trp P_{k+1}Bu_k+\\+\mathbb{E}[w_k^\trp P_{k+1}w_k]
+$$
+</center>
+					</div>
+
+		</section>
+
+
+						<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+
+$$
+\mathbb{E}[x_k^\trp Q x_k + u_k^\trp R u_k] + \underbrace{\mathbb{E}[(Ax_k+Bu_k+w_k)^\trp P_{k+1}(\bullet)]}_{\star}
+$$
+note que 
+$$
+\star=x_k^\trp A^\trp P_{k+1}Ax_k+2u_k^\trp B^\trp P_{k+1}Ax_k+u_k^\trp B^\trp P_{k+1}Bu_k+\\+\mathbb{E}[\tr[w_k^\trp P_{k+1}w_k]]
+$$
+</center>
+					</div>
+
+		</section>
+
+
+		
+						<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+
+$$
+\mathbb{E}[x_k^\trp Q x_k + u_k^\trp R u_k] + \underbrace{\mathbb{E}[(Ax_k+Bu_k+w_k)^\trp P_{k+1}(\bullet)]}_{\star}
+$$
+note que 
+$$
+\star=x_k^\trp A^\trp P_{k+1}Ax_k+2u_k^\trp B^\trp P_{k+1}Ax_k+u_k^\trp B^\trp P_{k+1}Bu_k+\\+\mathbb{E}[\tr[P_{k+1}w_kw_k^\trp]]
+$$
+</center>
+					</div>
+
+		</section>
+
+
+						<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+
+$$
+\mathbb{E}[x_k^\trp Q x_k + u_k^\trp R u_k] + \underbrace{\mathbb{E}[(Ax_k+Bu_k+w_k)^\trp P_{k+1}(\bullet)]}_{\star}
+$$
+note que 
+$$
+\star=x_k^\trp A^\trp P_{k+1}Ax_k+2u_k^\trp B^\trp P_{k+1}Ax_k+u_k^\trp B^\trp P_{k+1}Bu_k+\\+\tr[P_{k+1}\mathbb{E}[w_kw_k^\trp]]
+$$
+</center>
+					</div>
+
+		</section>
+
+
+								<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+
+$$
+\mathbb{E}[x_k^\trp Q x_k + u_k^\trp R u_k] + \underbrace{\mathbb{E}[(Ax_k+Bu_k+w_k)^\trp P_{k+1}(\bullet)]}_{\star}
+$$
+note que 
+$$
+\star=x_k^\trp A^\trp P_{k+1}Ax_k+2u_k^\trp B^\trp P_{k+1}Ax_k+u_k^\trp B^\trp P_{k+1}Bu_k+\\+\tr[P_{k+1}Q]
+$$
+</center>
+					</div>
+
+		</section>
+
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+\frac{\partial}{\partial u_k}g(x_k,u_k)=0
+$$
+
+</center>
+					</div>
+
+		</section>
+
+
+		
+				<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+2R u_k+ \frac{\partial}{\partial u_k}(\underbrace{\mathbb{E}[(Ax_k+Bu_k+w_k)^\trp P_{k+1}(\bullet)]}_{\star})=0
+$$
+
+
+
+</center>
+					</div>
+
+		</section>
+
+
+				
+				<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+2R u_k+ 2B^\trp P_{k+1}Ax_k+2B^\trp P_{k+1}Bu_k=0
+$$
+
+
+</center>
+					</div>
+
+		</section>
+
+
+						<section>
+			
+			<div class="slide-title">
+				<h2>Propriedades de derivadas no $\mathbb{R}^n$</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					
+$$
+	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+$$
+então,
+$$
+(R+B^\trp P_{k+1}B)u_k+ B^\trp P_{k+1}Ax_k=0
+$$
+
+
+</center>
+					</div>
+
+		</section>
+
+
+
+	
+	
+	
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução de Controle Ótimo Estocástico (LQR):</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					u^*_k=-\underbrace{(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A}_{K}x_k
+	$$
+</p>
+<ul>
+	<li>Realimentação de estados!</li>
+	<li>Ganho depende de $P_{k+1}$.</li>
+</ul>
+
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação de Bellman</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					<p>&nbsp;</p>
+	<p class="lightup">
+	$$
+					V_k(x_k)=\mathbb{E}[x_k^\trp Q x_k + (u_k^*)^\trp R u_k^* + x_{k+1}^\trp P_{k+1}x_{k+1}+c_{k+1}]\\
+					x_{k+1}=Ax_k+Bu^*_k+w_k
+	$$
+</p>
+Com 
+$$
+u^*_k=-\underbrace{(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A}_{K}x_k,\quad V_k(x_k)=x_k^\trp P_k x_k+c_k
+$$
+
+					</div>
+
+		</section>
 
 
 
@@ -107,14 +851,263 @@
 
 
 
+		<section>
+			
+			<div class="slide-title">
+				<h2>Equação Recursiva de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+	<p class="">
+	$$
+					x_k^\trp P_k x_k+c_k \\=x_k^\trp(Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A )x_k +\\+\tr[P_{k+1}]+c_{k+1}
+	$$
+</p>
+Então,
+<p class="lightup2">
+	Equação de Riccati p/ Tempo Discreto:
+	$$
+					P_k =Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A  \\
+					c_k=\tr[P_{k+1}]+c_{k+1}
+	$$
+</p>
+
+					</div>
+
+		</section>
+		
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução da Equação de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Para $k=N-1$,
+<p class="">
+	$$
+					P_{N-1} =Q +A^\trp P_{N}A-A^\trp P_{N}B(R+B^\trp P_{N}B)^{-1}B^\trp P_{N}A  
+	$$
+</p>
+Para $k=N-2$,
+<p class="">
+	$$
+					P_{N-2} =Q +A^\trp P_{N-1}A-A^\trp P_{N-1}B(R+B^\trp P_{N-1}B)^{-1}B^\trp P_{N-1}A  
+	$$
+</p>
+Para $k=N-3,\ldots, 1, 0$,
+<p class="">
+	$$
+	P_k =Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A  
+	$$
+</p>
+
+					</div>
+
+		</section>
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Considere o sistema 
+					<p class="lightup">
+					$$
+					x_{k+1}=\begin{bmatrix}
+					0.8917 & 0.1790\\
+    				-0.1558 & 0.8631
+					\end{bmatrix}x_k+\begin{bmatrix}
+					0.0177 \\
+					0.1790
+					\end{bmatrix}u_k+w_k
+					$$
+					</p>
+					Obtenha o controle ótimo LQR de horizonte finito com $N=100$ e 
+					$$
+					Q=\begin{bmatrix}2 & 0 \\ 0 & 3\end{bmatrix},\quad R=1,\quad P_N=0.1I,\quad w_k\sim \mathcal{N}(0,0.1I)
+					$$
+				</center>
+
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle LQR (Linear Quadratic Regulator) </h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Custo quadrático (Horizonte Infinito):
+					<p class="lightup">
+			
+							$$
+J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N} \frac{1}{N}\mathbb{E}[x_k^T Qx_k+u_k^TRu_k],
+						$$
+					</p>
+					com 
+					$$
+					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+					$$
+				</center>
+					</div>
+
+		</section>
 
 
 
 
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Solução Estacionária da Eq. de Riccati</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Se $(A,B)$ for controlável então existe:
+<p class="lightup">
+	$$
+	P_\infty =Q +A^\trp P_\infty A-A^\trp P_\infty B(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A  
+	$$
+</p>
+<p class="lightup">
+	Lei de Controle Ótimo:
+	$$
+					u^*_k=-\underbrace{(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A}_{K}x_k
+	$$
+</p>
+					</div>
+
+		</section>
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo</h2>
+			</div>
+			<div class="slide-content">
+	
+				<center>
+					Considere o sistema 
+					<p class="lightup">
+					$$
+					x_{k+1}=\begin{bmatrix}
+					0.8917 & 0.1790\\
+    				-0.1558 & 0.8631
+					\end{bmatrix}x_k+\begin{bmatrix}
+					0.0177 \\
+					0.1790
+					\end{bmatrix}u_k+w_k
+					$$
+					</p>
+					Obtenha o controle ótimo LQR de horizonte infinito e 
+					$$
+					Q=\begin{bmatrix}2 & 0 \\ 0 & 3\end{bmatrix},\quad R=1,\quad P_N=0.1I,\quad w_k\sim \mathcal{N}(0,0.1I)
+					$$
+				</center>
+
+					</div>
+
+		</section>
+
+
+
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Linear Quadratic Guassian Regulator<br>LQR+Filtro de Kalman  = LQG</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+								
+			<img src="../images/state_observer_kf_sistema_estocastico.png" width="550">
+		
+	
+			</center>
+					</div>
+
+		</section>
 
 
 
 		
+
+
+				<section>
+			
+			<div class="slide-title">
+				<h2>Modelo Servo Motor</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<p>&nbsp;</p>
+					$$
+					\begin{bmatrix}
+					\dot{\theta} \\
+					\ddot{\theta}\\
+					\dot{i}
+					\end{bmatrix}=\begin{bmatrix}
+					0 & 1 & 0\\
+					0 & -\frac{b}{J} & \frac{k_t}{J}\\
+					0 & -\frac{K_b }{L} & -\frac{R}{L}
+					\end{bmatrix}\begin{bmatrix}
+					\theta \\
+					\dot{\theta}\\
+					i
+					\end{bmatrix}+\begin{bmatrix}
+					0 \\
+					0 \\
+					\frac{k_a}{L}
+					\end{bmatrix}u+dW				
+					$$
+					e 
+					$$
+					y=\begin{bmatrix}
+					1 & 0 & 0
+					\end{bmatrix}x+d\epsilon	
+$$
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Controle Servo Motor</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<p>&nbsp;</p>								
+			<img src="../images/montagem_servomotor_pinout.png" width="600">
+		<p>Controle LQR com apenas medições ruidosas da posição $\theta$!</p>
+	
+			</center>
+					</div>
+
+		</section>	
 	
 
 
