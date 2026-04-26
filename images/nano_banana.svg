@@ -1,0 +1,38 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Glow -->
+  <circle cx="200" cy="200" r="150" fill="url(#grad1)" opacity="0.2"/>
+  <defs>
+    <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#003366;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Nano Banana Body -->
+  <path d="M120,320 Q100,200 200,80 Q250,50 260,30 L270,40 Q260,70 210,100 Q140,200 160,320 Z" fill="#FFD700" stroke="#CCAA00" stroke-width="2"/>
+  
+  <!-- Tech Peel Detail (Nano circuits) -->
+  <path d="M145,280 Q130,200 200,110" fill="none" stroke="#003366" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.6"/>
+  <circle cx="200" cy="110" r="3" fill="#003366"/>
+  <path d="M160,240 Q150,180 220,130" fill="none" stroke="#003366" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+
+  <!-- Eyes (Digital/LED) -->
+  <rect x="215" y="75" width="12" height="4" rx="2" fill="#003366" transform="rotate(-20 215 75)"/>
+  <rect x="235" y="68" width="12" height="4" rx="2" fill="#003366" transform="rotate(-20 235 68)"/>
+
+  <!-- The "Control Signal" (Held by the banana) -->
+  <path d="M180,220 L200,180 L220,240 L240,160 L260,200" fill="none" stroke="#1e90ff" stroke-width="4" filter="url(#glow)"/>
+  <circle cx="180" cy="220" r="5" fill="#1e90ff" filter="url(#glow)"/>
+  <circle cx="260" cy="200" r="5" fill="#1e90ff" filter="url(#glow)"/>
+
+  <!-- Nano text label -->
+  <text x="210" y="320" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#003366" opacity="0.8">NANO</text>
+  <text x="210" y="345" font-family="Arial, sans-serif" font-size="18" fill="#003366" opacity="0.6">Control</text>
+</svg>
