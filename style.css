@@ -1,131 +1,328 @@
+/* =============================================================
+   SEL0359 - Controle Digital | 2026 Slide Theme
+   Modern Academic Style — built on Reveal.js white base
+   ============================================================= */
+
+/* ── Google Font ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Design Tokens ── */
 :root {
-    --blue: #1e90ff;
-    --white: #ffffff;
-    --yellow: #fff7db;
-  }
+    --blue:        #003366;   /* USP institutional blue          */
+    --blue-mid:    #1a4d8f;   /* softer mid-blue                 */
+    --blue-light:  #e8f0fb;   /* pale blue for backgrounds       */
+    --accent:      #c9a227;   /* gold accent line                */
+    --white:       #ffffff;
+    --off-white:   #f7f8fc;
+    --yellow:      #fffbea;   /* highlight box background        */
+    --yellow-border: #e8c84a; /* highlight box border            */
+    --text:        #1a1f36;
+    --text-muted:  #5a6380;
+    --shadow:      0 3px 12px rgba(0, 30, 80, .10);
+    --shadow-sm:   0 1px 4px  rgba(0, 30, 80, .07);
+    --radius:      10px;
+    --radius-lg:   16px;
+}
 
+/* ── Base Font Override ── */
+.reveal {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 38px;
+    color: var(--text);
+}
+
+/* ── Slide Number ── */
 .reveal .slide-number {
-    font-size:24pt;
-    color: #000; 
-    background:none;
-    padding: 1em;
-}
-.reveal .slides { margin: 0; }
-.slides li {
-    padding-bottom: 0.3em;
-}
-.slides h2, .slides h4,.slides h3{
-    text-transform:  unset;
-}
-.lightup {
-    background-color: var(--yellow);
-    margin: 0.5em;
-    padding: 0.5em;
-    border: 1px solid gray;
-    box-shadow:  5px 5px 5px 1px rgba(0, 0, 0, 0.2);
-    font-weight: bold;
-    text-align: center;
-    border-radius: 25px;
-
+    font-family: 'Inter', sans-serif;
+    font-size: 14pt;
+    font-weight: 500;
+    color: var(--blue);
+    background: none;
+    padding: 0.6em 1em;
+    letter-spacing: 0.5px;
 }
 
-.lightup2 {
-    background-color: var(--yellow);
-    border: 1px solid gray;
-    box-shadow:  5px 5px 5px 1px rgba(0, 0, 0, 0.2);
-    font-weight: bold;
-    text-align: center;
-    border-radius: 25px;
-}
-
-.slides {
+/* ── Global Slide Text ── */
+.reveal .slides {
     text-align: justify;
 }
-
-.slides h3{
-    font-size: 1.2em;
+.reveal .slides section {
+    font-size: 0.95em;
+    line-height: 1.65;
 }
 
-.slides h4 {
-    font-size: 0.8em;
+/* ── Headings ── */
+.reveal .slides h2,
+.reveal .slides h3,
+.reveal .slides h4 {
+    text-transform: unset;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.3px;
+}
+.reveal .slides h2 {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: var(--blue);
+}
+.reveal .slides h3 {
+    font-size: 1.05em;
+    font-weight: 600;
+    color: var(--blue-mid);
+}
+.reveal .slides h4 {
+    font-size: 0.82em;
+    font-weight: 600;
+    color: var(--text);
 }
 
-.advisor {
-    padding-top: 1.5em;
-    text-align: right;
+/* ── Lists ── */
+.slides li {
+    padding-bottom: 0.35em;
+    line-height: 1.6;
 }
-.author {
-    padding-top: 1em;
-}
-.title {
-    padding-top: 4.5em;
-    font-size: 1em;
+.reveal ul {
+    margin-left: 1.2em;
 }
 
-.logo {
-    display: block;
-    width: 15rem;
-    height: 10rem;
-    position: absolute;
-    left: 0rem;
+/* ── Links ── */
+.reveal a {
+    color: var(--blue-mid);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
 }
-.logo2 {
-    display: block;
-    width: 20rem;
-    height: 15rem;
-    position: absolute;
-    float: right;
-    right: -1rem;
-    top: -2rem;
+.reveal a:hover {
+    color: var(--blue);
 }
 
-.logo img, .logo2 img {
-    width: 100%;
-}
+/* ============================================================
+   SLIDE LAYOUT COMPONENTS
+   ============================================================ */
 
+/* ── Slide Title Bar ── */
 .slide-title {
     display: block;
     position: relative;
-    top:0;
+    top: 0;
+    padding-bottom: 0.15em;
+    margin-bottom: 0.3em;
+    border-bottom: 3px solid var(--blue);
+}
+.slide-title h2 {
+    margin: 0;
+    padding: 0.1em 0;
+    font-size: 1.2em;
+    color: var(--blue);
+    font-weight: 700;
 }
 
+/* ── Slide Content Area ── */
 .slide-content {
     position: relative;
     text-align: left;
-    padding-left: 1em;
+    padding-left: 0.5em;
+    padding-top: 0.2em;
 }
+
+/* ============================================================
+   TITLE / COVER SLIDE
+   ============================================================ */
+
+/* Logos */
+.logo {
+    display: block;
+    width: 12rem;
+    height: 8rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.logo2 {
+    display: block;
+    width: 17rem;
+    height: 12rem;
+    position: absolute;
+    right: -1rem;
+    top: -1.5rem;
+}
+.logo img,
+.logo2 img {
+    width: 100%;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,.08));
+}
+
+/* Title text block */
+.title {
+    padding-top: 4em;
+    font-size: 1em;
+    text-align: center;
+}
+.title h2 {
+    font-size: 1.3em;
+    color: var(--blue);
+    line-height: 1.35;
+}
+
+/* Author block */
+.author {
+    padding-top: 0.8em;
+    color: var(--text-muted);
+    text-align: center;
+}
+.author h3 {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* Advisor block */
+.advisor {
+    padding-top: 1.2em;
+    text-align: right;
+    color: var(--text-muted);
+}
+
+/* ============================================================
+   HIGHLIGHT BOXES
+   ============================================================ */
+
+/* .lightup  — centered key result / formula box */
+.lightup {
+    background: var(--yellow);
+    border: 1.5px solid var(--yellow-border);
+    border-left: 5px solid var(--accent);
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+    text-align: center;
+    border-radius: var(--radius);
+    margin: 0.5em auto;
+    padding: 0.5em 0.8em;
+}
+
+/* .lightup2 — inline/compact highlight, no outer margin */
+.lightup2 {
+    background: var(--yellow);
+    border: 1.5px solid var(--yellow-border);
+    border-left: 5px solid var(--accent);
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+    text-align: center;
+    border-radius: var(--radius);
+    padding: 0.3em 0.6em;
+}
+
+/* ============================================================
+   IMAGE HELPERS
+   ============================================================ */
 
 .imgIntro img {
     position: absolute;
 }
 
-.underline {
-    text-decoration: underline;
-}
-.eq-medium {
-    display:block;
-    position:relative;
-    left:-5em;
-    transform: scale(0.8);
-}
-
-.fragment.current-visible.visible:not(.current-fragment) {
-    display: none;
-    height:0px;
-    line-height: 0px;
-    font-size: 0px;
-}
-
-.redSquare {
-    display: block;border: .1em solid red;position: absolute;width: 10em;height: 8em;
-}
-.greenSquare {
-    display: block;border: .1em solid rgb(2, 140, 245);position: absolute;width: 10em;height: 8em;
-}
 .imgContainer {
     text-align: center;
 }
 .imgContainer img {
     float: left;
+}
 
+/* ============================================================
+   EQUATIONS
+   ============================================================ */
+
+.eq-medium {
+    display: block;
+    position: relative;
+    left: -5em;
+    transform: scale(0.8);
+}
+
+/* ============================================================
+   ANNOTATION OVERLAYS
+   ============================================================ */
+
+.redSquare {
+    display: block;
+    border: 2px solid #e53e3e;
+    border-radius: 4px;
+    position: absolute;
+    width: 10em;
+    height: 8em;
+}
+.greenSquare {
+    display: block;
+    border: 2px solid #0284c7;
+    border-radius: 4px;
+    position: absolute;
+    width: 10em;
+    height: 8em;
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+
+.underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+}
+
+/* ============================================================
+   CODE / MONOSPACE
+   ============================================================ */
+
+.reveal code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.85em;
+    background: var(--blue-light);
+    color: var(--blue);
+    padding: 0.08em 0.35em;
+    border-radius: 4px;
+}
+.reveal pre {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+.reveal pre code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: 0.78em;
+    line-height: 1.55;
+}
+
+/* ============================================================
+   FRAGMENT ANIMATION
+   ============================================================ */
+
+.fragment.current-visible.visible:not(.current-fragment) {
+    display: none;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+}
+
+/* ============================================================
+   TABLE REFINEMENTS
+   ============================================================ */
+
+.reveal table {
+    border-collapse: collapse;
+    font-size: 0.88em;
+}
+.reveal table th {
+    background: var(--blue);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.4em 0.7em;
+    letter-spacing: 0.3px;
+}
+.reveal table td {
+    padding: 0.35em 0.7em;
+    border-bottom: 1px solid #dde3ee;
+}
+.reveal table tr:nth-child(even) td {
+    background: var(--off-white);
 }

@@ -1,0 +1,80 @@
+\babel@toc {brazilian}{}\relax 
+\contentsline {chapter}{\numberline {1}Introdução ao Controle Digital}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Conceituação de Sistemas de Controle}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Requisitos do Projeto de Controle}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Recursos do Curso e Plataformas de Desenvolvimento}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Exemplos de Aplicação na Engenharia Moderna}{5}{section.1.4}%
+\contentsline {section}{\numberline {1.5}O Ciclo do Projeto de Controle}{8}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Cadeia de Processamento de Sinal em Tempo Discreto}{9}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Ações de Controle: ON-OFF vs. PID}{11}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Vantagens do Controle Digital}{12}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Implementação Analógica vs. Digital}{12}{section.1.9}%
+\contentsline {section}{\numberline {1.10}Desenvolvimento de Algoritmos Computacionais de Controle}{14}{section.1.10}%
+\contentsline {chapter}{\numberline {2}Teorema da Amostragem}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}A Natureza Discreta e Amostrada dos Sinais}{17}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Modelação Matemática da Amostragem}{19}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Análise Espectral da Amostragem}{20}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Fenômeno de Aliasing e Teorema de Nyquist}{22}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Reconstrução Real de Sinais e o Retentor de Ordem Zero (ZOH)}{25}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Exemplo Computacional no MATLAB: Efeito de Aliasing}{28}{section.2.6}%
+\contentsline {chapter}{\numberline {3}A Transformada Z}{29}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Definição da Transformada Z}{29}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Região de Convergência (ROC)}{30}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Dedução de Transformadas Z de Sinais Clássicos}{31}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Degrau Unitário}{31}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Exponencial Discreta}{31}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Propriedades Operacionais Fundamentais}{32}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Métodos de Inversão da Transformada Z}{32}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Modelagem e Discretização de Sistemas Contínuos}{33}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Equações de Diferenças e Função de Transferência}{33}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Derivação do Mapeamento por Retentor de Ordem Zero (ZOH)}{34}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Aproximação Numérica por Integração}{36}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Euler Forward (Diferença Avançada)}{36}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Euler Backward (Diferença Atrasada)}{36}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Transformação Bilinear ou de Tustin}{37}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Sinais e Códigos de Excitação: PRBS}{37}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Exemplo de Discretização Comparativa no MATLAB}{37}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Análise de Estabilidade em Tempo Discreto}{39}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Polos Complexos e Círculo Unitário}{39}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Efeito Estabilizador nos Mapeamentos das Aproximações de Integração}{41}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Influência da Localização de Polos na Resposta Temporal Discreta}{42}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Critério de Estabilidade de Jury}{47}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Análise de Estabilidade sob Variação de Ganho K}{49}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Análise de Erro em Regime Estacionário}{49}{section.5.6}%
+\contentsline {chapter}{\numberline {6}Projeto de Controladores na Frequência}{50}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Especificações de Desempenho e Mapeamento de Polos}{50}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Análise de Erro Estacionário por Tipo de Sistema}{52}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Aplicações Industriais e Sistemas Físicos Reais}{54}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Projeto via Emulação vs. Projeto Direto}{54}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Estruturas de Compensadores Discretos}{56}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Compensador de Avanço de Fase (Lead)}{56}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Compensador de Atraso de Fase (Lag)}{56}{subsection.6.5.2}%
+\contentsline {section}{\numberline {6.6}Controlador PID Digital}{57}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Limitações Físicas: Saturação de Atuadores e Anti-Windup}{58}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Otimização Meta-heurística por Enxame de Partículas (PSO)}{58}{section.6.8}%
+\contentsline {section}{\numberline {6.9}Exemplo de Projeto no MATLAB: LGR e PID}{60}{section.6.9}%
+\contentsline {chapter}{\numberline {7}Representação em Espaço de Estados}{61}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Definição do Modelo de Estados Contínuo e Discreto}{61}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Linearização de Sistemas Dinâmicos Não-Lineares}{62}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Dedução da Discretização Exata do Espaço de Estados}{64}{section.7.3}%
+\contentsline {chapter}{\numberline {8}Controle por Realimentação de Estados e Observadores}{65}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Controlabilidade e Observabilidade Discreta}{65}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Projeto de Realimentação de Estados e Fórmula de Ackermann}{67}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Realimentação de Estados com Ação Integral}{68}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Projeto de Observadores de Estado Discretos}{68}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Caso de Estudo: Controle Pêndulo Invertido}{69}{section.8.5}%
+\contentsline {chapter}{\numberline {9}Controle Ótimo Linear Quadrático (LQR)}{71}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Conceito de Controle Ótimo e Critério Quadrático}{71}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Dedução via Princípio de Otimalidade de Bellman}{73}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Solução Estacionária de Horizonte Infinito}{75}{section.9.3}%
+\contentsline {chapter}{\numberline {10}O Filtro de Kalman Discreto}{76}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Modelagem Estocástica com Ruído Gaussiano}{76}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Dedução e Ciclo de Recursão do Filtro de Kalman}{77}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Fase 1: Predição (A Priori)}{78}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Fase 2: Atualização ou Correção (A Posteriori)}{78}{subsection.10.2.2}%
+\contentsline {chapter}{\numberline {11}Controle Estocástico LQG}{80}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Estrutura LQG e Princípio da Separação}{80}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Estudo de Caso Completo: Servomotor DC}{82}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}Modelagem Física Contínua}{82}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}Simulação de Controle LQG Completa no MATLAB}{83}{subsection.11.2.2}%
+\contentsline {chapter}{Referências Bibliográficas}{86}{chapter*.68}%
