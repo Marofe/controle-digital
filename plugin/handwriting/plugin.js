@@ -5,9 +5,9 @@
  *
  * Usage: include this script anywhere after dist/reveal.js (it self-attaches to Reveal).
  *
- * Shortcuts:  C = show/hide toolbar (+pen)   E = eraser   X = next colour   Z = undo
- * Toolbar (bottom-left): hidden by default, press C to reveal — pen, eraser,
- * colour, undo, clear-slide.
+ * Shortcuts:  C = turn ON (toolbar + pen)   Esc = turn OFF   E = eraser   X = next colour   Z = undo
+ * Toolbar (bottom-left): hidden by default. Press C to show it and start drawing;
+ * press Esc to hide it. (When hidden, Esc falls through to Reveal's slide overview.)
  */
 (function () {
   'use strict';
@@ -141,8 +141,8 @@
     document.body.appendChild(bar);
     updateSwatch(); syncButtons();
   }
-  function toggleBar() {
-    var show = !bar || bar.style.display === 'none';
+  function barVisible() { return bar && bar.style.display !== 'none'; }
+  function setBar(show) {                  // C turns ON, Esc turns OFF
     if (bar) bar.style.display = show ? 'flex' : 'none';
     if (show) { state.erase = false; setPen(true); }
     else { setPen(false); }
@@ -176,8 +176,15 @@
   function onKey(e) {
     var t = (e.target && e.target.tagName) || '';
     if (t === 'INPUT' || t === 'TEXTAREA' || e.metaKey || e.ctrlKey || e.altKey) return;
-    switch (e.key.toLowerCase()) {
-      case 'c': e.stopPropagation(); toggleBar(); break;
+    var k = e.key.toLowerCase();
+
+    if (k === 'c') { e.stopPropagation(); setBar(true); return; }   // C = turn ON
+    if (k === 'escape') {                                           // Esc = turn OFF
+      if (barVisible()) { e.preventDefault(); e.stopPropagation(); setBar(false); }
+      return;                        // when already off, let Reveal handle Esc (overview)
+    }
+
+    switch (k) {
       case 'e': e.stopPropagation(); toggleErase(); break;
       case 'x': e.stopPropagation(); cycleColor(); break;
       case 'z': e.stopPropagation(); undo(); break;

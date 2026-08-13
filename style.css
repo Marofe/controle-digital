@@ -326,3 +326,61 @@
 .reveal table tr:nth-child(even) td {
     background: var(--off-white);
 }
+
+
+
+
+	/* Local helpers for this lesson (self-contained) */
+			.box {
+				background-color: var(--accent-soft);
+				border: 1px solid var(--accent-border);
+				border-left: 5px solid var(--accent);
+				border-radius: 12px;
+				box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+				padding: 0.5em 0.9em;
+				margin: 0.4em 0;
+				text-align: left;
+			}
+			.box .box-title {
+				display: block;
+				font-weight: 700;
+				color: var(--accent);
+				margin-bottom: 0.25em;
+			}
+			.box.warn {
+				background-color: #fef2f2;
+				border-color: #fecaca;
+				border-left-color: #dc2626;
+			}
+			.box.warn .box-title { color: #dc2626; }
+			.two-col {
+				display: flex;
+				gap: 1.2em;
+				align-items: center;
+			}
+			.two-col > div { flex: 1; }
+			.fig-cap {
+				display: block;
+				text-align: center;
+				color: var(--muted);
+				font-size: 0.72em;
+				margin-top: 0.2em;
+			}
+			.slide-content.small { font-size: 0.85em; }
+			.slide-content.smaller { font-size: 0.78em; }
+			.slide-content.dense { font-size: 0.72em; }
+			.assump { color: var(--accent); font-weight: 600; }
+			svg text { font-family: 'Inter', sans-serif; }
+			/* LaTeX labels inside SVG figures (rendered via KaTeX in <foreignObject>) */
+			.reveal svg foreignObject { overflow: visible; }
+			.flab { font-size: 13px; line-height: 1.05; white-space: nowrap; color: #334155; }
+			.flab.c { text-align: center; white-space: normal; }
+			.flab.sm { font-size: 11px; }
+			.flab .katex { font-size: 1.02em; }
+			/* compact spacing so dense math slides fit the 750px canvas */
+			.reveal .katex-display { margin: 0.35em 0; }
+			.slide-content p { margin: 0.35em 0; }
+			.slide-content.dense .slides ul > li,
+			.slide-content.dense ul > li { padding-bottom: 0.25em; }
+			.box { padding: 0.45em 0.85em; margin: 0.35em 0; }
+			.slide-content.dense .box { padding: 0.35em 0.7em; margin: 0.3em 0; }
