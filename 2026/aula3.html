@@ -23,14 +23,14 @@
 					<div class="logo"><img src="../images/sel.png"/> </div>
 					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
 					<div class="title">
-					<h2>Aula 3: <br>Modelagem e Identificação de Sistemas</h2>
+					<h2>Aula 3: <br>Transformada Z, Modelagem e Identificação de Sistemas</h2>
 					</div>
 					<div class="author">
 					<h3>Prof. Marcos Rogério Fernandes</h3>
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">21 de agosto de 2025</p>
+					<p style="text-align: center;font-size: 0.8em;">20 de agosto de 2026</p>
 				</div>
 
 				</section>
@@ -38,19 +38,7 @@
 
 
 
-				<section>
-					<div class="slide-title">
-						<h2>Transformada Z: material complementar</h2>
-					</div>
-					<div class="slide-content">
-						<center>
-							<img src="../images/sequencia_sinal.png" width="650" alt="">
-						</center>
-					</div>
-	
-				</section>
-
-
+				
 					<section>
 
 				<div class="slide-title">
@@ -60,7 +48,7 @@
 				<div class="slide-content">
 					<center>
 					<p>&nbsp;</p>
-					<img src="../images/malha_controle_digital.png" width="900" alt="">
+					<img src="images/malha_controle_digital_simples.png" width="900" alt="">
 		
 				</center>
 				   </div>
@@ -92,10 +80,11 @@
 			<div class="slide-content">
 				<p>Os objetivos dessa aula são entender:
 						<ul>
-						<li>Modelagem de sistemas dinâmicos;</li>
-						<li>Métodos de Discretização;</li>
+							<li>Transformada Z e Propriedades;</li>
+						<li><b>Modelagem</b> de sistemas dinâmicos;</li>
+						<li>Métodos de <b>Discretização</b>;</li>
 						<li>Conversão de EDO em Eq. à Diferenças</li>
-						<li>Identificação paramétrica;</li>
+						<li><b>Identificação</b> paramétrica;</li>
 						<li>Exemplos;</li>
 					</p>
 					</div>
@@ -106,7 +95,1013 @@
 			<section>
 
 					<div class="slide-title">
-						<h2>Sistema Dinâmico em tempo contínuo
+						<h2>Sinal contínuo: Transformada de Laplace
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							x(t):\mathbb{R}\to\mathbb{R}
+							$$
+						<img src="../images/sinal_continuo.png" width="600" alt="">
+			
+					</center>
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal contínuo: Transformada de Laplace
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							X(s)=\mathcal{L}\{x(t)\}=\int_{-\infty}^\infty x(t)e^{-st}dt
+							$$
+						<img src="../images/sinal_continuo.png" width="600" alt="">
+			
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace: exemplo
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/degrau_unitario.png" width="700" alt="">
+						$$
+							U(s)=\frac{1}{s}
+						$$
+			
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal em tempo discreto</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							x[k]=x(kT), \quad k\in\mathbb{Z}
+							$$
+						<img src="../images/sequencia_sinal.png" width="600" alt="">
+					</center>
+					   </div>
+
+				</section>
+
+
+
+					
+				<section>
+
+					<div class="slide-title">
+						<h2>Sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							x_a^*(t)=\sum_{k=-\infty}^\infty x(kT)\delta(t-kT)
+							$$
+						<img src="../images/modular_amostragem2.png" width="550" alt="">
+					</center>
+					   </div>
+
+				</section>
+
+
+					
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace do sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\mathcal{L}\{x_a^*(t)\}=\int_{-\infty}^\infty \Bigl(\sum_{k=-\infty}^\infty x(kT)\delta(t-kT)\Bigr)e^{-st}dt
+							$$
+				
+					</center>
+					<center class="">
+						$$
+						= \sum_{k=-\infty}^\infty x(kT)\int_{-\infty}^\infty\delta(t-kT)e^{-st}dt
+						$$
+					</center>
+					<center class="">
+						$$
+						= \sum_{k=-\infty}^\infty x(kT)e^{-skT}
+						$$
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada de Laplace do sinal amostrado</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\mathcal{L}\{x_a^*(t)\}= \sum_{k=-\infty}^\infty x[k](e^{sT})^{-k}
+							$$
+							Defina 
+							<p class="lightup">
+							$$
+							z=e^{sT}
+							$$
+						</p>
+
+					</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Dado uma função $x:\mathbb{Z}\to\mathbb{C}$, a transformada Z de $x[k]$ é definida como o mapeamento $X:\mathcal{D}\to\mathbb{C}$ dado por
+							<p class="lightup">
+							$$
+							\mathcal{Z}\{x[k]\}= \sum_{k=-\infty}^\infty x[k]z^{-k}=X(z)
+							$$
+						</p>
+							em que $\mathcal{D}\subseteq \mathbb{C}$ é o domínio
+							da transformada Z de $x[k]$:
+							$$
+							\mathcal{D}=\{z\in\mathbb{C} : X(z) \text{ existe}\}
+							$$
+						
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Série Geométrica</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+							Considere $z \in \mathbb{C}$. Se $|z|<1$, então
+							<p class="lightup">
+							$$
+							\sum_{k=0}^\infty z^k = \frac{1}{1-z}
+							$$
+						</p>
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Região de Convergência (ROC)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+							$z \in \mathbb{C}$ tal que $|z|<1$
+							<p>
+							<img src="../images/ROC_ztrans.png" width="550"><br>Plano-Z
+						</p>
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+							<section>
+
+					<div class="slide-title">
+						<h2>Exemplo ($k\ge0$)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Considere a sequência gerada pela função
+							$$
+								f[k]=\Bigl(\frac{1}{2}\Bigr)^k,\quad k\in\mathbb{N}
+							$$
+						</p>
+
+					</center>
+
+					<center class="">
+						$$\Rightarrow F(z)=\sum_{k=0}^\infty \Bigl(\frac{1}{2}\Bigr)^k z^{-k}$$
+
+					</center>
+					<center class="">
+						$$=\sum_{k=0}^{\infty} \Bigl(\frac{1}{2z}\Bigr)^k=\frac{1}{1-\frac{1}{2z}}=\frac{z}{z-\frac{1}{2}}
+						$$
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo  ($k\ge0$)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Portanto,
+							<p class="lightup">
+							$$
+								\mathcal{Z}\Bigl\{\Bigl(\frac{1}{2}\Bigr)^k\Bigr\}=\frac{z}{z-\frac{1}{2}},\quad k\in\mathbb{N}
+							$$
+						</p>
+						em que
+						$$
+						\mathcal{D}=\{z\in\mathbb{C}: |z|>\frac{1}{2}\}
+						$$
+
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo  ($k\ge0$)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						
+				
+						<img src="../images/ROC_ztrans0.png" width="550"><br>Plano-Z
+
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z (Unilateral)</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Dado uma função $x:\mathbb{N}\to\mathbb{C}$, a transformada Z de $x[k]$ é definida como o mapeamento $X:\mathcal{D}\to\mathbb{C}$ dado por
+							<p class="lightup">
+							$$
+							\mathcal{Z}\{x[k]\}= \sum_{k=0}^\infty x[k]z^{-k}=X(z)
+							$$
+						</p>
+							em que $\mathcal{D}\subseteq \mathbb{C}$ é o domínio
+							da transformada Z de $x[k]$:
+							$$
+							\mathcal{D}=\{z\in\mathbb{C} : X(z) \text{ existe}\}
+							$$
+						
+
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					<div class="slide-content">
+						
+						<center>
+												$$
+							u[k]=\begin{cases} 
+							1,\text{ se } k\ge 0,\\
+							0, \text{ se k<0}.
+							\end{cases}
+							$$
+
+						
+							<img src="../images/degrau_unitario_discreto.png" width="700">
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+
+							$$
+							u[k]=\begin{cases} 
+							1,\text{ se } k\ge 0,\\
+							0, \text{ se k<0}.
+							\end{cases}
+							$$
+
+							A transformada Z é dada por 
+							<p class="lightup">
+							$$
+								\mathcal{Z}\{u[k]\}=\frac{z}{z-1},\quad |z|>1
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Degrau unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/ROC_ztrans1.png" width="550"><br>Plano-Z
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							
+							$$
+								f[k]=\begin{cases} 
+								0, \text{ se } k\in(-\infty,-1)\\
+								a^k, \text{ se } k\in\mathbb{N}
+								\end{cases}
+							$$
+						
+						em que $a\in\mathbb{C}$.
+
+					</center>
+
+					<center class="">
+						$$
+						x(t)=e^{\alpha t} \\\Rightarrow x(kT)=e^{\alpha kT}=(e^{\alpha T})^k
+$$
+					</center>
+
+					   </div>
+
+				</section>
+
+				
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/exponencial_discreta.png" width="900">
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+			
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							
+							$$
+								f[k]=a^ku[k]
+							$$
+						
+						em que $a\in\mathbb{C}$, então
+						<p class="lightup ">
+						$$
+						F(z)=\frac{z}{z-a},\quad \mathcal{D}=\{z\in\mathbb{C}: |z|>|a|\}
+						$$
+					</p>
+
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<img src="../images/ROC_ztrans_a.png" width="550"><br>Plano-Z
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exponencial: exemplo</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							<p class="lightup">
+						$
+						x(t)=e^{-2t}u(t)
+						$
+					</p>
+
+					</center>
+
+					<center class="">
+						$$
+					\Rightarrow	x(kT)=e^{-2kT}u(kT)=(e^{-2T})^ku(kT)
+$$
+					</center>
+
+					
+					<center class="">
+						Portanto,
+						<p class="lightup">
+						$$
+					\mathcal{Z}\{x(kT)\}=\frac{z}{z-e^{-2T}},\quad |z| > e^{-2T}
+$$</p>
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Impulso unitário</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+
+							$$
+							\delta[k]=\begin{cases} 
+							1,\text{ se } k=0,\\
+							0, \text{ se } k\neq 0.
+							\end{cases}
+							$$
+
+							A transformada Z é dada por 
+							<p class="lightup">
+							$$
+								\mathcal{Z}\{\delta[k]\}=1,\quad \mathcal{D}=\mathbb{C}
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Cosseno</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Seja 
+							<p class="lightup">
+							$$
+								f[k]=\cos(\omega Tk)u[k],\quad \omega \in \mathbb{R}
+							$$
+						</p>
+						
+									
+
+					</center>
+
+					<center class="">
+						Lembre que 
+						$$
+							\cos(\theta)=\frac{e^{j\theta}+e^{-j\theta}}{2}
+						$$
+					</center>
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Cosseno</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							A transformada Z é, então, dada por 
+							
+							$$
+								F(z)=\sum_{k=0}^\infty\Bigl(\frac{e^{j\omega Tk}+e^{-j\omega Tk}}{2}\Bigr)z^{-k}
+							$$
+						
+					</center>
+					<center class="">
+						$$
+						= \sum_{k=0}^\infty\frac{1}{2}\Bigl(\frac{e^{j\omega T}}{z}\Bigr)^k+\sum_{k=0}^\infty\frac{1}{2}\Bigl(\frac{1}{ze^{j\omega T}}\Bigr)^k
+						$$
+					</center>
+					<center class="">
+						$$
+						= \frac{1}{2}\frac{z}{z-e^{j\omega T}}+\frac{1}{2}\frac{z}{z-e^{-j\omega T}}
+						$$
+					</center>
+
+					   </div>
+
+				</section>
+
+				
+				<section>
+
+					<div class="slide-title">
+						<h2>Cosseno</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+
+							A transformada Z é, então, dada por 
+							<p class="lightup">
+							$$
+								\mathcal{Z}\{\cos(\omega Tk)u[k]\}=\frac{z(z-\cos(\omega T))}{z^2-2\cos(\omega T)z+1},\quad |z|>1
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				
+
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Propriedades da Transformada Z</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<ul>
+
+							<li>Linearidade:
+
+								$$
+								\mathcal{Z}\{\alpha x[k]+\beta y[k]\}=\alpha X(z)+\beta Y(z)
+								$$
+							</li>
+
+							<li>
+								Atraso no tempo
+								$$
+								\mathcal{Z}\{x[k-l]\}=z^{-l}X(z)
+								$$
+							</li>
+
+							<li>
+								Avanço no tempo
+								$$
+								\mathcal{Z}\{x[k+l]\}=z^{l}X(z)
+								$$
+							</li>
+						</ul>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Propriedades da Transformada Z</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						<ul>
+
+							<li>Amortecimento:
+<p>
+								$
+								\mathcal{Z}\{a^{k}x[k]\}=X(az),\quad |a|< 1
+								$
+							</p>
+							</li>
+
+							<li>
+								Diferenciação:
+								<p>
+								$
+								\mathcal{Z}\{kx[k]\}=-z\frac{dX}{dz}
+								$
+							</p>
+							</li>
+
+							<li>Convolução:
+<p>
+								$
+								\mathcal{Z}\{x[k]\ast y[k]\}=X(z)Y(z)
+							$
+						</p>
+							</li>
+
+				
+						</ul>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Soma de sequências</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							Dado a definição de Transformada Z de $x[k]$ na forma:
+
+							$$
+							X(z)= \sum_{k=0}^\infty x[k]z^{-k}
+							$$
+
+							Então, para $z=1$, tem-se
+							<p class="lightup">
+							$$
+								X(1)=\sum_{k=0}^\infty x[k]
+							$$
+						</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema do Valor Inicial</h2>
+					</div>
+					<div class="slide-content">
+						<p>&nbsp;</p>
+						<center>
+						Seja $x[k]$ uma função com Transformada Z dada por $X(z)$. Se $\lim_{z\to\infty}X(z)$ existe, então 
+						<p>&nbsp;</p>
+						<p class="lightup">
+						$$
+							x[0]=\lim_{z\to\infty} X(z)
+						$$
+					</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Teorema do Valor Final</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							<p>&nbsp;</p>
+						Seja $x[k]$ uma função com Transformada Z dada por $X(z)$. Se $\lim_{k\to\infty}x[k]$ existe, então 
+						<p>&nbsp;</p>
+						<p class="lightup">
+						$$
+							\lim_{k\to\infty} x[k]= \lim_{z\to 1} (z-1)X(z)
+						$$
+					</p>
+						
+					</center>
+		
+
+					   </div>
+
+				</section>
+
+
+			
+
+
+				
+			
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Considere a equação à diferenças dada na forma
+						<p class="lightup">
+						$$
+							\sum_{i=0}^n \alpha_i y[k-i] = \sum_{i=0}^m \beta_i x[k-i]
+						$$
+						</p>
+						<p>&nbsp;</p>
+						Exemplo:
+						$$
+						3y[k-2]+2y[k-1]+y[k]=x[k]-2x[k-1]
+						$$
+					
+				
+				
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Considere a equação à diferenças dada na forma
+						<p class="lightup">
+						$$
+							\sum_{i=0}^n \alpha_i y[k-i] = \sum_{i=0}^m \beta_i x[k-i]
+						$$
+						</p>
+						<p>&nbsp;</p>
+						Exemplo:
+						$$
+						3z^{-2}Y(z)+2z^{-1}Y(z)+Y(z)=X(z)-2z^{-1}X(z)
+						$$
+					
+				
+				
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+							<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Considere a equação à diferenças dada na forma
+						<p class="lightup">
+						$$
+							\sum_{i=0}^n \alpha_i y[k-i] = \sum_{i=0}^m \beta_i x[k-i]
+						$$
+						</p>
+						<p>&nbsp;</p>
+						Exemplo:
+						$$
+						(3z^{-2}+2z^{-1}+1)Y(z)=(1-2z^{-1})X(z)
+						$$
+					
+				
+				
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				
+							<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Considere a equação à diferenças dada na forma
+						<p class="lightup">
+						$$
+							\sum_{i=0}^n \alpha_i y[k-i] = \sum_{i=0}^m \beta_i x[k-i]
+						$$
+						</p>
+						<p>&nbsp;</p>
+						Exemplo:
+						$$
+						\frac{Y(z)}{X(z)}=\frac{(1-2z^{-1})}{(3z^{-2}+2z^{-1}+1)}=G(z)
+						$$
+					
+				
+				
+					</center>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Eq. à Diferenças</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+					
+					<p>A Transformada Z permite obter uma representação na forma de uma função racional da Eq. à Diferenças!</p>
+					<p>&nbsp;</p>
+					<p class="lightup">
+					$$
+					G(z)=\frac{Y(z)}{X(z)}=\frac{\beta_mz^{-m}+\cdots+\beta_1z^{-1}+\beta_0}{\alpha_nz^{-n}+\cdots+\alpha_1z^{-1}+\alpha_0}
+					$$
+				</p>
+					</center>
+
+					<p align="center" class="">Usualmente, considera-se $\alpha_0=1$ (normalização)</p>
+
+				
+		
+
+					   </div>
+
+				</section>
+
+
+	
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z Inversa</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+						Seja $X(z)$ a transformada Z de $x[k]$ com $k\in\mathbb{N}$. Então, a Transformada Z Inversa é definida como
+						<p class="lightup">
+						$$
+							\mathcal{Z}^{-1}\{X(z)\}=x[k]
+						$$
+					</p>
+						
+					</center>
+<p>&nbsp;</p>
+					<center class="">
+						$$
+						x[k]=\frac{1}{2\pi j}\oint_\Gamma \Bigl(\frac{X(z)}{z}\Bigr)z^k dz,\quad k\in\mathbb{N}
+					$$
+
+					</center>
+		<p>&nbsp;</p>
+					<center class="">
+						<b>Tabelas de Transformada Z!</b>
+					</center>
+					   </div>
+
+				</section>
+
+
+
+
+			<section>
+
+					<div class="slide-title">
+						<h2>Modelagem de Sistemas Dinâmicos (SLIT)
 						</h2>
 					</div>
 					<div class="slide-content">
@@ -117,7 +1112,8 @@
 							\sum_{i=0}^n\alpha_i\frac{d^i y}{dt^i}=\sum_{i=0}^m\beta_i\frac{d^i u}{dt^i}
 						$$
 					</p>
-						<img src="../images/planta.png" width="600" alt="">
+					<p>&nbsp;</p>
+						<img src="images/planta_atuador_processo.png" width="600" alt="">
 			
 					</center>
 					   </div>
@@ -134,7 +1130,7 @@
 					<div class="slide-content">
 						<center>
 							<p>&nbsp;</p>
-							<img src="../images/edo_approach.png" width="1000" alt="">
+							<img src="images/edo_approach.png" width="1000" alt="">
 			
 					</center>
 					   </div>
@@ -156,7 +1152,7 @@
 							$$
 			
 					</center>
-
+					<p>&nbsp;</p>
 					<center class=" lightup">
 						Função de Transferência (FT):
 						$$
@@ -172,7 +1168,36 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Exemplo: Sistema 2° Ordem
+						<h2>Exemplo: Sistema de 1° Ordem
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+							$$
+							\alpha_1 \frac{dy}{dt}+\alpha_0 y(t) =\beta_0 u(t)
+							$$
+			
+					</center>
+<p>&nbsp;</p>
+					<center class=" lightup">
+						Função de Transferência (FT):
+						$$
+						\Rightarrow \frac{Y(s)}{U(s)}=\frac{\beta_0}{\alpha_1s+\alpha_0}=G(s)
+						$$
+		
+				</center>
+				<center>
+					Exemplos:<br>Circuito RC, RL, Sistemas térmicos, etc
+				</center>
+					   </div>
+
+				</section>
+
+
+				<section>
+
+					<div class="slide-title">
+						<h2>Exemplo: Sistema de 2° Ordem
 						</h2>
 					</div>
 					<div class="slide-content">
@@ -182,13 +1207,16 @@
 							$$
 			
 					</center>
-
+<p>&nbsp;</p>
 					<center class=" lightup">
 						Função de Transferência (FT):
 						$$
 						\Rightarrow \frac{Y(s)}{U(s)}=\frac{\beta_0}{\alpha_2s^2+\alpha_1s+\alpha_0}=G(s)
 						$$
 		
+				</center>
+				<center>
+					Exemplos:<br>Circuito RLC, Sistema massa-mola, etc
 				</center>
 					   </div>
 
@@ -237,7 +1265,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Transformada Z exata
+						<h2>Discretização  Impulso-invariante
 						</h2>
 					</div>
 					<div class="slide-content">
@@ -246,7 +1274,7 @@
 
 						<p class="lightup">Impulso-invariante:</p>
 					
-						<img src="../images/impulse_invariance.png" width="550">
+						<img src="images/impulse_invariance.png" width="550">
 					</center>
 				
 					   </div>
@@ -257,7 +1285,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Transformada Z exata
+						<h2>Discretização  Impulso-invariante
 						</h2>
 					</div>
 					<div class="slide-content">
@@ -278,10 +1306,36 @@
 				</section>
 
 
+
 					<section>
 
 					<div class="slide-title">
-						<h2>Transformada Z exata
+						<h2>Discretização  Impulso-invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+
+						<p class="lightup">Impulso-invariante:</p>
+						$$
+							g(t)=\mathcal{L}^{-1}\{G(s)\}\Rightarrow G_d(z)=\mathcal{Z}\{g(kT)\}
+						$$
+						
+
+						<img src="images/resposta_impulso_samples.png" width="750">
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Discretização Impulso-invariante
 						</h2>
 					</div>
 					<div class="slide-content">
@@ -294,7 +1348,7 @@
 						$$
 						
 
-						<img src="../images/resposta_impulso.png" width="700">
+						<img src="images/resposta_impulso_samples.png" width="750">
 					</center>
 				
 					   </div>
@@ -307,10 +1361,11 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Transformada Z exata
+						<h2>Discretização
 						</h2>
 					</div>
 					<div class="slide-content">
+						<p>&nbsp;</p>
 						<center>
 							<b>Notação:</b>
 					$$
@@ -320,7 +1375,7 @@
 						
 
 					</center>
-
+<p>&nbsp;</p>
 					<center class=" lightup">
 						$$
 							\mathcal{Z}\Bigl\{\frac{1}{s+a}\Bigr\}=\frac{z}{z-e^{-aT}}
@@ -340,7 +1395,7 @@
 					</div>
 					<div class="slide-content">
 						<center>
-						<h3 class="lightup">Usar <a href="../pdf/tabela_tranformada_Z_controle_digital.pdf" target="_blank">Tabelas de Transformada Z</a>!</h3>	
+						<h3 class="lightup">Usar <a href="pdf/tabela_transf_z.pdf" target="_blank">Tabelas de Transformada Z</a>!</h3>	
 
 						Exemplos:
 						$$
@@ -349,7 +1404,7 @@
 						
 
 					</center>
-
+<p>&nbsp;</p>
 					<center class="">
 						$$
 							G(s)=\frac{1}{s+a} \Rightarrow G_d(z)=\frac{z}{z-e^{-aT}}
@@ -379,6 +1434,38 @@
 					Qual a FT discretizada com $T=0.1s$?
 						
 					</center>
+					<p>&nbsp;</p>
+					<center class="lightup">
+						$$
+						G_d(z)=\mathcal{Z}\{G(s)\}=?
+						$$
+				
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Transformada Z exata
+						</h2>
+					</div>
+					<div class="slide-content">
+			
+					<center >
+						Exemplo:
+						$$
+							G(s)=\frac{A}{s+a}+\frac{B}{s+b}
+						$$
+						
+					Qual a FT discretizada com $T=0.1s$?
+						
+					</center>
+					<p>&nbsp;</p>
 					<center class="lightup">
 						$$
 						G_d(z)=\mathcal{Z}\{G(s)\}=?
@@ -394,7 +1481,7 @@
 					<section>
 
 					<div class="slide-title">
-						<h2>Degrau-Invariante
+						<h2>Discretização Degrau-Invariante
 						</h2>
 					</div>
 					<div class="slide-content">
@@ -403,7 +1490,33 @@
 
 						<p class="lightup">Degrau-Invariante:</p>
 					
-						<img src="../images/step_invariance.png" width="550">
+						<img src="images/step_invariance.png" width="550">
+					</center>
+				
+					   </div>
+
+				</section>
+
+
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Discretização Degrau-Invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center>
+					
+
+						<p class="lightup">Degrau-Invariante:</p>
+
+						<img src="../images/degrau_unitario.png" width="500">
+					
+						$$
+							\mathcal{Z}\{\frac{1}{s}\}=\frac{z}{z-1}=\frac{1}{1-z^{-1}}
+						$$
+					
 					</center>
 				
 					   </div>
@@ -414,7 +1527,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Degrau-Invariante
+						<h2>Discretização Degrau-Invariante
 						</h2>
 					</div>
 					<div class="slide-content">
@@ -431,11 +1544,32 @@
 				</section>
 
 
+
+					<section>
+
+					<div class="slide-title">
+						<h2>Discretização Degrau-Invariante
+						</h2>
+					</div>
+					<div class="slide-content">
+						<center class="lightup">
+					$
+							\mathcal{Z}^{-1}\Bigl\{G_d(z)\frac{1}{1-z^{-1}}\Bigr\}=\mathcal{L}^{-1}\Bigl\{G(s)\frac{1}{s}\Bigr\}|_{t=kT}
+					$
+					</center>
+					<center>
+					<img src="images/resposta_degrau_samples.png" width="800">
+				</center>
+					   </div>
+
+				</section>
+
+
 				
 				<section>
 
 					<div class="slide-title">
-						<h2>Degrau-Invariante
+						<h2>Discretização Degrau-Invariante
 						</h2>
 					</div>
 					<div class="slide-content">
@@ -445,7 +1579,7 @@
 					$
 					</center>
 					<center>
-					<img src="../images/resposta_degrau.png" width="800">
+					<img src="images/resposta_degrau_samples.png" width="800">
 				</center>
 					   </div>
 
@@ -458,7 +1592,7 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Degrau-Invariante
+						<h2>Discretização Degrau-Invariante
 						</h2>
 					</div>
 					<div class="slide-content">
@@ -498,12 +1632,12 @@
 				<section>
 
 					<div class="slide-title">
-						<h2>Degrau-Invariante
+						<h2>Discretização Degrau-Invariante
 						</h2>
 					</div>
 					<div class="slide-content">
 						<center >
-				<img src="../images/degrau_invariance.png" width="700">
+				<img src="images/zoh_degrau_invariance.png" width="700">
 				<p class="lightup">
 				$
 							ZOH(s)=\frac{1-e^{-sT}}{s}
@@ -551,7 +1685,7 @@
 						$$
 							G(s)=\frac{s+3}{s^2+3s+2}
 						$$
-						
+						<p>&nbsp;</p>
 					Qual a FT discretizada com $T=0.1s$?
 						
 					</center>
@@ -582,7 +1716,7 @@
 					$$
 
 					</center>
-
+<p>&nbsp;</p>
 					<center>
 						Aplica-se o mapeamento $z=e^{sT}$ nos pólos e zeros, resultando em
 						<p class="lightup">
@@ -610,7 +1744,8 @@
 						<p>&nbsp;</p>
 				
 						O ganho $K$ é escolhido de forma a preservar o ganho do sistema contínuo em uma frequência de interesse, por exemplo:
-<p class="lightup">
+<p>&nbsp;</p>
+						<p class="lightup">
 						$$
 						G(s)|_{s=0}=G_d(z)|_{z=1}
 						$$
@@ -641,6 +1776,7 @@
 						Qual a FT discretizada com $T=0.1s$?
 						
 					</center>
+<p>&nbsp;</p>
 					<center class="lightup">
 						$$
 						G_d(z)=?
@@ -769,7 +1905,7 @@
 						$$
 												
 					</center>
-
+<p>&nbsp;</p>
 					<center >
 						Portanto,
 						
@@ -802,6 +1938,7 @@
 					Qual a FT discretizada com $T=0.1s$?
 						
 					</center>
+					<p>&nbsp;</p>
 					<center class="lightup">
 						$$
 					G_d(z)=G(s)|_{s=\frac{z-1}{T}}=?
@@ -907,7 +2044,7 @@
 						
 					</center>
 
-
+<p>&nbsp;</p>
 					<center>
 						Portanto,
 						$$
@@ -942,6 +2079,7 @@
 					Qual a FT discretizada com $T=0.1s$?
 						
 					</center>
+					<p>&nbsp;</p>
 					<center class="lightup">
 						$$
 					G_d(z)=G(s)|_{s=\frac{z-1}{zT}}=?
@@ -1041,7 +2179,7 @@
 						
 						
 					</center>
-
+<p>&nbsp;</p>
 					<center>
 						Portanto, 
 						$$
@@ -1078,6 +2216,7 @@
 					Qual a FT discretizada com $T=0.1s$?
 						
 					</center>
+					<p>&nbsp;</p>
 					<center class="lightup">
 						$$
 				G_d(z)=G(s)|_{s=\frac{2}{T}\frac{z-1}{z+1}}=?
@@ -1190,10 +2329,10 @@
 			
 					<center >
 						<p>&nbsp;</p>
-					<img src="../images/sistema.png" alt="">
+					<img src="images/sistema.png" alt="">
 						
 					</center>
-					<center>
+					<center class="lightup">
 					$$
 						G(s)=\frac{Y(s)}{U(s)}
 					$$
@@ -1320,12 +2459,13 @@
 						\Rightarrow \frac{V_d^o(z)}{V_d^i(z)}=\frac{d_0}{c_2z^{-2}-c_1z^{-1}+1}=G_d(z)
 						$$
 					</center>
+					<p>&nbsp;</p>
 					<center>
 		em que
 		$$
 		d_0=T^2,\quad
-						c_2=\frac{LC}{LC+RCT+T^2},\\
-						c_1=\frac{RCT+2LC}{LC+RCT+T^2}\\
+						c_2=\frac{LC}{LC+RCT+T^2},\quad
+						c_1=\frac{RCT+2LC}{LC+RCT+T^2}
 						
 		$$
 	</center>
@@ -1347,11 +2487,12 @@
 						
 				$$y[k]=-c_2y[k-2]+c_1y[k-1]+d_0u[k]$$
 					</center>
+					<p>&nbsp;</p>
 					<center>
 		em que $y[k]=v_o[k]$ e $u[k]=v_i[k]$ com
 		$$
 		d_0=T^2,\quad
-						c_2=\frac{LC}{LC+RCT+T^2},\\
+						c_2=\frac{LC}{LC+RCT+T^2},\quad
 						c_1=\frac{RCT+2LC}{LC+RCT+T^2}\\
 						
 		$$
@@ -1381,6 +2522,7 @@
 	<center class="lightup">
 		$$y[k]=\underbrace{\begin{bmatrix}y[k-2] & y[k-1] & u[k]\end{bmatrix}}_{h_k^T}\underbrace{\begin{bmatrix}-c_2\\c_1\\d_0\end{bmatrix}}_{\theta}$$
 	</center>
+	<p>&nbsp;</p>
 	<center>
 		<p>$\rightarrow h_k $ é o <b>vetor de regressor</b> associado à $y_k$ </p>
 		<p>$\rightarrow \theta$ é o <b>vetor de parâmetros</b> do modelo.</p>
@@ -1414,6 +2556,7 @@
 		\vdots\\
 		-h_N^T- \end{bmatrix} \theta$$
 	</center>
+	<p>&nbsp;</p>
 	<center class="lightup2">
 		$$
 		y=H\theta+\varepsilon
@@ -1520,141 +2663,6 @@
 
 				</section>
 
-				<!-- <section>
-
-					<div class="slide-title">
-						<h2>Exemplo: Sistema 2° Ordem
-						</h2>
-					</div>
-					<div class="slide-content">
-						<center>
-							$$
-							\alpha_2\frac{d^2y}{dt^2}+\alpha_1 \frac{dy}{dt}+\alpha_0 y(t) =\beta_0 u(t)
-							$$
-			
-					</center>
-
-					<center class="lightup">
-						Função de Transferência (FT):
-						$$
-						\Rightarrow \frac{Y(s)}{U(s)}=\frac{\beta_0}{\alpha_2s^2+\alpha_1s+\alpha_0}=G(s)
-						$$
-		
-				</center>
-					   </div>
-
-				</section>
-
-				<section>
-
-					<div class="slide-title">
-						<h2>Exemplo: Sistema 2° Ordem
-						</h2>
-					</div>
-					<div class="slide-content">
-						<center>
-							$$
-							\alpha_2\frac{d^2y}{dt^2}+\alpha_1 \frac{dy}{dt}+\alpha_0 y(t) =\beta_0 u(t)
-							$$
-			
-					</center>
-
-					<center class="lightup">
-						Função de Transferência (FT) (Euler-Backward) :
-						$$
-						\Rightarrow \frac{Y_d(z)}{U_d(z)}=\frac{\beta_0}{\alpha_2(\frac{z-1}{zT})^2+\alpha_1(\frac{z-1}{zT})+\alpha_0}=G_d(z)
-						$$
-		
-				</center>
-					   </div>
-
-				</section>
-
-
-
-				<section>
-
-					<div class="slide-title">
-						<h2>Exemplo: Sistema 2° Ordem
-						</h2>
-					</div>
-					<div class="slide-content">
-				
-
-					<center class="lightup">
-						
-						$$
-						\Rightarrow \frac{Y_d(z)}{U_d(z)}=\frac{d_0}{c_2z^{-2}-c_1z^{-1}+1}=G_d(z)
-						$$
-					</center>
-					<center>
-		em que
-		$$
-		d_0=\beta_0T^2,\quad
-						c_2=\frac{\alpha_2}{\alpha_2+\alpha_1 T+\alpha_0 T^2},\\
-						c_1=\frac{\alpha_1T+2\alpha_2}{\alpha_2+\alpha_1 T+\alpha_0 T^2}\\
-						
-		$$
-	</center>
-					   </div>
-
-				</section>
-
-
-					<section>
-
-					<div class="slide-title">
-						<h2>Exemplo: Sistema 2° Ordem
-						</h2>
-					</div>
-					<div class="slide-content">
-				
-
-					<center class="lightup">
-						
-						$$
-						(c_2z^{-2}-c_1z^{-1}+1)Y_d(z)=d_0U_d(z)
-						$$
-					</center>
-					<center class="">
-		Então, a <b>equação à diferenças</b> associada a esse sistema é
-		<p class="lightup">
-		$$
-					c_2y[k-2]-c_1y[k-1]+y[k]=d_0u[k]
-		$$
-	</p>
-	</center>
-					   </div>
-
-				</section>
-
-
-				<section>
-
-					<div class="slide-title">
-						<h2>Exemplo: Sistema 2° Ordem
-						</h2>
-					</div>
-					<div class="slide-content">
-				
-
-					<center class="lightup">
-						
-						$$
-						(c_2z^{-2}-c_1z^{-1}+1)Y_d(z)=d_0U_d(z)
-						$$
-					</center>
-					<center class="">
-		Então, a <b>equação à diferenças</b> associada a esse sistema é
-		<p class="lightup">
-		$$
-					y[k]=-c_2y[k-2]+c_1y[k-1]+d_0u[k]
-		$$
-	</p>
-	</center>
-					   </div>
-
-				</section>
 
 
 
@@ -1683,7 +2691,7 @@
 	</center>
 					   </div>
 
-				</section> -->
+				</section>
 
 
 					<section>
@@ -1700,7 +2708,7 @@
 	
 	Como obter os parâmetros associados ao <b>sistema real</b>?
 	<p>&nbsp;</p>
-	<img src="../images/sistema.png" width="600" >
+	<img src="images/sistema.png" width="600" >
 
 	</center>
 	<center class="lightup ">
@@ -1725,7 +2733,7 @@
 	
 	Como obter os parâmetros associados ao <b>sistema real</b>?
 	<p>&nbsp;</p>
-	<img src="../images/sistema.png" width="600" >
+	<img src="images/sistema.png" width="600" >
 
 	</center>
 	<center class="lightup ">
@@ -1754,7 +2762,7 @@
 	
 	Como obter os parâmetros associados ao <b>sistema real</b>?
 	<p>&nbsp;</p>
-	<img src="../images/sistema.png" width="600" >
+	<img src="images/sistema.png" width="600" >
 
 	</center>
 	<center class="lightup ">
