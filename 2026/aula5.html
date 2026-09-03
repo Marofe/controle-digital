@@ -31,14 +31,15 @@
 					<div class="logo"><img src="../images/sel.png"/> </div>
 					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
 					<div class="title">
-					<h2>Aula 5: <br>Projeto de Controladores na Frequência - parte 1</h2>
+						<p>&nbsp;</p>
+					<h2>Aula 5: <br>Projeto de Controladores - parte 1</h2>
 					</div>
 					<div class="author">
 					<h3>Prof. Marcos Rogério Fernandes</h3>
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">11 de setembro de 2025</p>
+					<p style="text-align: center;font-size: 0.8em;">03 de setembro de 2026</p>
 				</div>
 
 				</section>
@@ -69,6 +70,7 @@
 				<p>Os objetivos dessa aula são entender:
 						<ul>
 						<li>Critérios de desempenho;</li>
+						<li>Erros em regime estacionários;</li>
 						<li>Projeto por Emulação;</li>				
 						<li>Projeto direto em Z;</li>
 						<li>Exemplos;</li>
@@ -92,6 +94,7 @@
 					<li>Tempo de pico ($t_p$);</li>
 					<li>Sobressinal ($M_p$);</li>
 					<li>Tempo de acomodação ($t_s$);</li>
+									
 					</ul>
 		
 				</center>
@@ -143,11 +146,14 @@
 
 		<section>
 			<div class="slide-title">
-				<h2>Exemplo: Controle de laser p/ os olhos</h2>
+				<h2>Exemplo: Controle de laser p/ cirurgia nos olhos</h2>
 			</div>
 			<div class="slide-content">
 				<center>
-				<img src="../images/laser_surgery.jpg" width="900">
+				<video width="900" controls muted>
+				<source src="../videos/cirurgia_laser_overshoot.mp4" type="video/mp4" >
+			  Your browser does not support the video tag.
+			  </video> 
 				
 				</center>
 			</div>
@@ -176,28 +182,15 @@
 
 		<section>
 			<div class="slide-title">
-				<h2>Exemplo: Caldeira</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-				<img src="../images/boiler_control.jpg" width="900">
-				
-				</center>
-			</div>
-
-		</section>
-
-
-		
-
-		<section>
-			<div class="slide-title">
 				<h2>Exemplo: Drones</h2>
 			</div>
 			<div class="slide-content">
 				<center>
 					<p>&nbsp;</p>
-				<img src="../images/drone_control_system.png" width="900">
+				<video width="900" controls muted>
+				<source src="../videos/drone_altitue_control_overshoot.mp4" type="video/mp4" >
+			  Your browser does not support the video tag.
+			  </video> 
 				
 				</center>
 			</div>
@@ -213,9 +206,9 @@
 					<div class="slide-content">
 				
 						<center>
-						<img src="../images/malha_fechada_controle.png" alt="">
+						<img src="images/malha_fechada_controle_s.png" alt="">
 						</center>
-						<center class="">
+						<center class="lightup">
 							$$
 							G_f(s)=\frac{C(s)G(s)}{1+C(s)G(s)}
 							$$
@@ -230,14 +223,14 @@
 
 						<section>
 					<div class="slide-title">
-						<h2>Malha Fechada (Pólos dominantes)</h2>
+						<h2>Malha Fechada (Pólos dominantes de 2° ordem)</h2>
 					</div>
 					<div class="slide-content">
 				
 						<center>
-						<img src="../images/malha_fechada_controle.png" alt="">
+						<img src="images/malha_fechada_controle_s.png" alt="">
 						</center>
-						<center class="">
+						<center class="lightup">
 							$$
 							G_f(s)=\frac{\omega_n^2}{s^2+2\xi\omega_n s+\omega_n^2}
 							$$
@@ -363,8 +356,10 @@
 			</p>
 				em que $t\ge 0$ e
 				$$
-\omega_d=\omega_n\sqrt{1-\xi^2}\\
-\sigma_d=\xi\omega_n
+				\begin{aligned}
+\omega_d&=\omega_n\sqrt{1-\xi^2}\\
+\sigma_d&=\xi\omega_n
+\end{aligned}
 				$$
 				</center>
 			</div>
@@ -460,7 +455,7 @@
 				<img src="../images/resposta_2ordem_tp.png" width="700">
 				<p class="lightup">
 					$
-				\min_{t_p\in\mathbb{R}} \frac{dy(t_p)}{dt}=0
+				\min_{t_p\in\mathbb{R}} \frac{dy(t)}{dt}\Bigr|_{t=t_p}=0
 					$
 				</p>
 				</center>
@@ -521,6 +516,111 @@
 		</section>
 
 
+
+		<section>
+			<div class="slide-title">
+				<h2>Sobressinal</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_Mp.png" width="700">
+				<p class="lightup">
+				$\ln (M_p)=-\pi\frac{\xi}{\sqrt{1-\xi^2}}$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Sobressinal</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_Mp.png" width="700">
+				<p class="lightup">
+				$\sqrt{1-\xi^2}=-\pi\frac{\xi}{\ln (M_p)}$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Sobressinal</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_Mp.png" width="700">
+				<p class="lightup">
+				$1-\xi^2=\pi^2\frac{\xi^2}{\ln (M_p)^2}$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+			
+		<section>
+			<div class="slide-title">
+				<h2>Sobressinal</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_Mp.png" width="700">
+				<p class="lightup">
+				$\ln (M_p)^2=(\pi^2+\ln (M_p)^2)\xi^2$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+				
+		<section>
+			<div class="slide-title">
+				<h2>Sobressinal</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_Mp.png" width="700">
+				<p class="lightup">
+				$\xi^2=\frac{\ln (M_p)^2}{(\pi^2+\ln (M_p)^2)}$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Sobressinal</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="../images/resposta_2ordem_Mp.png" width="700">
+				<p class="lightup">
+				$\xi=\Bigl|\frac{\ln (M_p)}{\sqrt{\pi^2+\ln (M_p)^2}}\Bigr|$
+			</p>
+				</center>
+			</div>
+
+		</section>
+
+
+
+
+
+
 		<section>
 			<div class="slide-title">
 				<h2>Sobressinal</h2>
@@ -554,7 +654,8 @@
 			</div>
 			<div class="slide-content">
 				<center>
-					<img src="../images/enveloped_xi.png" width="800">
+					<img src="../images/enveloped_xi.png" width="700"><br>
+					Uma resposta com $0.4\le \xi \le 0.8$.
 				</center>
 			</div>
 
@@ -825,8 +926,8 @@
 					O sistema é considerado tipo 0 se $N=0$, tipo 1 se $N=1$, etc.
 				</center>
 				<center>
-					<p>&nbsp;</p>
-					<ul><li>Tipo 1: erro nulo para entrada em degrau</li>
+					<p><b>Erro em malha-fechada:</b></p>
+					<ul><li>Tipo 1: erro nulo para entrada em degrau </li>
 					<li>Tipo 2: erro nulo para entrada em degrau e rampa;</li>
 					<li>Tipo 3: erro nulo para entrada em degrau, rampa e parábola;</li>
 					</ul>
@@ -850,11 +951,114 @@
 					e[k]=y[k]-r[k]
 					$$
 				</p>
+				<p>&nbsp;</p>
 				Pelo teorema do valor final, tem-se
+				<p class="lightup">
 				$$
 				\lim_{k\to\infty} e[k]=\lim_{z\to 1}(z-1)E(z)
 				$$
+				</p>
 				</center>
+
+			</div>
+
+		</section>
+
+
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Erro em regime estacionário</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="images/malha_controle_erro.png" alt="">
+				</center>
+				<p class="lightup">
+				$$
+				E(z)=R(z)-Y(z)
+				$$
+				</p>
+
+			</div>
+
+		</section>
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Erro em regime estacionário</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="images/malha_controle_erro.png" alt="">
+				</center>
+				<p class="lightup">
+				$$
+				E(z)=R(z)-G(z)E(z)
+				$$
+				</p>
+
+			</div>
+
+		</section>
+
+
+		
+			<section>
+			<div class="slide-title">
+				<h2>Erro em regime estacionário</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="images/malha_controle_erro.png" alt="">
+				</center>
+				<p class="lightup">
+				$$
+				(1+G(z))E(z)=R(z)
+				$$
+				</p>
+
+			</div>
+
+		</section>
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Erro em regime estacionário</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="images/malha_controle_erro.png" alt="">
+				</center>
+				<p class="lightup">
+				$$
+				E(z)=\frac{1}{1+G(z)}R(z)
+				$$
+				</p>
+
+			</div>
+
+		</section>
+
+
+
+		
+			<section>
+			<div class="slide-title">
+				<h2>Erro em regime estacionário</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<img src="images/malha_controle_erro.png" alt="">
+				</center>
+				<p class="lightup">
+				$$
+				e_{ss}=\lim_{z\to 1}(z-1)E(z)=\lim_{z\to 1}\frac{1}{1+G(z)}R(z)
+				$$
+				</p>
 
 			</div>
 
@@ -863,20 +1067,130 @@
 
 		<section>
 			<div class="slide-title">
-				<h2>Erro de posição</h2>
+				<h2>Erro de posição (entrada de degrau)</h2>
 			</div>
 			<div class="slide-content">
 				<center>
+					Sistema tipo 0: 
+					$$
+						G(z)=\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{z-1}
+					$$
+					<p>&nbsp;</p>
 					<p class="lightup">
+						Erro em regime estacionário:
+					$$
+					e_{ss}=\lim_{z\to 1}(z-1) \frac{1}{1+\frac{N(z)}{D(z)}}R(z)
+					$$
+					
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+					<section>
+			<div class="slide-title">
+				<h2>Erro de posição (entrada de degrau)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 0: 
+					$$
+						G(z)=\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{z-1}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+						Erro em regime estacionário:
+					$$
+					e_{ss}=\lim_{z\to 1}(z-1) \frac{1}{1+\frac{N(z)}{D(z)}}\frac{z}{(z-1)}
+					$$
+					
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		
+					<section>
+			<div class="slide-title">
+				<h2>Erro de posição (entrada de degrau)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 0: 
+					$$
+						G(z)=\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{z-1}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+						Erro em regime estacionário:
+					$$
+					e_{ss}=\lim_{z\to 1}\frac{z}{1+\frac{N(z)}{D(z)}}
+					$$
+					
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+					<section>
+			<div class="slide-title">
+				<h2>Erro de posição (entrada de degrau)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 0: 
+					$$
+						G(z)=\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{z-1}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+						Erro em regime estacionário:
+					$$
+					e_{ss}=\frac{\lim_{z\to 1}z}{\lim_{z\to 1}(1+\frac{N(z)}{D(z)})}
+					$$
+					
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		
+					<section>
+			<div class="slide-title">
+				<h2>Erro de posição (entrada de degrau)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 0: 
+					$$
+						G(z)=\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{z-1}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+						Erro em regime estacionário:
 					$$
 					e_{ss}=\frac{1}{1+K_p}
 					$$
-					com 
-					$$
-						K_p=\lim_{z\to 1}G(z)
-					$$
+					
 				</p>
-			
+			$$
+				K_p=\lim_{z\to 1}\frac{N(z)}{D(z)}=\lim_{z\to 1} G(z)
+			$$
 				</center>
 
 			</div>
@@ -884,20 +1198,100 @@
 		</section>
 
 
-		<section>
+			<section>
 			<div class="slide-title">
-				<h2>Erro de velocidade</h2>
+				<h2>Erro de posição (entrada de degrau)</h2>
 			</div>
 			<div class="slide-content">
 				<center>
+					Sistema tipo 1: 
+					$$
+						G(z)=\frac{1}{z-1}\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{z-1}
+					$$
+					<p>&nbsp;</p>
 					<p class="lightup">
+						Erro em regime estacionário:
 					$$
-					e_{ss}=\frac{1}{K_v}
+					e_{ss}=\lim_{z\to 1}(z-1) \frac{1}{1+\frac{1}{z-1}\frac{N(z)}{D(z)}}R(z)
 					$$
-					com 
+					
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+			<section>
+			<div class="slide-title">
+				<h2>Erro de posição (entrada de degrau)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 1: 
 					$$
-						K_v=\lim_{z\to 1}\frac{(1-z^{-1})G(z)}{T}
+						G(z)=\frac{1}{z-1}\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{z-1}
 					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+						Erro em regime estacionário:
+					$$
+					e_{ss}=\lim_{z\to 1}(z-1) \frac{1}{1+\frac{1}{z-1}\frac{N(z)}{D(z)}}\frac{z}{(z-1)}
+					$$
+					
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+				<section>
+			<div class="slide-title">
+				<h2>Erro de posição (entrada de degrau)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 1: 
+					$$
+						G(z)=\frac{1}{z-1}\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{z-1}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+						Erro em regime estacionário:
+					$$
+					e_{ss}=\lim_{z\to 1}\frac{z}{1+\frac{1}{z-1}\frac{N(z)}{D(z)}}
+					$$
+					
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+					<section>
+			<div class="slide-title">
+				<h2>Erro de posição (entrada de degrau)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 1: 
+					$$
+						G(z)=\frac{1}{z-1}\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{z-1}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+						Erro em regime estacionário:
+					$$
+					e_{ss}=\lim_{z\to 1}\frac{z(z-1)}{(z-1)+\frac{N(z)}{D(z)}}=0
+					$$
+					
 				</p>
 			
 				</center>
@@ -909,17 +1303,138 @@
 
 		<section>
 			<div class="slide-title">
-				<h2>Erro de aceleração</h2>
+				<h2>Erro de velocidade (entrada de rampa)</h2>
 			</div>
 			<div class="slide-content">
 				<center>
+					Sistema tipo 1: 
+					$$
+						G(z)=\frac{1}{z-1}\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{(z-1)^2}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+					$$e_{ss}=\lim_{z\to 1}\frac{\frac{z}{z-1}}{1+\frac{1}{z-1}\frac{N(z)}{D(z)}}$$
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Erro de velocidade (entrada de rampa)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 1: 
+					$$
+						G(z)=\frac{1}{z-1}\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{(z-1)^2}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+					$$e_{ss}=\lim_{z\to 1}\frac{z}{(z-1)+\frac{N(z)}{D(z)}}$$
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+				<section>
+			<div class="slide-title">
+				<h2>Erro de velocidade (entrada de rampa)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 1: 
+					$$
+						G(z)=\frac{1}{z-1}\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{(z-1)^2}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+					$$e_{ss}=\frac{1}{\lim_{z\to 1}\frac{N(z)}{D(z)}}$$
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+		
+				<section>
+			<div class="slide-title">
+				<h2>Erro de velocidade (entrada de rampa)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 1: 
+					$$
+						G(z)=\frac{1}{z-1}\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{(z-1)^2}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+					$$e_{ss}=\frac{1}{K_v}$$
+				</p>
+			$$
+				K_v=\lim_{z\to 1}\frac{N(z)}{D(z)}=\lim_{z\to 1}(z-1)G(z)
+			$$
+				</center>
+
+			</div>
+
+		</section>
+
+
+
+		
+				<section>
+			<div class="slide-title">
+				<h2>Erro de velocidade (entrada de rampa)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 2: 
+					$$
+						G(z)=\frac{1}{(z-1)^2}\frac{N(z)}{D(z)},\quad R(z)=\frac{z}{(z-1)^2}
+					$$
+					<p>&nbsp;</p>
+					<p class="lightup">
+				$$e_{ss}=\lim_{z\to 1}\frac{\frac{z}{z-1}}{1+\frac{1}{(z-1)^2}\frac{N(z)}{D(z)}}=0$$
+				</p>
+			
+				</center>
+
+			</div>
+
+		</section>
+
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Erro de aceleração (entrada de parábola)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					Sistema tipo 2: 
+					$$
+						G(z)=\frac{1}{(z-1)^2}\frac{N(z)}{D(z)},\quad R(z)=\frac{z(z+1)}{(z-1)^3}
+					$$
+					<p>&nbsp;</p>
 					<p class="lightup">
 					$$
 					e_{ss}=\frac{1}{K_a}
 					$$
 					com 
 					$$
-						K_a=\lim_{z\to 1}\frac{(1-z^{-1})^2G(z)}{T^2}
+						K_a=\lim_{z\to 1}(z-1)^2G(z)
 					$$
 				</p>
 			
@@ -933,7 +1448,7 @@
 		
 		<section>
 			<div class="slide-title">
-				<h2>Resumo</h2>
+				<h2>Resumo (Erros em Regime Estacionários)</h2>
 			</div>
 			<div class="slide-content">
 				<center>
@@ -947,12 +1462,14 @@
 \hline
 \end{array}
 					$$
-					em que as constantes estáticas são dadas por<br>
-					$
-						K_p=\lim_{z\to 1} G(z)\\ 
-						K_v=\lim_{z\to 1} \frac{1-z^{-1}}{T}G(z)\\
-						K_a=\lim_{z\to 1} \frac{(1-z^{-1})^2}{T^2}G(z)\\
-					$
+					em que as <b>constantes estáticas</b> são dadas por<br>
+					$$
+					\begin{aligned}
+						K_p&=\lim_{z\to 1} G(z),\\ 
+						K_v&=\lim_{z\to 1} (z-1)G(z),\\
+						K_a&=\lim_{z\to 1} (z-1)^2G(z).
+						\end{aligned}
+					$$
 				</p>
 			
 				</center>
@@ -962,37 +1479,8 @@
 		</section>
 
 
-		<section>
-			<div class="slide-title">
-				<h2>Projeto de controladores na frequência</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					<p>&nbsp;</p>
-					<img src="../images/malha_controle_digital_zoh.png" width="950">
 			
-				</center>
-
-			</div>
-
-		</section>
-
-
-		
-		<section>
-			<div class="slide-title">
-				<h2>Projeto via Emulação</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					<p>&nbsp;</p>
-					<img src="../images/malha_fechada_controle.png" width="850">
-			
-				</center>
-
-			</div>
-
-		</section>
+	
 
 
 			<section>
@@ -1013,25 +1501,6 @@
 
 
 
-
-		<section>
-			<div class="slide-title">
-				<h2>Projeto via Emulação</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					<p><b>Vantagem:</b></p>
-					<ul>
-						<li>Projeto usando LGR, Bode, alocação de pólos, etc, no domínio S;</li>
-					</ul>
-			
-				</center>
-
-			</div>
-
-		</section>
-
-
 			<section>
 			<div class="slide-title">
 				<h2>Projeto via Emulação</h2>
@@ -1040,13 +1509,13 @@
 				<center>
 					<p><b>Vantagens:</b></p>
 					<ul>
-						<li>Projeto usando LGR, Bode, alocação de pólos, etc, no domínio S;</li>
+						<li>Projeto no domínio S usando LGR, Bode, alocação de pólos, etc;</li>
 					</ul>
 			
 					<p><b>Desvantagens:</b></p>
 					<ul>
 						<li>Despreza-se o efeito do ZOH;</li>
-						<li>Requer Discretização do controlador usando Tustin, Euler-Backward, etc;</li>
+						<li>Requer <b>discretização do controlador</b> usando Tustin, Euler-Backward, etc;</li>
 						<li>Desempenho em tempo discreto pode ser ruim;</li>
 						<li>Requer frequência de amostragem elevada;</li>
 					</ul>
@@ -1077,25 +1546,6 @@
 		</section>
 
 
-				<section>
-			<div class="slide-title">
-				<h2>Projeto direto em Z</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-				<p><b>Vantagens:</b></p>
-					<ul>
-						<li>Pode-se considerar os efeitos da amostragem e ZOH;</li>
-							<li>Preserva o desempenhos do contínuo;</li>
-						<li>Pode-se trabalhar com taxas de amostragem menores;</li>
-
-					</ul>
-			
-				</center>
-
-			</div>
-
-		</section>
 
 
 					<section>
@@ -1113,8 +1563,8 @@
 			
 				<p><b>Desvantagens:</b></p>
 					<ul>
-						<li>Requer métodos de discretização da planta, ex: Tustin, Euler-Backward, etc;</li>
-						<li>Método Lugar das Raízes, Bode, alocação de pólos, etc no domínio Z;</li>
+						<li>Requer <b>discretização da planta</b>, ex: Tustin, Euler-Backward, etc;</li>
+						<li>Método no domínio Z de Lugar das Raízes, Bode, alocação de pólos, etc;</li>
 						
 					</ul>
 			
@@ -1134,7 +1584,8 @@
 			<div class="slide-content">
 				<center>
 					<p>&nbsp;</p>
-					<img src="../images/malha_controle_digital_discretizacao.png" width="950">
+					<img src="images/malha_controle_zoh.png" width="950"><br>
+					Discretização degrau invariante!
 			
 				</center>
 
@@ -1150,8 +1601,9 @@
 			</div>
 			<div class="slide-content">
 				<center>
-					<p>&nbsp;</p>
-					<img src="../images/malha_controle_digital_em_z.png" width="950">
+					
+					<img src="images/malha_controle_zoh_planta_z.png" width="950"><br>
+					Tudo em tempo discreto!
 			
 				</center>
 
@@ -1192,7 +1644,7 @@ z_{1,2}=e^{s_{1,2}T}
 $
 </p>
 					<table>
-						<tr><td><img src="../images/zgrid02.png" width="700"></td><td><img src="../images/zgrid_wn.png" width="630"></td></tr>
+						<tr><td align="center"><img src="../images/zgrid02.png" width="700"><br>plano-z</td><td align="center"><img src="../images/zgrid_wn.png" width="630"><br>plano-z</td></tr>
 					</table>
 			
 				</center>
@@ -1215,7 +1667,7 @@ z_{1,2}=
 $
 </p>
 					<table>
-						<tr><td><img src="../images/zgrid02.png" width="700"></td><td><img src="../images/zgrid_wn.png" width="630"></td></tr>
+						<tr><td align="center"><img src="../images/zgrid02.png" width="700"><br>plano-z</td><td align="center"><img src="../images/zgrid_wn.png" width="630"><br>plano-z</td></tr>
 					</table>
 			
 				</center>
@@ -1237,7 +1689,8 @@ $
 				<center>
 					<p class="lightup">
 				$$
-					z_{1,2}=e^{s_{1,2}T}=re^{\pm j\theta}
+					z_{1}=e^{s_{1}T}=re^{j\theta}\\
+					z_{2}=e^{s_{2}T}=re^{-j\theta}
 				$$
 			</p>
 				com 
@@ -1291,6 +1744,7 @@ r=e^{-T\xi \omega_n} \\
 			<div class="slide-content">
 				<center>
 					<p class="lightup">
+						Avanço ou Atraso de Fase
 				$$C(z)=K\frac{z-a}{z-b}
 				$$
 			</p>
@@ -1352,6 +1806,7 @@ r=e^{-T\xi \omega_n} \\
 					$$C(z)=K\frac{z-a}{z-b}
 				$$
 <p class="lightup">
+	Dinâmica de 2° ordem em malha-fechada
 				$$
 					G_f(z)=\frac{C(z)G(z)}{1+C(z)G(z)}=\frac{N(z)}{D(z)}
 				$$
@@ -1372,6 +1827,7 @@ r=e^{-T\xi \omega_n} \\
 				$$C(z)=K\frac{z-a}{z-b}
 				$$
 <p class="lightup">
+		Dinâmica de 2° ordem em malha-fechada
 				$$
 					G_f(z)=\frac{C(z)G(z)}{1+C(z)G(z)}=\frac{N(z)}{(z-z_1)(z-z_2)}
 				$$
@@ -1380,6 +1836,10 @@ r=e^{-T\xi \omega_n} \\
 $$
 z_{1,2}=e^{s_{1,2}T}=re^{\pm j\theta}
 $$
+Então, 
+<p class="lightup">
+	$$1+C(z)G(z)=z^2-(z_1+z_2)z+z_1z_2$$
+</p>
 				
 				</center>
 			</div>
@@ -1389,22 +1849,42 @@ $$
 
 				</section>
 
-				<section>
+
+
+						<section>
 			<div class="slide-title">
-				<h2>Implementação digital</h2>
+				<h2>Implementação digital do controlador</h2>
 			</div>
 			<div class="slide-content">
 				<p>&nbsp;</p>
 				<center>
-				$$C(z)=K\frac{1-az^{-1}}{1-bz^{-1}}=\frac{U(z)}{E(z)}
-				$$
-<p class="lightup">
-				$$
-					(1-bz^{-1})U(z)=K(1-az^{-1})E(z)
-				$$
+					<p class="lightup">
+				$$C(z)=K\frac{z-a}{z-b}=\frac{U(z)}{E(z)}$$
+				</p>
+				
+				<p>&nbsp;</p>
+					<img src="images/discrete_control.png" width="500">
+<br>Controlador
+				
+				</center>
+			</div>
 
-</p>				
+		</section>
 
+					<section>
+			<div class="slide-title">
+				<h2>Implementação digital do controlador</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+					<p class="lightup">
+				$$C(z)=K\frac{1-az^{-1}}{1-bz^{-1}}=\frac{U(z)}{E(z)}$$
+				</p>
+				
+				<p>&nbsp;</p>
+					<img src="images/discrete_control.png" width="500">
+<br>Controlador
 				
 				</center>
 			</div>
@@ -1414,26 +1894,20 @@ $$
 
 
 		
-
-
-
-
-							<section>
+					<section>
 			<div class="slide-title">
-				<h2>Implementação digital</h2>
+				<h2>Implementação digital do controlador</h2>
 			</div>
 			<div class="slide-content">
 				<p>&nbsp;</p>
 				<center>
-				$$C(z)=K\frac{1-az^{-1}}{1-bz^{-1}}=\frac{U(z)}{E(z)}
-				$$
-<p class="lightup">
-				$$
-					u[k]-bu[k-1]=K(e[k]-ae[k-1])
-				$$
-
-</p>				
-
+					<p class="lightup">
+				$$(1-bz^{-1})U(z)=K(1-az^{-1})E(z)$$
+				</p>
+				
+				<p>&nbsp;</p>
+					<img src="images/discrete_control.png" width="500">
+<br>Controlador
 				
 				</center>
 			</div>
@@ -1441,27 +1915,41 @@ $$
 		</section>
 
 
-		
-
-
-							<section>
+			<section>
 			<div class="slide-title">
-				<h2>Implementação digital</h2>
+				<h2>Implementação digital do controlador</h2>
 			</div>
 			<div class="slide-content">
 				<p>&nbsp;</p>
 				<center>
-				$$C(z)=K\frac{1-az^{-1}}{1-bz^{-1}}=\frac{U(z)}{E(z)}
-				$$
-<p class="lightup">
-				$$
-					u[k]=bu[k-1]+K(e[k]-ae[k-1])
-				$$
+					<p class="lightup">
+				$$u[k]-bu[k-1]=K(e[k]-ae[k-1])$$
+				</p>
+				
+				<p>&nbsp;</p>
+					<img src="images/discrete_control.png" width="500">
+<br>Controlador
+				
+				</center>
+			</div>
 
-</p>				
-$$e[k]=r[k]-y[k]
-$$
+		</section>
 
+
+			<section>
+			<div class="slide-title">
+				<h2>Implementação digital do controlador</h2>
+			</div>
+			<div class="slide-content">
+				<p>&nbsp;</p>
+				<center>
+					<p class="lightup">
+				$$u[k]=bu[k-1]+K(e[k]-ae[k-1])$$
+				</p>
+				
+				<p>&nbsp;</p>
+					<img src="images/discrete_control.png" width="500">
+<br>Controlador
 				
 				</center>
 			</div>
@@ -1471,7 +1959,7 @@ $$
 
 				<section>
 			<div class="slide-title">
-				<h2>Implementação digital</h2>
+					<h2>Implementação digital do controlador</h2>
 			</div>
 			<div class="slide-content">
 				<center>
@@ -1481,7 +1969,7 @@ $$
 					$$
 				</p>
 				<p>Escrever software em uma linguagem como C, C++, etc para colocar em um microcontrolador!</p>
-				<img src="../images/arduino.png" width="250"><img src="../images/esp32.webp" width="230"><img src="../images/pic.avif" width="300">
+				<img src="../images/arduino.png" width="250"><img src="../images/esp32.webp" width="230"><img src="images/raspberrypi.png" width="300">
 				
 
 				</center>
@@ -1496,8 +1984,9 @@ $$
 			</div>
 			<div class="slide-content">
 				<p align="center">Pseudo-código de Arduino:</p>
+				<p>&nbsp;</p>
 				<pre><code class="language-arduino">
-					void sampling() {
+					void tick() {
 							r=1; //set-point
 							y=analogRead(input_pin); //le saida do sistema 
 							erro=r-y; //obtem sinal de erro 
@@ -1514,31 +2003,6 @@ $$
 		
 
 
-							
-		<!-- <section>
-			<div class="slide-title">
-				<h2>Pólos dominantes de 2° ordem</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Dado
-					<p class="lightup">
-				$
-					z_{1,2}=re^{\pm j\theta}
-				$
-			</p>
-				Tem-se
-				$$
-				\xi = \frac{\ln(r)}{\sqrt{\ln(r)^2+\theta^2}},\quad \omega_n = \frac{\sqrt{\ln(r)^2+\theta^2}}{T}
-				$$
-				
-				</center>
-			</div>
-
-		</section> -->
-
-
-	
 		
 
 
@@ -1551,7 +2015,7 @@ $$
 				<div class="slide-content">
 					<center>
 						<p>Projeto de controladores - parte 2</p>
-						<img src="../images/malha_controle_atuador_processo.png" width="750" alt="">
+						<img src="images/malha_controle_atuador_processo.png" width="750" alt="">
 					</center>
 				</div>
 
@@ -1591,6 +2055,7 @@ $$
 		<script src="../plugin/markdown/markdown.js"></script>
 		<script src="../plugin/highlight/highlight.js"></script>
 		<script src="../plugin/math/math.js"></script>
+			<script src="../plugin/handwriting/plugin.js"></script>
 		<script src="../init.js"></script>
 	</body>
 </html>
