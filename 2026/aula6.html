@@ -30,6 +30,8 @@
 					<div class="logo"><img src="../images/sel.png"/> </div>
 					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
 					<div class="title">
+						<p>&nbsp;
+						</p>
 					<h2>Aula 6: <br>Projeto de Controladores na Frequência - parte 2</h2>
 					</div>
 					<div class="author">
@@ -37,7 +39,7 @@
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">18 de setembro de 2025</p>
+					<p style="text-align: center;font-size: 0.8em;">17 de setembro de 2026</p>
 				</div>
 
 				</section>
@@ -67,8 +69,9 @@
 			<div class="slide-content">
 				<p>Os objetivos dessa aula são entender:
 						<ul>
-						<li>Avanço/Atraso fase;</li>
-						<li>Projeto PID;</li>
+						<li>Controaldor Avanço/Atraso Fase;</li>
+						<li>Projeto PID em tempo discreto;</li>
+						<li>Efeito windup;</li>
 						<li>Métodos de otimização;</li>
 						<li>Exemplos;</li>
 					</p>
@@ -86,7 +89,7 @@
 			<div class="slide-content">
 				<center>
 					<p>&nbsp;</p>
-					<img src="../images/malha_controle_digital_zoh.png" width="950">
+					<img src="images/malha_controle_zoh.png" width="950">
 			
 				</center>
 
@@ -130,23 +133,6 @@
 		</section>
 
 
-	
-		
-		<section>
-			<div class="slide-title">
-				<h2>Projeto direto em Z</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					<p>&nbsp;</p>
-					<img src="../images/malha_controle_digital_discretizacao.png" width="950">
-			
-				</center>
-
-			</div>
-
-		</section>
-
 
 			
 		<section>
@@ -155,8 +141,8 @@
 			</div>
 			<div class="slide-content">
 				<center>
-					<p>&nbsp;</p>
-					<img src="../images/malha_controle_digital_em_z.png" width="950">
+			
+					<img src="images/malha_controle_zoh_planta_z.png" width="950">
 			
 				</center>
 
@@ -488,7 +474,7 @@ Equação característica:
 					|C(z)G(z)| = 1
 		$$
 		</p>
-					
+		<p>&nbsp;</p>			
 			<p class="lightup">
 		Condição de fase:
 		$$
@@ -510,9 +496,11 @@ Equação característica:
 				<center>
 					
 					Note que
+					<p class="lightup">
 					$$
 					C(z)G(z)=\frac{N(z)}{D(z)}=\frac{|N(z)|e^{j\angle N(z)}}{|D(z)|e^{j\angle D(z)}}
 					$$
+					</p>
 				</center>
 			</div>
 
@@ -528,9 +516,11 @@ Equação característica:
 				<center>
 					
 					Note que
+					<p class="lightup">
 					$$
 					C(z)G(z)=\frac{N(z)}{D(z)}=\frac{|N(z)|e^{j\angle N(z)}}{|D(z)|e^{j\angle D(z)}}
 					$$
+					</p>
 					Logo,
 					$$
 					\angle C(z)G(z)=\angle N(z)-\angle D(z)
@@ -548,16 +538,22 @@ Equação característica:
 				<center>
 					
 					Note que
+					<p class="lightup">
 					$$
 					C(z)G(z)=\frac{N(z)}{D(z)}=\frac{|N(z)|e^{j\angle N(z)}}{|D(z)|e^{j\angle D(z)}}
 					$$
+					</p>
 					Logo,
 					$$
 					\angle C(z)G(z)=\angle N(z)-\angle D(z)
 					$$
 					como
-					$N(z)=(z-n_1)(z-n_2)\ldots(z-n_m)$ <Br>
-						$D(z)=(z-p_1)(z-p_2)\ldots(z-p_n)$
+					$$
+					\begin{aligned}
+					N(z)&=(z-n_1)(z-n_2)\ldots(z-n_m)\\
+						D(z)&=(z-p_1)(z-p_2)\ldots(z-p_n)
+					\end{aligned}	
+						$$
 				</center>
 			</div>
 
@@ -571,6 +567,7 @@ Equação característica:
 			</div>
 			<div class="slide-content">
 				<center>
+					<p>&nbsp;</p>
 					
 					<b>Condições para que um ponto $z\in\mathbb{C}$ pertença ao LGR:</b>
 					<p class="lightup">
@@ -580,7 +577,7 @@ Equação característica:
 					|C(z)G(z)| = 1
 		$$
 		</p>
-					
+					<p>&nbsp;</p>
 			<p class="lightup">
 		Condição de fase:
 		$$
@@ -606,9 +603,9 @@ Equação característica:
 					<b>Procedimento:</b>
 					
 <ul>
-<li>Escolha a localização dos pólos dominante em malha fechada do sistema conforme critérios de desempenho;</li>
-<li>Escolha os pólos e zeros do controlador de forma a atender a condição de fase do LGR;</li>
-<li>Escolha o ganho do controlador de forma a satisfazer a condição de módulo do LGR.</li>
+<li>Escolha a localização dos <b>pólos dominante</b> em malha fechada do sistema conforme critérios de desempenho;</li>
+<li>Escolha os <b>pólos e zeros do controlador</b> de forma a atender a condição de fase do LGR;</li>
+<li>Escolha o <b>ganho do controlador</b> de forma a satisfazer a condição de módulo do LGR.</li>
 </ul>
 				
 				</center>
@@ -623,13 +620,39 @@ Equação característica:
 			</div>
 			<div class="slide-content">
 				<center>
+					<p class="lightup">
+						Planta (atuador+processo):
 					$$
 					G(s)=\frac{1}{s(s+1)}
 					$$
+					</p>
+					Deseja-se projetar um controlador em tempo discreto com $T_s=0.1s$ tal que os pólos dominantes de malha fechada possuam $M_p\le 4.6\%$ e $t_s\approx 1.15s$
+					<p><b>1° passo:</b> equivalente discreto</p>
+					$$
+					G_d(z)=\mathcal{Z}\Bigl\{\frac{1-e^{-sT_s}}{s}G(s)\Bigr\}
+					$$
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						Planta (atuador+processo):
+					$$
+					G(s)=\frac{1}{s(s+1)}
+					$$
+					</p>
 					Deseja-se projetar um controlador em tempo discreto com $T_s=0.1s$ tal que os pólos dominantes de malha fechada possuam $\xi=0.7$ e $\omega_n=5$
 					<p><b>1° passo:</b> equivalente discreto</p>
 					$$
-					G_d(z)=\mathcal{Z}\{\frac{1-e^{-sT_s}}{s}G(s)\}
+					G_d(z)=\mathcal{Z}\Bigl\{\frac{1-e^{-sT_s}}{s}G(s)\Bigr\}
 					$$
 				</center>
 			</div>
@@ -642,9 +665,12 @@ Equação característica:
 			</div>
 			<div class="slide-content">
 				<center>
+					<p class="lightup">
+						Planta (atuador+processo):
 					$$
 					G(s)=\frac{1}{s(s+1)}
 					$$
+					</p>
 					Deseja-se projetar um controlador em tempo discreto com $T_s=0.1s$ tal que os pólos dominantes de malha fechada possuam $\xi=0.7$ e $\omega_n=5$
 					<p><b>1° passo:</b> equivalente discreto</p>
 					$$
@@ -663,12 +689,12 @@ Equação característica:
 			<div class="slide-content">
 				<center>
 					<p>&nbsp;</p>
-					<p><b>2° passo:</b> pólo dominante no plano-s</p>
+					<p><b>2° passo:</b> pólos dominantes no plano-s</p>
 					$$
 					s_{1,2}=-\xi\omega_n\pm j\omega_n\sqrt{1-\xi^2}
 					$$
-
-					<p><b>3° passo:</b> mapeamento do pólo dominante para o plano-z</p>
+<p>&nbsp;</p>
+					<p><b>3° passo:</b> mapeamento dos pólos dominantes para o plano-z</p>
 					$$
 					z_{1,2}=e^{s_{1,2}T}
 					$$
@@ -687,12 +713,14 @@ Equação característica:
 					<p>&nbsp;</p>
 					<p><b>2° passo:</b> pólo dominante no plano-s</p>
 					$$
-					s_{1,2}=-3.5\pm j3.57
+					s_{1}=-3.5+ j3.57\\
+					s_{2}=-3.5- j3.57
 					$$
-
+<p>&nbsp;</p>
 					<p><b>3° passo:</b> mapeamento do pólo dominante para o plano-z</p>
 					$$
-					z_{1,2}=0.660\pm j 0.246
+					z_{1}=0.660+ j 0.246\\
+					z_{2}=0.660- j 0.246
 					$$
 				</center>
 			</div>
@@ -710,15 +738,17 @@ Equação característica:
 				<center>
 
 					<p><b>4° passo:</b> escolha da estrutura do controlador</p>
+					<p class="lightup">
 					$$
 					C(z)=K\frac{z-a}{z-b}
 					$$
+					</p>
 
 					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					Observações:
 					<ul>
-						<li>Satisfazer a condição de fase do LGR;</li>
 						<li>Se $G_d(z)$ tiver pólos <b>assintóticamente estáveis</b>, então pode-se escolher os zeros do controlador de forma a cancelar esses pólos <b>assintóticamente estáveis</b>.</li>
-						
+						<li>Satisfazer a condição de fase do LGR;</li>
 					</ul>
 				</center>
 			</div>
@@ -734,10 +764,12 @@ Equação característica:
 				<center>
 Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 					$a=0.9048$ 
+					<p class="lightup">
 					$$
 					C(z)=K\frac{z-0.9048}{z-b}
 					$$
-
+					</p>
+<p>&nbsp;</p>
 					Dessa forma,
 					$$
 					C(z)G_d(z) = \underbrace{K\frac{(z-0.9048)}{(z-b)}}_{C(z)}	\underbrace{\frac{0.004837(z+0.9672)}{(z-1)(z-0.9048)}}_{G_d(z)}
@@ -757,10 +789,12 @@ Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 				<center>
 Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 					$a=0.9048$ 
+					<p class="lightup">
 					$$
 					C(z)=K\frac{z-0.9048}{z-b}
 					$$
-
+</p>
+<p>&nbsp;</p>
 					Dessa forma,
 					$$
 					C(z)G_d(z) = \frac{K}{(z-b)}\frac{0.004837(z+0.9672)}{(z-1)}
@@ -781,11 +815,13 @@ Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 				<center>
 
 					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+						<p class="lightup">
 					$$
 					C(z)=K\frac{z-0.9048}{z-b}
 					$$
-
-					Condição de fase:
+</p>
+<p>&nbsp;</p>
+					<b>Condição de fase:</b>
 					$$
 					\angle C(z_1)G_d(z_1) = \angle \Bigl(\frac{K}{(z_1-b)}\frac{0.004837(z_1+0.9672)}{(z_1-1)}\Bigr)=180°
 					$$
@@ -805,13 +841,40 @@ Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 				<center>
 
 					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					<p class="lightup">
 					$$
 					C(z)=K\frac{z-0.9048}{z-b}
 					$$
+					</p>
 
 					Condição de fase:
 					$$
 					\angle(z_1+0.9672)-\angle (z_1-1)-\angle(z_1-b)=180°
+					$$
+				
+				</center>
+			</div>
+
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+
+					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					<p class="lightup">
+					$$
+					C(z)=K\frac{z-0.9048}{z-b}
+					$$
+					</p>
+
+					Condição de fase:
+					$$
+					\underbrace{\angle(z_1+0.9672)}_{\theta}-\underbrace{\angle (z_1-1)}_{\phi}-\underbrace{\angle(z_1-b)}_{\alpha}=180°
 					$$
 				
 				</center>
@@ -827,9 +890,10 @@ Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 				<center>
 
 					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					<p class="lightup">
 					$$
 					C(z)=K\frac{z-0.9048}{z-b}
-					$$
+					$$</p>
 
 					Condição de fase:
 					$$
@@ -897,6 +961,7 @@ Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 				\phi = \angle(-0.3398+j0.246)\approx 144°\\
 				\alpha=\theta-\phi-180°\approx -315.4°
 			$$
+			obs: no MATLAB pode-se usar a função <b>angle</b>
 				</center>
 			</div>
 
@@ -1014,9 +1079,10 @@ Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 				<center>
 
 					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					<p class="lightup">
 					$$
 					C(z)=K\frac{z-0.9048}{z-0.41}
-					$$
+					$$</p>
 
 					
 					<p><b>6° passo:</b> escolha do ganho do controlador</p>
@@ -1038,9 +1104,10 @@ Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 				<center>
 
 					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					<p class="lightup">
 					$$
 					C(z)=K\frac{z-0.9048}{z-0.41}
-					$$
+					$$</p>
 
 					
 					<p><b>6° passo:</b> escolha do ganho do controlador</p>
@@ -1062,10 +1129,11 @@ Cancelamento do pólo assintoticamente estável de $G_d(z)$:
 				<center>
 
 					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					<p class="lightup">
 					$$
 					C(z)=K\frac{z-0.9048}{z-0.41}
 					$$
-
+</p>
 					
 					<p><b>6° passo:</b> escolha do ganho do controlador</p>
 					$$
@@ -1086,9 +1154,10 @@ K=\frac{\Bigl|(z_1-0.41)(z_1-1)\Bigr|}{\Bigl| 0.004837(z_1+0.9672)\Bigr |}
 				<center>
 
 					<p><b>5° passo:</b> escolha dos pólos e zeros do controlador</p>
+					<p class="lightup">
 					$$
 					C(z)=K\frac{z-0.9048}{z-0.41}
-					$$
+					$$</p>
 
 					
 					<p><b>6° passo:</b> escolha do ganho do controlador</p>
@@ -1169,7 +1238,7 @@ K=18.5076
 					$$
 				</p>
 				<p>Escrever software em uma linguagem como C, C++, etc para colocar em um microcontrolador!</p>
-				<img src="../images/arduino.png" width="250"><img src="../images/esp32.webp" width="230"><img src="../images/pic.avif" width="300">
+				<img src="../images/arduino.png" width="250"><img src="../images/esp32.webp" width="230"><img src="images/raspberrypi.png" width="300">
 				
 
 				</center>
@@ -1184,9 +1253,10 @@ K=18.5076
 				<h2>Exemplo de Implementação:</h2>
 			</div>
 			<div class="slide-content">
-				<p align="center">Arduino:</p>
+				<p align="center">IDE do Arduino:</p>
+				Pseudo-código
 				<pre><code class="language-arduino">
-					void sampling() {
+					void tick() {
 						r=1; //set-point
 						y=analogRead(input_pin); //le saida do sistema 
 						erro=r-y; //obtem sinal de erro 
@@ -1200,6 +1270,29 @@ K=18.5076
 
 		</section>
 
+
+		
+		<section>
+			<div class="slide-title">
+				<h2>Exercicio:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p class="lightup">
+						Planta (atuador+processo):
+					$$
+					G(s)=\frac{1}{s(s+5)}
+					$$
+					</p>
+					Projete um controlador em tempo discreto com $T_s=0.2s$ tal que os pólos dominantes de malha fechada possuam $M_p\le 10\%$ e $\omega_n=5rad/s$.
+				
+				</center>
+			</div>
+
+		</section>
+
+
+
 		<section>
 			<div class="slide-title">
 				<h2>Controle PID (Padrão):</h2>
@@ -1208,10 +1301,10 @@ K=18.5076
 				<center>
 					<p class="lightup">
 						$$
-						u(t)=K_P\Bigl(e(t)+\frac{1}{T_I}\int_0^t e(\tau)d\tau+T_D\frac{de(t)}{dt}\Bigr)
+						u(t)=K_P\Bigl(e(t)+\frac{1}{T_i}\int_0^t e(\tau)d\tau+T_d\frac{de(t)}{dt}\Bigr)
 						$$
 						</p>
-					<img src="../images/pid_continuo.png" width="650">
+					<img src="images/pid_continuo_padrao.png" width="650">
 	
 				</center>
 			</div>
@@ -1326,6 +1419,7 @@ K=18.5076
 						u[k]=u_P[k]+u_I[k]+u_D[k]
 						$$
 						</p>
+						<p>&nbsp;</p>
 					$$
 					\begin{aligned}
 u_P[k]&=K_pe[k]\\
@@ -1345,9 +1439,10 @@ u_D[k]&=\frac{K_d}{T_s}(e[k]-e[k-1])
 				<h2>Controle PID (Euler-Backward):</h2>
 			</div>
 			<div class="slide-content">
-				<p align="center">Arduino:</p>
+				<p align="center">IDE do Arduino:</p>
+				Pseudo-código
 				<pre><code class="language-arduino">
-					void sampling() {
+					void tick() {
 						r=1; //set-point
 						y=analogRead(input_pin); //le saida do sistema 
 						erro=r-y; //obtem sinal de erro 
@@ -1395,6 +1490,7 @@ u_D[k]&=\frac{K_d}{T_s}(e[k]-e[k-1])
 						u[k]=u_P[k]+u_I[k]+u_D[k]
 						$$
 						</p>
+						<p>&nbsp;</p>
 						$$
 					\begin{aligned}
 u_P[k]&=K_pe[k]\\
@@ -1413,7 +1509,8 @@ u_D[k]&=\frac{K_p}{T_s}(e[k]-e[k-1])
 				<h2>Controle PID (Integrador via Tustin):</h2>
 			</div>
 			<div class="slide-content">
-				<p align="center">Arduino:</p>
+				<p align="center">IDE do Arduino:</p>
+				Pseudo-código
 				<pre><code class="language-arduino">
 						void sampling() {
 						r=1; //set-point
@@ -1485,6 +1582,79 @@ u_D[k]&=\frac{K_p}{T_s}(e[k]-e[k-1])
 					<img src="../images/pid_continuo_filtro_derivativo.png" width="650">
 	
 				</center>
+			</div>
+
+		</section>
+
+
+		
+			<section>
+			<div class="slide-title">
+				<h2>Saturação do atuador:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				$$
+				u_\text{min} \le u[k] \le u_\text{max}
+				$$
+				<img src="../images/u_saturacao.png" width="800">
+				</center>
+			</div>
+
+		</section>
+
+
+		
+		
+		<section>
+			<div class="slide-title">
+				<h2>Controle PID c/ anti-windup:</h2>
+			</div>
+			<div class="slide-content">
+				<p align="center">IDE do Arduino:</p>
+				<pre><code class="language-arduino">
+					void tick() {
+						r=1; //set-point
+						y=analogRead(input_pin); //le saida do sistema 
+						erro=r-y; //obtem sinal de erro 
+						if (ui >u_max) {
+							ui=u_max;
+						}else if (ui < u_mim ){
+							ui=ui_min;
+						}
+						up=K*erro;  // termo proporcional
+						ui=ui+Ki*Ts*erro; // termo integrativo c/ anti-windup
+						ud=Kd/Ts*(erro-erro_anterior);  //termo derivativo
+						u=up+ui+ud; //sinal de controle
+						erro_anterior=erro; 	//atualiza erro p/ proxima iteracao
+						analogWrite(output_pin,u); //atualiza saida
+					  }
+					  </code></pre>
+			</div>
+
+		</section>
+
+			<section>
+			<div class="slide-title">
+				<h2>Controle PID s/ anti-windup:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<img src="../images/temperatura_sem_antiwindup.png" width="800">	
+				</center>
+			</div>
+
+		</section>
+
+
+			<section>
+			<div class="slide-title">
+				<h2>Controle PID c/ anti-windup:</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<img src="../images/temperatura_com_antiwindup.png" width="800">	
+			</center>
 			</div>
 
 		</section>
@@ -1612,76 +1782,6 @@ u_D[k]&=\frac{K_p}{T_s}(e[k]-e[k-1])
 
 
 		
-			<section>
-			<div class="slide-title">
-				<h2>Saturação do atuador:</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-				$$
-				u_\text{min} \le u[k] \le u_\text{max}
-				$$
-				<img src="../images/u_saturacao.png" width="800">
-				</center>
-			</div>
-
-		</section>
-
-
-		
-		
-		<section>
-			<div class="slide-title">
-				<h2>Controle PID c/ anti-windup:</h2>
-			</div>
-			<div class="slide-content">
-				<p align="center">Arduino:</p>
-				<pre><code class="language-arduino">
-					void sampling() {
-						r=1; //set-point
-						y=analogRead(input_pin); //le saida do sistema 
-						erro=r-y; //obtem sinal de erro 
-						if (ui >u_max) {
-							ui=u_max;
-						}else if (ui < u_mim ){
-							ui=ui_min;
-						}
-						up=K*erro;  // termo proporcional
-						ui=ui+Ki*Ts*erro; // termo integrativo c/ anti-windup
-						ud=Kd/Ts*(erro-erro_anterior);  //termo derivativo
-						u=up+ui+ud; //sinal de controle
-						erro_anterior=erro; 	//atualiza erro p/ proxima iteracao
-						analogWrite(output_pin,u); //atualiza saida
-					  }
-					  </code></pre>
-			</div>
-
-		</section>
-
-			<section>
-			<div class="slide-title">
-				<h2>Controle PID s/ anti-windup:</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-			<img src="../images/temperatura_sem_antiwindup.png" width="800">	
-				</center>
-			</div>
-
-		</section>
-
-
-			<section>
-			<div class="slide-title">
-				<h2>Controle PID c/ anti-windup:</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-			<img src="../images/temperatura_com_antiwindup.png" width="800">	
-			</center>
-			</div>
-
-		</section>
 
 
 

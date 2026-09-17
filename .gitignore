@@ -1,0 +1,15 @@
+# Apostilas
+apostila/
+*apostila*
+
+# Claude outputs
+Claude outputs/
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.fls
+*.fdb_latexmk

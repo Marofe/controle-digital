@@ -1,3 +1,87 @@
 {
-    "cSpell.language": "pt-BR"
+    "cSpell.language": "pt-BR",
+
+    // LaTeX Workshop - Configuração Estilo Overleaf
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.tab.editorGroup": "right",
+    "latex-workshop.view.pdf.zoom": "auto",
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+    "latex-workshop.synctex.afterBuild.enabled": true,
+
+    // Compilação manual (apenas ao clicar em Build ou Ctrl+Enter)
+    "latex-workshop.latex.autoBuild.run": "never",
+
+    // Notificações limpas
+    "latex-workshop.message.warning.show": false,
+    "latex-workshop.message.error.show": true,
+
+    // Ferramentas de compilação (usa pdflatex nativo do MiKTeX)
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {}
+        }
+    ],
+
+    // Receitas de compilação
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "pdflatex ➞ pdflatex",
+            "tools": [
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "xelatex",
+            "tools": [
+                "xelatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipe.default": "first",
+
+    // Limpeza de arquivos auxiliares
+    "latex-workshop.latex.clean.subfolder.enabled": true
 }
