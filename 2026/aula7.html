@@ -16,10 +16,24 @@
 		
 		<!-- and it's easy to individually load additional languages -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/arduino.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/matlab.min.js"></script>
 		
 		<script>hljs.highlightAll();</script>
 		
 		<link rel="stylesheet" href="../style.css">
+		<!-- Destaque de código no estilo do editor do MATLAB -->
+		<style>
+			.reveal pre:has(code.language-matlab) { background: #ffffff; border: 1px solid #d0d7de; text-align: left; }
+			.reveal pre code.language-matlab { background: #ffffff; color: #000000; padding: 0.6em 0.9em; max-height: none; }
+			.reveal pre code.language-matlab .hljs-keyword { color: #0e00ff; }
+			.reveal pre code.language-matlab .hljs-comment { color: #228b22; }
+			.reveal pre code.language-matlab .hljs-string  { color: #a020f0; }
+			.reveal pre code.language-matlab .hljs-number,
+			.reveal pre code.language-matlab .hljs-built_in,
+			.reveal pre code.language-matlab .hljs-title,
+			.reveal pre code.language-matlab .hljs-params,
+			.reveal pre code.language-matlab .hljs-literal { color: #000000; }
+		</style>
 	</head>
 	<body>
 		
@@ -30,14 +44,15 @@
 					<div class="logo"><img src="../images/sel.png"/> </div>
 					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
 					<div class="title">
-					<h2>Aula 7: <br>Espaço de Estados - parte 1</h2>
+						<p>&nbsp;</p>
+					<h2>Aula 7: <br>Introdução ao Controle Digital em Espaço de Estados</h2>
 					</div>
 					<div class="author">
 					<h3>Prof. Marcos Rogério Fernandes</h3>
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">02 de outubro de 2025</p>
+					<p style="text-align: center;font-size: 0.8em;">24 de setembro de 2026</p>
 				</div>
 
 				</section>
@@ -67,6 +82,7 @@
 			<div class="slide-content">
 				<p>Os objetivos dessa aula são entender:
 						<ul>
+						<li>Revisão de Álgebra Linear;</li>
 						<li>Modelos em espaço de estados;</li>
 						<li>Discretização em espaço de estados;</li>
 						<li>Análise de estabilidade em espaço de estados;</li>
@@ -90,7 +106,7 @@
 					\sum_{i=0}^n\alpha_i\frac{d^i y}{dt^i}=\sum_{i=0}^m\beta_i\frac{d^i u}{dt^i}
 				$$
 			</p>
-				<img src="../images/planta.png" width="600" alt="">
+				<img src="images/planta_atuador_processo.png" width="600" alt="">
 	
 			</center>
 			   </div>
@@ -113,9 +129,7 @@
 			   </div>
 
 		</section>
-
-
-		<!-- <section>
+ <section>
 
 			<div class="slide-title">
 				<h2>Revisão de Álgebra Linear 
@@ -123,6 +137,8 @@
 			</div>
 			<div class="slide-content">
 				<center>
+					<p class="lightup">
+						Matriz:
 					$$
 					A_{n\times m}=\begin{bmatrix}
 					a_{11} & a_{12} & \cdots & a_{1m}\\
@@ -131,10 +147,13 @@
 					a_{n1} & a_{n2} & \cdots & a_{nm}\\
 					\end{bmatrix}
 					$$
+						</p>
 				De forma compacta
+				<p class="lightup">
 				$$
-					A_{n\times m}=[a_{ij}], i=1,\ldots,n,\quad j=1,\ldots,m
+					A_{n\times m}=[a_{ij}]
 				$$
+				</p>
 $i\to$ linhas e $j\to$ colunas
 			</center>
 			   </div>
@@ -149,7 +168,10 @@ $i\to$ linhas e $j\to$ colunas
 				</h2>
 			</div>
 			<div class="slide-content">
+				
 				<center>
+					<p class="lightup2">
+						Vetores Colunas:
 					$$
 					A_{n\times m}=\begin{bmatrix}
 					| & | & \cdots & |\\
@@ -157,7 +179,10 @@ $i\to$ linhas e $j\to$ colunas
 					| & | & \cdots & |\\
 					\end{bmatrix}
 					$$
-				ou
+					</p>
+		
+				<p class="lightup2">
+					Vetores Linhas:
 				$$
 					A_{n\times m}=\begin{bmatrix}
 					- & l_1^\trp & -\\
@@ -166,6 +191,7 @@ $i\to$ linhas e $j\to$ colunas
 					- & l_n^\trp & -\\
 					\end{bmatrix}
 					$$
+					</p>
 			</center>
 			   </div>
 
@@ -180,33 +206,8 @@ $i\to$ linhas e $j\to$ colunas
 			</div>
 			<div class="slide-content">
 				<center>
-					Produto matriz com matriz
-					$$
-					[A_{n\times m}B_{m\times p}]_{ij}=\sum_{k=1}^m a_{ik} b_{kj}
-					$$
-			<p class="lightup">
-					i-ésima linha produto escalar com a j-ésima coluna
-					$$
-					[A_{n\times m}B_{m\times p}]_{ij}=\langle l_i^A, c_j^B\rangle 
-					$$
-			</p>
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com matriz
-					<p>&nbsp;</p>
-					$$
+					<b>Produto matriz com matriz</b>
+						$$
 					(AB)_{n\times p}=\begin{bmatrix} 
 					- & (l_1^A)^\trp & - \\
 					- & (l_2^A)^\trp & - \\
@@ -218,11 +219,18 @@ $i\to$ linhas e $j\to$ colunas
 					| & |  & \cdots & |
 					\end{bmatrix}
 					$$
-			
+			<p>&nbsp;</p>
+			<p class="lightup">
+					i-ésima linha produto escalar com a j-ésima coluna
+					$$
+					[A_{n\times m}B_{m\times p}]_{ij}=\langle l_i^A, c_j^B\rangle 
+					$$
+			</p>
 			</center>
 			   </div>
 
 		</section>
+
 
 
 		<section>
@@ -259,7 +267,7 @@ $i\to$ linhas e $j\to$ colunas
 			<div class="slide-content">
 				<center>
 					Produto matriz com matriz
-					<p>&nbsp;</p>
+			
 					$$
 					(AB)_{n\times p}=\begin{bmatrix} 
 					| & |  & \cdots & |\\
@@ -273,41 +281,20 @@ $i\to$ linhas e $j\to$ colunas
 					- & (l_m^B)^\trp & - \\
 					\end{bmatrix}
 					$$
-			
-			</center>
-			   </div>
 
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com matriz
-					<p>&nbsp;</p>
+					Então, 
+					<p class="lightup">
 					$$
 					(AB)_{n\times p}=c_1^A(l_1^B)^\trp +c_2^A(l_2^B)^\trp+\cdots+c_m^A(l_m^B)^\trp
 					$$
-			Portanto,
-			$$
-					(AB)_{n\times p}=\sum_{k=1}^m \begin{bmatrix}
-					|\\
-					c_k^A \\
-					|
-					\end{bmatrix}_{n\times 1}\cdot \begin{bmatrix}
-					- & (l_k^B)^\trp & - 
-					\end{bmatrix}_{1\times p}
-					$$
+					</p>
 			
 			</center>
 			   </div>
 
 		</section>
+
+
 
 
 		<section>
@@ -323,42 +310,7 @@ $i\to$ linhas e $j\to$ colunas
 					A\in\mathbb{R}^{n\times n},\quad x\in\mathbb{R}^n
 					$$
 			Portanto,
-			$$
-					Ax = \begin{bmatrix} 
-					| & |  & \cdots & |\\
-					c_1^A &  c_2^A & \cdots & c_n^A \\
-					| & |  & \cdots & |
-					\end{bmatrix}\begin{bmatrix}
-					x_1\\
-					x_2\\
-					\vdots \\
-					x_n
-					\end{bmatrix}=\sum_{j=1}^n \begin{bmatrix} 
-					|\\
-					c_j^A \\
-					| 
-					\end{bmatrix}x_j
-					$$
-			
-			</center>
-			   </div>
-
-		</section>
-
-
-		<section>
-
-			<div class="slide-title">
-				<h2>Revisão de Álgebra Linear 
-				</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-					Produto matriz com vetor
-					$$
-					A\in\mathbb{R}^{n\times n},\quad x\in\mathbb{R}^n
-					$$
-			Portanto,
+			<p class="lightup">
 			$$
 					Ax =\begin{bmatrix} 
 					- & (l_1^A)^\trp & - \\
@@ -377,7 +329,7 @@ $i\to$ linhas e $j\to$ colunas
 					\langle l_n^A, x\rangle\\
 					\end{bmatrix}
 					$$
-			
+			</p>
 			</center>
 			   </div>
 
@@ -393,17 +345,24 @@ $i\to$ linhas e $j\to$ colunas
 			<div class="slide-content">
 				<center>
 					Não-comutatividade:
+
+					<p class="lightup">
 					$$
 				AB \neq BA
 					$$
+					</p>
 		Transposto:
+		<p class="lightup">
 		$$
 					(AB)^\trp = B^\trp A^\trp 
 		$$
+		</p>
 		Inversa: 
+		<p class="lightup">
 		$$
 					(AB)^{-1}=B^{-1}A^{-1}
 		$$
+		</p>
 			
 			</center>
 			   </div>
@@ -420,22 +379,93 @@ $i\to$ linhas e $j\to$ colunas
 			<div class="slide-content">
 				<center>
 		Autovalores e Autovetores:
+		<p class="lightup">
 		$$
 					Av=\lambda v
 		$$
+		</p>
+		<p>&nbsp;</p>
 		Operador Autovalores:
 		$$
 					\lambda\{A\}=\{\lambda_1,\lambda_2,\ldots,\lambda_n\}
 		$$
+		<p>&nbsp;</p>
 		Matriz (semi)-definida positiva: 
 		$$
-					A\ge 0 \Rightarrow \lambda \{A\} \ge 0
+					A\succeq 0 \Rightarrow \lambda \{A\} \ge 0
 		$$
 			
 			</center>
 			   </div>
 
 		</section>
+
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+		Autovalores e Autovetores:
+		<p class="lightup">
+		$$
+					(\lambda I-A)v=0
+		$$
+		</p>
+		<p>&nbsp;</p>
+		Operador Autovalores:
+		$$
+					\lambda\{A\}=\{\lambda_1,\lambda_2,\ldots,\lambda_n\}
+		$$
+		<p>&nbsp;</p>
+		Matriz (semi)-definida positiva: 
+		$$
+					A\succeq 0 \Rightarrow \lambda \{A\} \ge 0
+		$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
+		
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+		Autovalores e Autovetores:
+		<p class="lightup">
+		$$
+					det(\lambda I-A)=0
+		$$
+		</p>
+		<p>&nbsp;</p>
+		Operador Autovalores:
+		$$
+					\lambda\{A\}=\{\lambda_1,\lambda_2,\ldots,\lambda_n\}
+		$$
+		<p>&nbsp;</p>
+		Matriz (semi)-definida positiva: 
+		$$
+					A\succeq 0 \Rightarrow \lambda \{A\} \ge 0
+		$$
+			
+			</center>
+			   </div>
+
+		</section>
+
+
 
 		<section>
 
@@ -445,10 +475,37 @@ $i\to$ linhas e $j\to$ colunas
 			</div>
 			<div class="slide-content">
 				<center>
-			Decomposição espectral: 
+			Interpretação geométrica dos autovalores e autovetores:
+			<img src="images/autovalores_autovetores.svg" width="880" alt="Autovalores e autovetores">
+			<div style="font-size:0.7em;">
+		$$
+			A=\begin{bmatrix} 1{,}25 & 0{,}75\\ 0{,}75 & 1{,}25\end{bmatrix},\quad
+			\lambda_1=2,\; v_1=\tfrac{1}{\sqrt{2}}\begin{bmatrix}1\\1\end{bmatrix},\quad
+			\lambda_2=0{,}5,\; v_2=\tfrac{1}{\sqrt{2}}\begin{bmatrix}1\\-1\end{bmatrix}
+		$$
+			</div>
+			</center>
+			   </div>
+
+		</section>
+
+
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Revisão de Álgebra Linear 
+				</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			Decomposição espectral (dados os autovalores e autovetores): 
+			<p class="lightup">
 		$$
 					A=V\Lambda V^{-1}
 		$$
+		</p>
 em que
 		$$
 \begin{aligned} 
@@ -483,7 +540,8 @@ v_1 & v_2 & \cdots & v_n\\
 		$$
 					A=V\Lambda V^{-1}
 		$$
-em que
+Então,
+<p class="lightup">
 		$$
 \begin{aligned} 
 A^{-1} = V\begin{bmatrix}
@@ -494,6 +552,7 @@ A^{-1} = V\begin{bmatrix}
 \end{bmatrix}V^{-1}
 \end{aligned}
 		$$
+		</p>
 			
 			</center>
 			   </div>
@@ -513,7 +572,8 @@ A^{-1} = V\begin{bmatrix}
 		$$
 					A=V\Lambda V^{-1}
 		$$
-em que
+Então, 
+<p class="lightup">
 		$$
 \begin{aligned} 
 A^n = V\begin{bmatrix}
@@ -524,6 +584,7 @@ A^n = V\begin{bmatrix}
 \end{bmatrix}V^{-1}
 \end{aligned}
 		$$
+		</p>
 			
 			</center>
 			   </div>
@@ -544,7 +605,8 @@ A^n = V\begin{bmatrix}
 		$$
 					A=V\Lambda V^{-1}
 		$$
-em que
+Então,
+<p class="lightup">
 		$$
 \begin{aligned} 
 e^A = V\begin{bmatrix}
@@ -555,7 +617,7 @@ e^{\lambda_1} \\
 \end{bmatrix}V^{-1}
 \end{aligned}
 		$$
-			
+</p>			
 			</center>
 			   </div>
 
@@ -570,12 +632,15 @@ e^{\lambda_1} \\
 			</div>
 			<div class="slide-content">
 				<center>
+					<p>&nbsp;</p>
+					<p class="lightup">
 			Exponencial Matricial: 
 		$$
 					e^A=I+A+\frac{1}{2!}A^2+\frac{1}{3!}A^3+\cdots
 		$$
-
-similar ao caso escalar:
+		</p>
+<p>&nbsp;</p>
+Similar ao caso escalar:
 $$
 e^a=1+a+\frac{1}{2!}a^2+\frac{1}{3!}a^3+\cdots
 $$
@@ -584,7 +649,7 @@ $$
 			   </div>
 
 		</section>
- -->
+ 
 
 
 		
@@ -598,8 +663,9 @@ $$
 					<p class="">
 						EDO
 					$$
-					\alpha_n\frac{d^n y}{dt^n}+\alpha_{n-1}\frac{d^{n-1}y}{dt^{n-1}}+\cdots+\alpha_0y=u
+					\boxed{\alpha_n\frac{d^n y}{dt^n}+\alpha_{n-1}\frac{d^{n-1}y}{dt^{n-1}}+\cdots+\alpha_0y=u}
 				$$
+				<p>&nbsp;</p>
 				Introduz-se <b>variáveis de estado</b>:
 				<p class="lightup">
 				$$
@@ -623,7 +689,9 @@ $$
 				<h2>Modelo em Espaço de Estados</h2>
 			</div>
 			<div class="slide-content">
+					<p>&nbsp;</p>
 				<center>
+					<b>Forma Canônica Controlável:</b>
 					$$
 					\begin{bmatrix} 
 					\dot x_1\\
@@ -647,8 +715,9 @@ $$
 					\frac{1}{\alpha_n}
 					\end{bmatrix}u
 					$$
-				
+				<p>&nbsp;</p>
 				<p class="lightup">
+						Espaço de Estados
 				$$
 					\dot{x}(t)=Ax(t)+Bu(t)
 				$$
@@ -676,6 +745,7 @@ $$
 					\dot{x}(t)=Ax(t)+Bu(t)
 				$$
 			</p>
+			<p>&nbsp;</p>
 			$$
 			x\in\mathbb{R}^n \to \text{vetor de estados}\\
 			u\in\mathbb{R}^m \to \text{vetor de entrada}\\
@@ -699,11 +769,12 @@ $$
 				<center>
 									
 				<p class="lightup">
-					Saída:
+					Equação de Saída:
 				$$
 					y(t)=Hx(t)+Du(t)
 				$$
 			</p>
+			<p>&nbsp;</p>
 			$$
 			y\in\mathbb{R}^p \to \text{vetor de saída}\\
 			H\in\mathbb{R}^{p\times n}\to \text{matriz de saída}\\
@@ -737,7 +808,7 @@ $$
 					y(t)=Hx(t)+Du(t)
 				$$
 			</p>
-			<img src="../images/MIMO.png" width="600">
+			<img src="../images/MIMO.png" width="600"><br>Multiple Inputs Multiple Outpus (MIMO)
 		
 	
 			</center>
@@ -803,11 +874,14 @@ $$
 		x_1=y;\quad x_2=\dot{y}=\dot{x}_1; \quad\dot{x}_2=\ddot{y}.
 		$$
 		Logo,
+		<p class="lightup">
+			Modelo em espaço de estados:
 		$$
+		\begin{aligned}
 		\begin{bmatrix}
 		\dot{x}_1\\ 
 		\dot{x}_2
-		\end{bmatrix}=\begin{bmatrix}
+		\end{bmatrix}&=\begin{bmatrix}
 		0 & 1\\ 
 		-\omega_n^2 & -2\xi\omega_n
 		\end{bmatrix}\begin{bmatrix}
@@ -816,8 +890,11 @@ $$
 		\end{bmatrix}+\begin{bmatrix}
 		0\\			
 		\omega_n^2
-		\end{bmatrix}u
+		\end{bmatrix}u\\
+		y&=\begin{bmatrix}1 & 0 \end{bmatrix}x
+		\end{aligned}
 		$$
+		</p>
 			</center>
 					</div>
 
@@ -858,11 +935,13 @@ $$
 				<center>
 									
 			
-			<img src="../images/pendulo_invertido.png" width="350">
-			<p class="">
+			<img src="../images/pendulo_invertido.png" width="300">
+			<p class="lightup">
 		$$
-					(M+m)\ddot{x}-ml\ddot{\theta}\cos(\theta)+ml\dot{\theta}^2\sin(\theta)=F\\
-					l\ddot{\theta}-\ddot{x}\cos(\theta)-g\sin(\theta)=0
+		\begin{aligned}
+					(M+m)\ddot{x}-ml\ddot{\theta}\cos(\theta)+ml\dot{\theta}^2\sin(\theta)&=F\\
+					l\ddot{\theta}+b\dot{\theta}-\ddot{x}\cos(\theta)-g\sin(\theta)&=0
+					\end{aligned}
 		$$
 	</p>
 	
@@ -890,36 +969,6 @@ $$
 		
 
 
-		<!-- <section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="">
-					
-				$$
-				\delta \dot{x}(t)=A(x_0,u_0)\delta x(t)+B(x_0,u_0)\delta u(t)\\
-					\delta y(t)=H(x_0,u_0)\delta x(t)+D(x_0,u_0)\delta u(t)
-				$$
-			</p>
-		em que 
-		$$
-		\begin{aligned}
-		A(x_0,u_0)=\frac{\partial f}{\partial x}\Bigr|_{x=x_0,u=u_0},\quad
-		B(x_0,u_0)=\frac{\partial f}{\partial u}\Bigr|_{x=x_0,u=u_0}\\
-		H(x_0,u_0)=\frac{\partial h}{\partial x}\Bigr|_{x=x_0,u=u_0},\quad
-		D(x_0,u_0)=\frac{\partial h}{\partial u}\Bigr|_{x=x_0,u=u_0}
-\end{aligned}
-		$$
-		
-	
-			</center>
-					</div>
-
-		</section>
 		
 
 
@@ -927,67 +976,6 @@ $$
 			
 			<div class="slide-title">
 				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									
-				<p class="">
-					
-				$$
-				\delta \dot{x}(t)=A(x_0,u_0)\delta x(t)+B(x_0,u_0)\delta u(t)\\
-					\delta y(t)=H(x_0,u_0)\delta x(t)+D(x_0,u_0)\delta u(t)
-				$$
-			</p>
-		em que 
-		$$
-		\begin{aligned}
-			\delta x(t)&=x(t)-x_0 \\
-			\delta \dot{x}&=\dot{x}(t)-f(x_0,u_0)\\
-			\delta u(t)&=u(t)-u_0\\ 
-			\delta y(t)&=y(t)-h(x_0,u_0)\\
-\end{aligned}
-		$$
-		
-	
-			</center>
-					</div>
-
-		</section> -->
-
-
-		<!-- <section>
-			
-			<div class="slide-title">
-				<h2>Modelo em Espaço de Estados (Linearizado)</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-									Ponto de equilíbrio na origem
-									$$
-									0=f(0,0),\quad 0=h(0,0)
-									$$
-				<p class="">
-					
-				$$
-				\dot{x}(t)=A(x_0,u_0)x(t)+B(x_0,u_0)u(t)\\
-				y(t)=H(x_0,u_0)x(t)+D(x_0,u_0)u(t)
-				$$
-				em que $x_0=0$ e $u_0=0$.
-			</p>
-	
-			</center>
-					</div>
-
-		</section> -->
-
-	
-
-
-
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização do Modelo em Espaço de Estados</h2>
 			</div>
 			<div class="slide-content">
 				<center>
@@ -995,11 +983,81 @@ $$
 				<p class="lightup">
 					
 				$$
+				\delta \dot{x}(t)=A\delta x(t)+B\delta u(t)\\
+					\delta y(t)=H\delta x(t)+D\delta u(t)
+				$$
+			</p>
+		em que 
+		$$
+		\begin{aligned}
+			&\boxed{\delta x(t)=x(t)-x_e},\quad
+			\boxed{\delta u(t)=u(t)-u_e}\\ 
+		A&=\frac{\partial f}{\partial x}\Bigr|_{x=x_e,u=u_e},\quad
+		B=\frac{\partial f}{\partial u}\Bigr|_{x=x_e,u=u_e}\\
+		H&=\frac{\partial h}{\partial x}\Bigr|_{x=x_e,u=u_e},\quad
+		D=\frac{\partial h}{\partial u}\Bigr|_{x=x_e,u=u_e}
+\end{aligned}
+$$
+obs: $(x_e,u_e)\rightarrow \text{ponto de equilíbrio do sistema}$
+		
+	
+			</center>
+					</div>
+
+		</section> 
+
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Pêndulo Invertido móvel (linearizado)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+							<p class="lightup">
+			$$
+			\theta\approx 0
+			$$
+			</p>		
+			<img src="../images/pendulo_invertido.png" width="150">
+			<p class="">
+				Então, $\sin(\theta)\approx 0$, e $\cos(\theta)\approx 1$, logo
+				<p class="lightup">
+		$$
+		\begin{aligned}
+					(M+m)\ddot{x}-ml\ddot{\theta}&=F\\
+					l\ddot{\theta}+b\dot{\theta}-\ddot{x}&=0
+					\end{aligned}
+		$$
+		</p>
+	</p>
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização do Modelo em Espaço de Estados</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p>&nbsp;</p>
+									Dado um modelo em tempo contínuo:
+				<p class="lightup">
+					
+				$$
 				\dot{x}(t)=Ax(t)+Bu(t)\\
 				$$
 			</p>
+			<p>&nbsp;</p>
 
-Equivalente em tempo discreto:
+Como obter equivalente em tempo discreto?
 										
 			<p class="lightup">
 					
@@ -1072,7 +1130,7 @@ Solução:
 		 x(t)=e^{a(t-t_0)}x(t_0)+\int_0^t e^{a(t-\tau)}b u(\tau)d\tau,\quad t\in[t_0,T]
 				$$
 			</p>
-		
+		em que $e^x=1+x+\frac{1}{2}x^2+\cdots$
 		
 	
 			</center>
@@ -1125,6 +1183,7 @@ Solução:
 				x(t)=e^{A (t-t_0)}x(t_0)+\int_{t_0}^t e^{A(t-\tau)}Bu(\tau)d\tau,\quad t\in[t_0,T]
 				$$
 			</p>
+			<p>&nbsp;</p>
 Considere
 										
 			<p class="">
@@ -1133,9 +1192,9 @@ Considere
 				x(kT_s)=x_k,\quad t \in [kT_s,(k+1)T_s]
 				$$
 				ou seja,
-				$
+				$$
 				t_0=kT_s,\quad T=(k+1)T_s
-				$
+				$$
 			</p>
 		
 		
@@ -1162,11 +1221,11 @@ Considere
 				x_{k+1}=e^{A T_s}x_k+\int_{kT_s}^{(k+1)T_s} e^{A((k+1)T_s-\tau)}Bu(\tau)d\tau
 				$$
 			</p>
-
+<p>&nbsp;</p>
 			Suponha que 
 
 			$$
-			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
+			u(\tau)=u_k, \\\forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
 			$$
 
 		
@@ -1192,11 +1251,11 @@ Considere
 				x_{k+1}=e^{A T_s}x_k+\int_{kT_s}^{(k+1)T_s} e^{A((k+1)T_s-\tau)}d\tau Bu_k
 				$$
 			</p>
-
+<p>&nbsp;</p>
 			Suponha que 
 
 			$$
-			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
+			u(\tau)=u_k,\\ \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
 			$$
 
 		
@@ -1215,20 +1274,51 @@ Considere
 			</div>
 			<div class="slide-content">
 				<center>
-									
+				Com a troca de variáveis $$\eta=(k+1)T_s-\tau\Rightarrow d\eta = -d\tau$$	
+				Note que os limites de integração são:
+				$$
+					\tau = kT_s \Rightarrow \eta = T_s \\
+					\tau = (k+1)T_s \Rightarrow \eta = 0
+				$$
+				Logo, tem-se			
 				<p class="lightup">
-					
+				$$
+				x_{k+1}=e^{A T_s}x_k+\Bigl(-\int_{T_s}^0 e^{A\eta}d\eta B\Bigr)u_k
+				$$
+			</p>
+			
+<p>&nbsp;</p>
+
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Discretização via Integração</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				Com a troca de variáveis $$\eta=(k+1)T_s-\tau\Rightarrow d\eta = -d\tau$$	
+				Note que os limites de integração são:
+				$$
+					\tau = kT_s \Rightarrow \eta = T_s \\
+					\tau = (k+1)T_s \Rightarrow \eta = 0
+				$$
+				Logo, tem-se			
+				<p class="lightup">
 				$$
 				x_{k+1}=e^{A T_s}x_k+\Bigl(\int_{0}^{T_s} e^{A\eta}d\eta B\Bigr)u_k
 				$$
 			</p>
+			
+<p>&nbsp;</p>
 
-			Suponha que 
-			$$
-			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
-			$$
-
-		
 		
 	
 			</center>
@@ -1244,26 +1334,29 @@ Considere
 			</div>
 			<div class="slide-content">
 				<center>
-									
+				Com a troca de variáveis $$\eta=(k+1)T_s-\tau\Rightarrow d\eta = -d\tau$$	
+				Note que os limites de integração são:
+				$$
+					\tau = kT_s \Rightarrow \eta = T_s \\
+					\tau = (k+1)T_s \Rightarrow \eta = 0
+				$$
+				Logo, tem-se			
 				<p class="lightup">
-					
 				$$
 				x_{k+1}=\underbrace{e^{A T_s}}_{A_d}x_k+\underbrace{\Bigl(\int_{0}^{T_s} e^{A\eta }d\eta B\Bigr)}_{B_d}u_k
 				$$
 			</p>
+			
+<p>&nbsp;</p>
 
-			Suponha que 
-			$$
-			u(\tau)=u_k, \forall \tau \in[kT_s,(k+1)T_s] \text{ (ZOH)}
-			$$
-
-		
 		
 	
 			</center>
 					</div>
 
 		</section>
+
+
 
 
 
@@ -1276,21 +1369,21 @@ Considere
 				<center>
 									
 				<p class="lightup">
-					
+					Modelo equivalente em tempo discreto:
 				$$
 				x_{k+1}=A_dx_k+B_du_k
 				$$
 			</p>
+			<p>&nbsp;
+			</p>
 			em que 
 			$$
-			\begin{aligned}
-			A_d&=e^{AT_s}\\
-			B_d&=\int_0^{T_s} e^{A\eta}d\eta B
-			\end{aligned}
+			\boxed{A_d=e^{AT_s}}\quad
+			\boxed{B_d=\int_0^{T_s}e^{A\eta}d\eta B}
 			$$
 
 		
-		
+Obs: discretização exata para ZOH!		
 	
 			</center>
 					</div>
@@ -1309,7 +1402,7 @@ Considere
 						&nbsp;
 					</p>
 				<p class="lightup">
-					
+				Caso escalar:	
 				$$
 			\int_0^t e^{a\eta}d\eta = \frac{1}{a}(e^{at}-1)
 				$$
@@ -1339,7 +1432,7 @@ Considere
 						&nbsp;
 					</p>
 				<p class="lightup">
-					
+					Caso Matricial:
 				$$
 			\int_0^t e^{A\eta}d\eta = A^{-1}(e^{At}-I)=(e^{At}-I)A^{-1}
 				$$
@@ -1358,29 +1451,6 @@ Considere
 
 
 
-		<section>
-			
-			<div class="slide-title">
-				<h2>Discretização via Integração</h2>
-			</div>
-			<div class="slide-content">
-				<center>
-				<p>&nbsp;</p>
-			Se $A$ for não-singular (existe $A^{-1}$), então
-						$$
-			\begin{aligned}
-		B_d&=\int_0^{T_s} e^{A\eta}d\eta B\\&=A^{-1}(e^{AT_s}-I)B\\&=(e^{AT_s}-I)A^{-1}B
-			\end{aligned}
-			$$
-
-		
-		
-	
-			</center>
-					</div>
-
-		</section>
-
 
 		<section>
 			
@@ -1391,12 +1461,13 @@ Considere
 				<center>
 								<p>&nbsp;</p>	
 			Se $A$ for singular (não existe $A^{-1}$), então
+			<p class="lightup">
 						$$
 			\begin{aligned}
 		B_d&=\int_0^{T_s} e^{A\eta}d\eta B\\&= \int_0^{T_s} (I+A\eta+\frac{1}{2!}A^2\eta^2+\frac{1}{3!}A^3\eta^3+\cdots)d\eta B
 			\end{aligned}
 			$$
-
+</p>
 		
 		
 	
@@ -1414,13 +1485,14 @@ Considere
 				<center>
 								<p>&nbsp;</p>	
 			Se $A$ for singular (não existe $A^{-1}$), então
+				<p class="lightup">
 						$$
 			\begin{aligned}
 		B_d&=\int_0^{T_s} e^{A\eta}d\eta B\\&= \int_0^{T_s} (I+A\eta+\frac{1}{2!}A^2\eta^2+\frac{1}{3!}A^3\eta^3+\cdots)d\eta B\\
 		=&\Bigl(IT_s+A \frac{T_s^2}{2}+\frac{1}{2!}A^2 \frac{T_s^3}{3}+\frac{1}{3!}A^3 \frac{T_s^4}{4}+\cdots\Bigr)B
 			\end{aligned}
 			$$
-
+</p>
 		
 		
 	
@@ -1437,13 +1509,14 @@ Considere
 			</div>
 			<div class="slide-content">
 				<center>
-									
+						<p>&nbsp;</p>			
 			<p class="lightup">
 
 				$$
 				y(t)=Hx(t)+Du(t)
 				$$
 			</p>
+			<p>&nbsp;</p>			
 		Portanto, o equivalente em tempo discreto basta tomar
 
 		<p class="lightup">
@@ -1467,13 +1540,14 @@ Considere
 			</div>
 			<div class="slide-content">
 				<center>
-									
+								<p>&nbsp;</p>				
 			<p class="lightup">
 
 				$$
 				y(kT_s)=Hx(kT_s)+Du(kT_s)
 				$$
 			</p>
+			<p>&nbsp;</p>			
 		ou seja, o equivalente em tempo discreto é
 
 		<p class="lightup">
@@ -1510,9 +1584,11 @@ Considere
 		
 		em que 
 		$$
-			A_d=e^{AT_s},\quad B_d=\int_0^{T_s} e^{A\eta}d\eta B
+			\boxed{A_d=e^{AT_s}},\quad \boxed{B_d=\int_0^{T_s} e^{A\eta}d\eta B}
 		$$
 	
+		No MATLAB: 
+		<pre><code class="language-matlab">[Ad,Bd]=c2d(A,B,Ts);</code></pre>
 			</center>
 					</div>
 
@@ -1559,6 +1635,40 @@ Considere
 				$$x_{k+1}=A_dx_k+B_du_k$$
 			</p>
 	
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no matlab: solução</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+		<pre style="width:85%;font-size:0.55em;"><code class="language-matlab">A  = [-1 1; 0 -2];
+B  = [1; 3];
+Ts = 0.1;
+
+[Ad, Bd] = c2d(A, B, Ts)    % discretização com ZOH
+
+% alternativa: a partir do modelo ss
+% sysd = c2d(ss(A,B,eye(2),0), Ts);  Ad = sysd.A;  Bd = sysd.B;</code></pre>
+		<p class="lightup">
+			$$
+			x_{k+1}=\underbrace{\begin{bmatrix} 0.9048 & 0.0861 \\ 0 & 0.8187 \end{bmatrix}}_{A_d}x_k
+			+\underbrace{\begin{bmatrix} 0.1087 \\ 0.2719 \end{bmatrix}}_{B_d}u_k
+			$$
+		</p>
+		<div style="font-size:0.65em;">
+			Conferindo analiticamente:
+			$$
+			A_d=e^{AT_s}=\begin{bmatrix} e^{-T_s} & e^{-T_s}-e^{-2T_s} \\ 0 & e^{-2T_s} \end{bmatrix},\qquad
+			B_d=\int_0^{T_s}e^{A\eta}d\eta\,B=\begin{bmatrix} 4(1-e^{-T_s})-\frac{3}{2}(1-e^{-2T_s}) \\ \frac{3}{2}(1-e^{-2T_s}) \end{bmatrix}
+			$$
+		</div>
 			</center>
 					</div>
 
@@ -1691,7 +1801,7 @@ Considere
 				$$
 			</p>
 		
-		
+		<img src="../images/modelo_ss_discreto.png" width="700">
 	
 			</center>
 					</div>
@@ -1822,7 +1932,7 @@ Considere
 					0 & -2
 					 \end{bmatrix}x+\begin{bmatrix} 1 \\ 3 \end{bmatrix}u
 			$$
-	
+	<p>&nbsp;</p>
 			<p class="lightup">
 				Equivalente em tempo discreto com $T_s=0.1s$:
 				$$x_{k+1}=A_dx_k+B_du_k$$
@@ -1830,6 +1940,42 @@ Considere
 	Simular para $x_0=[10;10]$ e $u_k=0, T=10$
 			</center>
 					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no matlab: solução</h2>
+			</div>
+			<div class="slide-content">
+				<div style="display:flex; align-items:center; gap:1em;">
+					<pre style="flex:1.05; margin:0; font-size:0.48em;"><code class="language-matlab">A  = [-1 1; 0 -2];  B = [1; 3];
+Ts = 0.1;  T = 10;
+[Ad, Bd] = c2d(A, B, Ts);
+
+N = round(T/Ts);          % número de amostras
+x = zeros(2, N+1);
+x(:,1) = [10; 10];        % x0
+u = zeros(1, N+1);        % u_k = 0
+
+for k = 1:N
+    x(:,k+1) = Ad*x(:,k) + Bd*u(k);
+end
+
+% conferência: solução fechada x_N = Ad^N x0
+xN = Ad^N * x(:,1)
+
+k = 0:N;
+stairs(k*Ts, x', 'LineWidth', 2); grid on
+xlabel('t = kT_s [s]'); ylabel('x_k')
+legend('x_1', 'x_2')</code></pre>
+					<div style="flex:1; text-align:center;">
+						<img src="images/exemplo_simulacao_discreta.png" style="width:100%;" alt="Simulação x_k">
+					</div>
+				</div>
+			</div>
 
 		</section>
 
@@ -1856,6 +2002,10 @@ Considere
 				$$
 			</p>
 		
+			Obs:
+			$$
+			\lambda\{\bullet\} \rightarrow \text{operador de autovalores}
+				$$
 		
 	
 			</center>
@@ -1874,11 +2024,12 @@ Considere
 				<center>
 													
 			<p class="lightup">
-							$
+				Autovalores da matriz dinâmica discreta:
+							$$
 				\begin{aligned} 
 				|\lambda\{A_d\}| < 1
 				\end{aligned}
-				$
+				$$
 			</p>
 
 			<img src="../images/estabilidade_discreta.png" width="850">
@@ -1898,7 +2049,8 @@ Considere
 			</div>
 			<div class="slide-content">
 				<center>
-			Função de energia:
+					<div class="box">
+			<b>Função de energia:</b>
 
 			<br>
 			Se existir uma função $V:\mathbb{R}^n\to \mathbb{R}$ tal que 
@@ -1911,6 +2063,47 @@ $$
 V(x_{k+1})-V(x_{k}) \le 0
 $$
 então o sistema é estável.
+
+</div>
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov: estável (conserva energia)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<div style="font-size:0.75em;">
+			$$
+			x_{k+1}=A_dx_k,\;\; A=\begin{bmatrix}0&1\\-4&0\end{bmatrix},\;\; V(x_k)=x_k^\trp\begin{bmatrix}4&0\\0&1\end{bmatrix}x_k,\;\; |\lambda\{A_d\}|=1
+			$$
+			</div>
+			<video data-autoplay loop muted playsinline width="1100" src="images/lyapunov_estavel.mp4"></video>
+			<div style="font-size:0.7em;">$V(x_{k+1})-V(x_k)=0$: a energia se conserva e o estado permanece em uma curva de nível (órbita fechada) &rarr; <b>estável</b>, mas não converge para a origem.</div>
+			</center>
+					</div>
+
+		</section>
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov: estável (perde energia)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<div style="font-size:0.75em;">
+			$$
+			x_{k+1}=A_dx_k,\;\; A=\begin{bmatrix}0&1\\0&-1\end{bmatrix},\;\; V(x_k)=x_k^\trp\begin{bmatrix}1&1\\1&2\end{bmatrix}x_k,\;\; \lambda\{A_d\}=\{1,\;e^{-T_s}\}
+			$$
+			</div>
+			<video data-autoplay loop muted playsinline width="1100" src="images/lyapunov_dissipativo.mp4"></video>
+			<div style="font-size:0.7em;">$V(x_{k+1})-V(x_k)\le 0$: a energia diminui e estabiliza em $V_\infty>0$ (o estado para sobre a reta de equilíbrios $x_2=0$) &rarr; <b>estável</b>, mas não assintoticamente.</div>
 			</center>
 					</div>
 
@@ -1925,7 +2118,9 @@ então o sistema é estável.
 			</div>
 			<div class="slide-content">
 				<center>
-			Função de energia:
+					<div class="box">
+			<b>Função de energia:</b>
+
 
 			<br>
 			Se existir uma função $V:\mathbb{R}^n\to \mathbb{R}$ tal que 
@@ -1938,6 +2133,86 @@ $$
 V(x_{k+1})-V(x_{k}) < 0
 $$
 então o sistema é <b>assintoticamente</b> estável.
+</div>
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov: assintoticamente estável</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<div style="font-size:0.75em;">
+			$$
+			x_{k+1}=A_dx_k,\;\; A=\begin{bmatrix}-1&1\\0&-2\end{bmatrix},\;\; V(x_k)=x_k^\trp P x_k,\;\; A_d^\trp P A_d-P=-I,\;\; |\lambda\{A_d\}|<1
+			$$
+			</div>
+			<video data-autoplay loop muted playsinline width="1100" src="images/lyapunov_assintotico.mp4"></video>
+			<div style="font-size:0.7em;">$V(x_{k+1})-V(x_k)<0$: a energia decresce estritamente até zero e todas as trajetórias convergem para a origem &rarr; <b>assintoticamente estável</b>.</div>
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov: instável (ganha energia)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<div style="font-size:0.75em;">
+			$$
+			x_{k+1}=A_dx_k,\;\; A=\begin{bmatrix}0{,}25&2\\-2&0{,}25\end{bmatrix},\;\; V(x_k)=x_k^\trp x_k,\;\; |\lambda\{A_d\}|=e^{0{,}25T_s}>1
+			$$
+			</div>
+			<video data-autoplay loop muted playsinline width="1100" src="images/lyapunov_instavel.mp4"></video>
+			<div style="font-size:0.7em;">$V(x_{k+1})-V(x_k)>0$: a energia cresce a cada passo e as trajetórias se afastam da origem em espiral &rarr; <b>instável</b>.</div>
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov: pêndulo simples (estável)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<div style="font-size:0.75em;">
+			$$
+			\ddot\theta=-\frac{g}{\ell}\sin\theta-b\,\dot\theta,\qquad x_k=\begin{bmatrix}\theta_k\\ \omega_k\end{bmatrix},\qquad V(x)=\tfrac{1}{2}\ell^2\omega^2+g\ell(1-\cos\theta)
+			$$
+			</div>
+			<img src="images/pendulo_simples_estavel.gif" width="1100" alt="pêndulo simples (estável)">
+			<div style="font-size:0.7em;">O atrito dissipa energia: $V(x_{k+1})-V(x_k)\le 0$ e o pêndulo converge para o equilíbrio inferior $x=0$ &rarr; <b>estável</b>.</div>
+			</center>
+					</div>
+
+		</section>
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Estabilidade no sentido de Lyapunov: pêndulo invertido em malha aberta (instável)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<div style="font-size:0.75em;">
+			$$
+			\ddot\theta=+\frac{g}{\ell}\sin\theta-b\,\dot\theta,\qquad x_k=\begin{bmatrix}\theta_k\\ \omega_k\end{bmatrix},\qquad V(x)=\tfrac{1}{2}\omega^2+\tfrac{1}{2}\tfrac{g}{\ell}\theta^2
+			$$
+			</div>
+			<img src="images/pendulo_invertido_instavel.gif" width="1100" alt="pêndulo invertido em malha aberta (instável)">
+			<div style="font-size:0.7em;">Uma pequena perturbação ($\theta_0=0{,}05$ rad) é amplificada: $V(x_{k+1})-V(x_k)>0$ e o estado se afasta de $x=0$ &rarr; <b>instável</b> (é preciso controle!).</div>
 			</center>
 					</div>
 
@@ -1952,8 +2227,7 @@ então o sistema é <b>assintoticamente</b> estável.
 			<div class="slide-content">
 				<center>
 					<p>&nbsp;</p>
-			Função de energia:
-
+		
 			<br>
 			Para <b>sistemas lineares</b>, a função de energia
 			<p class="lightup">
@@ -1961,7 +2235,7 @@ então o sistema é <b>assintoticamente</b> estável.
 					V(x_k)=x_k^\trp P x_k,\quad P=P^\trp \succeq 0
 			$$
 		</p>
-			é necessária e suficiente para certificar a estabilidade!
+			é <b>necessária e suficiente</b> para certificar a estabilidade!
 			</center>
 					</div>
 
@@ -1977,8 +2251,7 @@ então o sistema é <b>assintoticamente</b> estável.
 			<div class="slide-content">
 				<center>
 					<p>&nbsp;</p>
-			Função de energia:
-
+		
 			<br>
 			Para <b>sistemas lineares</b>, a função de energia
 			<p class="lightup">
@@ -1986,7 +2259,7 @@ então o sistema é <b>assintoticamente</b> estável.
 						V(x_k)=x_k^\trp P x_k,\quad P=P^\trp \succ 0
 				$$
 			</p>
-			é necessária e suficiente para certificar a <b>estabilidade assintótica</b>!
+			é <b>necessária e suficiente</b> para certificar a <b>estabilidade assintótica</b>!
 			</center>
 					</div>
 
@@ -2125,7 +2398,7 @@ então o sistema é <b>assintoticamente</b> estável.
 			existir uma matriz $P=P^\trp \in\mathbb{R}^{n\times n}$ tal que
 			<p class="lightup">
 			$$
-						P\succ 0 \\
+						P\succ 0, \\
 						A_d^\trp PA_d -P \prec  0
 			$$
 			
@@ -2188,6 +2461,36 @@ então o sistema é <b>assintoticamente</b> estável.
 				<li>via Lyapunov com $Q=I$ (dlyap).</li>
 			</ul>
 			</p>
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no matlab: solução</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+		<pre style="width:92%;font-size:0.5em;"><code class="language-matlab">Ad = [1 -2; 2 1];
+Bd = [1; 2];
+
+%% 1) Estabilidade via autovalores
+lambda = eig(Ad)        % 1 + 2i, 1 - 2i
+abs(lambda)             % 2.2361 > 1  ->  instável
+
+%% 2) Estabilidade via Lyapunov (Q = I)
+% dlyap(A,Q) resolve  A*X*A' - X + Q = 0
+% -> usar Ad' para obter  Ad'*P*Ad - P = -Q
+Q = eye(2);
+P = dlyap(Ad', Q)       % P = [-0.25 0; 0 -0.25]
+eig(P)                  % -0.25, -0.25  ->  P não é definida positiva
+Ad'*P*Ad - P            % = -Q  (verificação)</code></pre>
+		<p class="lightup" style="font-size:0.8em;">
+			$|\lambda\{A_d\}|=\sqrt{5}>1$ &nbsp; e &nbsp; $P=-\tfrac{1}{4}I\not\succ 0$ &nbsp; &rArr; &nbsp; sistema <b>instável</b>
+		</p>
 			</center>
 					</div>
 
