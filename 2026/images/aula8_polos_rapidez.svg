@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" width="900" height="460">
+<style>text{font-family:'Segoe UI','Inter',Arial,sans-serif;fill:#111}.sm{font-size:15px}.lb{font-size:17px;font-weight:600}.it{font-style:italic}</style>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#444"/></marker>
+<marker id="ak" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10z" fill="#111"/></marker></defs>
+
+<text class="lb" x="210" y="24" text-anchor="middle">Plano z: posição dos polos e rapidez</text>
+<line x1="20" y1="215" x2="405" y2="215" stroke="#111" stroke-width="1.3" marker-end="url(#ak)"/>
+<line x1="210" y1="400" x2="210" y2="25" stroke="#111" stroke-width="1.3" marker-end="url(#ak)"/>
+<text class="sm it" x="393" y="237">Re</text><text class="sm it" x="218" y="38">Im</text>
+<circle cx="210" cy="215" r="165" fill="#2A7EE0" fill-opacity="0.06" stroke="#111" stroke-width="1.6"/>
+<circle cx="210" cy="215" r="41.2" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4 4"/>
+
+<circle cx="210" cy="215" r="82.5" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4 4"/>
+
+<circle cx="210" cy="215" r="123.8" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4 4"/>
+
+<text class="sm" x="177.8" y="182.8" text-anchor="end" fill="#777" style="fill:#777">0,25</text>
+<text class="sm" x="148.7" y="153.7" text-anchor="end" fill="#777" style="fill:#777">0,5</text>
+<text class="sm" x="119.5" y="124.5" text-anchor="end" fill="#777" style="fill:#777">0,75</text>
+<text class="sm" x="379" y="233">1</text>
+<path d="M334.0,207L350.0,223M334.0,223L350.0,207" stroke="#2A7EE0" stroke-width="3.5"/>
+<path d="M350.5,207L366.5,223M350.5,223L366.5,207" stroke="#2A7EE0" stroke-width="3.5"/>
+<path d="M268.0,207L284.0,223M268.0,223L284.0,207" stroke="#E02424" stroke-width="3.5"/>
+<path d="M284.5,207L300.5,223M284.5,223L300.5,207" stroke="#E02424" stroke-width="3.5"/>
+<text class="sm" x="350.25" y="170" text-anchor="middle" fill="#2A7EE0" style="fill:#2A7EE0">controlador</text>
+<text class="sm" x="284.25" y="255" text-anchor="middle" fill="#E02424" style="fill:#E02424">observador</text>
+<path d="M366.75,157.25 Q312.3,112.7 256.2,165.5" fill="none" stroke="#444" stroke-width="1.6" marker-end="url(#ar)"/>
+<text class="sm" x="312.3" y="124.24999999999999" text-anchor="middle">mais rápido</text><text class="sm" x="312.3" y="142.25" text-anchor="middle">(|z| menor)</text>
+<text class="sm" x="480" y="77">Modo λᵏ do controlador: λ = 0,9</text>
+<line x1="480" y1="215" x2="860" y2="215" stroke="#111" stroke-width="1.2"/>
+<line x1="490" y1="215" x2="490" y2="85.0" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="490" cy="85.0" r="3.5" fill="#2A7EE0"/>
+<line x1="513" y1="215" x2="513" y2="98.0" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="513" cy="98.0" r="3.5" fill="#2A7EE0"/>
+<line x1="536" y1="215" x2="536" y2="109.7" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="536" cy="109.7" r="3.5" fill="#2A7EE0"/>
+<line x1="559" y1="215" x2="559" y2="120.2" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="559" cy="120.2" r="3.5" fill="#2A7EE0"/>
+<line x1="582" y1="215" x2="582" y2="129.7" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="582" cy="129.7" r="3.5" fill="#2A7EE0"/>
+<line x1="605" y1="215" x2="605" y2="138.2" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="605" cy="138.2" r="3.5" fill="#2A7EE0"/>
+<line x1="628" y1="215" x2="628" y2="145.9" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="628" cy="145.9" r="3.5" fill="#2A7EE0"/>
+<line x1="651" y1="215" x2="651" y2="152.8" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="651" cy="152.8" r="3.5" fill="#2A7EE0"/>
+<line x1="674" y1="215" x2="674" y2="159.0" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="674" cy="159.0" r="3.5" fill="#2A7EE0"/>
+<line x1="697" y1="215" x2="697" y2="164.6" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="697" cy="164.6" r="3.5" fill="#2A7EE0"/>
+<line x1="720" y1="215" x2="720" y2="169.7" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="720" cy="169.7" r="3.5" fill="#2A7EE0"/>
+<line x1="743" y1="215" x2="743" y2="174.2" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="743" cy="174.2" r="3.5" fill="#2A7EE0"/>
+<line x1="766" y1="215" x2="766" y2="178.3" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="766" cy="178.3" r="3.5" fill="#2A7EE0"/>
+<line x1="789" y1="215" x2="789" y2="182.0" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="789" cy="182.0" r="3.5" fill="#2A7EE0"/>
+<line x1="812" y1="215" x2="812" y2="185.3" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="812" cy="185.3" r="3.5" fill="#2A7EE0"/>
+<line x1="835" y1="215" x2="835" y2="188.2" stroke="#2A7EE0" stroke-width="2.5"/><circle cx="835" cy="188.2" r="3.5" fill="#2A7EE0"/>
+<text class="sm it" x="866" y="220">k</text>
+<text class="sm" x="480" y="267">Modo λᵏ do observador: λ = 0,45</text>
+<line x1="480" y1="405" x2="860" y2="405" stroke="#111" stroke-width="1.2"/>
+<line x1="490" y1="405" x2="490" y2="275.0" stroke="#E02424" stroke-width="2.5"/><circle cx="490" cy="275.0" r="3.5" fill="#E02424"/>
+<line x1="513" y1="405" x2="513" y2="346.5" stroke="#E02424" stroke-width="2.5"/><circle cx="513" cy="346.5" r="3.5" fill="#E02424"/>
+<line x1="536" y1="405" x2="536" y2="378.7" stroke="#E02424" stroke-width="2.5"/><circle cx="536" cy="378.7" r="3.5" fill="#E02424"/>
+<line x1="559" y1="405" x2="559" y2="393.2" stroke="#E02424" stroke-width="2.5"/><circle cx="559" cy="393.2" r="3.5" fill="#E02424"/>
+<line x1="582" y1="405" x2="582" y2="399.7" stroke="#E02424" stroke-width="2.5"/><circle cx="582" cy="399.7" r="3.5" fill="#E02424"/>
+<line x1="605" y1="405" x2="605" y2="402.6" stroke="#E02424" stroke-width="2.5"/><circle cx="605" cy="402.6" r="3.5" fill="#E02424"/>
+<line x1="628" y1="405" x2="628" y2="403.9" stroke="#E02424" stroke-width="2.5"/><circle cx="628" cy="403.9" r="3.5" fill="#E02424"/>
+<line x1="651" y1="405" x2="651" y2="404.5" stroke="#E02424" stroke-width="2.5"/><circle cx="651" cy="404.5" r="3.5" fill="#E02424"/>
+<line x1="674" y1="405" x2="674" y2="404.8" stroke="#E02424" stroke-width="2.5"/><circle cx="674" cy="404.8" r="3.5" fill="#E02424"/>
+<line x1="697" y1="405" x2="697" y2="404.9" stroke="#E02424" stroke-width="2.5"/><circle cx="697" cy="404.9" r="3.5" fill="#E02424"/>
+<line x1="720" y1="405" x2="720" y2="405.0" stroke="#E02424" stroke-width="2.5"/><circle cx="720" cy="405.0" r="3.5" fill="#E02424"/>
+<line x1="743" y1="405" x2="743" y2="405.0" stroke="#E02424" stroke-width="2.5"/><circle cx="743" cy="405.0" r="3.5" fill="#E02424"/>
+<line x1="766" y1="405" x2="766" y2="405.0" stroke="#E02424" stroke-width="2.5"/><circle cx="766" cy="405.0" r="3.5" fill="#E02424"/>
+<line x1="789" y1="405" x2="789" y2="405.0" stroke="#E02424" stroke-width="2.5"/><circle cx="789" cy="405.0" r="3.5" fill="#E02424"/>
+<line x1="812" y1="405" x2="812" y2="405.0" stroke="#E02424" stroke-width="2.5"/><circle cx="812" cy="405.0" r="3.5" fill="#E02424"/>
+<line x1="835" y1="405" x2="835" y2="405.0" stroke="#E02424" stroke-width="2.5"/><circle cx="835" cy="405.0" r="3.5" fill="#E02424"/>
+<text class="sm it" x="866" y="410">k</text>
+<text class="sm" x="480" y="440">O erro de estimação some antes da malha reagir.</text>
+</svg>

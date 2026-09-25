@@ -16,10 +16,24 @@
 		
 		<!-- and it's easy to individually load additional languages -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/arduino.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/matlab.min.js"></script>
 		
 		<script>hljs.highlightAll();</script>
 		
 		<link rel="stylesheet" href="../style.css">
+		<!-- Destaque de código no estilo do editor do MATLAB -->
+		<style>
+			.reveal pre:has(code.language-matlab) { background: #ffffff; border: 1px solid #d0d7de; text-align: left; }
+			.reveal pre code.language-matlab { background: #ffffff; color: #000000; padding: 0.6em 0.9em; max-height: none; }
+			.reveal pre code.language-matlab .hljs-keyword { color: #0e00ff; }
+			.reveal pre code.language-matlab .hljs-comment { color: #228b22; }
+			.reveal pre code.language-matlab .hljs-string  { color: #a020f0; }
+			.reveal pre code.language-matlab .hljs-number,
+			.reveal pre code.language-matlab .hljs-built_in,
+			.reveal pre code.language-matlab .hljs-title,
+			.reveal pre code.language-matlab .hljs-params,
+			.reveal pre code.language-matlab .hljs-literal { color: #000000; }
+		</style>
 	</head>
 	<body>
 		
@@ -30,14 +44,15 @@
 					<div class="logo"><img src="../images/sel.png"/> </div>
 					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
 					<div class="title">
-					<h2>Aula 8: <br>Espaço de Estados - parte 2</h2>
+						<p>&nbsp;</p>
+					<h2>Aula 8: <br>Controle via Realimentação de Estados </h2>
 					</div>
 					<div class="author">
 					<h3>Prof. Marcos Rogério Fernandes</h3>
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">09 de outubro de 2025</p>
+					<p style="text-align: center;font-size: 0.8em;">01 de outubro de 2026</p>
 				</div>
 
 				</section>
@@ -194,7 +209,7 @@
 				É possível levar o sistema para qualquer estado desejado em um tempo finito?
 			</p>
 			$$
-\text{Existe uma sequência de ações de controle } u_0,u_1,\ldots,u_k \\ \text{ tal que: } \\x_k=A_d^kx_0+\sum_{j=0}^{k-1}A_d^{k-1-j}Bu_j
+\text{Existe uma sequência de ações de controle } u_0,u_1,\ldots,u_{k-1} \\ \text{ tal que: } \\x_k=A_d^kx_0+\sum_{j=0}^{k-1}A_d^{k-1-j}B_du_j
 			$$
 	
 			</center>
@@ -418,11 +433,11 @@
 			
 			x_k-A^kx_0
 			=\mathcal{C}\begin{bmatrix}
-					u_0\\
-					u_1\\
-					u_2\\
-					\vdots \\
-					u_{k-1}
+					u_{k-1}\\
+					u_{k-2}\\
+					\vdots\\
+					u_1 \\
+					u_0
 					\end{bmatrix}
 		\end{aligned}
 	$$
@@ -444,11 +459,11 @@
 			
 			(x_k-A^kx_0)_{n\times 1}
 			=\mathcal{C}_{n\times mk}\begin{bmatrix}
-					u_0\\
-					u_1\\
-					u_2\\
-					\vdots \\
-					u_{k-1}
+					u_{k-1}\\
+					u_{k-2}\\
+					\vdots\\
+					u_1 \\
+					u_0
 					\end{bmatrix}_{mk\times 1}
 		\end{aligned}
 	$$
@@ -472,11 +487,11 @@
 			
 			\underbrace{(x_k-A^kx_0)_{n\times 1}}_{\Delta x}
 			=\mathcal{C}_{n\times mk}\begin{bmatrix}
-					u_0\\
-					u_1\\
-					u_2\\
-					\vdots \\
-					u_{k-1}
+					u_{k-1}\\
+					u_{k-2}\\
+					\vdots\\
+					u_1 \\
+					u_0
 					\end{bmatrix}_{mk\times 1}
 		\end{aligned}
 	$$
@@ -508,6 +523,30 @@
 		</section>
 
 
+		<section>
+			<div class="slide-title">
+				<h2>Controlabilidade: interpretação geométrica</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_controlavel_vs_nao.png" width="950"><p style="font-size:0.65em;">Estados alcançáveis a partir de $x_0=0$ em $2$ passos com entradas aleatórias. Se $\text{rank}\,\mathcal{C}\lt n$, o estado fica preso em $\mathcal{R}\{\mathcal{C}\}$ (esq.: $A$ rotação, $B=[1\;0]^\top$; dir.: $A=0{,}8I$, $B=[1\;1]^\top$).</p>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Controlabilidade: animação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_controlabilidade.gif" width="1000"><p style="font-size:0.62em;">A cada passo $x_{k+1}=Ax_k+Bu_k$: a <b>deriva</b> $Ax_k$ (cinza) é imposta pela dinâmica e o <b>controle</b> $Bu_k$ (vermelho) só empurra na direção de $B$. Esq.: $B$ e $AB$ são independentes e geram o plano &rarr; $x_f$ é alcançado em $n=2$ passos. Dir.: $B$ e $AB$ são paralelos &rarr; $x_2$ fica preso na reta $A^2x_0+\mathrm{span}\{B\}$.</p>
+				</center>
+			</div>
+		</section>
+
+
 		
 		<section>
 			
@@ -522,11 +561,11 @@
 			
 			\Delta x
 			=\mathcal{C}\begin{bmatrix}
-					u_0\\
-					u_1\\
-					u_2\\
-					\vdots \\
-					u_{k-1}
+					u_{k-1}\\
+					u_{k-2}\\
+					\vdots\\
+					u_1 \\
+					u_0
 					\end{bmatrix}
 		\end{aligned}
 	$$
@@ -549,11 +588,11 @@
 			
 			\Delta x
 			=\mathcal{C}_{n\times n}\begin{bmatrix}
-					u_0\\
-					u_1\\
-					u_2\\
-					\vdots \\
-					u_{n-1}
+					u_{n-1}\\
+					u_{n-2}\\
+					\vdots\\
+					u_1 \\
+					u_0
 					\end{bmatrix}
 		\end{aligned}
 	$$
@@ -576,11 +615,11 @@
 			
 			\mathcal{C}^{-1}\Delta x
 			=\mathcal{C}^{-1}\mathcal{C}\begin{bmatrix}
-					u_0\\
-					u_1\\
-					u_2\\
-					\vdots \\
-					u_{n-1}
+					u_{n-1}\\
+					u_{n-2}\\
+					\vdots\\
+					u_1 \\
+					u_0
 					\end{bmatrix}
 		\end{aligned}
 	$$
@@ -606,11 +645,11 @@
 			\begin{aligned}
 			
 			\begin{bmatrix}
-			u_0\\
-			u_1\\
-			u_2\\
-			\vdots \\
-			u_{n-1}
+			u_{n-1}\\
+			u_{n-2}\\
+			\vdots\\
+			u_1 \\
+			u_0
 			\end{bmatrix}= \mathcal{C}^{-1}\Delta x
 			
 		\end{aligned}
@@ -618,6 +657,18 @@
 			</center>
 					</div>
 
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Controlabilidade: exemplo numérico</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_controlabilidade_passos.png" width="1000"><p style="font-size:0.65em;">$A=\begin{bmatrix}2&1\\5&-3\end{bmatrix}$, $B=\begin{bmatrix}0\\1\end{bmatrix}$: de $x_0=[1\;\,-1]^\top$ até $x_f=[2\;\,1]^\top$ em $n=2$ passos com $u_0=-8$ e $u_1=-4$. Note a ordem invertida: $\mathcal{C}=[B\;\;AB]$ multiplica $[u_1\;\;u_0]^\top$.</p>
+				</center>
+			</div>
 		</section>
 
 
@@ -646,6 +697,30 @@
 		</section>
 
 
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo no Matlab: solução</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<pre style="width:75%;font-size:0.6em;"><code class="language-matlab">A = [2 1; 5 -3];
+B = [0; 1];
+
+Cc = [B A*B]          % ou Cc = ctrb(A,B)
+%  Cc = [0  1
+%        1 -3]
+rank(Cc)              % 2 = n  -&gt;  controlável
+det(Cc)               % -1 (não singular)
+
+% sequência que leva x0 -&gt; xf em 2 passos
+x0 = [1; -1];  xf = [2; 1];
+v  = Cc \ (xf - A^2*x0);   % v = [u1; u0]
+u  = flipud(v)             % u0 = -8, u1 = -4</code></pre><p class="lightup" style="font-size:0.8em;">$\det\mathcal{C}=-1\neq0\;\Rightarrow\;\text{rank}\,\mathcal{C}=2$: sistema <b>controlável</b></p>
+				</center>
+			</div>
+		</section>
+
+
 		
 
 
@@ -660,19 +735,16 @@
 					<p class="">
 					Se $u_k\in\mathbb{R^m}$ (multiple-input), com $m\le n$, então é suficiente que exista $u_0,u_1,\ldots,u_{\lceil\frac{n}{m}\rceil-1}$ ações de controle para levar o sistema para qualquer estado. Além do mais, se $\text{rank}(\mathcal{C})=n$, então pode-se obter a sequência de ações de controle na forma
 				</p>
-				$					
-	
-			
+				$$
 			\begin{bmatrix}
-			u_0\\
-			u_1\\
-			u_2\\
+			u_{\ell-1}\\
 			\vdots \\
-			u_{\lceil\frac{n}{m}\rceil-1}
-			\end{bmatrix}= (\mathcal{C}^\trp \mathcal{C})^{-1}\mathcal{C}^\trp \Delta x
-			
-
-	$
+			u_1\\
+			u_0
+			\end{bmatrix}= \mathcal{C}^\trp(\mathcal{C}\mathcal{C}^\trp)^{-1}\Delta x,
+			\qquad \ell=\Bigl\lceil\frac{n}{m}\Bigr\rceil
+			$$
+				<p style="font-size:0.7em;">$\mathcal{C}\in\mathbb{R}^{n\times m\ell}$ é "largo" ($m\ell\ge n$): há infinitas soluções e esta é a de <b>menor energia</b> $\|u\|$ (pseudo-inversa à direita). Obs.: $\ell=\lceil n/m\rceil$ passos bastam quando $\text{rank}\,[B\;AB\;\cdots\;A^{\ell-1}B]=n$; caso contrário são necessários mais passos (até $n$).</p>
 			</center>
 					</div>
 
@@ -710,6 +782,23 @@
 			</center>
 					</div>
 
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo no Matlab: solução</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<pre style="width:80%;font-size:0.6em;"><code class="language-matlab">A = [2 2 1 3; 2 1 2 0; 1 1 0 1; 3 3 3 2];
+B = [1 0; 0 1; 0 0; 0 0];
+
+Cc = [B A*B A^2*B A^3*B];   % 4 x 8  (ou ctrb(A,B))
+rank(Cc)                    % 3 &lt; 4  -&gt;  NÃO controlável
+rank([B A*B])               % 3: A^2B e A^3B não acrescentam direções</code></pre><p class="lightup" style="font-size:0.8em;">$\text{rank}\,\mathcal{C}=3\lt n=4$: sistema <b>não controlável</b> &mdash; existe uma direção do espaço de estados que nenhuma sequência de entradas consegue alcançar.</p>
+				</center>
+			</div>
 		</section>
 
 
@@ -1105,6 +1194,30 @@ Supondo $x_k\in \mathbb{R}^n$ e $y_k\in\mathbb{R}$ e $k=n-1$, então
 		</section>
 
 
+		<section>
+			<div class="slide-title">
+				<h2>Observabilidade: interpretação geométrica</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_observabilidade_retas.png" width="1000"><p style="font-size:0.65em;">Cada medida $y_k=HA^kx_0$ é uma reta (restrição linear) no plano de $x_0$. Esq.: $A=\begin{bmatrix}2&1\\5&-3\end{bmatrix}$, $H=[1\;0]$ &rarr; as retas se cruzam em um único $x_0$. Dir.: $A=0{,}8I$ &rarr; as medidas repetem a mesma informação.</p>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Observabilidade: animação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_observabilidade.gif" width="1000"><p style="font-size:0.62em;">Cada medida $y_k=HA^kx_0$ restringe $x_0$ a uma reta. Um candidato $\hat x_0$ deslizando sobre a reta de $y_0$ só reproduz também $y_1$ na interseção (esq., observável); se as retas coincidem (dir., $\text{rank}\,\mathcal{O}=1$), infinitos candidatos explicam as mesmas medidas.</p>
+				</center>
+			</div>
+		</section>
+
+
 
 		
 		<section>
@@ -1129,6 +1242,28 @@ Supondo $x_k\in \mathbb{R}^n$ e $y_k\in\mathbb{R}$ e $k=n-1$, então
 			</center>
 					</div>
 
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo no Matlab: solução</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<pre style="width:75%;font-size:0.6em;"><code class="language-matlab">A = [2 1; 5 -3];
+H = [1 0];
+
+Ob = [H; H*A]         % ou Ob = obsv(A,H)
+%  Ob = [1 0
+%        2 1]
+rank(Ob)              % 2 = n  -&gt;  observável
+
+% reconstrução de x0 a partir de y0 e y1 (u = 0)
+y  = [1.5; 2];        % medidas y0, y1
+x0 = Ob \ y           % x0 = [1.5; -1]</code></pre><p class="lightup" style="font-size:0.8em;">$\det\mathcal{O}=1\neq0\;\Rightarrow\;\text{rank}\,\mathcal{O}=2$: sistema <b>observável</b></p>
+				</center>
+			</div>
 		</section>
 
 
@@ -1423,9 +1558,9 @@ $$
 	\Delta(A)=\det(\lambda I-A)
 	$$
 	</p>
-	Para <b>sistemas controláveis</b> os autovalores são iguais aos pólos da função de transferência!
+	Para <b>sistemas controláveis e observáveis</b> (realização mínima) os autovalores de $A$ são iguais aos pólos da função de transferência!
 <p class="">
-				Ou seja, se não ocorrer cancelamentos de zeros com pólos, então o sistema é controlável!				
+				Ou seja, para sistemas SISO, se não ocorrer cancelamento de zeros com pólos em $H(zI-A)^{-1}B$, então o sistema é controlável <b>e</b> observável!				
 </p>
 			</center>
 					</div>
@@ -1718,7 +1853,7 @@ $$
 					x_{k+1}=\begin{bmatrix}
 					0 & 1 \\
 					-0.96 & -2
-					\end{bmatrix}+\begin{bmatrix}0\\ 1\end{bmatrix}u_k
+					\end{bmatrix}x_k+\begin{bmatrix}0\\ 1\end{bmatrix}u_k
 			$$
 
 			Pólos desejados: $p_1=0.8$ e $p_2=0.9$.
@@ -1745,7 +1880,7 @@ $$
 					x_{k+1}=\begin{bmatrix}
 					0 & 1 \\
 					-0.96 & -2
-					\end{bmatrix}+\begin{bmatrix}0\\ 1\end{bmatrix}u_k
+					\end{bmatrix}x_k+\begin{bmatrix}0\\ 1\end{bmatrix}u_k
 			$$
 
 			Pólos desejados: $p_1=0.8$ e $p_2=0.9$.
@@ -1776,7 +1911,7 @@ $$
 					x_{k+1}=\begin{bmatrix}
 					0 & 1 \\
 					-\underbrace{0.96}_{a_2} & -\underbrace{2}_{a_1}
-					\end{bmatrix}+\begin{bmatrix}0\\ 1\end{bmatrix}u_k
+					\end{bmatrix}x_k+\begin{bmatrix}0\\ 1\end{bmatrix}u_k
 			$$
 
 			Pólos desejados: $p_1=0.8$ e $p_2=0.9$.
@@ -1807,7 +1942,7 @@ $$
 					x_{k+1}=\begin{bmatrix}
 					0 & 1 \\
 					-\underbrace{0.96}_{a_2} & -\underbrace{2}_{a_1}
-					\end{bmatrix}+\begin{bmatrix}0\\ 1\end{bmatrix}u_k
+					\end{bmatrix}x_k+\begin{bmatrix}0\\ 1\end{bmatrix}u_k
 			$$
 
 			Pólos desejados: $p_1=0.8$ e $p_2=0.9$.
@@ -1824,6 +1959,43 @@ $$
 			</center>
 					</div>
 
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo: solução</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<div style="font-size:0.85em;">
+			$$
+			K=\begin{bmatrix}(\beta_2-a_2) & (\beta_1-a_1)\end{bmatrix}
+			 =\begin{bmatrix}(0.72-0.96) & (-1.7-2)\end{bmatrix}
+			 =\begin{bmatrix}-0.24 & -3.7\end{bmatrix}
+			$$
+			Verificação:
+			$$
+			A-BK=\begin{bmatrix}0&1\\-0.96+0.24&-2+3.7\end{bmatrix}=\begin{bmatrix}0&1\\-0.72&1.7\end{bmatrix}
+			\;\Rightarrow\;\det(zI-A+BK)=z^2-1.7z+0.72\;\checkmark
+			$$
+			</div><pre style="width:60%;font-size:0.58em;"><code class="language-matlab">A = [0 1; -0.96 -2];  B = [0; 1];
+K = acker(A, B, [0.8 0.9])    % ou place(A,B,[0.8 0.9])
+eig(A - B*K)                  % 0.8, 0.9</code></pre>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Alocação de pólos: efeito da realimentação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_alocacao_polos.png" width="1050"><p style="font-size:0.65em;">Os pólos de malha aberta ($-0{,}8$ e $-1{,}2$) estão sobre/fora do círculo unitário: o sistema é instável e alterna de sinal. Com $u_k=-Kx_k$ os pólos vão para $0{,}8$ e $0{,}9$ e a resposta converge sem oscilação.</p>
+				</center>
+			</div>
 		</section>
 
 
@@ -1877,7 +2049,7 @@ $$
 			x_{k+1}=\begin{bmatrix}
 			-1.2 & 1 \\
 			0 & -0.8
-			\end{bmatrix}+\begin{bmatrix}0.5\\ 1\end{bmatrix}u_k
+			\end{bmatrix}x_k+\begin{bmatrix}0.5\\ 1\end{bmatrix}u_k
 	$$
 
 
@@ -1890,6 +2062,45 @@ $$
 			</center>
 					</div>
 
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo: solução via Ackermann</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<div style="font-size:0.78em;">
+			$$
+			\mathcal{C}=\begin{bmatrix}B&AB\end{bmatrix}=\begin{bmatrix}0.5&0.4\\1&-0.8\end{bmatrix},\qquad
+			\mathcal{C}^{-1}=\begin{bmatrix}1&0.5\\1.25&-0.625\end{bmatrix}
+			$$
+			$$
+			\gamma(A)=A^2-1.7A+0.72I=\begin{bmatrix}4.2&-3.7\\0&2.72\end{bmatrix}
+			$$
+			$$
+			K=\begin{bmatrix}0&1\end{bmatrix}\mathcal{C}^{-1}\gamma(A)
+			=\begin{bmatrix}1.25&-0.625\end{bmatrix}\begin{bmatrix}4.2&-3.7\\0&2.72\end{bmatrix}
+			=\begin{bmatrix}5.25&-6.325\end{bmatrix}
+			$$
+			</div><pre style="width:60%;font-size:0.58em;"><code class="language-matlab">A = [-1.2 1; 0 -0.8];  B = [0.5; 1];
+K = acker(A, B, [0.8 0.9])    % [5.25 -6.325]
+eig(A - B*K)                  % 0.8, 0.9</code></pre>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Exemplo: resposta em malha fechada</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_ackermann_exemplo.png" width="1000"><p style="font-size:0.65em;">Simulação de $x_{k+1}=(A-BK)x_k$ a partir de $x_0=[1\;\,-1]^\top$. Pólos em $0{,}8$ e $0{,}9$ levam a uma convergência lenta; ganhos grandes (e esforço de controle grande) surgem porque a planta tem pólos em $-1{,}2$ e $-0{,}8$, longe dos pólos desejados.</p>
+				</center>
+			</div>
 		</section>
 		
 		
@@ -2043,8 +2254,8 @@ Observador
 				$$
 				\begin{aligned} 
 				\varepsilon_{k+1}&=x_{k+1}-\hat{x}_{k+1}\\ 
-				&=Ax_k+Bu_k-(A\hat{x}_k+Bu_k)+L(y_k-\hat{y}_k)\\
-				&=A\varepsilon_{k}+L(Hx_k+Du_k-(H\hat{x}_k+Du_k))\\
+				&=Ax_k+Bu_k-\bigl(A\hat{x}_k+Bu_k+L(y_k-\hat{y}_k)\bigr)\\
+				&=A\varepsilon_{k}-L\bigl(Hx_k+Du_k-(H\hat{x}_k+Du_k)\bigr)\\
 				&=(A-LH)\varepsilon_k
 				\end{aligned}
 				$$
@@ -2089,6 +2300,18 @@ Observador
 			</center>
 					</div>
 
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Observador: escolha dos pólos</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_polos_rapidez.svg" width="1000"><p style="font-size:0.65em;">No plano $z$, quanto menor $|z|$, mais rápido o modo $\lambda^k$ decai. Os pólos de $A-LH$ são colocados mais próximos da origem que os de $A-BK$.</p>
+				</center>
+			</div>
 		</section>
 
 
@@ -2138,6 +2361,41 @@ Observador
 			</center>
 					</div>
 
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Observador de estados: simulação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_observador_simulacao.png" width="1080"><p style="font-size:0.65em;">Planta $A=\begin{bmatrix}0&1\\-0.96&-2\end{bmatrix}$, $H=[1\;0]$, controle $u_k=-K\hat x_k$ com pólos $0{,}8$ e $0{,}9$; observador com pólos $0{,}4$ e $0{,}5$ ($L=[-2{,}9\;\;5{,}04]^\top$). Mesmo partindo de $\hat x_0=0\neq x_0$, a estimativa converge em poucas amostras.</p>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Observador de estados: código</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<pre style="width:80%;font-size:0.6em;"><code class="language-matlab">A = [0 1; -0.96 -2];  B = [0; 1];  H = [1 0];
+K = acker(A,  B,  [0.8 0.9]);        % controlador
+L = acker(A', H', [0.4 0.5])';       % observador (dualidade)
+eig(A - L*H)                         % 0.4, 0.5
+
+x = [1; -0.5];  xh = [0; 0];         % estado real e estimado
+for k = 1:40
+    y  = H*x;   yh = H*xh;
+    u  = -K*xh;                      % realimenta o estado ESTIMADO
+    x  = A*x  + B*u;
+    xh = A*xh + B*u + L*(y - yh);    % observador de Luenberger
+end</code></pre><p style="font-size:0.7em;">Dualidade: projetar $L$ para $(A,H)$ equivale a projetar um ganho de realimentação para $(A^\top,H^\top)$.</p>
+				</center>
+			</div>
 		</section>
 
 
@@ -2555,9 +2813,9 @@ Condição para rastreamento do sistema:
 Consequências:
 <br>
 			<ul>
-				<li>Sistema original precisa ser controlável;</li>
-				<li>Não pode possuir zeros em $z=1$;</li>
-				<li>Matriz $H$ precisa ter rank completo de linhas;</li>
+				<li>Além do rank completo, o par $(A_d,B_d)$ precisa ser controlável;</li>
+				<li>A planta não pode possuir zeros em $z=1$ (o integrador cancelaria o zero);</li>
+				<li>Número de entradas $\ge$ número de saídas rastreadas ($H$ com rank completo de linhas).</li>
 			</ul>
 			
 		
@@ -2586,6 +2844,56 @@ Consequências:
 		</section>
 
 
+		<section>
+			<div class="slide-title">
+				<h2>Rastreamento: simulação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_rastreamento_integrador.png" width="1000"><p style="font-size:0.65em;">Referência degrau $r_k=1$ e perturbação constante na entrada em $k=30$. Só com $u_k=-Kx_k$ a saída não segue $r$ e sofre desvio permanente; com o integrador ($K=[-0{,}705\;-2{,}65]$, $K_i=0{,}09$, pólos $0{,}5;\,0{,}55;\,0{,}6$) o erro em regime é nulo mesmo com a perturbação.</p>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Rastreamento: código</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<pre style="width:75%;font-size:0.6em;"><code class="language-matlab">A = [0 1; -0.96 -2];  B = [0; 1];  H = [1 0];
+
+% sistema aumentado [x; m]
+Aa = [A zeros(2,1); -H 1];
+Ba = [B; 0];
+Ka = acker(Aa, Ba, [0.5 0.55 0.6]);   % Ka = [K  -Ki]
+K  = Ka(1:2);   Ki = -Ka(3);
+
+x = [0; 0];  m = 0;  r = 1;
+for k = 1:60
+    y = H*x;
+    u = -K*x + Ki*m;                 % lei de controle
+    x = A*x + B*u;
+    m = m + (r - y);                 % integrador do erro
+end</code></pre>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			<div class="slide-title">
+				<h2>Rastreamento: quadricóptero em trajetória "8"</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula8_quadricoptero_8.gif" width="990"><p style="font-size:0.62em;">Modelo linearizado em <i>hover</i> ($T_s=0{,}02$ s) com <i>feedforward</i> da referência; vento constante a partir de $t=8$ s. <span style="color:#E02424">Sem integrador</span>: erro permanente causado pelo vento. <span style="color:#2A7EE0">Com integrador</span> $m_{k+1}=m_k+(r_k-y_k)$: o erro volta a zero.</p>
+				</center>
+			</div>
+		</section>
+
+
 
 
 
@@ -2603,7 +2911,7 @@ Consequências:
 						<p>Controle LQR</p>
 						<p >
 				$$
-						J=\sum_{k=1}^\infty x_k^\trp Q x_k +u_k^\trp R u_k
+						J=\sum_{k=0}^\infty x_k^\trp Q x_k +u_k^\trp R u_k
 				$$
 			</p>
 			
