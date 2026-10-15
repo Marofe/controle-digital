@@ -16,10 +16,26 @@
 		
 		<!-- and it's easy to individually load additional languages -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/arduino.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/matlab.min.js"></script>
+
 		
 		<script>hljs.highlightAll();</script>
 		
 		<link rel="stylesheet" href="../style.css">
+		<!-- Destaque de código no estilo do editor do MATLAB -->
+		<style>
+			.reveal pre:has(code.language-matlab) { background: #ffffff; border: 1px solid #d0d7de; text-align: left; }
+			.reveal pre code.language-matlab { background: #ffffff; color: #000000; padding: 0.6em 0.9em; max-height: none; }
+			.reveal pre code.language-matlab .hljs-keyword { color: #0e00ff; }
+			.reveal pre code.language-matlab .hljs-comment { color: #228b22; }
+			.reveal pre code.language-matlab .hljs-string  { color: #a020f0; }
+			.reveal pre code.language-matlab .hljs-number,
+			.reveal pre code.language-matlab .hljs-built_in,
+			.reveal pre code.language-matlab .hljs-title,
+			.reveal pre code.language-matlab .hljs-params,
+			.reveal pre code.language-matlab .hljs-literal { color: #000000; }
+		</style>
+
 	</head>
 	<body>
 		
@@ -30,6 +46,7 @@
 					<div class="logo"><img src="../images/sel.png"/> </div>
 					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
 					<div class="title">
+						<p>&nbsp;</p>
 					<h2>Aula 9: <br>Controle LQR</h2>
 					</div>
 					<div class="author">
@@ -37,7 +54,7 @@
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">16 de outubro de 2025</p>
+					<p style="text-align: center;font-size: 0.8em;">15 de outubro de 2026</p>
 				</div>
 
 				</section>
@@ -65,14 +82,15 @@
 				<h2>Objetivos</h2>
 			</div>
 			<div class="slide-content">
-				<p>Os objetivos dessa aula são entender:
+				<p>Os objetivos desta aula são entender:</p>
 						<ul>
 						<li>Problema de controle ótimo;</li>
-						<li>Custo Quadrático;</li>
+						<li>Custo quadrático;</li>
 						<li>Programação dinâmica: equação de Bellman;</li>
 						<li>Equação de Riccati;</li>
 						<li>Custo ótimo;</li>
-					</p>
+						<li>Solução no MATLAB (<code>dlqr</code>, <code>idare</code>).</li>
+						</ul>
 					</div>
 
 		</section>
@@ -87,7 +105,7 @@
 			<div class="slide-content">
 				<p class="lightup2">
 					Objetivo:
-Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ que minimize um critério de desempenho (função custo).
 				</p>
 				<center>
 					<img src="../images/controle_otimo.png" width="500">
@@ -105,7 +123,7 @@ Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimi
 			<div class="slide-content">
 				<p class="lightup2">
 					Objetivo:
-Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ que minimize um critério de desempenho (função custo).
 				</p>
 				<center>
 					<img src="../images/controle_otimo2.png" width="500">
@@ -123,7 +141,7 @@ Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimi
 			<div class="slide-content">
 				<p class="lightup2">
 					Objetivo:
-Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ que minimize um critério de desempenho (função custo).
 				</p>
 				<center>
 					<img src="../images/controle_otimo3.png" width="500">
@@ -141,7 +159,7 @@ Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimi
 			<div class="slide-content">
 				<p class="lightup2">
 					Objetivo:
-Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimize um critério de desempenho (função custo).
+Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ que minimize um critério de desempenho (função custo).
 				</p>
 				<center>
 					<img src="../images/controle_otimo4.png" width="500">
@@ -149,6 +167,38 @@ Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimi
 					</div>
 
 		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Cálculo Variacional: o Problema da Braquistócrona</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<p style="font-size:0.7em;margin:0;">Qual curva leva a bolinha de $A$ até $B$, partindo do repouso e sob ação da gravidade, no <b>menor tempo</b>? (Johann Bernoulli, 1696)</p>
+					<img src="images/braquistocrona.gif" width="760">
+					<p class="lightup" style="font-size:0.6em;margin-top:0;">$$\min_{y(\cdot)}\; T=\int_A^B \frac{ds}{v}=\int_0^{x_B}\frac{\sqrt{1+y'(x)^2}}{\sqrt{2g\,|y(x)|}}\,dx \quad\Rightarrow\quad \text{solução ótima: cicloide}$$</p>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Cálculo Variacional: o Problema da Braquistócrona</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+				<video width="900" controls muted>
+				<source src="images/3d_printed_braquistocrona.mp4" type="video/mp4">
+			  Your browser does not support the video tag.
+			  </video> 
+				</center>
+			</div>
+		</section>
+
 
 
 		<section>
@@ -162,7 +212,7 @@ Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimi
 						Problema de programação (otimização) matemática:
 				$$
 					\min_{u_0,u_1,\ldots,u_{N-1}} \quad J\\
-					\text{tal que} \\
+					\text{sujeito a} \\
 					 x_{k+1}=f(x_k,u_k)\\
 					 x_k\in\mathcal{X}\\
 					 u_k\in\mathcal{U}
@@ -181,12 +231,12 @@ Obter uma sequência de ações de controle $\{u_k\}_{k=0}^{N-1}$ tal que minimi
 			</div>
 			<div class="slide-content">
 				<center>
-					Custo quadrático:
+						Custo quadrático:
 					<p class="lightup">
 			
-							$
-J_{0\to N}=x_N^T P_N x_N + \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k, \\Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
-						$
+							$$
+J_{0\to N}=x_N^\trp P_N x_N + \sum_{k=0}^{N-1} \left(x_k^\trp Qx_k+u_k^\trp Ru_k\right), \\Q=Q^\trp\succeq 0,\quad R=R^\trp \succ 0,\quad P_N=P_N^\trp\succeq 0
+						$$
 					</p>
 					Dinâmica Linear:
 					<p class="lightup2">
@@ -204,6 +254,20 @@ J_{0\to N}=x_N^T P_N x_N + \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k, \\Q=Q^T\succeq
 		</section>
 
 
+		<section>
+			
+			<div class="slide-title">
+				<h2>Custo Quadrático: Visualização 3D</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="images/custo_quadratico_3d.gif" height="590">
+				</center>
+			</div>
+		</section>
+
+
+
 
 		<section>
 			
@@ -215,8 +279,8 @@ J_{0\to N}=x_N^T P_N x_N + \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k, \\Q=Q^T\succeq
 					<p class="lightup">
 						Problema de programação (otimização) matemática:
 				$$
-					\min_{u_0,u_1,\ldots,u_{N-1}} \quad \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N \\
-					\text{tal que} \\
+					\min_{u_0,u_1,\ldots,u_{N-1}} \quad \sum_{k=0}^{N-1} \left(x_k^\trp Qx_k+u_k^\trp Ru_k\right)+x_N^\trp P_N x_N \\
+					\text{sujeito a} \\
 					 x_{k+1}=Ax_k+Bu_k\\
 					 x_k\in\mathbb{R}^n\\
 					 u_k\in\mathbb{R}^m
@@ -284,10 +348,10 @@ J_{0\to N}=x_N^T P_N x_N + \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k, \\Q=Q^T\succeq
 			<div class="slide-content">
 				<p>&nbsp;</p>
 				<center>
-	Seja $\{x_0^*,x_1^*,\ldots,x_N^*\}$ e $\{u_0^*,u_1^*,\ldots,u_{N-1}^*\}$ a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{0\to N}$.
+	Sejam $\{x_0^*,x_1^*,\ldots,x_N^*\}$ e $\{u_0^*,u_1^*,\ldots,u_{N-1}^*\}$ a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{0\to N}$.
 		<p class="lightup">
-			Então, para qualquer $k\in (0,N)$, tem-se:
-	$\{x_k^*,x_{k+1}^*,\ldots,x_N^*\}$ e $\{u_k^*,u_{k+1}^*,\ldots,u_{N-1}^*\}$ são a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{k\to N}$			
+			Então, para qualquer $k\in \{0,1,\ldots,N-1\}$, tem-se:
+	$\{x_k^*,x_{k+1}^*,\ldots,x_N^*\}$ e $\{u_k^*,u_{k+1}^*,\ldots,u_{N-1}^*\}$ são a trajetória ótima de estados e as ações ótimas de controle, respectivamente, que minimizam $J_{k\to N}$ a partir de $x_k^*$.
 </p>
 				</center>
 					</div>
@@ -308,10 +372,10 @@ J_{0\to N}=x_N^T P_N x_N + \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k, \\Q=Q^T\succeq
 	Seja $V_k(x_k)=J_{k\to N}^*$, então 
 	<p class="lightup">
 	$$
-					V_k(x_k)=\min_{u_k} [\underbrace{x_k^\trp Q x_k + u_k^\trp R u_k}_{\text{custo por estágio}} + \underbrace{V_{k+1}(x_{k+1})}_{\text{custo  ``to-go"}}]
+					V_k(x_k)=\min_{u_k} [\underbrace{x_k^\trp Q x_k + u_k^\trp R u_k}_{\text{custo por estágio}} + \underbrace{V_{k+1}(x_{k+1})}_{\text{custo \textit{to-go}}}],\quad V_N(x_N)=x_N^\trp P_N x_N
 	$$
 </p>
-<p>Base da programação dinâmica! (Reinforcement Learning, etc)</p>
+<p>Base da programação dinâmica! (aprendizado por reforço etc.)</p>
 					</div>
 
 		</section>
@@ -369,7 +433,7 @@ J_{0\to N}=x_N^T P_N x_N + \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k, \\Q=Q^T\succeq
 </p>
 <p>Hipótese:</p>
 $$
-	V_{k+1}(x_{k+1})=x_{k+1}^\trp P_{k+1}x_{k+1}, \quad P_{k+1}=P_{k+1}^\trp \succ 0
+	V_{k+1}(x_{k+1})=x_{k+1}^\trp P_{k+1}x_{k+1}, \quad P_{k+1}=P_{k+1}^\trp \succeq 0
 $$
 					</div>
 
@@ -392,7 +456,7 @@ $$
 					V_k(x_k)=\min_{u_k} [\underbrace{x_k^\trp Q x_k + u_k^\trp R u_k + x_{k+1}^\trp P_{k+1}x_{k+1}}_{g(x_k,u_k)}]
 	$$
 </p>
-<p>LQR: Custo quadrático+dinâmica linear gera um problema <b>convexo</b>! (possui apenas um mínimo)</p>
+<p>LQR: custo quadrático + dinâmica linear geram um problema <b>convexo</b>! Como $R+B^\trp P_{k+1}B\succ 0$, $g$ é estritamente convexa em $u_k$ &rArr; mínimo único:</p>
 $$
 	\frac{\partial g(x_k,u_k)}{\partial u_k}=0
 $$
@@ -414,7 +478,7 @@ $$
 				<center>
 					
 $$
-	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+	\frac{\partial }{\partial y}(y^\trp M y)=(M+M^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp M x)=Mx,\quad \frac{\partial }{\partial y}(x^\trp M y)=M^\trp x
 $$
 </center>
 					</div>
@@ -433,7 +497,7 @@ $$
 				<center>
 					
 $$
-	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+	\frac{\partial }{\partial y}(y^\trp M y)=(M+M^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp M x)=Mx,\quad \frac{\partial }{\partial y}(x^\trp M y)=M^\trp x
 $$
 então,
 $$
@@ -458,7 +522,7 @@ $$
 				<center>
 					
 $$
-	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+	\frac{\partial }{\partial y}(y^\trp M y)=(M+M^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp M x)=Mx,\quad \frac{\partial }{\partial y}(x^\trp M y)=M^\trp x
 $$
 então,
 $$
@@ -481,7 +545,7 @@ $$
 				<center>
 					
 $$
-	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+	\frac{\partial }{\partial y}(y^\trp M y)=(M+M^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp M x)=Mx,\quad \frac{\partial }{\partial y}(x^\trp M y)=M^\trp x
 $$
 então,
 $$
@@ -505,7 +569,7 @@ $$
 				<center>
 					
 $$
-	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+	\frac{\partial }{\partial y}(y^\trp M y)=(M+M^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp M x)=Mx,\quad \frac{\partial }{\partial y}(x^\trp M y)=M^\trp x
 $$
 então,
 $$
@@ -534,7 +598,7 @@ $$
 				<center>
 					
 $$
-	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+	\frac{\partial }{\partial y}(y^\trp M y)=(M+M^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp M x)=Mx,\quad \frac{\partial }{\partial y}(x^\trp M y)=M^\trp x
 $$
 então,
 $$
@@ -558,7 +622,7 @@ $$
 				<center>
 					
 $$
-	\frac{\partial }{\partial y}(y^\trp A y)=(A+A^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp A x)=Ax
+	\frac{\partial }{\partial y}(y^\trp M y)=(M+M^\trp)y,\quad \frac{\partial }{\partial y}(y^\trp M x)=Mx,\quad \frac{\partial }{\partial y}(x^\trp M y)=M^\trp x
 $$
 então,
 $$
@@ -588,12 +652,12 @@ $$
 					<p>&nbsp;</p>
 	<p class="lightup">
 	$$
-					u^*_k=-\underbrace{(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A}_{K}x_k
+					u^*_k=-\underbrace{(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A}_{K_k}x_k
 	$$
 </p>
 <ul>
 	<li>Realimentação de estados!</li>
-	<li>Ganho depende de $P_{k+1}$.</li>
+	<li>Ganho $K_k$ variante no tempo: depende de $P_{k+1}$.</li>
 </ul>
 
 					</div>
@@ -619,7 +683,7 @@ $$
 </p>
 Com 
 $$
-u^*_k=-\underbrace{(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A}_{K}x_k,\quad V_k(x_k)=x_k^\trp P_k x_k
+u^*_k=-\underbrace{(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A}_{K_k}x_k,\quad V_k(x_k)=x_k^\trp P_k x_k
 $$
 
 					</div>
@@ -648,7 +712,7 @@ $$
 </p>
 Então,
 <p class="lightup2">
-	Equação de Riccati p/ Tempo Discreto:
+	Equação de Riccati para tempo discreto:
 	$$
 					P_k =Q +A^\trp P_{k+1}A-A^\trp P_{k+1}B(R+B^\trp P_{k+1}B)^{-1}B^\trp P_{k+1}A  
 	$$
@@ -669,7 +733,7 @@ Então,
 			<div class="slide-content">
 	
 				<center>
-					Para $k=N-1$,
+					Partindo de $P_N$ (dado), para $k=N-1$,
 <p class="">
 	$$
 					P_{N-1} =Q +A^\trp P_{N}A-A^\trp P_{N}B(R+B^\trp P_{N}B)^{-1}B^\trp P_{N}A  
@@ -717,6 +781,49 @@ Para $k=N-3,\ldots, 1, 0$,
 
 		</section>
 
+		<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no Matlab: solução (horizonte finito)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<pre style="width:85%;font-size:0.6em;"><code class="language-matlab">A = [3 0; 5 4];   B = [1; 2];
+Q = diag([2 3]);  R = 1;
+N = 20;  P = 0.1*eye(2);                    % P_N
+
+K = zeros(N,2);                             % K(k+1,:) = K_k
+for k = N-1:-1:0                            % recursão de Riccati para trás
+    K(k+1,:) = (R + B'*P*B) \ (B'*P*A);     % K_k  (usa P_{k+1})
+    P = Q + A'*P*A - A'*P*B*K(k+1,:);       % P_k
+end
+K(N,:)        % K_19 = [0.8667  0.5333]
+K(1,:)        % K_0  = [2.4845  1.9994]
+
+x = [1; 1];  J = x'*P*x                     % custo ótimo J* = 49.81
+for k = 1:N                                 % simulação: u_k = -K_k x_k
+    u = -K(k,:)*x;   x = A*x + B*u;
+end</code></pre>
+<p class="lightup" style="font-size:0.75em;">Recursão para trás: $K_{19}=[0.867\;\;0.533]\;\to\;K_0\approx[2.484\;\;2.000]$ (o ganho converge rapidamente)</p>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no Matlab: solução (horizonte finito)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula9_lqr_horizonte_finito.png" width="1000">
+<p style="font-size:0.75em;">Longe do final do horizonte, $K_k\approx K_\infty$; o ganho só muda nos últimos passos, quando $P_N$ passa a pesar.</p>
+				</center>
+			</div>
+		</section>
+
+
 
 
 		<section>
@@ -730,12 +837,12 @@ Para $k=N-3,\ldots, 1, 0$,
 					<p class="lightup">
 			
 							$$
-J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N,
+J_\infty = \lim_{N\to \infty} \left[\sum_{k=0}^{N-1} \left(x_k^\trp Qx_k+u_k^\trp Ru_k\right)+x_N^\trp P_N x_N\right],
 						$$
 					</p>
 					com 
 					$$
-					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+					Q=Q^\trp\succeq 0,\quad R=R^\trp \succ 0
 					$$
 				</center>
 					</div>
@@ -754,12 +861,12 @@ J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_
 					<p class="lightup">
 			
 							$$
-J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k,
+J_\infty = \sum_{k=0}^{\infty} \left(x_k^\trp Qx_k+u_k^\trp Ru_k\right),
 						$$
 					</p>
 					com 
 					$$
-					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+					Q=Q^\trp\succeq 0,\quad R=R^\trp \succ 0
 					$$
 				</center>
 					</div>
@@ -779,13 +886,14 @@ J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k,
 					<p class="lightup">
 			
 							$$
-J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k+u_k^\trp F x_k,
+J_\infty = \sum_{k=0}^{\infty} \left(x_k^\trp Qx_k+u_k^\trp Ru_k+2x_k^\trp N u_k\right),
 						$$
 					</p>
 					com 
 					$$
-					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0, \quad F=0
+					\begin{bmatrix}Q & N\\ N^\trp & R\end{bmatrix}\succeq 0,\quad R=R^\trp \succ 0
 					$$
+					<p style="font-size:0.8em;">Termo cruzado $N$ (opcional; no MATLAB: <code>dlqr(A,B,Q,R,N)</code>). Neste curso: $N=0$.</p>
 				</center>
 					</div>
 
@@ -801,7 +909,7 @@ J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k+u_k^\trp F x_k,
 			<div class="slide-content">
 	
 				<center>
-					Se $(A,B)$ for controlável então existe:
+					Se $(A,B)$ for estabilizável (p.ex. controlável) e $(A,Q^{1/2})$ detectável (p.ex. $Q\succ 0$), então existe uma única solução $P_\infty=P_\infty^\trp\succeq 0$ estabilizadora:
 <p class="lightup">
 	$$
 	P_\infty =Q +A^\trp P_\infty A-A^\trp P_\infty B(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A  
@@ -842,6 +950,48 @@ J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k+u_k^\trp F x_k,
 
 		</section>
 
+		<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no Matlab: solução (horizonte infinito)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<pre style="width:85%;font-size:0.6em;"><code class="language-matlab">A = [3 0; 5 4];   B = [1; 2];
+Q = diag([2 3]);  R = 1;
+abs(eig(A))                    % 3 e 4  -&gt;  malha aberta instável
+rank(ctrb(A,B))                % 2 (det = 7)  -&gt;  controlável
+
+[P, K, polos] = idare(A, B, Q, R)   % eq. algébrica de Riccati (DARE)
+% P     = [10.9384  -5.9402
+%          -5.9402  50.7537]
+% K     = [ 2.4845   1.9994]
+% polos = 0.3216, 0.1952   (|z| &lt; 1: estável)
+
+[K2, P2] = dlqr(A, B, Q, R);   % mesma solução (u_k = -K x_k)
+
+x0 = [1; 1];
+J  = x0'*P*x0                  % custo ótimo J* = 49.81</code></pre>
+<p class="lightup" style="font-size:0.75em;">$K_\infty=[2.4845\;\;1.9994]$: polos de malha fechada em $0.322$ e $0.195$</p>
+				</center>
+			</div>
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Exemplo no Matlab: solução (horizonte infinito)</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+<img src="images/aula9_lqr_horizonte_infinito.png" width="1000">
+<p style="font-size:0.75em;">O custo acumulado simulado converge exatamente para $x_0^\trp P_\infty x_0=49.81$.</p>
+				</center>
+			</div>
+		</section>
+
+
 
 
 
@@ -853,7 +1003,7 @@ J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k+u_k^\trp F x_k,
 			<div class="slide-content">
 	
 				<center>
-					Se $(A,B)$ for controlável então existe:
+					Se $(A,B)$ for estabilizável (p.ex. controlável) e $(A,Q^{1/2})$ detectável (p.ex. $Q\succ 0$), então existe uma única solução $P_\infty=P_\infty^\trp\succeq 0$ estabilizadora:
 <p class="lightup">
 	$$
 	P_\infty =Q +A^\trp P_\infty A-A^\trp P_\infty B(R+B^\trp P_\infty B)^{-1}B^\trp P_\infty A  
@@ -863,10 +1013,10 @@ J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k+u_k^\trp F x_k,
 <p></p>
 
 	<ul>
-		<li>Controle LQR garante estabilidade!</li>
+		<li>Sob essas condições, o LQR garante estabilidade em malha fechada!</li>
 	</ul>
 	$$
-	u_k=-Kx_k
+	u_k=-Kx_k,\qquad |\lambda_i(A-BK)|\lt 1
 	$$
 				</div>
 
@@ -883,14 +1033,14 @@ J_\infty = \sum_{k=0}^{\infty} x_k^T Qx_k+u_k^TRu_k+u_k^\trp F x_k,
 				<center>
 					Custo quadrático (Horizonte Infinito):
 					<p class="lightup">
-			Estabilidade implica em
+			Estabilidade implica
 							$$
-J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N < \infty 
+J_\infty = \lim_{N\to \infty} \left[\sum_{k=0}^{N-1} \left(x_k^\trp Qx_k+u_k^\trp Ru_k\right)+x_N^\trp P_N x_N\right] \lt \infty  
 						$$
 					</p>
 					com 
 					$$
-					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+					Q=Q^\trp\succeq 0,\quad R=R^\trp \succ 0
 					$$
 				</center>
 					</div>
@@ -906,7 +1056,7 @@ J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_
 			</div>
 			<div class="slide-content">
 				<center>
-				Critério de Bryson:
+				Regra de Bryson:
 					<p class="">
 			
 						$$
@@ -923,6 +1073,7 @@ J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_
 					$$
 					q_{ii}=\frac{1}{(x_i^\text{max})^2},\quad r_{ii}=\frac{1}{(u_i^\text{max})^2}
 					$$
+					<p style="font-size:0.8em;">$x_i^\text{max}$, $u_i^\text{max}$: máximos desvios aceitáveis de cada estado e de cada entrada.</p>
 				</center>
 					</div>
 
@@ -942,12 +1093,12 @@ J_\infty = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_
 					<p class="lightup">
 	
 							$$
-V_0(x_0) = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_N = x_0^\trp P_\infty x_0
+V_0(x_0) = \min_{\{u_k\}} J_\infty = \min_{\{u_k\}}\sum_{k=0}^{\infty} \left(x_k^\trp Qx_k+u_k^\trp Ru_k\right) = x_0^\trp P_\infty x_0
 						$$
 					</p>
 					com 
 					$$
-					Q=Q^T\succeq 0,\quad R=R^\trp \succ 0
+					Q=Q^\trp\succeq 0,\quad R=R^\trp \succ 0
 					$$
 				</center>
 					</div>
@@ -965,15 +1116,29 @@ V_0(x_0) = \lim_{N\to \infty} \sum_{k=0}^{N-1} x_k^T Qx_k+u_k^TRu_k+x_N^T P_N x_
 					Custo ótimo:
 					<p class="">
 	
-							$
-J_\infty = x_0^\trp P_\infty x_0
-						$
+							$$
+J_\infty^* = x_0^\trp P_\infty x_0
+						$$
 					</p>
 					<img src="../images/LQR_cost.gif" alt="">
 				</center>
 					</div>
 
 		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Pêndulo Invertido sobre Carro: LQR x PID</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+					<img src="images/pendulo_carro_lqr_vs_pid.gif" width="1050">
+				</center>
+			</div>
+		</section>
+
 	
 
 
