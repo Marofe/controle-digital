@@ -16,10 +16,24 @@
 		
 		<!-- and it's easy to individually load additional languages -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/arduino.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/matlab.min.js"></script>
 		
 		<script>hljs.highlightAll();</script>
 		
 		<link rel="stylesheet" href="../style.css">
+		<!-- Destaque de código no estilo do editor do MATLAB -->
+		<style>
+			.reveal pre:has(code.language-matlab) { background: #ffffff; border: 1px solid #d0d7de; text-align: left; }
+			.reveal pre code.language-matlab { background: #ffffff; color: #000000; padding: 0.6em 0.9em; max-height: none; }
+			.reveal pre code.language-matlab .hljs-keyword { color: #0e00ff; }
+			.reveal pre code.language-matlab .hljs-comment { color: #228b22; }
+			.reveal pre code.language-matlab .hljs-string  { color: #a020f0; }
+			.reveal pre code.language-matlab .hljs-number,
+			.reveal pre code.language-matlab .hljs-built_in,
+			.reveal pre code.language-matlab .hljs-title,
+			.reveal pre code.language-matlab .hljs-params,
+			.reveal pre code.language-matlab .hljs-literal { color: #000000; }
+		</style>
 	</head>
 	<body>
 		
@@ -30,14 +44,15 @@
 					<div class="logo"><img src="../images/sel.png"/> </div>
 					<div class="logo2"><img src="../images/Logo EESC-USP_top.png"/> </div>
 					<div class="title">
-					<h2>Aula 10: <br>Filtro de Kalman</h2>
+						<p>&nbsp;</p>
+					<h2>Aula 10: <br>Introdução ao Filtro de Kalman</h2>
 					</div>
 					<div class="author">
 					<h3>Prof. Marcos Rogério Fernandes</h3>
 				</div>
 					<div class="advisor">
 					
-					<p style="text-align: center;font-size: 0.8em;">23 de outubro de 2025</p>
+					<p style="text-align: center;font-size: 0.8em;">29 de outubro de 2026</p>
 				</div>
 
 				</section>
@@ -362,6 +377,87 @@ Paper em 1960<br>
 		</section>
 
 
+		<section>
+
+			<div class="slide-title">
+				<h2>Filtro de Kalman na Missão Apollo</h2>
+			</div>
+			<div class="slide-content">
+				<div style="display: flex; align-items: center; gap: 30px;">
+					<div style="flex: 1.15; font-size: 0.8em;">
+						<ul>
+							<li>1960: Stanley F. Schmidt (NASA Ames) conhece o trabalho de Kalman e o adapta à navegação Terra&ndash;Lua (dinâmica não linear &rarr; linearização: origem do <i>Filtro de Kalman Estendido</i>);</li>
+							<li>O computador de bordo (AGC) estimava posição e velocidade da nave combinando o <b>modelo</b> de movimento com <b>medições</b>: sextante (estrelas, horizonte e marcos da Terra e da Lua) e rastreio por radar a partir da Terra;</li>
+							<li>1969: Apollo 11 leva o homem à Lua.</li>
+						</ul>
+					</div>
+					<div style="flex: 1; text-align: center;">
+						<img src="images/apollo15_csm_lunar_orbit.jpg" width="440"><br>
+						<span style="font-size: 0.5em;">Módulo de comando e serviço da Apollo 15 em órbita lunar (NASA)</span>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+
+		<section>
+
+			<div class="slide-title">
+				<h2>Simulação: Navegação Terra &rarr; Lua</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<img src="images/kalman_apollo_terra_lua.gif" width="1000"><br>
+			
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Simulação: Filtro de Kalman no GPS</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<img src="images/kalman_gps_sao_carlos.gif" width="1050">
+			</center>
+					</div>
+
+		</section>
+
+
+		
+		<section>
+			
+			<div class="slide-title">
+				<h2>Aplicações do Filtro de Kalman</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+									
+					<p>&nbsp;</p>
+			<ul>
+				<li>Observador de estados para sistemas de controle;</li>
+				<li>Navegação de aviões, drones, carros autônomos, etc;</li>
+				<li>Processamento de GPS;</li>
+				<li>Rastreamento de alvos usando radares;</li>
+				<li>Área financeira: mercado de ações, etc;</li>
+				<li>Área médica: estimação de sinais biológicos EEG, ECG, etc;</li>
+				<li>etc...</li>
+			</ul>
+		
+	
+			</center>
+					</div>
+
+		</section>
+
+
+
 			<section>
 			
 			<div class="slide-title">
@@ -673,6 +769,21 @@ $$
 		</section>
 
 
+		<section>
+			
+			<div class="slide-title">
+				<h2>Passo de Predição: Chapman&ndash;Kolmogorov</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<img src="images/kalman_chapman_kolmogorov.gif" width="1050"><br>
+			<span style="font-size: 0.55em;">Caso escalar: $x_k=a\,x_{k-1}+b\,u_{k-1}+w_{k-1}$, com $a=1.1$, $b\,u=1$, $\hat{x}_{k-1|k-1}=0$, $P_{k-1|k-1}=0.25$ e $Q=0.2025$. Código: <code>matlab/anim_chapman_kolmogorov.m</code></span>
+			</center>
+					</div>
+
+		</section>
+
+
 				<section>
 			
 			<div class="slide-title">
@@ -722,6 +833,21 @@ y_k=Hx_k+\epsilon_k
 $$
 com $\epsilon_k\sim\mathcal{N}(0,R),\quad \forall k\in\mathbb{N}$
 		
+			</center>
+					</div>
+
+		</section>
+
+
+		<section>
+			
+			<div class="slide-title">
+				<h2>Verossimilhança: Interpretação</h2>
+			</div>
+			<div class="slide-content">
+				<center>
+			<img src="images/kalman_verossimilhanca.gif" width="1050"><br>
+			<span style="font-size: 0.55em;">Sensor de temperatura com relação linear 1:2: $y_k=Hx_k+\epsilon_k$, com $H=2$ e $\sqrt{R}=2$; o sensor leu $y_k=80$ ($x_k\approx 40\,^{\circ}$C). Código: <code>matlab/anim_verossimilhanca.m</code></span>
 			</center>
 					</div>
 
@@ -1718,51 +1844,48 @@ $$
 		</section>
 
 
-
-
 		<section>
 			
 			<div class="slide-title">
-				<h2>Aplicações do Filtro de Kalman</h2>
+				<h2>Exemplo no Matlab</h2>
 			</div>
 			<div class="slide-content">
-				<center>
-									
-					<p>&nbsp;</p>
-			<ul>
-				<li>Observador de estados para sistemas de controle;</li>
-				<li>Navegação de aviões, drones, carros autônomos, etc;</li>
-				<li>Processamento de GPS;</li>
-				<li>Rastreamento de alvos usando radares;</li>
-				<li>Área financeira: mercado de ações, etc;</li>
-				<li>Área médica: estimação de sinais biológicos EEG, ECG, etc;</li>
-				<li>etc...</li>
-			</ul>
-		
-	
-			</center>
+				<div style="display: flex; align-items: center; gap: 20px;">
+					<div style="flex: 1.25;">
+<pre style="width:100%;font-size:0.52em;margin:0;"><code class="language-matlab">A = [0.9677 -0.3226; 0 0.6452];  B = [1; 2];  H = [1 0];
+Q = 0.1*eye(2);  R = 10;  u = 1;  N = 150;
+x = [0; 0];  xh = [0; 0];  P = 10*eye(2);
+
+for k = 1:N
+    x = A*x + B*u + sqrtm(Q)*randn(2,1);   % planta
+    y = H*x + sqrt(R)*randn;               % medição
+    % predição
+    xh = A*xh + B*u;
+    P  = A*P*A' + Q;
+    % correção
+    K  = P*H'/(R + H*P*H');
+    xh = xh + K*(y - H*xh);
+    P  = (eye(2) - K*H)*P;
+end
+
+% horizonte infinito (Riccati)
+Pinf = idare(A', H', Q, R);
+Kinf = Pinf*H'/(R + H*Pinf*H')   % [0.0962; -0.0074]</code></pre>
 					</div>
+					<div style="flex: 1; text-align: center;">
+						<img src="images/aula10_kalman_exemplo.png" width="510">
+					</div>
+				</div>
+			</div>
 
 		</section>
 
 
 
-			<section>
-				<div class="slide-title">
-					<h2>Próxima aula teórica</h2>
-				</div>
-				<div class="slide-content">
-					<center>
-						<p>Controle LQG</p>
-						<img src="../images/LQR_cost.gif" width="500">
-					</center>
-				</div>
-
-			</section>
 
 
 
-			
+		
 
 
 			<section>
@@ -1772,7 +1895,7 @@ $$
 						<p>&nbsp;</p>
 						<p>&nbsp;</p>
 						<p>&nbsp;</p>
-					<h2>Até a próxima aula!</h2>
+					<h2>Fim!</h2>
 				</center>
 				</div>
 
