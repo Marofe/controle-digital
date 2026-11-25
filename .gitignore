@@ -1,11 +1,14 @@
 # Apostilas
-apostila/
-*apostila*
+.antigravitycli
+.vscode
+GEMINI.md
 
+2026/prova
 # Claude outputs
 Claude outputs/
 
 # LaTeX auxiliary files
+*.tex
 *.aux
 *.log
 *.out
