@@ -229,3 +229,17 @@ footer {
     .header-info { text-align: center; margin-top: 20px; }
     .bib-container { grid-template-columns: 1fr; }
 }
+
+/* Slide + lecture notes side by side */
+.slide-row {
+    display: flex;
+    gap: 10px;
+}
+.slide-row > .card-slide:first-child {
+    flex: 1;
+}
+.card-notes {
+    flex: 0 0 auto;
+    min-width: 170px;
+}
+
